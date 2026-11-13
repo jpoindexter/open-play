@@ -1,0 +1,13 @@
+# Paused loaded-deck recovery
+
+Actual isolated workspace baseline: load Copper Steps at2seconds, select4decks, then reload. The app returned to2demo decks/After Hours at0. The session snapshot omitted loaded tracks/count/positions and startup unconditionally loaded two demos.
+
+The new30-line deck-session module validates/snapshots/restores only track references, positions, deck count and library selection. Startup resolves saved local audio first, primes every deck reference before asynchronous work can save a partial session, then reuses the original loader for visible decks with Instant Doubles bypassed. Restoration creates no Play request, voice, queued launch or Sync work. It preserves the existing focus and Undo semantics; hidden decks retain references without eager decoding. Missing track references survive later saves until explicitly replaced/ejected. Positions clamp to the current known duration. No media is deleted, moved or rewritten.
+
+Observed actual UI follow-through: four owned real-track copies imported into a separate browser origin/profile, loaded through original controls and positioned at2/3/4/5seconds. Clean reload retained all four titles/positions, four-deck mode and32hotcues. Four decoded overviews returned;12library rows remained, with5visible/lazy preview images. Zero active Play buttons and Master−∞ observed; no Play or Sync was invoked. No new acoustic/PCM/hardware claim follows. The four test copies match their previously pinned SHA256 values.
+
+Tracks: We Are Youth(CASSIMM Remix), Nautical Dub, Phuture/The Horses and Armando/Jack'n' '4' Jazz. Raw media, content-addressed library data and screenshots remain under ignored local-evidence; no originals or normal desktop profile were changed.
+
+Focused checks: one new real-session validation/round-trip regression covers duplicate loaded tracks, empty decks, duration clamp, missing-reference retention, invalid-session write blocking and legacy data. Existing affected load/overview checks3/3 pass. Four checks total, no broad suite/soak rerun. JS syntax and whitespace checked.
+
+Limits: this restores loaded references and positions after a clean close/reload. Pitch, Sync, loops, temporary Cue and other transient controls begin from their safe startup defaults; a startup notice says so. Full transport/mixer reconstruction, timed crash checkpoints, quota/fault/crash recovery, native quit/reopen and hardware remain separate acceptance. SYS-002 stays OPEN. A private0.1.58 package is being prepared; package inspection is not native restart proof. Normal installed57does not contain this source until explicitly upgraded.

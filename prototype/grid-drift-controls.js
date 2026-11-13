@@ -12,7 +12,7 @@ export function checkedDriftProposal(suggestion,track){
 export function mountGridDrift({body,deck,engine,apply}){
   const track=deck.track,check=body.querySelector('#grid-drift-check'),stage=body.querySelector('#grid-drift-stage'),status=body.querySelector('#grid-drift-status');
   const previous=track.analysisResult?.grid?.drift;
-  let drift=previous?.method==='windowed-bass-pulse-drift-v3'&&Number.isFinite(previous.checkedDuration)&&Number.isFinite(previous.maximumResidualSeconds)?previous:null,controller=null;
+  let drift=previous?.method==='windowed-bass-pulse-drift-v5'&&Number.isFinite(previous.checkedDuration)&&Number.isFinite(previous.maximumResidualSeconds)?previous:null,controller=null;
   const current=()=>body.isConnected&&body.contains(status)&&deck.track===track;
   const proposal=()=>{
     if(drift?.proposalCheck?.status!=='improved')throw new Error('Independent onset check did not validate this correction. Edit the grid manually.');

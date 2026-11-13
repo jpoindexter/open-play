@@ -1,0 +1,230 @@
+{
+  "date": "2026-11-03",
+  "version": "0.1.143",
+  "sourceCommit": "8630f93034e327723a349a072ca7b67441933bc7",
+  "archiveSHA256": "13e25fc0e300a979812787ab2949ca6c163c77e2749f09b63335b6b0c1fa6899",
+  "packageInspection": "desktop-0.1.143-playback-hidden-decks.json (5/5)",
+  "changes": {
+    "production": "Existing master tick skips three unchanged value/accessibility writes (e13fad2). No other DSP/transport/gain-default/waveform/layout change.",
+    "diagnostic": "One55-line generated-only held-deck check plus existing shell binding; core shell197lines. Existing Pitch/Slicer hiding repairs were not changed.",
+    "newTestsThisTurn": 0,
+    "priorFocusedEvidence": "11 affected master-presentation checks retained, not rerun; no full suite."
+  },
+  "native": {
+    "startedAt": "2026-11-03T21:44:44.473Z",
+    "completed": true,
+    "scope": "Generated-only four\u2192two\u2192four Compact; actual engine/installed pad, deck-count and Play handlers. Synthetic held Space and clicks, not physical pointer/MIDI/listening or natural timing/pop proof.",
+    "cases": [
+      {
+        "mode": "Pitch",
+        "during": {
+          "playing": true,
+          "loop": false,
+          "keyShift": 1,
+          "liveKeylock": true
+        },
+        "hidden": {
+          "playing": false,
+          "loop": false,
+          "loopIn": 0,
+          "loopOut": 0
+        },
+        "freshPlayContinued": true,
+        "sourceToken": 6,
+        "siblingVoicesAndRatesRetained": true,
+        "releaseControlsRetained": 205,
+        "readyPreviewsRetained": 8,
+        "physicalMuted": true
+      },
+      {
+        "mode": "Slicer",
+        "during": {
+          "playing": true,
+          "loop": true,
+          "keyShift": 0,
+          "slice": 1,
+          "liveKeylock": false
+        },
+        "hidden": {
+          "playing": false,
+          "loop": false,
+          "loopIn": 0,
+          "loopOut": 0,
+          "slice": null
+        },
+        "freshPlayContinued": true,
+        "sourceToken": 11,
+        "siblingVoicesAndRatesRetained": true,
+        "releaseControlsRetained": 206,
+        "readyPreviewsRetained": 8,
+        "physicalMuted": true
+      }
+    ],
+    "sourceBefore": {
+      "app.js": "1b84ced4c37bc7b00a0c9b2fd6a9c255efa84d8032384b1ff2b91a8d4e795021",
+      "engine.js": "036f084a42177cb58eeaf926b3fd3d5ea6f0ef7b2fe9aefcb1974711ee89261b",
+      "pitchplay.js": "881bab6da5c5664f007a84d2a836a71bb0f95da7fd4aff2d6472ce327f95c6c7",
+      "slicer.js": "c2f44196ce03613ef829072c9cc582ae66357c40ed3a660346dd91bafb619718",
+      "hidden-deck-check.js": "b870893845bd6e932d3c22c9a98d6a94bde0ce7c4584c84286c1dd28c6fac7d9"
+    },
+    "releaseObservation": {
+      "mode": "Slicer",
+      "playing": true,
+      "sameVoice": true,
+      "tokenBefore": 11,
+      "tokenAfter": 11,
+      "positionBefore": 4.450229508196719,
+      "positionAfter": 4.4875628415300515,
+      "contextTime": 18.677333333333333,
+      "anchorTime": 18.618000000000002
+    },
+    "idleMaster": {
+      "attributeWrites": 0,
+      "meter": -60,
+      "peak": "\u2212\u221e",
+      "limiter": "Master limiter idle"
+    },
+    "cleanup": {
+      "allStopped": true,
+      "physicalMuted": true
+    },
+    "sourceAfter": {
+      "app.js": "1b84ced4c37bc7b00a0c9b2fd6a9c255efa84d8032384b1ff2b91a8d4e795021",
+      "engine.js": "036f084a42177cb58eeaf926b3fd3d5ea6f0ef7b2fe9aefcb1974711ee89261b",
+      "pitchplay.js": "881bab6da5c5664f007a84d2a836a71bb0f95da7fd4aff2d6472ce327f95c6c7",
+      "slicer.js": "c2f44196ce03613ef829072c9cc582ae66357c40ed3a660346dd91bafb619718",
+      "hidden-deck-check.js": "b870893845bd6e932d3c22c9a98d6a94bde0ce7c4584c84286c1dd28c6fac7d9"
+    },
+    "sourceStable": true,
+    "finishedAt": "2026-11-03T21:44:47.467Z"
+  },
+  "sourceHashesIndependentlyMatched": true,
+  "browser": {
+    "scope": "Two actual installed-handler generated cases, prior diagnostic before additive native idle-meter observation.",
+    "completed": true,
+    "cases": [
+      {
+        "mode": "Pitch",
+        "during": {
+          "playing": true,
+          "loop": false,
+          "keyShift": 1,
+          "liveKeylock": true
+        },
+        "hidden": {
+          "playing": false,
+          "loop": false,
+          "loopIn": 0,
+          "loopOut": 0
+        },
+        "freshPlayContinued": true,
+        "sourceToken": 6,
+        "siblingVoicesAndRatesRetained": true,
+        "releaseControlsRetained": 205,
+        "readyPreviewsRetained": 5,
+        "physicalMuted": true
+      },
+      {
+        "mode": "Slicer",
+        "during": {
+          "playing": true,
+          "loop": true,
+          "keyShift": 0,
+          "slice": 1,
+          "liveKeylock": false
+        },
+        "hidden": {
+          "playing": false,
+          "loop": false,
+          "loopIn": 0,
+          "loopOut": 0,
+          "slice": null
+        },
+        "freshPlayContinued": true,
+        "sourceToken": 11,
+        "siblingVoicesAndRatesRetained": true,
+        "releaseControlsRetained": 206,
+        "readyPreviewsRetained": 5,
+        "physicalMuted": true
+      }
+    ],
+    "timingCorrection": "First100ms position assertion occurred45ms before a genuine scheduled live start; captured same voice/token/playing. Diagnostic now waits for actual audio anchor+.05 before checking timer advance. Product code unchanged; both earlier failed observations retained privately."
+  },
+  "mainSession": {
+    "paused": true,
+    "trackCount": 25,
+    "positionsSeconds": [
+      161.797,
+      111.183
+    ],
+    "masterDb": -10.04344,
+    "readyLibraryPreviews": 12,
+    "playControls": 2,
+    "tempoControls": 2,
+    "eqControls": 6,
+    "levelControls": 2,
+    "recordingPreflight": "Idle Start recording00:00; Download disabled, panel closed before normal142Quit.",
+    "mainPlaySyncCueRecordRestoreInvoked": false,
+    "privateEvidence": [
+      "main-before.txt",
+      "recording-before.txt",
+      "main-143-start.txt",
+      "main-final.txt",
+      "main-143.png"
+    ]
+  },
+  "closedProfileRecovery": {
+    "source": "/Users/jasonpoindexter/Library/Application Support/Open Play Playback Test",
+    "recovery": "/Users/jasonpoindexter/Documents/GitHub/Open Play/local-evidence/profile-recovery/pre-hidden-0.1.142-2026-11-03",
+    "files": 280,
+    "bytes": 221811445,
+    "hashSizeMtimeEqual": true,
+    "copy": "APFS clone; not hard-linked",
+    "old142Processes": 0
+  },
+  "cleanup": {
+    "remove": "/Users/jasonpoindexter/Documents/GitHub/Open Play/local-evidence/desktop-builds/0.1.142",
+    "logicalBytes": 611675637,
+    "retainedBuild": "/Users/jasonpoindexter/Documents/GitHub/Open Play/local-evidence/desktop-builds/0.1.143",
+    "retainedCurrentRuntimeCache": {
+      "path": "/Users/jasonpoindexter/Library/Caches/electron/5ea8d8a9b31b6adae9bf3c2dbe1ac40908da7b96143379b3ba53f43037430952/electron-v44.9.0-darwin-arm64.zip",
+      "bytes": 130738603,
+      "purpose": "One exact current official runtime cache avoids repeated downloads; superseded app bundles still removed."
+    },
+    "profileRecovery": {
+      "source": "/Users/jasonpoindexter/Library/Application Support/Open Play Playback Test",
+      "recovery": "/Users/jasonpoindexter/Documents/GitHub/Open Play/local-evidence/profile-recovery/pre-hidden-0.1.142-2026-11-03",
+      "files": 280,
+      "bytes": 221811445,
+      "hashSizeMtimeEqual": true,
+      "copy": "APFS clone; not hard-linked",
+      "old142Processes": 0
+    },
+    "sourceRemoteEqual": "8630f93034e327723a349a072ca7b67441933bc7",
+    "processes": "26225 /Users/jasonpoindexter/Documents/GitHub/Open Play/local-evidence/desktop-builds/0.1.143/Open Play Playback Test-darwin-arm64/Open Play Playback Test.app/Contents/MacOS/Open Play Playback Test",
+    "preserved": [
+      "Original music",
+      "Recordings",
+      "All profiles/recoveries",
+      "Unrelated owner draft"
+    ],
+    "removed": true,
+    "retainedBuildVersions": [
+      "0.1.143"
+    ]
+  },
+  "launchers": "Current/playback/named143 syntax checked; exact app opened separately; launcher execution not claimed.",
+  "originalMedia": "No original music imported, copied, edited or deleted; generated-only isolated session. Main/profile/recordings preserved.",
+  "trello": {
+    "complete": "CORE-FIX-77 bounded source/browser/native presentation criterion",
+    "open": "CORE-FIX-69 delayed-preparation/physical-input/listening breadth; parent resource/core/live gates",
+    "receipt": "hidden-decks-143-trello-2026-11-03.json"
+  },
+  "remaining": [
+    "No natural delayed-prepare, physical pointer/MIDI or owner listening acceptance from scripted key/clicks",
+    "No full EQ/pitch sonic quality, PCM alignment or measured total CPU/frame/RSS improvement",
+    "CORE-FIX-01/07 intermittent pops/stalls, startup60, numeric-entry06, owner Sync70 and matched-volume75 remain open",
+    "No public beta/full-core or reference-parity completion claim"
+  ],
+  "goal": "Active; audio muted; no readiness question while owner away."
+}

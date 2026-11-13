@@ -1,0 +1,78 @@
+{
+  "date": "2026-10-28",
+  "baseline": {
+    "physicalMuted": true,
+    "duration": 448.0058125,
+    "loop": [
+      0,
+      1.951219512195122
+    ],
+    "keyShift": -12,
+    "keylock": true,
+    "playing": false,
+    "processing": false,
+    "position": 0,
+    "elapsedMS": 23.299999982118607,
+    "notice": "This track exceeds the browser pitch-render memory limit. Use a shorter file.",
+    "rendererCalls": [
+      {
+        "duration": 448.0058125,
+        "frames": 21504279,
+        "channels": 2,
+        "sampleRate": 48000,
+        "tempo": 1,
+        "semitones": -12,
+        "error": "This track exceeds the browser pitch-render memory limit. Use a shorter file."
+      }
+    ],
+    "otherPlaying": true,
+    "otherVoiceSame": true,
+    "otherRateSame": true,
+    "playControls": 4,
+    "previews": 3
+  },
+  "repaired": {
+    "physicalMuted": true,
+    "duration": 448.0058125,
+    "loop": [
+      0,
+      1.951219512195122
+    ],
+    "keyShift": -12,
+    "keylock": true,
+    "playing": true,
+    "processing": false,
+    "position": 0.011333333333332973,
+    "elapsedMS": 358.19999998807907,
+    "notice": "Finished: 3 measured, 0 failed. Existing/manual metadata and locked grids preserved unless replacement was requested.",
+    "rendererCalls": [
+      {
+        "duration": 448.0058125,
+        "frames": 21504279,
+        "channels": 2,
+        "sampleRate": 48000,
+        "tempo": 1,
+        "semitones": -12,
+        "window": {
+          "start": 0,
+          "end": 3.951229166666667
+        },
+        "resultFrames": 189659
+      }
+    ],
+    "otherPlaying": true,
+    "otherVoiceSame": true,
+    "otherRateSame": true,
+    "playControls": 4,
+    "previews": 3
+  },
+  "effectiveInputFrames": 189659,
+  "fullInputFrames": 21504279,
+  "workerPCMBudgetBytes": 6069088,
+  "previousBudgetBytes": 688136928,
+  "focusedTestsPassed": 21,
+  "realTrackInputUnchanged": true,
+  "physicalMutedThroughout": true,
+  "cleanup": "Stopped; frame closed; owned origin cleared",
+  "scope": "Actual browser/real-worker short loop start on one pinned real song and controlled transport/window/ownership regressions. Real browser pass predates final synchronized-out-of-window guard, which has a separate RED/GREEN source check; ordinary Play does not enter that guard. Not listening, native, seamless-loop, reverse full-track, Sync-pop or broad waveform-stall proof."
+}

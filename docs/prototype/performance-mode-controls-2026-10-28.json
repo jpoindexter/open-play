@@ -1,0 +1,119 @@
+{
+  "date": "2026-10-28",
+  "baselineCommit": "846279bbbd390ee5a12c20b757f17934fff1370b",
+  "baseline": {
+    "physicalMuted": true,
+    "results": [
+      {
+        "action": "tab",
+        "value": "Loops",
+        "controlsOutsideChangingDeck": 311,
+        "retained": 117,
+        "focusRetained": false,
+        "otherVoiceSame": true,
+        "otherPlaying": true,
+        "otherRateSame": true,
+        "otherLevelSame": true,
+        "previewCount": 3,
+        "previewsRetained": 3,
+        "selectedTab": "Loops",
+        "visiblePlayControls": 4
+      },
+      {
+        "action": "loopMode",
+        "value": "auto",
+        "controlsOutsideChangingDeck": 311,
+        "retained": 117,
+        "focusRetained": false,
+        "otherVoiceSame": true,
+        "otherPlaying": true,
+        "otherRateSame": true,
+        "otherLevelSame": true,
+        "previewCount": 3,
+        "previewsRetained": 3,
+        "selectedTab": "Loops",
+        "selectedLoopMode": "auto",
+        "visiblePlayControls": 4
+      },
+      {
+        "action": "tab",
+        "value": "Cues",
+        "controlsOutsideChangingDeck": 311,
+        "retained": 117,
+        "focusRetained": false,
+        "otherVoiceSame": true,
+        "otherPlaying": true,
+        "otherRateSame": true,
+        "otherLevelSame": true,
+        "previewCount": 3,
+        "previewsRetained": 3,
+        "selectedTab": "Cues",
+        "selectedLoopMode": "auto",
+        "visiblePlayControls": 4
+      }
+    ]
+  },
+  "repaired": {
+    "physicalMuted": true,
+    "results": [
+      {
+        "action": "tab",
+        "value": "Loops",
+        "selectedLoopButtonFocused": null,
+        "controlsOutsideChangingDeck": 316,
+        "retained": 316,
+        "focusRetained": true,
+        "otherVoiceSame": true,
+        "otherPlaying": true,
+        "otherRateSame": true,
+        "otherLevelSame": true,
+        "previewCount": 8,
+        "previewsRetained": 8,
+        "selectedTab": "Loops",
+        "visiblePlayControls": 4
+      },
+      {
+        "action": "loopMode",
+        "value": "auto",
+        "selectedLoopButtonFocused": true,
+        "controlsOutsideChangingDeck": 316,
+        "retained": 316,
+        "focusRetained": false,
+        "otherVoiceSame": true,
+        "otherPlaying": true,
+        "otherRateSame": true,
+        "otherLevelSame": true,
+        "previewCount": 8,
+        "previewsRetained": 8,
+        "selectedTab": "Loops",
+        "selectedLoopMode": "auto",
+        "visiblePlayControls": 4
+      },
+      {
+        "action": "tab",
+        "value": "Cues",
+        "selectedLoopButtonFocused": null,
+        "controlsOutsideChangingDeck": 316,
+        "retained": 316,
+        "focusRetained": true,
+        "otherVoiceSame": true,
+        "otherPlaying": true,
+        "otherRateSame": true,
+        "otherLevelSame": true,
+        "previewCount": 8,
+        "previewsRetained": 8,
+        "selectedTab": "Cues",
+        "selectedLoopMode": "auto",
+        "visiblePlayControls": 4
+      }
+    ]
+  },
+  "sourceChange": "Two existing single-deck renderDecks(index) calls; structural fallback and mode focus preserved.",
+  "focusedRegression": {
+    "file": "prototype/performance-mode-presentation.test.mjs",
+    "lines": 19,
+    "baseline": "one failure: renderer called without deck ownership",
+    "repaired": "one composed test passes both tab and loop-mode branches"
+  },
+  "scope": "Actual generated-track/muted four-deck Compact UI. The changing deck intentionally replaces its own structural mode controls. Outside-deck identity and outgoing transport observed; no frame-time, pop-free, musical Sync, native pointer/playing/controller or listening claim."
+}

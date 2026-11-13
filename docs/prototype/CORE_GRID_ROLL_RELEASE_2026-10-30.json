@@ -1,0 +1,132 @@
+{
+  "date": "2026-10-30",
+  "baselineCommit": "9d3a8b0125cb6b4fe83b54973aca1da230c72c8b",
+  "status": "Two source repairs; private124/native delivery pending",
+  "ownerInstruction": "Goal active; audio muted; no broad reruns; original audio/session/controls/previews retained",
+  "gridPublication": {
+    "baseline": "9d3a8b0",
+    "defect": "Public grid publication after playing Simple alignment scheduling failed to revoke the old owned ACK",
+    "focusedCommand": "node --test --test-name-pattern='public grid publication revokes owned Simple ACKs' prototype/simple-sync-lifecycle.test.mjs",
+    "red": {
+      "tests": 1,
+      "pass": 0,
+      "fail": 1,
+      "assertion": "Old incoming alignment was not aborted while original BPM/grid were still visible at grid hook return"
+    },
+    "green": {
+      "tests": 1,
+      "pass": 1,
+      "fail": 0
+    },
+    "testFileLines": 199,
+    "actualModules": [
+      "saveBeatgrid",
+      "AudioEngine",
+      "synchronizeSimple",
+      "createSyncMaster",
+      "createSmartSync",
+      "extracted actual app deckAction",
+      "extracted actual app onGridWillChange/onGridChanged hooks"
+    ],
+    "flow": [
+      "BownedACK held after old-grid positionAt",
+      "Publish B120/0 to100/.1 through public transaction; observe abort before original metadata changes",
+      "Old ACK rejects AbortError, old playing Bvoice/rate1 and no falseSyncflags/notice retained",
+      "Retry then edit track shared by actualleaderA and deckC126/0 to130/.2; related incoming ACK aborts before publication",
+      "One fresh request commits B1.3 against A130 using both new grids; current-grid beat fractional phase aligns"
+    ],
+    "assertions": [
+      "Two valid metadata publications persist exactly once each",
+      "Obsolete prepared adapters disposed",
+      "Outgoing actual voice retained",
+      "Final voices/transforms empty and controlled adapters disposed"
+    ],
+    "callerReview": [
+      "saveBeatgrid",
+      "Track Details changed BPM/grid",
+      "deck Tap Tempo",
+      "analysis completion grid replacement"
+    ],
+    "hookCompatibility": "Actual callbacks still return smartSync.captureGrid(track) plans unchanged after revoking related Simple requests; no callback argument/return contract changes. Existing source fixtures mostly wire Smart directly; new test executes actual app hook with real cancelSimpleSync/state collaborators.",
+    "evidenceSHA256": {
+      "red.txt": "93ba8a44f0404b70358ab20a31259a9d460f67a1cdb180412341acce68e9ad39",
+      "green.txt": "1273194c299538fa4fe8fb574f9626135cc93b1ffbcd0fbf1d5d6fcda273e623",
+      "source-before.sha256": "4bc4cd314e3492e4a95466b3d6b74160f678fd81b7c011cb34f381029b5910d9",
+      "failing-result.json": "28245dfd038d262930695ffed95b3f3c5b97c4d5c14703265df9eee7bcbdf40b"
+    },
+    "limits": [
+      "One controlled engine/app-hook regression, not native/liveWASM/PCM/music/controller acceptance",
+      "No broad suites or ordinary mixing reruns",
+      "No attribution to reported audiblepops or longsessionwaveformstalls"
+    ]
+  },
+  "loopRelease": {
+    "baseline": "9d3a8b0",
+    "red": {
+      "path": "red.txt",
+      "assertion": "Old roll release canceled the newer saved-loop recall: false!==true"
+    },
+    "green": {
+      "path": "green.txt",
+      "command": "node --test --test-name-pattern='pending Loop Roll release yields' prototype/manual-loop-ownership.test.mjs",
+      "passed": 1,
+      "failed": 0
+    },
+    "executedCriteria": [
+      "New saved-loop handler returns true.",
+      "Only seek target11 observed; no old6.59 background seek.",
+      "Position11,loop11\u201312,playingtrue.",
+      "New voice and token unchanged after old release settles.",
+      "Fixture cleanup zero voices/transforms/retirements and all Workers terminated; globals restored."
+    ],
+    "sourceBefore": {
+      "prototype/app.js": "1ea892804ce97cc36a67a728b2d7681018656e00c5e5d32fb7d1f1b78e81bb4c",
+      "prototype/loop-pads.js": "d9389bfec1108aa7605f6d10c16be1188b6eb80d3b003f084c69073f88a3f631",
+      "prototype/manual-loops.js": "abc09bd34bd359a836870c22d6418a6bf53442ddf54e40232ec68df38b3d2439",
+      "prototype/engine.js": "036f084a42177cb58eeaf926b3fd3d5ea6f0ef7b2fe9aefcb1974711ee89261b",
+      "prototype/manual-loop-ownership.test.mjs": "4e7672384a7c4937df7b0eefeea07f36a888c390983562b4942343efc88c6cf6"
+    },
+    "sourceAfter": {
+      "prototype/loop-pads.js": "f6be73206baad3c878412e362e11b82dd409376f4786a8e70b751bc565c41be5",
+      "prototype/manual-loop-ownership.test.mjs": "524f00da89aea1e4b0ec2775a1136f513b73c21f983752cb15ad5fecff31ccd1"
+    },
+    "runtimeLines": 97,
+    "testModuleLines": 106,
+    "scope": "Post-await token check only. Existing actual rendered-loop Worker/raw graph fixture and extracted normal saved-pad handler. No app wiring or DSP changes.",
+    "setupLimit": "First attempt reused cached original loop render, so no third Worker was created and target observation timed out. Cleaned up; not a failing product result. Corrected isolated setup explicitly clears existing pitch renderer cache after starting held roll, then release reaches a real cold Worker boundary.",
+    "limits": [
+      "Controlled cold Worker boundary and source graph; actual renderer DSP is not run.",
+      "No native, PCM, music/listening/controller, waveform preview retention, stall duration or Sync-pop proof."
+    ],
+    "skipped": "No broad tests, native/UI/audio/build/Trello/Git operations."
+  },
+  "nativeFlipAttempt123": {
+    "executed": "Existing isolated volatile GUI Tempo checker Prepare then Stop/export; source asserts physical mute before starting generated tones; observed stopped0decks",
+    "changedCallbackReached": false,
+    "observations": "Flip AX click, focused keyboard activation and one coordinate fallback did not open Flip panel. Reached limit; no further retries or hidden-state workaround. Isolated window closed; main retained paused30.097/34.086,16tracks/12visiblepreviews",
+    "limits": "No completed Flip recording/start/control-feedback/node identity/listening/physical acceptance; native automation failure is not attributed to an app defect",
+    "evidenceSHA256": {
+      "main-before.txt": "3b2d77b9126c15088d62c9b4bc5291e5278c3f021768d329089db78bd02a6b44",
+      "prepared-stopped.txt": "eb4603b7b3edc50565b91dda2c7e85a6a8fe2fb3d6338d383fb42520532fd190",
+      "attempt-not-reached.txt": "eb4603b7b3edc50565b91dda2c7e85a6a8fe2fb3d6338d383fb42520532fd190",
+      "main-after.txt": "066620be37345bba3cfc0b256f8b8c5a047abf3125890515e82c6efb3fb19d7e"
+    }
+  },
+  "sourceSHA256": {
+    "prototype/app.js": "ad4e2b47146e4342102fa64c19923eba120597c12892433b9e0a97dd24d51058",
+    "prototype/loop-pads.js": "f6be73206baad3c878412e362e11b82dd409376f4786a8e70b751bc565c41be5",
+    "prototype/manual-loop-ownership.test.mjs": "524f00da89aea1e4b0ec2775a1136f513b73c21f983752cb15ad5fecff31ccd1",
+    "prototype/simple-sync-lifecycle.test.mjs": "d355f32c3babb97a7a722f54dd7d9ee5ab39d815d3712f8c45c638a7b02b2ac0"
+  },
+  "moduleLines": {
+    "prototype/loop-pads.js": 97,
+    "prototype/manual-loop-ownership.test.mjs": 106,
+    "prototype/simple-sync-lifecycle.test.mjs": 199
+  },
+  "limits": [
+    "Two new focused RED/GREEN regressions; no broad suite/new diagnostic helper",
+    "Native changed grid/Roll race, live-WASM/PCM/listening/hardware acceptance pending",
+    "Generic Sync pops/waveform stalls/startup60 remain open; no speculative DSP or rendering change",
+    "Original media/profile/recordings/unrelated draft retained"
+  ]
+}

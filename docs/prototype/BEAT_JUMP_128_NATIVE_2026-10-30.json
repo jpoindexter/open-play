@@ -1,0 +1,123 @@
+{
+  "date": "2026-10-30",
+  "version": "0.1.128",
+  "sourceCommit": "0e61228cfda3bd29e720c42bb9071649729b1517",
+  "asarSHA256": "306217d15c0ec54658f03adb50a1eea4e313104bc88a0179882fa286e3eac0f6",
+  "productTransport": "Unchanged from127/038ce4d; source127 failing reproduction and repair remain linked. This candidate adds isolated diagnostic only.",
+  "nativeCheck": {
+    "startedAt": "2026-10-30T09:15:26.260Z",
+    "completed": true,
+    "scope": "Packaged generated-only four-deck workspace, real AudioContext and cold pitch-render Worker. First completed render result is held before engine continuation; newer saved-loop recall uses normal mode/pad handlers. Not natural scheduling probability, master PCM, music/listening, controller or general pop/stall proof.",
+    "sourceBefore": {
+      "app.js": "ad4e2b47146e4342102fa64c19923eba120597c12892433b9e0a97dd24d51058",
+      "engine.js": "036f084a42177cb58eeaf926b3fd3d5ea6f0ef7b2fe9aefcb1974711ee89261b",
+      "loop-pads.js": "3cb0aa261b7e99c9391a23d84175453c06aec1eea3d8b59e408e90d9ac4d3ca0",
+      "keylock.js": "63cab6070fb0a6683a7905955a33390385d6b71f61add773f7338c8c881b4a2d",
+      "beat-jump-recall-check.js": "8570da926d73d7d6b0f1e39139a42fa6a31f351507756937803b2e08d6a4c198"
+    },
+    "render": {
+      "frames": 358530,
+      "sampleRate": 48000,
+      "finite": true,
+      "peak": 0.02027362957596779,
+      "window": {
+        "start": 4.530625,
+        "end": 12
+      }
+    },
+    "held": {
+      "token": 3,
+      "loopIn": 8,
+      "loopOut": 10,
+      "calls": 1
+    },
+    "after": {
+      "token": 6,
+      "position": 11,
+      "anchor": 17.784875283446713,
+      "loopIn": 11,
+      "loopOut": 12,
+      "playing": true,
+      "seeks": [
+        11
+      ],
+      "renderCalls": 3,
+      "siblingControlsRetained": 172,
+      "previewSourcesRetained": 7,
+      "previewImagesAfter": 8
+    },
+    "cleanup": {
+      "allStopped": true,
+      "physicalMuted": true,
+      "methodsRestored": true
+    },
+    "sourceAfter": {
+      "app.js": "ad4e2b47146e4342102fa64c19923eba120597c12892433b9e0a97dd24d51058",
+      "engine.js": "036f084a42177cb58eeaf926b3fd3d5ea6f0ef7b2fe9aefcb1974711ee89261b",
+      "loop-pads.js": "3cb0aa261b7e99c9391a23d84175453c06aec1eea3d8b59e408e90d9ac4d3ca0",
+      "keylock.js": "63cab6070fb0a6683a7905955a33390385d6b71f61add773f7338c8c881b4a2d",
+      "beat-jump-recall-check.js": "8570da926d73d7d6b0f1e39139a42fa6a31f351507756937803b2e08d6a4c198"
+    },
+    "sourceStable": true,
+    "finishedAt": "2026-10-30T09:15:28.020Z"
+  },
+  "mainSession": {
+    "returnedAfterClosingOwnedCheck": true,
+    "pausedPositions": [
+      30.097,
+      34.086
+    ],
+    "libraryTracks": 16,
+    "materializedPreviews": 12,
+    "silentMaster": true,
+    "noMainPlaySyncCueREC": true
+  },
+  "profileRecovery": {
+    "source": "/Users/jasonpoindexter/Library/Application Support/Open Play Playback Test",
+    "target": "/Users/jasonpoindexter/Documents/GitHub/Open Play/local-evidence/profile-recovery/pre-native-check-0.1.127-2026-10-30",
+    "files": 262,
+    "bytes": 120232934,
+    "hashesSizesMTimesEqual": true,
+    "nativeProcessExited": true
+  },
+  "packageInspection": {
+    "passed": 5,
+    "failed": 0
+  },
+  "evidenceSHA256": {
+    "main-127-before.txt": "d5a251deda89812b2348f293e794b3040e8d0acdcecb226c0076a3c8397d2827",
+    "main-128-before.txt": "fef2843b9708161322f862b7a85b37b58352217037cb40e6ae18cc89174d49f5",
+    "check-128.txt": "5b130958aaf31613764eaf31ca1f3a269a2d36c0d8c184ec4fd880ce51ee2d28",
+    "main-128-after.txt": "e3bf802b179025e28f3b8e4af50fc25be3abf7600f892198c9286f7b4a19f2cd",
+    "result.json": "33400645f7809d6df13488e326e3bd5a66d85a58b50c652540392666c0a30b47"
+  },
+  "limits": [
+    "One deliberately held result from a real cold DSP Worker; not natural race frequency or long-session scheduling coverage",
+    "First rendered Worker output finite/nonzero, not complete master-output PCM, musical alignment, audible quality or absence of clicks",
+    "Normal mode change intentionally rebuilds B; identity criterion protects A/C/D and mixer, not every B control",
+    "No owner listening/controller/headphone acceptance or broad suite; genericpop/stall/startup60 remain OPEN"
+  ],
+  "cleanup": {
+    "retiredVersion": "0.1.127",
+    "verifiedASARSHA256": "93130329fc9f8dd0aa0fe0718aaa290465c341e3ea397f1962334c64ef607fb7",
+    "inactiveVerified": true,
+    "bundleBytes": 810155198,
+    "cache": [
+      {
+        "path": "/Users/jasonpoindexter/Library/Caches/electron/5ea8d8a9b31b6adae9bf3c2dbe1ac40908da7b96143379b3ba53f43037430952/electron-v44.9.0-darwin-arm64.zip",
+        "bytes": 130738603,
+        "sha256": "12d873a5ae98a6598e730402e9278c5d132e97ea1a4405a7713bec2a3e83921f"
+      }
+    ],
+    "logicalBytesRemoved": 940893801,
+    "remainingVersions": [
+      "0.1.128"
+    ]
+  },
+  "trello": {
+    "closedSoftwareCard": "https://trello.com/c/rQHArSGa",
+    "parentFeatureOpen": "DEK-005",
+    "coreGoalOpen": "CORE-001",
+    "threeDescriptionsReadBackExactly": true
+  }
+}

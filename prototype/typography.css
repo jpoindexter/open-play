@@ -1,0 +1,44 @@
+/* Shared type/icon owner. Layout adapters own geometry, not text sizing. */
+body,button,input,select,textarea{font-family:var(--dj-semantic-font)}
+body{letter-spacing:normal;font-size:var(--dj-semantic-body-size);line-height:var(--dj-semantic-leading-body)}
+button,input,select,textarea{font-size:inherit;line-height:var(--dj-semantic-leading-control)}
+button,select{font-weight:var(--dj-semantic-weight-regular)}
+strong,b,h1,h2,h3{font-weight:var(--dj-semantic-weight-bold)}
+h1,h2{font-size:var(--dj-semantic-heading-size);line-height:var(--dj-semantic-leading-display)}
+h3,.deck-title strong{font-size:var(--dj-semantic-track-size);line-height:var(--dj-semantic-leading-control)}
+small,.muted,.library-footer,.workspace-caption{font-size:var(--dj-semantic-caption-size)}
+code,pre,kbd,textarea{font-family:var(--dj-semantic-mono-font)}
+code,pre,kbd{font-size:var(--dj-semantic-body-size)}
+.performance-toolbar,.op-standard,.op-standard-field,.op-dialog-field,.op-dialog-check{font-size:var(--dj-semantic-body-size)}
+.op-standard-field :is(button,input),.op-dialog-field textarea{font-size:var(--dj-semantic-body-size)}
+.deck :is(button,select),#mixer,.rb-mixer-band{font-size:var(--dj-semantic-control-size);line-height:var(--dj-semantic-leading-control)}
+.deck-head,.deck-key,.preview-deck-time,.tempo-control,.deck-number{font-size:var(--dj-semantic-caption-size)}
+.cross-assign,.cross-assign select{font-size:var(--dj-semantic-control-size)}
+.preview-key-row :is([data-action=keyDown],[data-action=keyUp])::after{font-size:var(--dj-semantic-icon-size)}
+.deck-title small{font-size:var(--dj-semantic-caption-size)}
+[data-density=compact] .deck-title strong{font-size:var(--dj-semantic-track-compact-size)}
+.pad,.pad small,.deck-tabs button{font-size:var(--dj-semantic-control-size);line-height:var(--dj-semantic-leading-control)}
+.deck-tabs{font-weight:var(--dj-semantic-weight-regular)}
+.deck-foot,.deck-foot :is(button,select,small),.preview-deck-utilities,.preview-deck-utilities :is(button,output),.rb-track-gain-knob,.track-gain-control{font-size:var(--dj-semantic-micro-size)}
+.deck-foot>small,.scratch-status,.wave-label,.detail-waves>span,.rb-tempo-label,.rb-tempo-caption,.rb-monitor-knob,.rb-output-knob{font-size:var(--dj-semantic-micro-size)}
+.knob-group,.fader-group,.channel-strip>button,.crossfader label,.rb-crossfader-assignments{font-size:var(--dj-semantic-control-size)}
+.platter strong{font-size:var(--dj-semantic-bpm-size);line-height:var(--dj-semantic-leading-display)}
+.platter time{font-size:var(--dj-semantic-time-size)}
+.platter small{font-size:var(--dj-semantic-micro-size)}
+.platter time,.preview-deck-time,.platter strong,output,td{font-variant-numeric:tabular-nums}
+.transport :is([data-action=play],[data-action=eject]){font-size:var(--dj-semantic-icon-size)}
+.library,.crate-tools,.library-tools,.library-footer{font-size:var(--dj-semantic-body-size)}
+table{font-size:inherit}
+th,th button,.crate-section{font-size:var(--dj-semantic-caption-size)}
+.preview-zoom,.preview-zoom button,.preview-zoom output{font-size:var(--dj-semantic-caption-size)}
+.workspace-switch button,.hybrid-controls,.settings-tabs{font-size:var(--dj-semantic-body-size)}
+#modal p,#modal li{font-size:var(--dj-semantic-reading-size);line-height:var(--dj-semantic-leading-body)}
+.panel-controls,.form-grid,.settings-grid{font-size:var(--dj-semantic-body-size)}
+.brand,.workspace-brand{font-size:var(--dj-semantic-heading-size)}
+.brand small,.workspace-brand small{font-size:var(--dj-semantic-micro-size)}
+.op-icon,.lucide,.op-standard-field svg,[role=listbox] svg{width:var(--dj-semantic-icon-size);height:var(--dj-semantic-icon-size);flex-shrink:0;vertical-align:middle;stroke-width:var(--dj-semantic-icon-stroke)}
+.crate-icon{display:inline-flex;align-items:center;justify-content:center}
+.crate-fold,.preview-more summary{display:inline-flex;align-items:center;justify-content:center}
+.transport [data-action=play]{line-height:var(--dj-semantic-leading-display)}
+
+.deck-tool-activity{font-size:var(--dj-semantic-micro-size)}

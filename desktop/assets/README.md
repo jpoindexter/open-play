@@ -1,0 +1,13 @@
+# Open Play desktop identity
+
+`open-play-icon.png` is the generated master. `open-play.icns` contains the standard macOS app-icon sizes. `menu-icon-source.png` is the matching monochrome master; `menuTemplate.png` and `menuTemplate@2x.png` are 16px/72dpi and 32px/144dpi alpha templates for automatic macOS light/dark tinting.
+
+Re-export with `node scripts/build_app_icons.mjs`. It uses macOS `sips` and `iconutil`, checks output dimensions/header, and removes its temporary iconset. No dependencies or application data are changed. Keep the generated masters; resizing is packaging only.
+
+Generated with the built-in imagegen tool on 28 October 2026. Original generated files remain in the Codex generated-images folder; project assets are stored here and included by the current desktop builders. No trademark/uniqueness clearance is implied.
+
+App prompt: “Create ONE finished premium macOS application icon for Open Play, a professional DJ mixing app. Square composition, isolated on genuinely transparent background. One flat near-black rounded-square tile, with generous even margins around the tile. Center a distinctive, extremely simple cobalt/electric blue symbol: a bold open circular record ring, broken on its right side, paired with a clean right-pointing play triangle so the ring and triangle feel like one unified 'open play' mark. The triangle may be soft white for contrast; use only near-black, vivid blue and soft white. Strong balanced geometric construction, optically centered, chunky enough to remain recognizable at16–32 pixels. Flat matte vector-like graphic, crisp clean edges, restrained professional music software aesthetic. No text, letters, gradients, glass, bevel, metallic materials, knobs, headphones, waveform clutter, decorative border, mockup, surrounding scene or multiple variants. Output the icon artwork itself.”
+
+Template edit prompt: “Create the matching macOS menu-bar template icon from this Open Play app icon. Keep the open record-ring silhouette and the play-triangle silhouette recognizable as the same unified mark, but remove the entire rounded-square tile/background. Convert both shapes into solid pure black on genuinely transparent background. No white fill, colors, grey, gradients, shadows, texture or border. Put the unified glyph nearly filling the square canvas with an even modest transparent margin. Thick clean simple shapes readable at16 pixels. Actual monochrome glyph for macOS automatic light/dark menu-bar tinting, not an app tile, scene or presentation.”
+
+Electron reference: https://www.electronjs.org/docs/latest/api/tray#platform-considerations and https://www.electronjs.org/docs/latest/api/native-image#template-image-macos.

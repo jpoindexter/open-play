@@ -1,0 +1,11 @@
+# Private desktop0.1.66
+
+Sourceaf4e8c6; ASARe2dbb0f45178ef2092d773bbd9799d63480bfcabc3c6ee274ba198a5cacbea45. Exact archive/controlled-host inspection5/5,609runtime files/100declared modules. No public release.
+
+Temporary Cue pause, cue-set and release now use existing transport presentation and Smart Sync reconciliation instead of rebuilding all decks/mixer. Actual isolated four-deck Compact Cue-key release preserves237/237observed nodes, another channel’s fader focus/value, correct paused return,4Play controls and4lazy previews; original retained9/234. Different totals reflect asynchronous image preparation. Generated audio/physical mute, not real-song/native-held/listening proof. Eight focused module checks pass, no broad suite or soak.126-line shared Cue module; no new runtime module/DSP/clock change. Hot-cue editing and Stem Slip rendering remain unchanged. CORE-FIX-21 https://trello.com/c/aUUFoC0n remains open for scoped native interaction.
+
+Protected65recording preflight: Start/00:00.0/Download disabled. Normal quit/process exit, then closed254-file/120545527Bprofile backup; before/after/copy SHA/size manifests match. Exact66native startup recovers the four real tracks at2/3/4/5s,16library tracks/exact BX3 metadata,4Play/tempo/filter/level and12EQ,7viewport AX previews. Final screenshot shows decoded overviews/detail lanes, silent master/Autoplay off. Initial blank deck waveforms during decoding are retained separately, not a ready-state or permanent-preview claim. No Play/Sync/REC or native Cue-held result inferred. See desktop-0.1.66-playback-delivery.json.
+
+Default launchers target66; named66starter syntax checked, exact bundle launch observed separately. Earlier bundles/starters retained. Confirm current exact version/session and preserve any NEW recording/work before later owner actions. CORE-LIVE-01 https://trello.com/c/yJ8r9kCD and docs/delivery/OWNER_CORE_SESSION_2026-10-27.md collect one practical controller/headphone/master/listening session; prior53ordinary control acceptance need not be rerun wholesale.
+
+Open: native fault/held/playing interaction, physical routing/listening, next actual Sync pop/waveform stall, remaining shared-style migration and public-beta distribution. No merge/publication or full-core completion claim.

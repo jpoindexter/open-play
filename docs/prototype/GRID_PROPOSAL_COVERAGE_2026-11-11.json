@@ -1,0 +1,87 @@
+{
+  "date": "2026-11-11",
+  "status": "source guard executed; current native0.1.148 remains unchanged",
+  "baselineCommit": "cdabc4374880ad6da5b957ff40aa390427ec9932",
+  "scope": "One original BX3 input discrepancy; no broad corpus, soak, full suite, native input, playback or desktop build.",
+  "criterion": "Withhold a whole-track correction when independent complete-onset sections cover less than75percent, even if a dense excerpt has100events; invalidate old cached proposal decisions.",
+  "matchedInput": {
+    "originalSHA256": "152548477424997a7138941ef1711e72be4162cc7b29115e42d4892c9f7fbe69",
+    "originalUnchanged": true,
+    "protocol": "FFmpeg48000Hz stereo vs saved native48000Hz stereo, production analyzePCM, highest-energy left channel",
+    "chosenChannel": 0,
+    "channelEnergy": [
+      3371698.186906682,
+      2904697.733754172
+    ],
+    "markersBoth": 6,
+    "maximumMarkerTimeDifferenceSeconds": 7.017968073341763e-08,
+    "bpmDifference": 5.744053055423137e-08,
+    "limit": "Near-identical output rules out a material decoder effect for this file/protocol; no musical ground truth."
+  },
+  "inputIsolation": [
+    {
+      "protocol": "left11025",
+      "bpm": 124.9853922833664,
+      "firstBeat": 0.3651166168789644,
+      "markers": 1,
+      "sections": 22
+    },
+    {
+      "protocol": "average48000",
+      "bpm": 124.98811223808964,
+      "firstBeat": 0.36741805519089615,
+      "markers": 1,
+      "sections": 18
+    }
+  ],
+  "mechanism": "At native-selected-channel input the strongest causal flux peak can switch from the near-grid pulse to an earlier peak around64ms in some sections. Different rate or averaged channels change that selection. The independent checker skipped ambiguous sections but accepted a whole-track map from only10of28sections. Musical kick ownership remains unproven.",
+  "repair": {
+    "files": [
+      "prototype/grid-proposal-check.js",
+      "prototype/tempo-drift.js",
+      "prototype/grid-drift-controls.js"
+    ],
+    "independentSectionCoverageMinimum": 0.75,
+    "checkerMethod": "complete-energy-onsets-v3",
+    "driftMethod": "windowed-bass-pulse-drift-v5",
+    "cachedV4": "Stage disabled until a fresh check; existing saved grids not erased or rewritten",
+    "dependenciesAdded": 0
+  },
+  "execution": {
+    "regressionBefore": "many onsets in half a track: failed, improved instead of insufficient",
+    "affectedChecks": 17,
+    "affectedChecksPassed": 17,
+    "command": "node --test prototype/grid-proposal-check.test.mjs prototype/tempo-drift.test.mjs prototype/grid-drift-controls.test.mjs",
+    "sameOriginalAfter": {
+      "checker": {
+        "method": "complete-energy-onsets-v3",
+        "status": "insufficient",
+        "events": 266,
+        "sections": 10,
+        "sectionCoverage": 0.35714285714285715
+      },
+      "suggestion": null
+    },
+    "knownLateDrift": "Existing constructed late-drift correction still passes; this does not prove musical accuracy."
+  },
+  "preservation": {
+    "nativeBundle": "0.1.148 unchanged; source repair not packaged",
+    "nativeInputOrPlaybackIssued": false,
+    "mainProfileAccessed": false,
+    "controlsLayoutsAndWaveformRenderingChanged": false,
+    "decodedPCM": "Memory-only, no retained raw PCM files created",
+    "privateEvidenceBytes": 1616754
+  },
+  "limits": [
+    "Independent onset coverage is conservative; legitimate ambiguous music may receive no automatic proposal and still supports manual grid editing.",
+    "Underlying pulse-identity ambiguity remains; this guard does not correct tempo or prove musical alignment.",
+    "Native Check/Stage cache behavior of the changed source is not observed in a packaged candidate yet.",
+    "Listening, matched-reference volume, Sync-pop reliability and Hercules remain open/deferred; no public beta acceptance."
+  ],
+  "privateEvidence": "local-evidence/native-grid-148/{input-comparison,input-isolation,pulse-candidates,input-comparison-after,checker-coverage-after}.json",
+  "trello": [
+    "ANA-002",
+    "ANA-FIX-13",
+    "CORE-FIX-07"
+  ]
+}

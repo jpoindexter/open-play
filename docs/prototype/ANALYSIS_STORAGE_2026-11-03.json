@@ -1,0 +1,112 @@
+{
+  "date": "2026-11-03",
+  "baselineCommit": "d39e1ff14b2e9abcbf0fbaa947909f45a2a6752a",
+  "status": "Source/browser repair; installed desktop143 unchanged, next native delivery pending.",
+  "card": "https://trello.com/c/SkySPrF3",
+  "rootCause": "trackMetadata included full analysisResult; identical pulse arrays in grid and tempo.grid were serialized twice for each analyzed track.",
+  "repair": {
+    "owner": "Shared134-line library-state.js metadata projection; normal saves, backups and legacy reads use it.",
+    "stored": "Validated integer beatCount in each existing grid summary instead of duplicate pulse arrays.",
+    "preserved": "Full analyzer result and pulse arrays in memory; measured BPM/key/loudness/gain/confidence/drift/warnings/firstBeat, manual source grid, warp markers, cues, remaining metadata and all controls/waveforms.",
+    "reader": "Analysis panel reads full array length or restored beatCount. Legacy array records remain readable.",
+    "compatibilityLimit": "Newly compact analysis needs the updated reader; older binaries may reject it. No downgrade compatibility claim.",
+    "productionModulesAdded": 0,
+    "dependenciesAdded": 0
+  },
+  "sourceRegression": {
+    "newTests": 1,
+    "affectedChecksPassed": 15,
+    "red": "Original metadata projection still contains a pulse array.",
+    "green": "Raw analyzer object/aliases untouched; both saved summaries compact, legacy/new counts validate, malformed/mismatched counts rejected, session/backup roundtrip accepted.",
+    "fullSuiteRun": false
+  },
+  "browser": {
+    "completed": true,
+    "scope": "Owned synthetic analysis metadata, actual localStorage/session projection, normal Analysis settings Save and reload. No imported music, playback, native timing or universal quota claim.",
+    "metadata": {
+      "tracks": 400,
+      "legacyCharacters": 5600705,
+      "compactCharacters": 270305,
+      "ratio": 0.04826267407406746
+    },
+    "legacyWrite": "QuotaExceededError",
+    "compactSaved": true,
+    "normalSave": {
+      "saved": true,
+      "localTags": 400,
+      "beatCount": 96,
+      "fullMemoryBeats": 96,
+      "retained": 114,
+      "total": 114,
+      "previews": 5,
+      "previewsRetained": true
+    },
+    "backup": {
+      "tags": 408,
+      "valid": true,
+      "pulseArrays": false
+    },
+    "reload": {
+      "localTags": 400,
+      "beatCount": 96,
+      "hasPulseArray": false,
+      "analysisText": "Low OrbitMeasured BPM121.01 \u00b7 confidence 80% \u00b7 library 122Measured keyAm \u00b7 confidence 0% \u00b7 library 7ALevelRMS -12.00 dBFS \u00b7 sample peak -1.00 dBFS \u00b7 0 clipped samplesIntegrated loudnessUnknown \u00b7 re-analyze for loudnessSuggested gain-3.00 dB \u00b7 ungated RMS target; not LUFS or true peakPulse grid96 beats, first pulse 0.137 s; downbeat unverifiedCoverage48.0 / 48.0 seconds for tempo/key; whole input for levelgeneration annotation \u00b7 measured unknown \u00b7 heuristic confidence 80%generation annotation \u00b7 not measuredOwned storage fixture, not a source measurement",
+      "playControls": 2,
+      "allStopped": true
+    },
+    "cleanup": {
+      "ownedSessionRemoved": true,
+      "protectedRecordsUnchanged": true,
+      "originalMediaTouched": false
+    }
+  },
+  "scopeLimits": [
+    "Synthetic400-entry analysis metadata, not400imported music tracks or an exact universal storage quota.",
+    "Backup create/validate modules executed, not a normal export/download/restore UI roundtrip. Normal Analysis settings Save and reload executed.",
+    "No before/after CPU/GC/frame/Sync-pop or long-session performance claim.",
+    "Native profile/main143 untouched; source is not yet in installed desktop."
+  ],
+  "nativeMain": {
+    "version": "0.1.143",
+    "tracks": 25,
+    "pausedDisplayedPositions": [
+      "02:41.7",
+      "01:51.1"
+    ],
+    "silent": true,
+    "evidence": "local-evidence/analysis-storage-2026-11-03/native-main-unchanged.txt"
+  },
+  "diagnosticIncident": {
+    "date": "2026-11-03",
+    "origin": "http://127.0.0.1:18874",
+    "removedKey": "openplay-review-v1",
+    "cause": "Temporary helper unconditionally removed a record in finally even after fresh-origin admission failed.",
+    "clearedValueCaptured": false,
+    "recoveryClaimed": false,
+    "historicalUse": "handoffs/current.md section132: owned GUI tempo diagnostic port18874 on18October; contents of cleared value remain unknown.",
+    "normalDesktop143": "Independently observed unchanged25tracks/paused02:41.7and01:51.1/silent after browser checks; separate native profile.",
+    "correction": "Temporary helper now uses a crypto-random prefixed Storage adapter and namespaced IndexedDB, with pre-existing-record comparison. Only its own prefix is cleaned; two subsequent runs report protectedRecordsUnchanged:true.",
+    "temporaryFilesRemoved": [
+      "__analysis-storage-check.html",
+      "__analysis-storage-check.js",
+      "__analysis-storage-safe.html",
+      "__analysis-storage-safe.js",
+      "__analysis-storage-workspace.html",
+      "__analysis-storage-workspace.js"
+    ]
+  },
+  "otherDiagnosticFailure": "First namespaced attempt string-searched any beats field and incorrectly matched numeric analysis counts. Corrected to actual arrays at grid.beats / tempo.grid.beats; final check passes, no product change for this assertion.",
+  "sourceHashes": {
+    "prototype/library-state.js": {
+      "before": "d2d7a2bea1faaffc43552e9703a7b9215429772c2d7d0d7f9183a5ee64adf9c9",
+      "after": "1a99789a7514a1103e423444acfc83bb8d5e1598f6a437d6b0d7bfb5b6c6ca6f"
+    },
+    "prototype/panels.js": {
+      "before": "9785129e40dfa3e01169cd013fe284d15bde7b01bf50bb7096044e32997eac8a",
+      "after": "d1311a4c67849e67f606b37b56af99abaa51499aa686980abf2cac16551465ce"
+    }
+  },
+  "cleanup": "Six temporary sources copied to ignored evidence then removed; owned tab closed and server91363 stopped. Namespaced session keys removed, protected records unchanged in subsequent runs. Original music never imported/copied/edited/deleted.",
+  "trelloReceipt": "analysis-storage-trello-2026-11-03.json",
+  "goal": "Active/audio muted; no listening/controller/full-core acceptance claim."
+}

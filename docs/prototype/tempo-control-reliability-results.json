@@ -1,0 +1,554 @@
+{
+  "date": "2026-10-25",
+  "scope": "Actual engine/controller/slider/renderer methods with controlled graph, clock, buffers and DOM endpoints. No new live browser/native/music/hardware acceptance.",
+  "baselineCommit": "2a9c027def85c180f54fa3e706f7531f0b7ca94a",
+  "sourceCommits": {
+    "revokedStart": "2a9c027def85c180f54fa3e706f7531f0b7ca94a",
+    "tempoSafetyAndControls": "5e53ef6c1873f6b411bf182edbf9a5a2b420e82a"
+  },
+  "sourceSHA256": {
+    "prototype/engine.js": "b9e6920b313adc35f736a1de2e643da520d2dfa5a1e59db4665209dfd383b7b7",
+    "prototype/app.js": "6e482cef012010b8ef137542774c8e9fac428887edf4f4fb9dbef63e73dc0a0a",
+    "prototype/tempo-slider.js": "c70274de8e1c5e0d093bb1f1c1bcf3a23faf1ae9dbd1f700ea2bffbbd4a0ca40",
+    "prototype/start-preparation.test.mjs": "b48a97fd751f3da0f0ab7441725380b5baeeb6a63a938a7239138bedc01a5f22",
+    "prototype/range-control-retention.test.mjs": "ba5036a4c2135adc545daa0f87ec3e84a164dcf61b528f3575484157302cf63f",
+    "prototype/rate-failure-safety.test.mjs": "0ea9363bc5c18cb87606d112bbac9aa29c9f83c3e665211318ccd64efef8c732"
+  },
+  "revokedStart": {
+    "baseline": {
+      "passed": 2,
+      "failed": 3,
+      "tapSHA256": "72bc7b8d4f66ff5249fc088988c08d0c8917a4402e71bef3796366e3e6142cbc",
+      "sameParentBufferCalls": [
+        "replacement",
+        "same"
+      ]
+    },
+    "after": {
+      "passed": 5,
+      "failed": 0,
+      "tapSHA256": "583779135a1a858fa4c7f980019691c83a9875ddcc2633f92413ef0dd3b589e4",
+      "sameParentBufferCalls": [
+        "replacement"
+      ],
+      "sameParentLogSHA256": "aab338309462c478218a6443f8bf3c3e89ae19bfd8d49a86f656f060295df5de"
+    },
+    "limit": "Buffer-request ownership only. Does not cancel already-started decoding or legitimate shared library preview work; no measured native allocation/latency."
+  },
+  "range": {
+    "baselineSourceCommit": "2a9c027def85c180f54fa3e706f7531f0b7ca94a",
+    "correctedFixtureBaseline": {
+      "passed": 3,
+      "failed": 5,
+      "tapSHA256": "58313d3af9e600c3c6258e61d46ae5966284398fe953782e3e8018b0e2fb45d1"
+    },
+    "after": {
+      "passed": 8,
+      "failed": 0,
+      "tapSHA256": "d1ac41a8b3166fd61f0c1efc06323c0258bd42795e9565987ecc1ef01fef58f3"
+    },
+    "decksTested": [
+      2,
+      4
+    ],
+    "states": [
+      "8\u219216\u219250\u21928 range cycle",
+      "original node/focus/mixer/footer/detail/preview identity",
+      "slider bounds/value/REL/aria/tooltip",
+      "pending adjustment and unrelated gesture target",
+      "missing control/changed shape structural recovery"
+    ],
+    "normalActionDeckMixerOverviewRebuildsAfter": 0,
+    "limit": "Controlled source/DOM semantics. No actual pointer/MIDI delivery, compact CSS geometry or native duration improvement."
+  },
+  "rateSafety": {
+    "acceptedBaseline": {
+      "sourceCommit": "2a9c027def85c180f54fa3e706f7531f0b7ca94a",
+      "passed": 2,
+      "failed": 11,
+      "tapSHA256": "cf8da7c7aef6e8730e440880fa57f7e5a6d5f95b61b386e39772b8005277ac4e"
+    },
+    "after": {
+      "passed": 13,
+      "failed": 0,
+      "tapSHA256": "f366e0e1aa09fc29eb9f9cb74bbb2052f0d663e0648bb1f9f6190c09db9885b5"
+    },
+    "reachableCase": "Actual tempo slider\u00b10.1% within\u00b18, KeyShift\u00b124, KeyLockOff, active loop/reverse. Real renderer validator rejects combined fallback pitch. Before repair old voice stopped/rate retained invalid for nextPlay; after repair existing prepared group keeps old audio/rate.",
+    "apiOnlyCases": "Nonfinite/outside.25\u20134 and nonnumeric direct/group inputs; currentGUI/MIDI/Sync callers already clamp/check. These are not demonstrated normalUI inputs.",
+    "existingHandoffReused": true,
+    "existingRawLiveGestureBranchesRetained": true,
+    "sliderPolicy": "Restore rejected absolute coordinate to actual pitch. Preserve existing relative consumed coordinate and next delta.",
+    "limit": "Cached transforms/controlled graph/reversal endpoints. No actual worker/stretch/reversal quality, PCM, heard pop or native boundary capture."
+  },
+  "evidenceCorrections": {
+    "crossRealmPreviewAndFloatingPointFixtureFailuresRetained": true,
+    "relativeZeroRebaseHypothesisRejected": true,
+    "legacyGUIRegressionObserved": "Initial candidate changed relative behavior and failed1/8 existing GUI checks; corrected source preserves original policy.",
+    "finalBaselineExcludesInvalidRelativeResetExpectation": true
+  },
+  "fullNode": {
+    "passed": 194,
+    "failed": 0,
+    "tapSHA256": "ede02c340cc57611c9d4913a68756a26ba9c69aebdf21d1fe69f35e0b255cf35"
+  },
+  "existingChecks": {
+    "gui-tempo-final-check": {
+      "passed": true,
+      "scope": "Controlled GUI-coordinate model with asynchronous engine collaborator; not browser input/audio, native, hardware or vendor equivalence.",
+      "tests": [
+        {
+          "name": "Synced +20% at \u00b18% starts centered; one GUI step changes pitch by 0.1%, not 12.1%",
+          "passed": true
+        },
+        {
+          "name": "Ordinary GUI tempo remains absolute and accepts external rate changes while focused",
+          "passed": true
+        },
+        {
+          "name": "External shared or MIDI tempo changes rebase the next GUI step at the last GUI position",
+          "passed": true
+        },
+        {
+          "name": "REL disengagement, absolute hardware reset, range changes and replacement tracks retain valid coordinates",
+          "passed": true
+        },
+        {
+          "name": "Rapid GUI gestures accumulate while audio work is pending",
+          "passed": true
+        },
+        {
+          "name": "Transport saturation consumes overshoot; reversing by one GUI step moves immediately",
+          "passed": true
+        },
+        {
+          "name": "Rejected rate changes rebase at actual audio state and permit a subsequent gesture",
+          "passed": true
+        },
+        {
+          "name": "Reset sets actual pitch to zero; unloaded decks never request audio changes",
+          "passed": true
+        }
+      ]
+    },
+    "live-keylock-final-check": {
+      "passed": 9,
+      "failed": 0,
+      "engineSHA256": "b9e6920b313adc35f736a1de2e643da520d2dfa5a1e59db4665209dfd383b7b7",
+      "endEngineSHA256": "b9e6920b313adc35f736a1de2e643da520d2dfa5a1e59db4665209dfd383b7b7",
+      "checks": [
+        {
+          "name": "Audible old clock remains authoritative before future new handoff and composes nested bridges",
+          "passed": true,
+          "evidence": {
+            "reported": 11,
+            "expectedOld": 11,
+            "handoff": 11.17
+          }
+        },
+        {
+          "name": "Old piecewise voice clock determines target instead of optimistic requested deck rate",
+          "passed": true,
+          "evidence": {
+            "target": 10.17,
+            "oldRate": 1,
+            "requestedRate": 2
+          }
+        },
+        {
+          "name": "End-clamped nonplaying adapter acknowledgement cannot mark deck playing",
+          "passed": true,
+          "evidence": {
+            "position": 30
+          }
+        },
+        {
+          "name": "Owned outer starts supersede stale preparation with latest rate and key settings",
+          "passed": true,
+          "evidence": {
+            "candidates": [
+              {
+                "rate": 1,
+                "semitones": 0,
+                "disposed": true
+              },
+              {
+                "rate": 2,
+                "semitones": 0,
+                "disposed": true
+              },
+              {
+                "rate": 2,
+                "semitones": 12,
+                "disposed": false
+              }
+            ],
+            "latestPlaying": true,
+            "preparationFX": [
+              {
+                "at": 10,
+                "bpm": 120
+              },
+              {
+                "at": 10,
+                "bpm": 120
+              },
+              {
+                "at": 10,
+                "bpm": 120
+              }
+            ]
+          }
+        },
+        {
+          "name": "Live rate and key commands send only changed parameters and preserve independent request fields",
+          "passed": true,
+          "evidence": {
+            "commands": [
+              {
+                "rate": 2
+              },
+              {
+                "keylock": true,
+                "semitones": 12
+              }
+            ],
+            "effectUpdateTimes": [
+              {
+                "at": 10,
+                "bpm": 120
+              }
+            ]
+          }
+        },
+        {
+          "name": "Actual legacy5-source construction records history ownership and transfers one shared output path",
+          "passed": true,
+          "evidence": {
+            "outputsPerHistory": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "oldGainTransferred": true
+          }
+        },
+        {
+          "name": "Rapid restart waits for scheduled prior retirement without disposing the audible grandparent early",
+          "passed": true,
+          "evidence": {
+            "grandparentRetiredOnlyAfterContextTime": 10.2,
+            "newCandidateTime": 10.37,
+            "firstCandidatePreserved": true
+          }
+        },
+        {
+          "name": "Audible rate composes the old bridge and switches to the prepared adapter at its boundary",
+          "passed": true,
+          "evidence": {
+            "when": 10.17,
+            "before": 1,
+            "atBoundary": 2
+          }
+        },
+        {
+          "name": "Channel and unit FX retain old audible tempo before a future rate boundary and update afterward",
+          "passed": true,
+          "evidence": {
+            "rateBoundary": 10.17,
+            "channelEffectUpdates": [
+              {
+                "at": 10,
+                "bpm": 120
+              },
+              {
+                "at": 10.17,
+                "bpm": 240
+              }
+            ],
+            "unitCalls": [
+              {
+                "at": 10,
+                "bpms": [
+                  120,
+                  120,
+                  120,
+                  120
+                ]
+              },
+              {
+                "at": 10.17,
+                "bpms": [
+                  240,
+                  120,
+                  120,
+                  120
+                ]
+              }
+            ],
+            "sourceCommands": [
+              {
+                "rate": 2
+              }
+            ],
+            "scope": "Controlled calls at/before the boundary; actual app rAF arrival and captured parameter timing remain separate proof."
+          }
+        }
+      ],
+      "scope": "Actual current AudioEngine start/control/routing/retirement methods with controlled adapter, native graph and clock collaborators. No actual browser PCM, physical hardware, native app or integrated audio acceptance. Source may be concurrently edited by parent; hashes delimit read-only review."
+    },
+    "handoff-final-check": {
+      "passed": true,
+      "scope": "Two audio-time barrier ownership/failure policy; no actual audio/native/hardware proof",
+      "checks": [
+        "all preparation ready before common output time",
+        "all future starts armed before any group commit",
+        "render failure aborts owners and rejects waits",
+        "missed lead rejects group instead of late commit"
+      ]
+    },
+    "fx-tempo-final-check": {
+      "checks": [
+        {
+          "name": "Uninitialized engine retains independent timing scalars and snapshots caller settings",
+          "passed": true
+        },
+        {
+          "name": "Existing effect slots receive manual bank BPM and independent route-derived automatic BPM without graph rebuild",
+          "passed": true
+        },
+        {
+          "name": "Real setRate reconfiguration holds manual timing while automatic timing follows its changed deck",
+          "passed": true
+        },
+        {
+          "name": "Restore automatic uses current track tempo and preserves existing processors and other bank authority",
+          "passed": true
+        },
+        {
+          "name": "Master and sampler automatic fallbacks retain existing route policy while manual remains bank-owned",
+          "passed": true
+        },
+        {
+          "name": "Semantic Video Echo uses the same effective bank timing after real engine reconfiguration",
+          "passed": true
+        },
+        {
+          "name": "Canonical metadata BPM synchronization updates automatic audio and Video timing once without erasing manual authority",
+          "passed": true
+        },
+        {
+          "name": "Metadata synchronization never initializes DSP, and rejected input preserves the current clock",
+          "passed": true
+        }
+      ],
+      "passed": 8,
+      "failed": 0,
+      "scope": "Actual AudioEngine configureFX/setRate and semantic query with controlled existing effect slot updates; not browser DSP, measured repeat intervals, live UI, musical/reference or native acceptance."
+    },
+    "midi-relative-check": {
+      "passed": true,
+      "scope": "Controlled production MIDI router with engine collaborator; no actual audio, UI, hardware or exact vendor taper proof",
+      "tests": [
+        {
+          "name": "Smart Sync outside hardware range: baseline no jump, next fader movement changes tempo",
+          "passed": true
+        },
+        {
+          "name": "First Sync-off keeps relative control; explicit second-OFF reset immediately restores known physical pitch",
+          "passed": true
+        },
+        {
+          "name": "External shared-tempo change rebases at last physical position without pickup dead zone",
+          "passed": true
+        },
+        {
+          "name": "Shift-ignore repositions fader without changing relative tempo or adding a release jump",
+          "passed": true
+        },
+        {
+          "name": "A new track or different input establishes its own no-jump relative baseline",
+          "passed": true
+        },
+        {
+          "name": "Ordinary unsynced absolute pickup remains in force",
+          "passed": true
+        },
+        {
+          "name": "Rapid paired packets coalesce without losing relative movement while engine work is pending",
+          "passed": true
+        },
+        {
+          "name": "Reversing after the transport limit moves immediately rather than retaining a saturated offset",
+          "passed": true
+        },
+        {
+          "name": "Known physical position restores across track replacement; disconnect invalidates that cached position",
+          "passed": true
+        },
+        {
+          "name": "Explicit absolute reset without a received position grants takeover to the next actual packet",
+          "passed": true
+        }
+      ]
+    },
+    "simple-sync-check": {
+      "passed": true,
+      "scope": "Production MIDI router with controlled engine collaborator. Controller/internal-deck path, not actual app OFF dispatch/audio, physical hardware, DVS/CDJ modes or exact vendor taper.",
+      "tests": [
+        {
+          "name": "Simple Sync +20% with known -2% physical fader moves relatively and never waits for unreachable pickup",
+          "passed": true
+        },
+        {
+          "name": "Simple Sync GUI/shared tempo rebases the next controller movement",
+          "passed": true
+        },
+        {
+          "name": "Simple Sync Shift-ignore repositions without a release jump, then resumes relative movement",
+          "passed": true
+        },
+        {
+          "name": "Explicit known/unknown absolute reset supports Simple controller OFF without inventing a position",
+          "passed": true
+        }
+      ]
+    },
+    "smart-primary-check": {
+      "passed": true,
+      "scope": "Controlled Smart Sync collaborators: primary local warp progression versus nominal/shared-tempo changes, source Pause and own token cancellation. Actual browser phase/audio checked separately.",
+      "checks": [
+        "Natural local .84\u21921.4 progression at constant nominal126 joins Beat Sync",
+        "Primary nominal-rate change rejects stale join",
+        "Shared tempo changes before nominal transport commit reject stale join",
+        "Primary Pause before scheduling rejects",
+        "Joining deck current-owner token cancellation rejects"
+      ]
+    },
+    "analysis-controller-check": {
+      "executedAt": "2026-10-25T08:54:25.809Z",
+      "boundary": "Actual app controller/import/persistence functions, real analyzePCM and library/storage/gain modules; controlled DOM/decode and session-only import fallback. Does not prove IndexedDB persistence, browser decoding, Worker or visible controls.",
+      "passed": 14,
+      "total": 14,
+      "results": [
+        {
+          "name": "Actual controller writes measured numeric tempo and initial grid",
+          "passed": true
+        },
+        {
+          "name": "Measured level and unknown key remain honest",
+          "passed": true
+        },
+        {
+          "name": "Ordinary reanalysis preserves manual BPM/key/grid",
+          "passed": true
+        },
+        {
+          "name": "Explicit replace still preserves protected grid and unknown-result key",
+          "passed": true
+        },
+        {
+          "name": "Locked file key survives explicit replacement with a known measured key",
+          "passed": true
+        },
+        {
+          "name": "Explicit unlocked replacement updates tempo and phase",
+          "passed": true
+        },
+        {
+          "name": "Edit during asynchronous decode wins over queued replacement",
+          "passed": true
+        },
+        {
+          "name": "Cancel during decode prevents publishing a replacement result",
+          "passed": true
+        },
+        {
+          "name": "Post-cancel enqueue drains without another user action",
+          "passed": true
+        },
+        {
+          "name": "Post-cancel enqueue does not revive cancelled pending jobs",
+          "passed": true
+        },
+        {
+          "name": "File import generates content-derived stable identity and obeys analysis disabled",
+          "passed": true
+        },
+        {
+          "name": "Repeated identical file import does not duplicate library row",
+          "passed": true
+        },
+        {
+          "name": "Same bytes restore persisted manual metadata on re-import",
+          "passed": true
+        },
+        {
+          "name": "Actual persistence saves analysis settings and imported metadata without file bytes",
+          "passed": true
+        }
+      ]
+    }
+  },
+  "independentReview": {
+    "rangePassed": 8,
+    "ratePassed": 13,
+    "legacyGUIPassed": 8,
+    "concreteIntroducedRegressionFound": false,
+    "scope": "Source and controlled execution only."
+  },
+  "liveBoundary": {
+    "userRequestedUntilUnlock": true,
+    "newUIPlaybackOrNativeBuild": false,
+    "normal52ProfileTouched": false,
+    "priorOrientationComparison": "99abf2a/ba4f0de remains a separate isolated experiment.",
+    "currentRuntimePreparation": "Prepared CURRENT_INTEGRATION variant:22 selected modules pinned to5e53ef6; static/pure checks only. Separate99/ba4 variants retain20modules; no actual current runtime acceptance."
+  },
+  "stillOpen": [
+    "Actual current-source varied-track native buffer/range/rate behavior",
+    "Other unattributed four-deck stalls and audible Sync pops",
+    "Actual pointer/MIDI/compact geometry",
+    "Late-song musical grids, manual transitions/EQ/Cue/stop and physical monitoring/controller acceptance"
+  ],
+  "preparedCurrentIntegration": {
+    "scope": "PRIVATE CURRENT_INTEGRATION readiness only; no Electron, HTTP listener, UI, native capture, playback or music started",
+    "currentCommit": "5e53ef6c1873f6b411bf182edbf9a5a2b420e82a",
+    "variants": {
+      "baseline": 20,
+      "candidate": 20,
+      "current": 22
+    },
+    "currentFiles": {
+      "native-orientation-window.cjs": {
+        "sha256": "a248153fe59a3642a7c21841b9078ec508e02b083b33a7af2a52191a8a58fb9d",
+        "bytes": 30101
+      },
+      "orientation-server.py": {
+        "sha256": "3d12ad87aeb2e6d1c014492272d798c6367eec9accf137fb6628315e8ba85618",
+        "bytes": 3494
+      },
+      "orientation-current-sources.json": {
+        "sha256": "84cfdc5f8f831c89224dc5c0aaab83ca69e96f704ccb357e46354c3f752959b6",
+        "bytes": 2351
+      }
+    },
+    "originalCopiesVerified": true,
+    "legacyManifestsUnchanged": true,
+    "captureObserverSecurityAndQualityGateSectionsByteUnchanged": true,
+    "serverHandlerHostOriginAndTrackRoutingSectionByteUnchanged": true,
+    "pureChecks": {
+      "triggerCases": 9,
+      "intervalCases": 7,
+      "injectedScriptsCompiled": 2,
+      "all3ManifestsGitHashVerified": true,
+      "eightOriginalTrackHashesVerified": true
+    },
+    "launchOnlyAfterUnlock": true,
+    "doesNotEstablish": [
+      "Matched99/ba4orientationcausality",
+      "Currentnativeintegration",
+      "NewFXparameterorfailedraterequestcoverage",
+      "AudibleSyncpopsorhardwareoutput"
+    ]
+  }
+}

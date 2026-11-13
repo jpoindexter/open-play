@@ -1,0 +1,60 @@
+{
+  "date": "2026-10-30",
+  "baselineCommit": "27e9bf8cb0c37892f86ea144b88bbdc80b16401d",
+  "defect": "Pending Auto Loop metadata and its preexisting queued pad adopted a newer saved-loop transport, canceling the newer recall.",
+  "repair": "Queue admission captures deck/track/epoch/transport token; only successful own transport advances or unchanged no-ops carry queued input. Each asynchronous loop/seek rechecks owned token before follow-up metadata/render/seek.",
+  "focusedCommand": "node --test --test-name-pattern='pending (Auto Loop|Loop Roll|Beat Jump)|rejected queued Roll release' prototype/manual-loop-ownership.test.mjs",
+  "red": {
+    "tests": 1,
+    "pass": 0,
+    "fail": 1,
+    "assertion": "Older queued Auto Loop canceled the newer saved-loop recall: false !== true"
+  },
+  "green": {
+    "tests": 4,
+    "pass": 4,
+    "fail": 0,
+    "criteria": [
+      "New saved-loop handler returns true",
+      "Old pending Auto Loop and queued pad both return false",
+      "New voice/token/loop11\u201312/loopLength2/autoLoopBeatsnull retained",
+      "Fresh legitimate queued Auto Loop pads both succeed",
+      "Directly changed Roll-release and BeatJump ownership cases retain newer recall",
+      "All controlled Workers terminate and voice/transform/retirement cleanup succeeds",
+      "Rejected queued Roll release clears its old held-pad state without ending newer work; fresh Auto Loop succeeds"
+    ]
+  },
+  "callerReview": [
+    "GUI Auto Loop/Roll/Beat Jump pads",
+    "Legacy Roll pointer/keyboard holds/releases/blur",
+    "Deck MIDI AutoLoop4 and loop-pad adapters",
+    "Existing presentation fixture has engine token map; no caller signature change"
+  ],
+  "sourceAfter": {
+    "prototype/loop-pads.js": "5cc6223884590738b44402fca17e1c3e64668d62a0f94b04f28587c4091698d4",
+    "prototype/manual-loop-ownership.test.mjs": "396823680d5e98493163d07460aefe0735a1664e99477219c8e7b1cb9e4fd8ae",
+    "prototype/loop-pad-recall-check.js": "0daf6165ed32b434eed45755b35071d4cf13fc0fe6aae4f0f6954c0d6dde0de5"
+  },
+  "moduleLines": {
+    "prototype/loop-pads.js": 106,
+    "prototype/manual-loop-ownership.test.mjs": 160,
+    "prototype/loop-pad-recall-check.js": 72
+  },
+  "rawEvidence": {
+    "red.txt": "1f755ad68185caae93adfb16fe190244295ae1fb90d1d586fb731ee241d6a9e0",
+    "green.txt": "91df9374ccba8e37d00dd79acc690561b3c6bf367ed25a831266e7e752e13066"
+  },
+  "nativePlan": "Reuse existing isolated real-Worker recall checker for queued Auto Loop. Original Beat Jump button retained. No new diagnostic framework or broad matrix.",
+  "limits": [
+    "Source fixture uses actual AudioEngine/app-handler/modules with controlled Worker/graph; renderer DSP not executed there",
+    "Native queued-Auto acceptance and private130 delivery pending",
+    "No new audio clocks/DSP/Sync/layout/waveform logic, original music/session changes or genericpop/stall attribution",
+    "Owner listening/controller/headphone and startup60 remain open"
+  ],
+  "laterNativeAcceptance": {
+    "version": "0.1.133",
+    "completed": true,
+    "report": "QUEUED_LOOP_133_NATIVE_2026-10-30.json",
+    "scope": "Generated-only real Worker/held result, strict newer recall/control/preview/muted cleanup. No music/generalpop/hardware claim."
+  }
+}

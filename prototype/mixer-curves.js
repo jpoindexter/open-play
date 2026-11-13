@@ -1,12 +1,12 @@
 // Independent curves anchored to the documented endpoints, not measured vendor DSP.
 const clamp=(v,min,max)=>Math.max(min,Math.min(max,v));
 const finite=(v,fallback)=>Number.isFinite(Number(v))?Number(v):fallback;
-export const mixerFields=new Set(['Crossfader Curve','Crossfader Curve Amount','Crossfader Reverse','Crossfader Disable','Upfader Curve',...Array.from({length:4},(_,i)=>`Deck ${i+1} Crossfader Assign`)]);
+export const mixerFields=new Set(['Crossfader Curve','Crossfader Curve Amount','Crossfader Reverse','Crossfader Disable','Upfader Curve','Channel Filters',...Array.from({length:4},(_,i)=>`Deck ${i+1} Crossfader Assign`)]);
 export function normalizeMixerSettings(value={}){
- return {curve:value.curve==='Power'?'Power':'Linear',amount:clamp(finite(value.amount,.5),0,1),reverse:value.reverse===true,disabled:value.disabled===true,upfader:clamp(finite(value.upfader,.5),0,1),assignments:Array.from({length:4},(_,i)=>['A','B','Thru'].includes(value.assignments?.[i])?value.assignments[i]:i%2?'B':'A')};
+ return {curve:value.curve==='Power'?'Power':'Linear',amount:clamp(finite(value.amount,.5),0,1),reverse:value.reverse===true,disabled:value.disabled===true,upfader:clamp(finite(value.upfader,.5),0,1),filtersEnabled:value.filtersEnabled!==false,assignments:Array.from({length:4},(_,i)=>['A','B','Thru'].includes(value.assignments?.[i])?value.assignments[i]:i%2?'B':'A')};
 }
 export function mixerSettingsFromPreferences(settings){
- return normalizeMixerSettings({curve:settings['Crossfader Curve'],amount:finite(settings['Crossfader Curve Amount'],50)/100,reverse:settings['Crossfader Reverse'],disabled:settings['Crossfader Disable'],upfader:finite(settings['Upfader Curve'],50)/100,assignments:Array.from({length:4},(_,i)=>settings[`Deck ${i+1} Crossfader Assign`])});
+ return normalizeMixerSettings({curve:settings['Crossfader Curve'],amount:finite(settings['Crossfader Curve Amount'],50)/100,reverse:settings['Crossfader Reverse'],disabled:settings['Crossfader Disable'],upfader:finite(settings['Upfader Curve'],50)/100,filtersEnabled:settings['Channel Filters']===true,assignments:Array.from({length:4},(_,i)=>settings[`Deck ${i+1} Crossfader Assign`])});
 }
 export function crossfaderGain(position,assignment,settings){
  if(settings.disabled||assignment==='Thru')return 1;

@@ -1,0 +1,51 @@
+{
+  "date": "2026-10-25",
+  "candidate": "Open Play Playback Test 0.1.55",
+  "sourceCommit": "bf5c71b46a53fdb5452c62a1dfeb511ca9ffdc0f",
+  "defect": "Play increments were omitted from the shared persisted metadata whitelist and reset after reload.",
+  "repair": "Add plays to trackMetadata and validate it as a nonnegative safe integer. Reuse existing saved-state, backup and restore owners. No transport/DSP/UI rewrite.",
+  "focusedRegression": {
+    "command": "node --test --test-name-pattern='play counts survive' prototype/library-state.test.mjs",
+    "before": "RED: restored demo count 0 instead of 3.",
+    "after": "GREEN 1/1: demo and content-addressed metadata through real session storage validation/JSON and backup validation; invalid counts rejected; old missing-count entries accepted.",
+    "limits": "Controlled memory storage and metadata/restore functions, not native backup chooser or storage-quota acceptance."
+  },
+  "native": {
+    "method": "Actual cua native UI on exact immutable bundle; one real saved track, muted Play, pause, quit, process exit verified, reopen.",
+    "track": "Anika Kunst \u2014 Constant Change",
+    "channel": "A",
+    "countBefore": 0,
+    "countAfterPlay": 1,
+    "countAfterRestart": 1,
+    "historyBeforeRestart": {
+      "entry": 96,
+      "deck": 1,
+      "time": "2026-10-25T14:47:19.654Z"
+    },
+    "historyAfterRestart": "Same entry 96, title, deck and ISO timestamp observed.",
+    "muting": "Channel A 0 during playback; master meter minus infinity. Paused before restoring A to80%.",
+    "startup": "Same0.1.55 exact native title;0playing;16saved library tracks and waveform images retained; A/B demo decks load at restart.",
+    "cleanup": "History panel closed;0playing;A/B80%;crosscentre;Master\u221210dB;Horizontal/Compact/two decks.",
+    "limits": "No new audible Sync/pop/EQ or physical routing claim; no Prepare restoration or full history editing/export acceptance."
+  },
+  "preservation": {
+    "profileBackup": "local-evidence/desktop-builds/0.1.55/profile-before-native",
+    "recording": "0.1.54 stopped and REC inactive/Download disabled before closing. Prior saved0.1.53 capture and old bundles retained.",
+    "session": "Existing history kept; exactly one intentional successful play added. Original music unchanged."
+  },
+  "package": "docs/prototype/desktop-0.1.55-playback-package.json",
+  "inspection": "docs/prototype/desktop-0.1.55-playback-inspection.json",
+  "packageResult": "Existing immutable archive/host inspection5passed0failed; no broad suite or matrix repeated.",
+  "trello": {
+    "cards": [
+      "LIB-008",
+      "SYS-002",
+      "LIB-016"
+    ],
+    "newCards": 0,
+    "fullFeatureCompletions": 0,
+    "reason": "Existing cards cover count/history persistence and remaining history semantics. Preserve model guidance/history.",
+    "readback": "Three existing card descriptions, unchanged incomplete states and existing core comment read back exactly; original criteria/model/history preserved."
+  },
+  "next": "Continue remaining hardware-independent core controls/history defects; manual history edits and local timestamp presentation remain on LIB-016. Pop/stall cause changes require a concrete event."
+}

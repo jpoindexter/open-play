@@ -133,7 +133,7 @@ export function createPitchPlay({
           name: `Cue ${pad + 1}`,
         };
       persist();
-      render();
+      render(d);
       return true;
     }
     const cue = d.track.cues[d.pitchCue || 0];
@@ -175,7 +175,7 @@ export function createPitchPlay({
       notify(error.message);
       return false;
     } finally {
-      render();
+      render(d);
     }
   }
   async function release(key) {
@@ -191,7 +191,7 @@ export function createPitchPlay({
       h.d.position = h.target;
     } else if (h.d.slipOrigin?.reason === "pitch")
       await engine.endSlip(h.d, "pitch");
-    render();
+    render(h.d);
   }
   function latch(d) {
     const h = owners.get(d.index);

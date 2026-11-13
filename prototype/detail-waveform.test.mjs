@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {paintDetailWaveforms} from './detail-waveform.js';
-import {performanceColors as ink} from './performance-tokens.js';
+import {performanceColors as ink,performanceTypography as type} from './performance-tokens.js';
 import {sourceWaveformState} from './source-waveform.js';
 const track=bpm=>({bpm,grid:0,duration:1000,cues:[],gridWarpMarkers:[]});
 const pair=()=>[{index:0,rate:132/120,position:60,track:track(120)},{index:1,rate:132/125,position:96,track:track(125)}];
@@ -32,7 +32,7 @@ test('four compact vertical lanes retain distinct clipped rulers and the same NO
   assert.deepEqual(r.clips,[[0,0,70,136],[70,0,70,136],[140,0,70,136],[210,0,70,136]]);
   assert.equal(r.rects.filter(r=>r.ink===ink.wavePlayhead&&r.rect[1]===67&&r.rect[2]===70&&r.rect[3]===2).length,4);
   assert(r.texts.some(t=>t.text==='C · —'));
-  assert(r.texts.every(t=>/\b1[01]px/.test(t.font)));
+  assert(r.texts.every(t=>[type.captionSize,type.microSize].includes(t.font.replace(/^bold /,''))));
 });
 test('ruler text and beat marks have measurable contrast without relying on frequency color',()=>{
   const luminance=hex=>{const c=hex.slice(1).match(/../g).map(v=>parseInt(v,16)/255).map(v=>v<=.04045?v/12.92:((v+.055)/1.055)**2.4);return .2126*c[0]+.7152*c[1]+.0722*c[2];};

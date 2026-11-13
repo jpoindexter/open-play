@@ -1,0 +1,601 @@
+{
+  "date": "2026-11-03",
+  "baseline": "e4650a781a66f9812818a3cdb0c496cc4a7a7e3a",
+  "defect": "drawWaves measured/resized an empty overview before noticing that no track was loaded. Actual Eject trace shows one6ms wave-1 geometry read and a coincident41.6ms rAF interval; full cause not established.",
+  "repair": "Shared painter skips empty geometry and clears the existing bitmap at unchanged intrinsic dimensions. No DSP/default/layout/loaded-waveform change.",
+  "sourceRegression": {
+    "emptyRed": "Width320\u2192100 attempted before clear; original failed receipt retained",
+    "affectedChecks": 24,
+    "failed": 0,
+    "fixtureMaintenance": "Two pre-existing failures reproduce on baseline: missing Sync helpers. Tests now import real helpers and supply current collaborators. No full suite."
+  },
+  "browser": {
+    "startedAt": "2026-11-03T20:43:46.367Z",
+    "finishedAt": "2026-11-03T20:43:52.969Z",
+    "completed": true,
+    "scope": "Isolated four-real-track Compact native/browser runtime; installed Play/range/Quantize/Eject handlers and deliberately held synthetic Y nudge. Scripted clicks/focus are not physical pointer/MIDI, listening or generic pop proof.",
+    "steps": [
+      {
+        "label": "range-0",
+        "deckCount": 4,
+        "retained": 233,
+        "total": 233,
+        "readyPreviews": 3,
+        "previewsRetained": true,
+        "focusRetained": true,
+        "voicesAndNominalRatesRetained": true,
+        "heldRate": 1.0399999618530273,
+        "range": 16,
+        "quantize": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "quantizePressed": [
+          "true",
+          "true",
+          "true",
+          "true"
+        ],
+        "globalQuantize": "true",
+        "removed": {
+          "decks": 0,
+          "detail": 0,
+          "mixer": 0,
+          "rows": 0,
+          "previews": 0
+        },
+        "elapsedToTwoFramesMs": 15.299999952316284,
+        "physicalMuted": true
+      },
+      {
+        "label": "range-1",
+        "deckCount": 4,
+        "retained": 233,
+        "total": 233,
+        "readyPreviews": 3,
+        "previewsRetained": true,
+        "focusRetained": true,
+        "voicesAndNominalRatesRetained": true,
+        "heldRate": 1.0399999618530273,
+        "range": 50,
+        "quantize": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "quantizePressed": [
+          "true",
+          "true",
+          "true",
+          "true"
+        ],
+        "globalQuantize": "true",
+        "removed": {
+          "decks": 0,
+          "detail": 0,
+          "mixer": 0,
+          "rows": 0,
+          "previews": 0
+        },
+        "elapsedToTwoFramesMs": 15.799999952316284,
+        "physicalMuted": true
+      },
+      {
+        "label": "range-2",
+        "deckCount": 4,
+        "retained": 233,
+        "total": 233,
+        "readyPreviews": 3,
+        "previewsRetained": true,
+        "focusRetained": true,
+        "voicesAndNominalRatesRetained": true,
+        "heldRate": 1.0399999618530273,
+        "range": 8,
+        "quantize": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "quantizePressed": [
+          "true",
+          "true",
+          "true",
+          "true"
+        ],
+        "globalQuantize": "true",
+        "removed": {
+          "decks": 0,
+          "detail": 0,
+          "mixer": 0,
+          "rows": 0,
+          "previews": 0
+        },
+        "elapsedToTwoFramesMs": 19.59999990463257,
+        "physicalMuted": true
+      },
+      {
+        "label": "deck-quantize-0",
+        "deckCount": 4,
+        "retained": 233,
+        "total": 233,
+        "readyPreviews": 3,
+        "previewsRetained": true,
+        "focusRetained": true,
+        "voicesAndNominalRatesRetained": true,
+        "heldRate": 1.0399999618530273,
+        "range": 8,
+        "quantize": [
+          false,
+          true,
+          true,
+          true
+        ],
+        "quantizePressed": [
+          "false",
+          "true",
+          "true",
+          "true"
+        ],
+        "globalQuantize": "mixed",
+        "removed": {
+          "decks": 0,
+          "detail": 0,
+          "mixer": 0,
+          "rows": 0,
+          "previews": 0
+        },
+        "elapsedToTwoFramesMs": 20,
+        "physicalMuted": true
+      },
+      {
+        "label": "deck-quantize-1",
+        "deckCount": 4,
+        "retained": 233,
+        "total": 233,
+        "readyPreviews": 3,
+        "previewsRetained": true,
+        "focusRetained": true,
+        "voicesAndNominalRatesRetained": true,
+        "heldRate": 1.0399999618530273,
+        "range": 8,
+        "quantize": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "quantizePressed": [
+          "true",
+          "true",
+          "true",
+          "true"
+        ],
+        "globalQuantize": "true",
+        "removed": {
+          "decks": 0,
+          "detail": 0,
+          "mixer": 0,
+          "rows": 0,
+          "previews": 0
+        },
+        "elapsedToTwoFramesMs": 24.5,
+        "physicalMuted": true
+      },
+      {
+        "label": "global-quantize-0",
+        "deckCount": 4,
+        "retained": 233,
+        "total": 233,
+        "readyPreviews": 3,
+        "previewsRetained": true,
+        "focusRetained": true,
+        "voicesAndNominalRatesRetained": true,
+        "heldRate": 1.0399999618530273,
+        "range": 8,
+        "quantize": [
+          false,
+          false,
+          false,
+          false
+        ],
+        "quantizePressed": [
+          "false",
+          "false",
+          "false",
+          "false"
+        ],
+        "globalQuantize": "false",
+        "removed": {
+          "decks": 0,
+          "detail": 0,
+          "mixer": 0,
+          "rows": 0,
+          "previews": 0
+        },
+        "elapsedToTwoFramesMs": 17.800000071525574,
+        "physicalMuted": true
+      },
+      {
+        "label": "global-quantize-1",
+        "deckCount": 4,
+        "retained": 233,
+        "total": 233,
+        "readyPreviews": 3,
+        "previewsRetained": true,
+        "focusRetained": true,
+        "voicesAndNominalRatesRetained": true,
+        "heldRate": 1.0399999618530273,
+        "range": 8,
+        "quantize": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "quantizePressed": [
+          "true",
+          "true",
+          "true",
+          "true"
+        ],
+        "globalQuantize": "true",
+        "removed": {
+          "decks": 0,
+          "detail": 0,
+          "mixer": 0,
+          "rows": 0,
+          "previews": 0
+        },
+        "elapsedToTwoFramesMs": 18,
+        "physicalMuted": true
+      },
+      {
+        "label": "range-0",
+        "deckCount": 2,
+        "retained": 120,
+        "total": 120,
+        "readyPreviews": 4,
+        "previewsRetained": true,
+        "focusRetained": true,
+        "voicesAndNominalRatesRetained": true,
+        "heldRate": 1.0399999618530273,
+        "range": 16,
+        "quantize": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "quantizePressed": [
+          "true",
+          "true"
+        ],
+        "globalQuantize": "true",
+        "removed": {
+          "decks": 0,
+          "detail": 0,
+          "mixer": 0,
+          "rows": 0,
+          "previews": 0
+        },
+        "elapsedToTwoFramesMs": 26.90000009536743,
+        "physicalMuted": true
+      },
+      {
+        "label": "range-1",
+        "deckCount": 2,
+        "retained": 121,
+        "total": 121,
+        "readyPreviews": 4,
+        "previewsRetained": true,
+        "focusRetained": true,
+        "voicesAndNominalRatesRetained": true,
+        "heldRate": 1.0399999618530273,
+        "range": 50,
+        "quantize": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "quantizePressed": [
+          "true",
+          "true"
+        ],
+        "globalQuantize": "true",
+        "removed": {
+          "decks": 0,
+          "detail": 0,
+          "mixer": 0,
+          "rows": 0,
+          "previews": 0
+        },
+        "elapsedToTwoFramesMs": 11.800000071525574,
+        "physicalMuted": true
+      },
+      {
+        "label": "range-2",
+        "deckCount": 2,
+        "retained": 121,
+        "total": 121,
+        "readyPreviews": 5,
+        "previewsRetained": true,
+        "focusRetained": true,
+        "voicesAndNominalRatesRetained": true,
+        "heldRate": 1.0399999618530273,
+        "range": 8,
+        "quantize": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "quantizePressed": [
+          "true",
+          "true"
+        ],
+        "globalQuantize": "true",
+        "removed": {
+          "decks": 0,
+          "detail": 0,
+          "mixer": 0,
+          "rows": 0,
+          "previews": 0
+        },
+        "elapsedToTwoFramesMs": 16.09999990463257,
+        "physicalMuted": true
+      },
+      {
+        "label": "deck-quantize-0",
+        "deckCount": 2,
+        "retained": 121,
+        "total": 121,
+        "readyPreviews": 5,
+        "previewsRetained": true,
+        "focusRetained": true,
+        "voicesAndNominalRatesRetained": true,
+        "heldRate": 1.0399999618530273,
+        "range": 8,
+        "quantize": [
+          false,
+          true,
+          true,
+          true
+        ],
+        "quantizePressed": [
+          "false",
+          "true"
+        ],
+        "globalQuantize": "mixed",
+        "removed": {
+          "decks": 0,
+          "detail": 0,
+          "mixer": 0,
+          "rows": 0,
+          "previews": 0
+        },
+        "elapsedToTwoFramesMs": 15.899999976158142,
+        "physicalMuted": true
+      },
+      {
+        "label": "deck-quantize-1",
+        "deckCount": 2,
+        "retained": 121,
+        "total": 121,
+        "readyPreviews": 5,
+        "previewsRetained": true,
+        "focusRetained": true,
+        "voicesAndNominalRatesRetained": true,
+        "heldRate": 1.0399999618530273,
+        "range": 8,
+        "quantize": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "quantizePressed": [
+          "true",
+          "true"
+        ],
+        "globalQuantize": "true",
+        "removed": {
+          "decks": 0,
+          "detail": 0,
+          "mixer": 0,
+          "rows": 0,
+          "previews": 0
+        },
+        "elapsedToTwoFramesMs": 16.199999928474426,
+        "physicalMuted": true
+      },
+      {
+        "label": "global-quantize-0",
+        "deckCount": 2,
+        "retained": 121,
+        "total": 121,
+        "readyPreviews": 5,
+        "previewsRetained": true,
+        "focusRetained": true,
+        "voicesAndNominalRatesRetained": true,
+        "heldRate": 1.0399999618530273,
+        "range": 8,
+        "quantize": [
+          false,
+          false,
+          false,
+          false
+        ],
+        "quantizePressed": [
+          "false",
+          "false"
+        ],
+        "globalQuantize": "false",
+        "removed": {
+          "decks": 0,
+          "detail": 0,
+          "mixer": 0,
+          "rows": 0,
+          "previews": 0
+        },
+        "elapsedToTwoFramesMs": 16.600000023841858,
+        "physicalMuted": true
+      },
+      {
+        "label": "global-quantize-1",
+        "deckCount": 2,
+        "retained": 121,
+        "total": 121,
+        "readyPreviews": 5,
+        "previewsRetained": true,
+        "focusRetained": true,
+        "voicesAndNominalRatesRetained": true,
+        "heldRate": 1.0399999618530273,
+        "range": 8,
+        "quantize": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "quantizePressed": [
+          "true",
+          "true"
+        ],
+        "globalQuantize": "true",
+        "removed": {
+          "decks": 0,
+          "detail": 0,
+          "mixer": 0,
+          "rows": 0,
+          "previews": 0
+        },
+        "elapsedToTwoFramesMs": 16.40000009536743,
+        "physicalMuted": true
+      },
+      {
+        "label": "eject-B",
+        "deckCount": 4,
+        "retained": 186,
+        "total": 186,
+        "readyPreviews": 5,
+        "previewsRetained": true,
+        "focusRetained": true,
+        "voicesAndNominalRatesRetained": true,
+        "heldRate": 1.0399999618530273,
+        "range": 8,
+        "quantize": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "quantizePressed": [
+          "true",
+          "true",
+          "true",
+          "true"
+        ],
+        "globalQuantize": "true",
+        "removed": {
+          "decks": 1,
+          "detail": 0,
+          "mixer": 0,
+          "rows": 0,
+          "previews": 0
+        },
+        "elapsedToTwoFramesMs": 28.600000023841858,
+        "physicalMuted": true,
+        "emptyOverviewGeometryReads": 0
+      }
+    ],
+    "sourceBefore": {
+      "app.js": "267e372f7f71523df7c3f4fca17ac08ebb18b8ef9276ebb28a1240f2751eb967",
+      "engine.js": "036f084a42177cb58eeaf926b3fd3d5ea6f0ef7b2fe9aefcb1974711ee89261b",
+      "four-deck-trace.js": "f654c2bd9d886ae96d3a0474aade36d1597733a4f2fbfcd20e704dbb3fea3d6b",
+      "core-ownership-check.js": "03f8c165e022aa9e36d782c19bb80fa5f86b49c9aded8bde32ab115cee47d44f",
+      "playing-controls-check.js": "a3e4e2bee2c384ca759369524dd22b3040ce7701fad70ba9be4e52efd76f624b"
+    },
+    "sourceAfter": {
+      "app.js": "267e372f7f71523df7c3f4fca17ac08ebb18b8ef9276ebb28a1240f2751eb967",
+      "engine.js": "036f084a42177cb58eeaf926b3fd3d5ea6f0ef7b2fe9aefcb1974711ee89261b",
+      "four-deck-trace.js": "f654c2bd9d886ae96d3a0474aade36d1597733a4f2fbfcd20e704dbb3fea3d6b",
+      "core-ownership-check.js": "03f8c165e022aa9e36d782c19bb80fa5f86b49c9aded8bde32ab115cee47d44f",
+      "playing-controls-check.js": "a3e4e2bee2c384ca759369524dd22b3040ce7701fad70ba9be4e52efd76f624b"
+    },
+    "sourceStable": true,
+    "emptyOverview": {
+      "transparent": true,
+      "geometryReads": 0
+    },
+    "tracks": [
+      {
+        "id": "local-0ed3fa4989da4ddedce328ab3f580c7b8d2e10bb877ced20bb5a453b1e897279",
+        "title": "Disaffected",
+        "duration": 460.2969791666667
+      },
+      {
+        "id": "local-243ecc70a5c2114d6fba35240f36372d3ab125a7adfcf1ea115511c8270e5bf2",
+        "title": "DJ W!LD - When You Feel Me (Remixes Part 1) - 001 - DJ W!LD - AC!DMAT!C (Jus-Ed Head Room Remix) [W14]",
+        "duration": 401.02022916666664
+      },
+      {
+        "id": "local-633c327923c1917b1473b24444b8ee2e1caee53411d11cfe0810d22b060b6d6c",
+        "title": "DJ W!LD - Sweet & Spicy EP (The W Label) - 003 - DJ W!LD - Call Me Later (W Label)",
+        "duration": 448.0058125
+      },
+      {
+        "id": "local-7f4d7e5723721a9c985bfb49294908548d16093211db4d027fd8a532cfb35b5b",
+        "title": "Czeslawa",
+        "duration": 454.81333333333333
+      }
+    ],
+    "cleanup": {
+      "allStopped": true,
+      "physicalMuted": true,
+      "traceStopObserved": true
+    },
+    "final": {
+      "playing": [
+        true,
+        false,
+        true,
+        true
+      ],
+      "nominalRate": 1,
+      "releasedRate": 1,
+      "aPositionAdvanced": 1.2467199605305985
+    },
+    "cadence": {
+      "samples": 113,
+      "medianMs": 8.300000000000182,
+      "p95Ms": 16.800000000000182,
+      "maxMs": 91.59999999999945,
+      "limit": "Includes intentional structural mode changes; not a benchmark or general stall/pop acceptance."
+    },
+    "privateEvidenceCandidates": [
+      "local-evidence/playing-controls-2026-11-03/browser-first.json",
+      "local-evidence/playing-controls-2026-11-03/browser-cleanup.json",
+      "local-evidence/playing-controls-2026-11-03/browser-empty-first.json",
+      "local-evidence/playing-controls-2026-11-03/browser-final.json",
+      "local-evidence/playing-controls-2026-11-03/browser.json"
+    ]
+  },
+  "sourceHashesIndependentlyMatched": true,
+  "originalAudio": {
+    "files": 4,
+    "bytes": 70847408,
+    "shaSizeMtimeUnchanged": true,
+    "copiedToRepo": false
+  },
+  "diagnosticMaintenance": [
+    "Valid empty deck B no longer blocks diagnostic startup after Eject",
+    "Initial total counter included intentional mode-transition measurements; final counter scopes geometry to Eject. Rejected diagnostic receipt retained."
+  ],
+  "remaining": "One immutable142 native controlled workflow + paused main recovery. Physical pointer/MIDI/listening and generic pop/stall remain separate.",
+  "privateEvidence": "local-evidence/playing-controls-2026-11-03"
+}

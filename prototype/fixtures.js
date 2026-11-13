@@ -204,6 +204,7 @@ export const settingsSchema = {
   Mixer: [
     ["Master Volume", "range", 100],
     ["EQ Boost", ["6 dB", "12 dB"], "6 dB"],
+    ["Channel Filters", "check", false],
     ["Output Mode", ["Stereo", "Mono"], "Stereo"],
     ["Cue Mix", "range", 50],
     ["Cue Volume", "range", 50],

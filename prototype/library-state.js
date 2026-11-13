@@ -1,5 +1,6 @@
 import {settingsSchema,demoTracks} from './fixtures.js';
 import {createBeatgrid} from './beatgrid.js';
+import {validateDeckSession} from './deck-session.js';
 import {ruleFields,ruleOperators} from './library.js';
 
 const object=x=>x!==null&&typeof x==='object'&&!Array.isArray(x);
@@ -27,21 +28,42 @@ function safeJSON(value,path='library',depth=0){
     safeJSON(entry,`${path}.${key}`,depth+1);
   }
 }
-export const metadataFields=['title','artist','album','bpm','key','rating','comment','color','cues','savedLoops','grid','gridMarkers','gridWarpMarkers','locked','flips','sampleGain','trackGainDb','autoGainSchema','autoGainOffsetDb','autoGainPendingDb','analysisResult','metadataSources','analysisGainDb','metadataRevision','stemJob','stemModel','stemBackend','inStemCrate'];
-export function trackMetadata(track){return Object.fromEntries(metadataFields.filter(key=>track[key]!==undefined).map(key=>[key,track[key]]));}
+export const metadataFields=['title','artist','album','bpm','key','plays','rating','comment','color','cues','savedLoops','grid','gridMarkers','gridWarpMarkers','locked','flips','sampleGain','trackGainDb','autoGainSchema','autoGainOffsetDb','autoGainPendingDb','analysisResult','metadataSources','analysisGainDb','metadataRevision','stemJob','stemModel','stemBackend','inStemCrate'];
+function storedAnalysis(result){
+  const compact=grid=>{const {beats,...summary}=grid;return {...summary,beatCount:beats.length};};
+  const grid=Array.isArray(result?.grid?.beats),tempo=Array.isArray(result?.tempo?.grid?.beats);
+  if(!grid&&!tempo)return result;
+  const summary={...result};
+  if(grid)summary.grid=compact(result.grid);
+  if(tempo)summary.tempo={...result.tempo,grid:compact(result.tempo.grid)};
+  return summary;
+}
+export function trackMetadata(track){return Object.fromEntries(metadataFields.filter(key=>track[key]!==undefined).map(key=>[key,key==='analysisResult'?storedAnalysis(track[key]):track[key]]));}
+export function createLibraryBackup({tracks,localTags={},crates,settings}){
+  const tags=new Map();
+  for(const [hash,metadata] of Object.entries(localTags))if(/^[a-f0-9]{64}$/.test(hash)){
+    const id='local-'+hash;tags.set(id,{id,...trackMetadata(metadata)});
+  }
+  for(const track of tracks)tags.set(track.id,{id:track.id,...trackMetadata(track)});
+  return {format:'open-play-prototype-1',crates,settings,tags:[...tags.values()]};
+}
 function analysis(value){
   if(value===null)return true;
   required(value,{duration:nonnegative,analyzedDuration:nonnegative,gain:object,warnings:list(string)},'analysis');
   fields(value,{bpm:nullable(nonnegative),key:nullable(string),partial:bool,tempo:nullable(object),keyEstimate:nullable(object),loudness:nullable(object)},'analysis');
   required(value.gain,{recommendedDb:nullable(number)},'analysis.gain');
   fields(value.gain,{rmsDbfs:nullable(number),samplePeakDbfs:nullable(number),clippedSamples:nonnegative},'analysis.gain');
-  if(value.grid!==null&&value.grid!==undefined)required(value.grid,{firstBeat:number,beats:list(number)},'analysis.grid');
+  for(const [path,grid]of [['analysis.grid',value.grid],['analysis.tempo.grid',value.tempo?.grid]])if(grid!==null&&grid!==undefined){
+    required(grid,{firstBeat:number},path);fields(grid,{beats:list(number),beatCount:x=>Number.isSafeInteger(x)&&x>=0},path);
+    check(Object.hasOwn(grid,'beats')||Object.hasOwn(grid,'beatCount'),path+'.beatCount');
+    if(grid.beats&&grid.beatCount!==undefined)check(grid.beatCount===grid.beats.length,path+'.beatCount');
+  }
   for(const key of ['tempo','keyEstimate'])if(value[key])fields(value[key],{confidence:range(0,1)},`analysis.${key}`);
   if(value.loudness)fields(value.loudness,{integratedLUFS:nullable(number),channels:nonnegative,reason:nullable(string)},'analysis.loudness');
   return true;
 }
 export function validateMetadata(input,track={}){
-  fields(input,{title:string,artist:string,album:string,key:string,comment:string,color,bpm:range(0,999),rating:range(0,5),grid:nullable(number),locked:bool,inStemCrate:bool,
+  fields(input,{title:string,artist:string,album:string,key:string,comment:string,color,bpm:range(0,999),rating:range(0,5),plays:x=>Number.isSafeInteger(x)&&x>=0,grid:nullable(number),locked:bool,inStemCrate:bool,
     cues:list(nullable(object)),savedLoops:list(nullable(object)),gridMarkers:list(number),gridWarpMarkers:list(object),flips:list(nullable(object)),
     sampleGain:range(-24,24),trackGainDb:range(-24,24),autoGainSchema:x=>x===1,autoGainOffsetDb:range(-48,48),autoGainPendingDb:range(-24,24),analysisGainDb:nullable(number),metadataRevision:nonnegative,
     analysisResult:analysis,metadataSources:object,stemJob:nullable(string),stemModel:nullable(string),stemBackend:nullable(string)},'track');
@@ -88,13 +110,22 @@ export function validateBackup(data,tracks=[]){
   }
   return result;
 }
+function historyEvents(events){
+  check(list(object)(events),'history');
+  for(const event of events)required(event,{id:string,title:string,time:string,deck:range(1,4)},'history event');
+}
 export function validateSavedState(data){
   safeJSON(data);check(object(data),'saved session');const result={...data};
+  if(data.deckSession!==undefined)validateDeckSession(data.deckSession);
   if(data.crates!==undefined)result.crates=crates(data.crates);
   if(data.settings!==undefined)result.settings=validateSettings(data.settings);
   for(const key of ['tags','localTags'])if(data[key]!==undefined){check(object(data[key]),key);result[key]=Object.fromEntries(Object.entries(data[key]).map(([id,tag])=>[id,validateMetadata(tag,key==='tags'?demoTracks.find(t=>t.id===id):undefined)]));}
   if(data.prepare!==undefined)check(list(string)(data.prepare),'prepare');
-  if(data.history!==undefined){check(list(object)(data.history),'history');for(const event of data.history)required(event,{id:string,title:string,time:string,deck:range(1,4)},'history event');}
+  if(data.history!==undefined)historyEvents(data.history);
+  if(data.historySessions!==undefined){
+    check(list(object)(data.historySessions),'history sessions');
+    for(const session of data.historySessions){required(session,{time:string,entries:list(object)},'history session');historyEvents(session.entries);}
+  }
   if(data.analysisSettings!==undefined){fields(data.analysisSettings,{onImport:bool,analyzeKey:bool,analyzeTempo:bool,minBpm:range(30,299),maxBpm:range(31,300),maxSeconds:range(1,86400)},'analysis settings');check((data.analysisSettings.minBpm??50)<(data.analysisSettings.maxBpm??220),'analysis BPM range');}
   if(data.mappings!==undefined){check(list(object)(data.mappings),'mappings');for(const m of data.mappings){required(m,{target:string,channel:range(1,16),number:range(0,127),encoding:string},'mapping');fields(m,{type:string,deviceId:string,conditions:list(object)},'mapping');}}
   if(data.fxBeatMultipliers!==undefined)check(list(range(Number.MIN_VALUE,64))(data.fxBeatMultipliers),'FX multipliers');

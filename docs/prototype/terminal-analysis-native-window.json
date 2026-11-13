@@ -1,0 +1,163 @@
+{
+  "date": "2026-10-24",
+  "scope": "Two separate executed observations: a bounded physically muted first-analysis native trace using a fresh diagnostic profile, and normal desktop0.1.52 startup using its existing profile after a verified closed-profile backup. Neither is a completed listening/hardware or full core-acceptance result.",
+  "boundedNativeWindow": {
+    "executed": true,
+    "status": "bounded-analysis-window-captured",
+    "runtime": {
+      "electron": "44.9.0",
+      "chrome": "152.0.7977.167",
+      "node": "24.22.0"
+    },
+    "hostSourceSHA256": "9006ca3e8d58e12387c89909a86fdba53c4e81d0bc36e2701e3bc51c02981969",
+    "servedDiagnosticSourceSHA256": {
+      "probe-after/app.js": "bd9dd9473c93dc04783104880b67bc2336de8c1b77070b9af1f4971cfe346229",
+      "baseline/engine.js": "28daba2587f8d4f958901036928c52abcdf61f62db75f5aaa062d214534ca875",
+      "harness.js": "e4e7aecb6443fd2b71217e726f534d6296844eacf76aa68d29a8e6d3a9092f70",
+      "trace.js": "982ade63a8c0b8dd7fe571ff7aef79c585029d2fc6ae9bed2ea4719f03c3dc52"
+    },
+    "trace": {
+      "sha256": "8d8e42c6c4c8bccaa16d250c0aa897d548ab628b7dd15be3332bcc44f81e0883",
+      "bytes": 18845317,
+      "events": 80337,
+      "rawPublished": false
+    },
+    "requestedCaptureWaitMs": 3000,
+    "actualMarkIntervalMs": 3006.498,
+    "targetProgressPercent": 94,
+    "terminalRelativeMs": 242.544,
+    "workerReadyRelativeMs": 287.068,
+    "terminalDetail": {
+      "completed": 1,
+      "failed": 0,
+      "cancelled": false,
+      "success": true,
+      "geometryVisits": 0,
+      "paintVisits": 0,
+      "roundedProbeDurationMs": 0
+    },
+    "delayedFirstJobValidation": {
+      "turn": 0,
+      "retainedNodes": 254,
+      "loadedDeckCount": 1,
+      "contract": true,
+      "activeControls": true,
+      "focusedTempoRetained": true,
+      "masterRetained": true,
+      "gainDeferred": true,
+      "controls": {
+        "play": 4,
+        "tempo": 4,
+        "eq": 4,
+        "scrub": 4,
+        "libraryPreviews": 4
+      },
+      "scope": "Normal harness acceptance occurs after its existing12second PCM acquisition; post-capture validation was separate from native recording."
+    },
+    "physicalOutputMutedByHost": true,
+    "hostExportedPCM": false,
+    "partialSessionComplete": false,
+    "provisionalTraceBufferUsage": {
+      "percentage": 0.3560096025466919,
+      "value": 0
+    },
+    "bufferGateScope": "Provisional numeric gate only; installed declarations do not establish units or prove no dropped events.",
+    "qualityGates": {
+      "usageBelowPointEight": true,
+      "marksOrdered": true,
+      "onlyOwnedProcessIDs": true,
+      "actualFirstColdTarget": true,
+      "normalFirstJobAccepted": true
+    },
+    "nativeCorrelation": {
+      "largestCompleteRendererTaskMs": 22.869,
+      "scope": "Complete X scopes overlapping the owned mark interval only; not a bound on all native work or the earlier long frames. Unclosed/async scopes are excluded.",
+      "unpairedUppercaseBeginScopesExcluded": 12,
+      "pairedUppercaseScopes": 0,
+      "nestedIntervalsMergedBeforeTotals": true,
+      "gcNamedEventsWholeTrace": 6562,
+      "gcNamedEventCountIsNotCollectionCount": true,
+      "mainGCNamedScopeUnionMs": 9.823,
+      "mainGCNamedScopeLongestMs": 4.417,
+      "targetInsideCompleteMainGCNamedScope": false,
+      "gcScopeLimit": "GC-named scopes include nested/incremental/background work and are not summed as independent collections or stop-the-world pauses. The largest main GC-named scope occurs after the target.",
+      "partialNativeAppLongFrames": [
+        {
+          "startPerformanceMs": 183935,
+          "durationMs": 199.1000000089407,
+          "overlapsNativeWindow": false,
+          "attributedScriptCount": 0
+        },
+        {
+          "startPerformanceMs": 200650.5,
+          "durationMs": 52.6000000089407,
+          "overlapsNativeWindow": false,
+          "attributedScriptCount": 1
+        }
+      ],
+      "appLongFramesOverlappingNativeWindow": 0,
+      "maximumRetainedFrameIntervalMs": 33.39999999999418,
+      "styleObservation": "Largest complete main tasks include Chromium UpdateLayoutTree work touching1711elements; this does not identify its invalidating product or diagnostic write.",
+      "interpretation": "No attribution of separate larger browser/native frames, intermittent pops, decoder CPU or audio-device behavior follows from this three-second trace. Native polling/tracing/harness overhead remains distinct from untraced browser measurements."
+    }
+  },
+  "normalDesktopStartup": {
+    "executed": true,
+    "version": "0.1.52",
+    "observedTitle": "Open Play Playback Test 0.1.52 \u2014 controller mixing test",
+    "sourceCommit": "df48b502f0c85cd66b55dfa20041bb929a3e9362",
+    "asarSHA256": "a7c40826ce6e58f04a61b36bcb4d9fefcafe56198fd15401ff2e90f4c9a4ef20",
+    "packageInspection": {
+      "passed": 5,
+      "failed": 0,
+      "scope": "Actual ASAR bytes and controlled packaged host/check-window callbacks, not native UI/audio/device acceptance."
+    },
+    "observed": {
+      "layout": "Horizontal",
+      "density": "Compact",
+      "decks": 2,
+      "libraryListedTracks": 16,
+      "AXFullTrackWaveformImages": 14,
+      "previewScope": "Observed viewport only; not all16track previews, cached image completeness or a regression compared with an earlier differently visible AX tree.",
+      "playingDecks": 0,
+      "demoDeckPositionsSeconds": [
+        0,
+        0
+      ],
+      "masterControlDB": -10.04344,
+      "meterDisplay": "\u2212\u221e relative to nominal",
+      "shownSaveOrRecoveryWarning": false
+    },
+    "evidenceSHA256": {
+      "startupAX": "26af3b3470e641c385f71d3e5f3163fbd581e6e17d5216ec82329ce5ec1a71f0",
+      "startupPNG": "0a91b3a4cdc526e98588178b6f329e83232b815c08c783a3d60dcf90213bd48c",
+      "preQuit48AX": "f610e97630451223a41d702ba9f36800c594f62a51d29d548f971f4d498bd53a",
+      "closedProfileBackupReceipt": "a3fed8fc0a5b55096cd518de4bccea119d5efeea814a194fcd93aef1f88200b9"
+    },
+    "preLaunchPreservation": {
+      "recordingTimerSeconds": 0,
+      "startRecordingEnabled": true,
+      "downloadCaptureDisabled": true,
+      "old48QuitNormally": true,
+      "closedProfileFiles": 245,
+      "closedProfileBytes": 120391863,
+      "copyVerifiedAtClosedProfileBoundary": true,
+      "liveProfileUnchangedAfterStartupClaimed": false,
+      "rawProfileOrManifestPublished": false
+    },
+    "notEstablished": [
+      "All16listedtracks decoded or all16previews rendered",
+      "Current normal-profile real-track playback, Sync or four-deck moving-frame behavior",
+      "Fresh listening/manual transition/EQ/Cue/clean-stop acceptance",
+      "Physical headphone/master/controller routing or full vendor parity"
+    ]
+  },
+  "remainingOpen": [
+    "Broader waveform stalls, including large frames outside the native mark interval",
+    "Intermittent audible Sync pops and their cause",
+    "Normal packaged moving-frame/physical held-gesture behavior",
+    "Fresh audible manual transition/EQ/Cue/clean-stop judgment",
+    "Physical headphone/master/controller acceptance and full vendor parity"
+  ],
+  "rawNativeTraceProfileMachineMetadataPublished": false
+}

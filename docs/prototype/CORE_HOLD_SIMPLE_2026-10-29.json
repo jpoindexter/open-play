@@ -1,0 +1,107 @@
+{
+  "date": "2026-10-29",
+  "baselineCommit": "9dc9c318de763202e6ef6f0ab29b6bd281506228",
+  "status": "Three source repairs; private121 delivery pending; current120 unchanged until protected replacement",
+  "ownerInstruction": "Keep goal active; audio muted. Listening/controller later. No broad test reruns.",
+  "repairs": {
+    "hiddenPitch": {
+      "card": "https://trello.com/c/TwKTVyhp",
+      "rootCause": "Count4to2 pauses hidden C/D but leaves Pitch owner; restored normal Play is consumed as latch",
+      "change": "Call existing pitchPlay.cancelDeck before pause",
+      "command": "node --test --test-name-pattern='deck-count reduction' prototype/pitch-presentation.test.mjs",
+      "red": "1fail: stale hold consumes normal Play",
+      "green": "1pass: fresh Play starts, old release cannot stop it, A/B retained",
+      "scope": "Actual Pitch module and extracted count/Play handlers, controlled no-audio engine",
+      "evidenceSHA256": {
+        "red.txt": "16298e126c2328ae0ecc98509a2b596530b945e90b0cf96fda4c11672b820484",
+        "green.txt": "e3138e35099a016d0552fa37fa87ed1bd0d0b44c45a5c09a5c5404ea0dc2654f"
+      }
+    },
+    "slicerStop": {
+      "card": "https://trello.com/c/YVVSNRt7",
+      "rootCause": "Ordinary Pause after Slicer cancellation uses global renderDecks",
+      "change": "Reuse existing renderLoopDecks(d) for slice/loop feedback; Stem Slip structural fallback retained",
+      "command": "node --test --test-name-pattern='stopping an actual held Slicer' prototype/play-refresh.test.mjs",
+      "red": "1fail: global redraw1 instead of0",
+      "green": "1pass: stopped transport, restored prior loop, cleared feedback and harmless late release",
+      "scope": "Actual Slicer and extracted Play; real feedback helper, controlled unrelated-node/focus model",
+      "evidenceSHA256": {
+        "red.txt": "da06c47a5e4c4c038cc6bdfa0d6370d1e5fa5d5323171312e0918ace67768d8f",
+        "green.txt": "308b1b9a83b46d1d4efc7de99280ae5f57972d2498a1171b943475d10264a538"
+      }
+    },
+    "simpleCompletion": {
+      "sourceBaseline": "9dc9c31",
+      "defect": "Obsolete Simple Sync tempo-only completion reports newer unmatched playback as synchronized",
+      "modules": [
+        "synchronizeSimple",
+        "actual app deckAction/play/cancelPendingPlay",
+        "AudioEngine",
+        "createSyncMaster",
+        "createSyncTempoRequests",
+        "createSlicer"
+      ],
+      "route": [
+        "Select paused126BPM master A",
+        "Bplaying120BPM,unsynced",
+        "Simple tempo-only Sync writes1.05 then holds actual applyChannelFX",
+        "Actual Play handler Pause then Play creates new token2",
+        "Manual engine.setRate through actual unsynced rate-request path commits1.1/132BPM",
+        "Release obsolete effect completion"
+      ],
+      "red": "Older completion fulfilled, set A/B Sync roles, and reported matched despite126vs132BPM",
+      "repair": "Capture own post-setRate rateOwner/token; post-await require same owner/token/target rate and unchanged original leader snapshot in addition to existing valid request/metadata/transport checks",
+      "focusedCommand": "node --test --test-name-pattern='obsolete tempo-only Simple completion' prototype/simple-sync-preparation.test.mjs",
+      "redCases": {
+        "tests": 1,
+        "pass": 0,
+        "fail": 1
+      },
+      "greenCases": {
+        "tests": 1,
+        "pass": 1,
+        "fail": 0
+      },
+      "assertions": [
+        "Obsolete completion rejects AbortError",
+        "New playing voice/token/rate1.1 retained with Sync false and no false success notice",
+        "Leader stays unsynced by obsolete completion",
+        "Fresh current tempo-only request still commits own rateOwner transition1.05, roles and notice without restarting current voice",
+        "Final voices/transforms empty"
+      ],
+      "productDiff": "sync.js2added/1replaced lines",
+      "testFileLines": 117,
+      "compatibility": "Own voice/clock is intentionally not compared against pre-call values: real owned setRate may update anchors or replace voice. Own synchronous post-invocation token/rateOwner form completion boundary. No engine/DSP or app-handler edits.",
+      "evidenceSHA256": {
+        "red.txt": "6fc297d519b5883ac38386b225596747b11efbd965168949f79071b11513cc8f",
+        "green.txt": "36d2176256b50875e7db8ce6d05fed61c89ad2895e771374162973b121f457f3",
+        "failing-result.json": "b17c275607b753b003305d3d951f33a56b2c410ff89a33b70070236bb38e6a4a",
+        "source-before.sha256": "2b710eba2d3e711e01e9212b6f9180046ee849fb1aaa485a5d9a38953241ed35"
+      },
+      "limits": [
+        "Controlled graph/clock/buffer/effect completion with actual modules and extracted app handlers, not PCM/live WASM/native/listening/hardware",
+        "One focused case only; no broad existing suite or extra native workflow rerun",
+        "Other playing-Simple completion and new-MASTER paths remain outside this reproduced defect",
+        "Initial exploratory composed lifecycle fixture lacked the current syncButtonLabel collaborator; discarded as setup failure, no product claim or fixture change from it"
+      ]
+    }
+  },
+  "sourceSHA256": {
+    "prototype/app.js": "6f4b9674438139ff00bdc2f76f9925c302be725342f186d011a1e06d11899ff2",
+    "prototype/sync.js": "9f2be317de4f7eb337c9dc546fba764e6db6b1ba93d17b63ec850df733af66a8",
+    "prototype/pitch-presentation.test.mjs": "be57693b1392081406492202b63ea2bbcee8866952e2b0a51fd04b86ea8a9dd4",
+    "prototype/play-refresh.test.mjs": "abc81686334f0ede65c060a5cc5c93776eeed59c59c9c7072db6a9048dd063e4",
+    "prototype/simple-sync-preparation.test.mjs": "875657d648d296c50a66551b06d615777881a640cfca5bf024ca9c8bd0abebf7"
+  },
+  "testModuleLines": {
+    "prototype/pitch-presentation.test.mjs": 76,
+    "prototype/play-refresh.test.mjs": 134,
+    "prototype/simple-sync-preparation.test.mjs": 117
+  },
+  "limits": [
+    "No native held-control/PCM/real-worklet/listening/hardware acceptance for these changed paths",
+    "Not established causes of generic pops or waveform stalls; those defects remain open",
+    "Three focused RED/GREEN scenarios; no full suite, broad DSP matrix or extra diagnostic helper",
+    "Original media, normal profile, recordings and unrelated draft unchanged by source edits"
+  ]
+}

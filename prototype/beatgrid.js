@@ -19,7 +19,10 @@ export function createBeatgrid(track) {
   const timeAt=beat=>{const node=segmentAt(nodes,'beat',beat);return node.time+(beat-node.beat)*60/node.bpm;};
   const bpmAt=time=>segmentAt(nodes,'time',time).bpm;
   function lines(from,to,max=2048){
-    const first=Math.ceil(beatAt(from)),last=Math.floor(beatAt(to)),step=Math.max(1,Math.ceil((last-first+1)/max));
+    const first=Math.ceil(beatAt(from)),last=Math.floor(beatAt(to));
+    // Unsafe beat coordinates can no longer advance by one and stall this loop.
+    if(!Number.isSafeInteger(first)||!Number.isSafeInteger(last))return [];
+    const step=Math.max(1,Math.ceil((last-first+1)/max));
     const result=[];for(let beat=first;beat<=last;beat+=step)result.push({beat,time:timeAt(beat),bar:Math.floor(beat/4)+1,downbeat:((beat%4)+4)%4===0});
     return result;
   }

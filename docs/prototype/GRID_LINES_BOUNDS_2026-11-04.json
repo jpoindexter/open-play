@@ -1,0 +1,184 @@
+{
+  "date": "2026-11-04",
+  "issue": "ANA-FIX-12",
+  "status": "bounded source/package/stopped native criterion executed; broader listening gates open",
+  "sourceCommit": "bdffae52c56db1d5d2cf0ebe55582b2a11ffe1b0",
+  "version": "0.1.147",
+  "asarSHA256": "1e39f773d7782309149606217138c69d2a32d4bc8d0ac45f65917b8a93568d1d",
+  "criterion": "Accepted extreme finite grid metadata must not make beat-line enumeration or four-lane detail drawing loop forever; preserve ordinary grids, metadata, controls and waveform previews.",
+  "reproduction": {
+    "executed": true,
+    "path": "actual validateMetadata then createBeatgrid.lines in a bounded isolated Node worker",
+    "gridOffsets": [
+      1e+18,
+      -1e+18
+    ],
+    "bpm": 120,
+    "normalVisibleWindow": [
+      -2,
+      2
+    ],
+    "cause": "first and last beat become unsafe integers; first + 1 equals first, so the loop cannot advance",
+    "redResult": "Unmodified worker reached its 64 MiB heap limit; observed 153.7 ms. Not a native frame benchmark."
+  },
+  "repair": {
+    "file": "prototype/beatgrid.js",
+    "sharedCallers": "Both lines calls are in prototype/detail-waveform.js: plotted beat guides and ruler. Existing graph queried read-only, current source verified.",
+    "behavior": "Return no ruler lines for unsafe first/last beat coordinates. Keep track and its metadata unchanged. Ordinary safe grids retain existing enumeration.",
+    "unchanged": [
+      "audio clocks and transport",
+      "gain and DSP",
+      "layout and typography tokens",
+      "decoded waveform painter",
+      "library preview generation",
+      "validation ranges and stored metadata"
+    ]
+  },
+  "focusedChecks": {
+    "executed": true,
+    "newRegression": "prototype/beatgrid-lines.test.mjs: actual validator, shared grid and four-lane painter; both signs and horizontal/vertical, valid sibling ruler and track JSON preserved; controlled canvases and null buffers",
+    "distinctChecksAccepted": 7,
+    "sequence": "First affected run: 6 pass, 1 pre-existing font assertion failure. Same font failure reproduced on exact unmodified HEAD. Fixture changed to current semantic caption/micro tokens; only that failed named check rerun and passed. No full-suite rerun.",
+    "notEstablished": "Native pixels/DOM/audio, perceptual Sync, physical gestures, normal-song stall or pop resolution."
+  },
+  "package": {
+    "inspectionPassed": 5,
+    "inspectionFailed": 0,
+    "scope": "Actual ASAR bytes and controlled packaged host/check-window callbacks, not native UI/audio/device acceptance.",
+    "receipt": "desktop-0.1.147-playback-grid-lines.json"
+  },
+  "preservation": {
+    "source": "/Users/jasonpoindexter/Library/Application Support/Open Play Playback Test",
+    "recovery": "/Users/jasonpoindexter/Documents/GitHub/Open Play/local-evidence/profile-recovery/pre-grid-lines-0.1.146-2026-11-04",
+    "files": 281,
+    "logicalBytes": 221862721,
+    "hashSizeMtimeEqual": true,
+    "noSharedInodes": true,
+    "oldProcessAbsent": true
+  },
+  "retention": {
+    "defaultLaunchers": "Current/playback/named147 syntax checked, exact app opened separately",
+    "cleanup": {
+      "removedPath": "/Users/jasonpoindexter/Documents/GitHub/Open Play/local-evidence/desktop-builds/0.1.146",
+      "removedLogicalBytes": 611876133,
+      "retainedVersions": [
+        "0.1.147"
+      ],
+      "recoveryRetained": true,
+      "runtimeDownloadPerformed": false,
+      "pinnedRuntimeZIPPresentAtPriorPath": false,
+      "launchers": "Current/playback/named147 syntax checked; exact147 was opened through CUA separately; launchers not executed."
+    },
+    "preserve": "Original audio/recordings/normal profile/recoveries/unrelated draft and graph",
+    "runtimeCache": "Prior pinned ZIP path is absent; no download performed. Current packaged runtime retained."
+  },
+  "next": "Owner listening/matched-reference volume when available; Hercules deferred. Reuse accepted source/native checks; capture the next actual core failure once.",
+  "limits": [
+    "Not a proven cause of historical real-song Sync pops or ordinary four-deck stalls",
+    "Owner listening and matched-reference volume deferred; Hercules later",
+    "No public release or full-core/parity claim"
+  ],
+  "trello": {
+    "receipt": "grid-lines-147-trello-2026-11-04.json",
+    "cardsExactReadback": 5,
+    "closed": 0,
+    "fix": "https://trello.com/c/9vXyEZ2f",
+    "disposition": "All remain Core DJ — Now and incomplete; native Restore/export gate retained.",
+    "blockedFollowup": {
+      "card": "https://trello.com/c/9vXyEZ2f/255-ana-fix-12-bound-unsafe-beat-grid-line-enumeration",
+      "descriptionExact": true,
+      "list": "Blocked / unknown",
+      "complete": false,
+      "reason": "Shared native input conflict still observed; other app chat confirmed active. Listening deferred by owner. No independent reproduced source repair remains ready in the reviewed core queue."
+    },
+    "latestRecoveryFollowup": {
+      "cardsExactReadback": 5,
+      "closed": 0,
+      "goalStatus": "active",
+      "fixList": "Blocked / unknown",
+      "scope": "Coordination completed and main recovery executed; native unsafe-file admission/export still open."
+    },
+    "latestNativeReadback": {
+      "receipt": "grid-lines-147-native-trello.json",
+      "fixComplete": true,
+      "fixList": "Verified evidence",
+      "parentsOpen": true
+    }
+  },
+  "goalStatus": "active",
+  "historicalNativeAttempts": {
+    "executedSubset": [
+      "146 Recording idle: Start available, 00:00, Download disabled; normal Quit and process absence",
+      "Closed profile APFS clone: hash/size/mtime equality, separate inodes",
+      "Exact147 opened; settled main retains 25 tracks, A02:41.7/B01:51.1, silent master meter, 2Play/2tempo/6EQ and 12AX-visible library previews",
+      "Fresh generated-only device-denied isolated Core ownership window opened; four Play/tempo controls observed after deck-count action; Layouts reports Compact",
+      "Normal Library backup Restore file picker reached; no diagnostic Run button or Play/Sync/Cue/REC Start invoked",
+      "User-authorized desktop coordination; other chat acknowledged reservation and later received release notice",
+      "Exclusive-input attempts: native field assignment reflected the exact generated path, but keyboard/open, raised-window and direct-result activation did not admit it; no Restore success",
+      "Normal147Quit via actual application menu; CUA and process absence confirmed",
+      "Exact147 reopened; settled main again preserves25tracks/A02:41.7/B01:51.1/master−10.04344dB/silent meter/2Play/2tempo/6EQ/12AX-visible library previews"
+    ],
+    "notExecuted": [
+      "Unsafe generated file admitted and restored",
+      "Post-restore export/metadata equality and responsive rendered grid check"
+    ],
+    "blocker": "Initial shared-input conflict was resolved through authorized coordination. File-picker actions still failed during reserved desktop access; cause unestablished. Task ended that attempt via normal Quit and recovered the paused main session. Unsafe-backup Restore remains unaccepted; no pop or app-specific file-picker defect attribution.",
+    "audio": "No playback commands or recording start. Stopped/silent meter observed before picker; physical mute flag not asserted.",
+    "preflight": "Last distribution trust preflight is146 only;147 has not been signed/notarized or assessed for public distribution.",
+    "coordination": {
+      "authorizedByUser": true,
+      "reservationAcknowledged": true,
+      "released": true,
+      "messages": "Only desktop-access coordination sent; no OpenPen file/app changes requested."
+    },
+    "mainRecovery": {
+      "observedAfterNormalQuitAndReopen": true,
+      "tracks": 25,
+      "displayPositions": [
+        "02:41.7",
+        "01:51.1"
+      ],
+      "masterDB": -10.04344,
+      "silentMeter": true,
+      "playControls": 2,
+      "tempoControls": 2,
+      "eqControls": 6,
+      "libraryPreviews": 12,
+      "rawPrivateFolder": "local-evidence/grid-lines-native-2026-11-04"
+    }
+  },
+  "native": {
+    "receipt": "GRID_LINES_147_NATIVE_RESUME.json",
+    "criterionExecuted": true,
+    "wholeBackupEqual": true,
+    "gridOffsetPreserved": 1e+18,
+    "fourDeckCompactResponsive": true,
+    "mainRecoveredPaused": true,
+    "notEstablished": "Historical pop/stall resolution, listening, hardware or public release."
+  },
+  "latestNativeReceipt": "GRID_LINES_147_NATIVE_RESUME.json",
+  "historicalPostCoordinationBlockedAudit": {
+    "date": "2026-11-04",
+    "blockedAuditTurns": 3,
+    "goalStatus": "blocked",
+    "reason": "Actual unsafe-backup native admission/export remains unexecuted after exclusive-input attempts; owner listening and matched-reference volume explicitly deferred. Initial cross-chat access conflict was resolved and main147 recovered paused. No further evidenced unattended source repair is ready in the reviewed core queue.",
+    "cards": [
+      {
+        "key": "live",
+        "id": "ari:cloud:trello::card/workspace/6a8f03e71844a6c1103692dc/6ae0670c273810c81238cc14",
+        "url": "https://trello.com/c/yJ8r9kCD/165-core-live-01-jason-controller-and-listening-session",
+        "list": "Blocked / unknown",
+        "complete": false,
+        "descriptionExact": true
+      },
+      {
+        "key": "core",
+        "id": "ari:cloud:trello::card/workspace/6a8f03e71844a6c1103692dc/6ad5ecd7fef5ea31f0ce38c0",
+        "url": "https://trello.com/c/LGGdtSa3/114-core-001-load-two-local-mp3s-cue-mix-and-beatmatch",
+        "list": "Core DJ — Now",
+        "complete": false,
+        "descriptionExact": true
+      }
+    ]
+  }
+}

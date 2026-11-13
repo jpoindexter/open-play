@@ -1,0 +1,69 @@
+{
+  "date": "2026-10-30",
+  "baselineCommit": "ac01778108a955f696438b04ecd48930533e8714",
+  "defect": "Ordinary autosave unconditionally overwrote session data already changed by another owner, although explicit recovery already checked ownership.",
+  "repair": "Share the existing raw-record comparison between save and recover; compare after serialization and before setItem, block stale save/recovery without changing the newer durable record.",
+  "focusedCommand": "node --test --test-name-pattern='ordinary autosave refuses' prototype/session-storage.test.mjs",
+  "red": {
+    "pass": 0,
+    "fail": 1,
+    "assertion": "Stale autosave replaced newer durable session data: true !== false"
+  },
+  "green": {
+    "pass": 1,
+    "fail": 0,
+    "criteria": [
+      "Newer save and external deletion preserved",
+      "Blocked stale retries and recovery cannot overwrite newer record",
+      "Original raw record retained; no quarantine created for external conflict",
+      "Reopened owner reads latest state and fresh own saves advance ownership"
+    ]
+  },
+  "browser": {
+    "scope": "Actual workspace crate dialog/persist/session banner/reload across two stopped generated-only IAB tabs on separate localhost test origin18863; normal desktop profile not used.",
+    "flow": [
+      "Second tab startup analysis saved after first tab opened; first crate edit was correctly rejected and Reopen was followed",
+      "Reopened A created Newer durable crate",
+      "Stale B created Stale unsaved crate and displayed conflict/paused-saving warning",
+      "Reloaded A retained Newer durable crate and did not contain Stale unsaved crate",
+      "All music view materialized library previews; owned tabs closed"
+    ],
+    "observed": [
+      "Actual conflict warning and current-backup export access",
+      "Newer crate survives reload and stale crate absent",
+      "Screenshot shows retained decks/mixer and paused Play buttons/timers; no Play/Sync/Cue/REC action used"
+    ],
+    "limits": [
+      "Final AX observations include diffs, so no complete final preview-count or DOM-identity claim",
+      "No direct engine/PCM or native multi-window conflict acceptance",
+      "No atomic same-instant concurrent-writer guarantee"
+    ]
+  },
+  "sourceAfter": {
+    "prototype/session-storage.js": "5541a005a6200f6d9320dac5dabae345c447c4846af6c25c9f303eff3e26e875",
+    "prototype/session-storage.test.mjs": "5049481c3ec7184af5688d9363a509dad8d1404964985b976370bbd03d79e09c"
+  },
+  "moduleLines": {
+    "prototype/session-storage.js": 34,
+    "prototype/session-storage.test.mjs": 70
+  },
+  "rawEvidence": {
+    "red.txt": "2f8fbf4ff33d1c9639d96cd9b7a19755b5cfdc8f4039872028c1643e48422903",
+    "green.txt": "4036d87eeff41a34b43da76fafb1bce0ea054cb6239102eb8726fec37c245a8a",
+    "stale-browser.txt": "6fa9ef4e2d30ec89d22bfca556e74e0e71b4429f848207266797be0b520794cd",
+    "newer-reload.txt": "97c0ab0c757576324c8a945a65bd16ffd2fdb54bb2a376598295534f1483add8",
+    "stale-final.txt": "468b5bd05b46bf0340321b3403ef02fff600dc5c64659b3fcc6cbc1a520f15da",
+    "conflict.png": "12c93f1bacb3ab548716e7139268ab239cb9200301a816465097bd02dbcad29c"
+  },
+  "callerReview": [
+    "app saved-session load before state construction",
+    "app persist(sessionSnapshot) and existing session-status banner",
+    "Library backup restore/recovery and existing source-test callers; unchanged APIs"
+  ],
+  "limits": [
+    "localStorage read/compare/write is not an atomic transaction across renderers; transactional storage required before concurrent editing support",
+    "No audio/Sync/layout/waveform logic changes, no broad suite or accepted listening rerun",
+    "Genericpop/stall/startup60 and owner/Hercules/headphone gates remain open"
+  ],
+  "delivery": "Private129 package/native paused recovery pending"
+}

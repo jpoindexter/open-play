@@ -1,0 +1,32 @@
+{
+  "date": "2026-10-28",
+  "baseline": "d4dfb3d62332fd1c257c0931d9b807a17f4cda1d",
+  "candidate": "0.1.104",
+  "card": "https://trello.com/c/Avr5AEpG",
+  "defect": "Backup restore during pending new-track storage was overwritten by import completion",
+  "path": "Actual importLocalFiles \u2192 saveLocalAudio held \u2192 real restore handler \u2192 sessionSnapshot/persist \u2192 storage released \u2192 import completion/persist",
+  "before": "Restore reports success/saved for same SHA title/cue5/loop7\u20139; completion reverts to defaults and newer durable record retained nowhere",
+  "after": "Restored metadata remains on the authoritative imported track and final durable session",
+  "repair": "Move state.tracks.push(track) before the saveLocalAudio await, after decode/validation/normalization. No new helper/schema/token/dependency.",
+  "saveFailure": "One focused regression rejects the real save helper storage boundary; session-only/error/File and restored title/cue/loop persist with one track identity",
+  "checks": {
+    "newRegression": "RED before move \u2192 GREEN; directly affected library-recovery file3/3",
+    "originalSuccessfulSaveComposition": "RED\u2192GREEN",
+    "independentSourceReview": "No concrete early-publication regression; serialized import and retry skip existing identity retained",
+    "static": "node --check app.js and git diff --check"
+  },
+  "privateEvidence": "local-evidence/core-import-restore-104/import-restore-race-{before,after}.json",
+  "sourceSHA256": {
+    "prototype/app.js": "9c7716fff456e02b3ccadd95004a74b03169c848bbf44c332964f49c03b6e585",
+    "prototype/library-recovery.test.mjs": "61399cf60f69177bd5e97f768eb63699c0784de751b36bb7dc047ac57d215978"
+  },
+  "limits": "Actual source handlers/helper/module with controlled20s decoder, IDB/storage/UI collaborators and synthetic four-byte file. Not browser/native restore timing, real IDB quota, crash/migration, listening or original media evidence.",
+  "preserved": [
+    "Import decode readiness and complete metadata validation",
+    "Failed-save session-only retry behavior",
+    "Controls, all layouts and library waveform previews",
+    "Normal profile/original music; no UI/playback actions"
+  ],
+  "prior103": "All three safety repairs and generated app/menu icons retained. Native popup/listening/hardware/pop/stall gates remain open.",
+  "packagePolicy": "Replace only verified inactive never-launched103 with one pending104; current102 session/defaults unchanged while Mac locked."
+}

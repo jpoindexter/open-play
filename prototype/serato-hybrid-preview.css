@@ -7,20 +7,18 @@ body[data-workspace=serato-hybrid][data-wave-size=large]{--rb-wave-height:224px}
 body[data-workspace=serato-hybrid][data-orientation][data-density] .deck{
  grid-template-columns:minmax(0,1fr) 76px 100px 32px;
  grid-template-rows:44px 28px 28px minmax(76px,1fr) 24px 24px;
- gap:4px;background:#151515;border-top:2px solid #597caa;
+ gap:4px;background:var(--dj-semantic-panel);border-top:2px solid #597caa;
 }
 body[data-workspace=serato-hybrid][data-orientation][data-density] .deck:nth-of-type(even){grid-template-columns:minmax(0,1fr) 76px 100px 32px;border-top-color:#5ea8ba}
-body[data-workspace=serato-hybrid][data-orientation][data-density] .deck:nth-of-type(n) .deck-head{height:44px;background:#151515}
+body[data-workspace=serato-hybrid][data-orientation][data-density] .deck:nth-of-type(n) .deck-head{height:44px;background:var(--dj-semantic-panel)}
 body[data-workspace=serato-hybrid][data-orientation][data-density] .deck:nth-of-type(n) .deck-body>div:first-child{grid-column:1;grid-row:4;padding:0 4px;align-self:center}
 body[data-workspace=serato-hybrid][data-orientation][data-density] .deck:nth-of-type(n) .pads{grid-auto-flow:row;grid-template-columns:repeat(4,minmax(0,1fr));grid-template-rows:repeat(2,24px);gap:4px}
-body[data-workspace=serato-hybrid][data-orientation][data-density] .deck:nth-of-type(n) .pad{height:24px;min-height:24px;border-bottom:2px solid var(--pad);font-size:10px;justify-content:center;padding:0 3px}
+body[data-workspace=serato-hybrid][data-orientation][data-density] .deck:nth-of-type(n) .pad{height:24px;min-height:24px;border-bottom:2px solid var(--pad);justify-content:center;padding:0 3px}
 body[data-workspace=serato-hybrid][data-orientation][data-density] .deck:nth-of-type(n) .preview-loop-strip{grid-column:2;grid-row:4;align-self:center}
-body[data-workspace=serato-hybrid][data-orientation][data-density] .deck:nth-of-type(n) .transport{grid-column:1/-1;grid-row:3;flex-direction:row;justify-content:flex-start;align-self:stretch;padding:0 4px;gap:4px;border-bottom:1px solid #333}
+body[data-workspace=serato-hybrid][data-orientation][data-density] .deck:nth-of-type(n) .transport{grid-column:1/-1;grid-row:3;flex-direction:row;justify-content:flex-start;align-self:stretch;padding:0 4px;gap:4px;border-bottom:1px solid var(--dj-semantic-border)}
 body[data-workspace=serato-hybrid][data-orientation][data-density] .deck:nth-of-type(n) .transport select{width:52px;height:24px;min-height:24px}
-body[data-workspace=serato-hybrid][data-orientation][data-density] .deck:nth-of-type(n) .transport :is([data-action=play],[data-action=cue]){width:68px;min-width:68px;height:24px;min-height:24px;border-radius:2px;font-size:11px}
-body[data-workspace=serato-hybrid][data-orientation][data-density] .deck:nth-of-type(n) .platter{grid-column:3;grid-row:4;width:96px!important;height:72px!important;border-radius:2px;border:1px solid #3d4852;background:#0b0b0b;box-shadow:none;gap:6px}
-body[data-workspace=serato-hybrid][data-orientation][data-density] .deck:nth-of-type(n) .platter strong{font-size:25px;letter-spacing:-1px}
-body[data-workspace=serato-hybrid][data-orientation][data-density] .deck:nth-of-type(n) .platter small:first-of-type{font-size:10px}
+body[data-workspace=serato-hybrid][data-orientation][data-density] .deck:nth-of-type(n) .transport :is([data-action=play],[data-action=cue]){width:68px;min-width:68px;height:24px;min-height:24px;border-radius:2px;}
+body[data-workspace=serato-hybrid][data-orientation][data-density] .deck:nth-of-type(n) .platter{grid-column:3;grid-row:4;width:96px;height:72px;border-radius:2px;border:1px solid #3d4852;background:var(--dj-semantic-platter);box-shadow:none;gap:6px}
 body[data-workspace=serato-hybrid][data-orientation][data-density] .deck:nth-of-type(n) .rb-deck-options{grid-column:4;grid-row:4;padding:0;gap:4px}
 body[data-workspace=serato-hybrid][data-orientation][data-density] .deck:nth-of-type(n) .preview-deck-utilities{grid-row:5;gap:4px}
 body[data-workspace=serato-hybrid][data-orientation][data-density] .deck:nth-of-type(n) .deck-foot{grid-row:6;gap:4px}
@@ -28,27 +26,15 @@ body[data-workspace=serato-hybrid][data-orientation][data-density] .deck :is(.pr
 /* Deck-sized tracks keep the library immediately below the performance area. */
 body[data-workspace=serato-hybrid][data-density]{--rb-four-height:252px;--rb-channel-min:252px}
 body[data-workspace=serato-hybrid][data-orientation=horizontal]:not(.four-decks)[data-rb-mixer=true][data-library-focus=false] main{grid-template-rows:var(--rb-wave-height) 252px 44px var(--rb-library-tracks,minmax(180px,1fr))}
-body[data-workspace=serato-hybrid][data-orientation=horizontal] .detail-horizontal{height:var(--rb-wave-height)!important}
+body[data-workspace=serato-hybrid][data-orientation=horizontal] .detail-horizontal{height:var(--rb-wave-height)}
 body[data-workspace=serato-hybrid][data-orientation=vertical]:not(.four-decks)[data-rb-mixer=true][data-library-focus=false] main{grid-template-rows:88px 152px 44px var(--rb-library-tracks,minmax(180px,1fr))}
 /* Filter stays in its owning channel. Four channels use a fifth knob row. */
-body[data-workspace=serato-hybrid][data-orientation][data-density] #mixer .channel-strip .knob-group:has(input[data-mix$=':filter']){display:flex!important;grid-column:1;grid-row:6}
-body[data-workspace=serato-hybrid][data-orientation][data-density] .channel-strip{grid-template-rows:12px repeat(5,32px) 24px minmax(64px,1fr);gap:4px}
-body[data-workspace=serato-hybrid][data-orientation][data-density] .channel-strip>button{grid-row:7}
-body[data-workspace=serato-hybrid][data-orientation][data-density] .channel-strip .fader-group{grid-row:8}
-body[data-workspace=serato-hybrid][data-orientation][data-density]:not(.four-decks) #mixer{min-height:0}
-body[data-workspace=serato-hybrid][data-orientation][data-density]:not(.four-decks) .channel-strip{grid-template-columns:44px 44px;grid-template-rows:12px repeat(4,32px);align-content:center}
-body[data-workspace=serato-hybrid][data-orientation][data-density]:not(.four-decks) #mixer .channel-strip .knob-group:has(input[data-mix$=':filter']){grid-column:2;grid-row:5}
-body[data-workspace=serato-hybrid][data-orientation][data-density]:not(.four-decks) .channel-strip>button{grid-column:1;grid-row:3}
-body[data-workspace=serato-hybrid][data-orientation][data-density]:not(.four-decks) .channel-strip .fader-group{grid-column:1;grid-row:4/6}
-body[data-workspace=serato-hybrid][data-orientation][data-density]:not(.four-decks) #mixer .channel-strip:nth-child(2) .knob-group:has(input[data-mix$=':filter']){grid-column:1}
 /* Full is a roomier pad surface; compact retains the same core controls. */
 body[data-workspace=serato-hybrid][data-density=expanded]{--rb-four-height:280px}
 body[data-workspace=serato-hybrid][data-orientation][data-density=expanded] .deck{grid-template-rows:44px 28px 28px minmax(112px,1fr) 24px 24px}
 body[data-workspace=serato-hybrid][data-density=expanded] .deck:nth-of-type(n) .pads{grid-template-rows:repeat(2,36px)}
 body[data-workspace=serato-hybrid][data-density=expanded] .deck:nth-of-type(n) .pad{height:36px;min-height:36px}
-
-body[data-workspace=serato-hybrid][data-orientation][data-density]:not(.four-decks) .channel-strip:nth-child(2)>button,body[data-workspace=serato-hybrid][data-orientation][data-density]:not(.four-decks) .channel-strip:nth-child(2) .fader-group{grid-column:2}
-body[data-workspace=serato-hybrid][data-orientation][data-density] .deck:nth-of-type(n) .platter{align-items:center;color:#e6e8ea}
+body[data-workspace=serato-hybrid][data-orientation][data-density] .deck:nth-of-type(n) .platter{align-items:center;color:var(--dj-semantic-platter-text)}
 body[data-workspace=serato-hybrid][data-orientation][data-density] .deck:nth-of-type(n) .platter :is(strong,small){align-self:center;justify-self:center}
 body[data-workspace=serato-hybrid][data-orientation][data-density] .deck:nth-of-type(n) .preview-key-caption{display:none}
 body[data-workspace=serato-hybrid].four-decks[data-density=compact]{--rb-four-height:252px;--rb-wave-height:176px}
@@ -56,8 +42,6 @@ body[data-workspace=serato-hybrid].four-decks[data-density=expanded]{--rb-four-h
 body[data-workspace=serato-hybrid][data-density=expanded][data-orientation=horizontal]:not(.four-decks)[data-rb-mixer=true][data-library-focus=false] main{grid-template-rows:var(--rb-wave-height) 288px 44px var(--rb-library-tracks,minmax(180px,1fr))}
 body[data-workspace=serato-hybrid][data-orientation=vertical]:not(.four-decks)[data-rb-mixer=true][data-library-focus=false] main{grid-template-rows:72px 176px 44px var(--rb-library-tracks,minmax(180px,1fr))}
 body[data-workspace=serato-hybrid][data-density=expanded][data-orientation=vertical]:not(.four-decks)[data-rb-mixer=true][data-library-focus=false] main{grid-template-rows:108px 176px 44px var(--rb-library-tracks,minmax(180px,1fr))}
-
-body[data-workspace=serato-hybrid][data-orientation][data-density] .channel-strip .knob-group{font:9px/10px Arial,sans-serif}
 body[data-workspace=serato-hybrid][data-orientation][data-density]:has(.deck[data-rb-pad-mode=Loops]){--rb-four-height:288px;--hy-deck-height:288px}
 body[data-workspace=serato-hybrid][data-orientation][data-density]:has(.deck[data-rb-pad-mode=Loops]) .deck{grid-template-rows:44px 28px 28px minmax(112px,1fr) 24px 24px}
 body[data-workspace=serato-hybrid][data-orientation=horizontal]:not(.four-decks)[data-rb-mixer=true][data-library-focus=false] main{grid-template-rows:var(--rb-wave-height) var(--hy-deck-height,252px) 44px var(--rb-library-tracks,minmax(180px,1fr))}
@@ -66,24 +50,10 @@ body[data-workspace=serato-hybrid][data-orientation=vertical]:not(.four-decks)[d
 body[data-workspace=serato-hybrid].four-decks[data-orientation=vertical][data-density][data-rb-mixer=true][data-library-focus=false] main{grid-template-rows:176px calc(var(--rb-four-height) - 180px) var(--rb-four-height) 44px var(--rb-library-tracks,minmax(180px,1fr))}
 body[data-workspace=serato-hybrid].four-decks[data-orientation=vertical][data-density][data-rb-mixer=true][data-library-focus=false] .deck:nth-of-type(-n+2){grid-row:1/3}
 body[data-workspace=serato-hybrid].four-decks[data-orientation=vertical][data-density][data-rb-mixer=true][data-library-focus=false] .deck:nth-of-type(n+3){grid-row:3}
-body[data-workspace=serato-hybrid].four-decks[data-orientation=vertical][data-density][data-rb-mixer=true][data-library-focus=false] .detail-waves{height:176px!important}
+body[data-workspace=serato-hybrid].four-decks[data-orientation=vertical][data-density][data-rb-mixer=true][data-library-focus=false] .detail-waves{height:176px}
 body[data-workspace=serato-hybrid].four-decks[data-orientation=vertical][data-density][data-rb-mixer=true][data-library-focus=false] #mixer{grid-row:2/4}
 body[data-workspace=serato-hybrid].four-decks[data-orientation=vertical][data-density][data-rb-mixer=true][data-library-focus=false] .rb-mixer-band{grid-row:4}
 body[data-workspace=serato-hybrid].four-decks[data-orientation=vertical][data-density][data-rb-mixer=true][data-library-focus=false] .library{grid-row:5}
 /* Two-channel strips span the deck height: trim/EQ at the top, channel
    faders and filters reaching the monitor bar rather than a centered island. */
-body[data-workspace=serato-hybrid][data-orientation][data-density]:not(.four-decks) .channel-strip{
- grid-template-rows:12px repeat(3,minmax(32px,1fr)) 32px;align-content:stretch;align-self:stretch;height:100%;
-}
-body[data-workspace=serato-hybrid][data-orientation][data-density]:not(.four-decks) .channel-strip .knob-group{align-self:start}
-body[data-workspace=serato-hybrid][data-orientation][data-density]:not(.four-decks) #mixer .channel-strip .knob-group:has(input[data-mix$=':filter']){align-self:end}
-body[data-workspace=serato-hybrid][data-orientation][data-density]:not(.four-decks) .channel-strip>button{align-self:start}
-body[data-workspace=serato-hybrid][data-orientation][data-density]:not(.four-decks) .channel-strip .fader-group{align-self:stretch}
-body[data-workspace=serato-hybrid]:not(.four-decks) #mixer .knob-group:has(input[data-mix$=':trim']){grid-column:1;grid-row:2}
-body[data-workspace=serato-hybrid]:not(.four-decks) #mixer .knob-group:has(input[data-mix$=':high']){grid-column:2;grid-row:2}
-body[data-workspace=serato-hybrid]:not(.four-decks) #mixer .knob-group:has(input[data-mix$=':mid']){grid-column:2;grid-row:3}
-body[data-workspace=serato-hybrid]:not(.four-decks) #mixer .knob-group:has(input[data-mix$=':low']){grid-column:2;grid-row:4}
-body[data-workspace=serato-hybrid]:not(.four-decks) #mixer .channel-strip:nth-child(2) .knob-group:has(input[data-mix$=':trim']){grid-column:2}
-body[data-workspace=serato-hybrid]:not(.four-decks) #mixer .channel-strip:nth-child(2) .knob-group:has(:is(input[data-mix$=':high'],input[data-mix$=':mid'],input[data-mix$=':low'])){grid-column:1}
-body[data-workspace=serato-hybrid]:not(.four-decks) #mixer .channel-strip .knob-group{width:44px}
 body[data-workspace=serato-hybrid][data-orientation][data-density][data-rb-mixer=true]:not(.four-decks) main{grid-template-columns:minmax(0,1fr) var(--rb-center-width) minmax(0,1fr)}

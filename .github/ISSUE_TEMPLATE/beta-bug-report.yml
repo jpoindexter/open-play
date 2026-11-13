@@ -1,0 +1,74 @@
+name: Beta bug report
+description: Report a core playback, Sync, waveform, import or recovery problem.
+title: "[Beta]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please describe the event before attaching media. Do not upload songs, full mixes, private library backups or credentials. Review screenshots and logs for private filenames or paths.
+        A private candidate is not an approved public release. Keep the exact version in this report.
+  - type: input
+    id: version
+    attributes:
+      label: App version and source
+      description: Copy the window-title version and source/revision if the maintainer supplied one. Say unknown if unavailable.
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Mac and audio setup
+      description: macOS version, Mac model/architecture, audio output, controller, headphones/speakers and relevant device settings.
+    validations:
+      required: true
+  - type: dropdown
+    id: category
+    attributes:
+      label: Main symptom
+      options:
+        - Audio pop, click, gap or unexpected playback
+        - Sync or musical beat alignment
+        - Waveform or control stall
+        - Import, saving or recovery
+        - Other core DJ behavior
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps, expected result and actual result
+      description: Give the smallest sequence you know. Say whether it happened once, intermittently or every time. Do not repeatedly run clean cases to complete this report.
+    validations:
+      required: true
+  - type: textarea
+    id: transport
+    attributes:
+      label: Tracks and transport at the event
+      description: Identify decks A–D, song duration and position, BPM/rate, which were playing/paused, Sync mode/MASTER, Key Lock/key shift, loop/Reverse, and any simultaneous load, analysis or grid edit. Song names are optional; no source files are needed.
+    validations:
+      required: true
+  - type: dropdown
+    id: captured-audio
+    attributes:
+      label: Where was the audio defect observed?
+      description: If you made a master recording, say whether the downloaded capture also contains the defect. An internal capture and speaker/headphone output are different evidence.
+      options:
+        - Not an audio defect
+        - Heard at output; no master capture was made
+        - Heard at output and also present in the master capture
+        - Heard at output; not present in the master capture
+        - Unsure
+    validations:
+      required: true
+  - type: textarea
+    id: visual-evidence
+    attributes:
+      label: Waveforms, timers and other evidence
+      description: Did waveforms, timers or controls stop together? Include an approximate event time and optional screenshot or screen recording. Different absolute bar numbers alone do not establish failed Sync.
+  - type: textarea
+    id: recovery
+    attributes:
+      label: Recovery and data state
+      description: Did playback continue, pause or restart? Were controls usable? Copy any error/save warning and say whether tracks, metadata or a needed recording remain available. Do not reset or clear the library just to reproduce the issue.
+    validations:
+      required: true

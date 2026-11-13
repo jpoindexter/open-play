@@ -19,6 +19,100 @@ function base64(bytes){let text='';for(let i=0;i<bytes.length;i+=16384)text+=Str
 function rms(data,from,to,sr){let power=0;const start=Math.ceil(from*sr),end=Math.floor(to*sr);assert(start>=0&&end<=data.length&&end>start,'Missing declared recording window');for(let n=start;n<end;n++)power+=data[n]**2;return Math.sqrt(power/(end-start));}
 function amplitude(data,from,to,sr,hz){let re=0,im=0;const start=Math.ceil(from*sr),end=Math.floor(to*sr);for(let n=start;n<end;n++){re+=data[n]*Math.cos(2*Math.PI*hz*n/sr);im+=data[n]*Math.sin(2*Math.PI*hz*n/sr);}return 2*Math.hypot(re,im)/(end-start);}
 const show=()=>result.textContent=JSON.stringify({...report,recording:report.recording?{...report.recording,base64:'Retained in original evidence'}:undefined},null,2);
+document.querySelector('#fader-start-run').onclick=async()=>{
+ let engine,state;const r={complete:false,scope:'Actual isolated four-deck MIDI editor synthetic Fader Start; generated audio, no physical controller/native/listening or Sync-pop cause proof.',stages:[]};
+ try{
+  assert(location.port==='8874','Dedicated port8874 required');assert(localStorage.length===0||localStorage.getItem('openplay-core-controls-owned')==='true','Refusing unowned origin');
+  localStorage.setItem('openplay-core-controls-owned','true');localStorage.setItem(sessionKey,JSON.stringify({settings:{'Analyze Stems':false}}));
+  frame.src='workspace-preview.html?fader-start='+Date.now();await new Promise(resolve=>frame.onload=resolve);await until(()=>app()&&!app().state.analysis,'workspace');
+  ({engine,state}=app());await engine.resume();engine.audioMonitor.mutePhysical(true);assert(engine.audioMonitor.snapshot().physicalMuted,'Physical mute');input('#deck-count',4,'change');input('#preview-density','compact','change');r.density=doc().querySelector('#preview-density').value;assert(r.density==='compact','Compact mode');await until(()=>doc().querySelectorAll('.library-wave-preview img').length>0,'library previews');
+  const d=state.decks[0],w=frame.contentWindow;input('[data-mix="1:level"]',.37);click('[data-panel="midi"]');await until(()=>doc().querySelector('#midi-target'),'MIDI editor');input('#midi-target','Deck 1 fader start','change');input('#midi-type','CC','change');input('#midi-channel',1,'change');input('#midi-number',1,'change');click('#midi-add');
+  await until(()=>state.mappings.some(m=>m.target==='Deck 1 fader start'),'Fader Start mapping');
+  for(const [label,value] of [['idle zero',0],['start',127],['back cue',0]]){
+   const nodes=[...doc().querySelectorAll('.deck button,.deck input,#mixer button,#mixer input,[data-waveform-scrub],#detail-wave')],other=doc().querySelector('[data-mix="1:level"]');input('#midi-test-value',value,'change');await doc().querySelector('#midi-send').onclick();
+   await until(()=>!d.processing&&!d.playQueued&&d.playing===(value>0),'Fader '+label);await new Promise(resolve=>w.requestAnimationFrame(()=>w.requestAnimationFrame(resolve)));
+   r.stages.push({label,observed:nodes.length,retained:nodes.filter(n=>n.isConnected).length,otherFaderSame:other===doc().querySelector('[data-mix="1:level"]'),otherFaderValue:doc().querySelector('[data-mix="1:level"]').value,playing:d.playing,position:engine.position(d),cue:d.cue,level:d.level});
+  }
+  r.playControls=doc().querySelectorAll('[data-action="play"]').length;r.previewImages=doc().querySelectorAll('.library-wave-preview img').length;
+  assert(r.stages.every(s=>s.observed===s.retained&&s.otherFaderSame&&Number(s.otherFaderValue)===.37),'Fader Start replaced controls');assert(r.playControls===4&&r.previewImages>0&&!d.playing&&Math.abs(engine.position(d)-d.cue)<.001,'Fader transport or previews incorrect');r.complete=true;
+ }catch(error){r.error=error.message;}
+ finally{if(engine&&state){for(const d of state.decks){if(d.playing||d.processing||d.playQueued)click(`[data-action="play"][data-deck="${d.index}"]`);engine.pause(d);}await until(()=>state.decks.every(d=>!d.playing&&!d.processing&&!d.playQueued),'Stopped cleanup');r.physicalMuted=engine.audioMonitor.snapshot().physicalMuted;r.allStopped=true;}result.textContent=JSON.stringify(r,null,2);}
+};
+document.querySelector('#natural-end-run').onclick=async()=>{
+ let engine,state;const r={complete:false,scope:'One actual forward natural end in isolated four-deck GUI; generated audio/physical mute, no native/listening or Sync-pop cause proof.'};
+ try{
+  assert(location.port==='8874','Dedicated port8874 required');assert(localStorage.length===0||localStorage.getItem('openplay-core-controls-owned')==='true','Refusing unowned origin');
+  localStorage.setItem('openplay-core-controls-owned','true');localStorage.setItem(sessionKey,JSON.stringify({settings:{'Analyze Stems':false}}));
+  frame.src='workspace-preview.html?natural-end='+Date.now();await new Promise(resolve=>frame.onload=resolve);await until(()=>app()&&!app().state.analysis,'workspace');
+  ({engine,state}=app());await engine.resume();engine.audioMonitor.mutePhysical(true);assert(engine.audioMonitor.snapshot().physicalMuted,'Physical mute');input('#deck-count',4,'change');await until(()=>doc().querySelectorAll('.library-wave-preview img').length>0,'library previews');
+  const d=state.decks[0],w=frame.contentWindow;assert(!d.reverse&&!d.repeat&&!d.loop&&!state.autoplay,'Ordinary forward end setup');if(d.quantize??state.quantize)click('[data-action="quantize"][data-deck="0"]');
+  const overview=doc().querySelector('[data-seek="0"]');for(const key of ['End','ArrowLeft'])overview.dispatchEvent(new w.KeyboardEvent('keydown',{key,code:key,bubbles:true,cancelable:true}));
+  await until(()=>engine.position(d)===d.track.duration-1,'One second before end');click('[data-action="play"][data-deck="0"]');await until(()=>d.playing&&!d.processing,'Forward Play');
+  const focused=doc().querySelector('[data-mix="1:level"]');focused.focus();const value=focused.value,nodes=[...doc().querySelectorAll('.deck button,.deck input,#mixer button,#mixer input,[data-waveform-scrub],#detail-wave')];
+  await until(()=>!d.playing&&!d.processing&&!d.playQueued,'Natural end');await new Promise(resolve=>w.requestAnimationFrame(()=>w.requestAnimationFrame(resolve)));
+  Object.assign(r,{position:engine.position(d),duration:d.track.duration,voicePresent:engine.voices.has(0),observedControls:nodes.length,retainedControls:nodes.filter(n=>n.isConnected).length,unrelatedMixerFocused:doc().activeElement===focused,mixerValueRetained:focused.isConnected&&focused.value===value,playControls:doc().querySelectorAll('[data-action="play"]').length,previewImages:doc().querySelectorAll('.library-wave-preview img').length,playLabel:doc().querySelector('[data-action="play"][data-deck="0"]').textContent});
+  assert(r.position===r.duration&&!r.voicePresent&&r.playLabel==='▶','Natural-end transport state is stale');assert(r.observedControls===r.retainedControls&&r.unrelatedMixerFocused&&r.mixerValueRetained,'Natural end replaced controls or lost unrelated focus');assert(r.playControls===4&&r.previewImages>0,'Controls or library previews missing');r.complete=true;
+ }catch(error){r.error=error.message;}
+ finally{if(engine&&state){for(const d of state.decks){if(d.playing||d.processing||d.playQueued)click(`[data-action="play"][data-deck="${d.index}"]`);engine.pause(d);}await until(()=>state.decks.every(d=>!d.playing&&!d.processing&&!d.playQueued),'Stopped cleanup');r.physicalMuted=engine.audioMonitor.snapshot().physicalMuted;r.allStopped=true;}result.textContent=JSON.stringify(r,null,2);}
+};
+document.querySelector('#reverse-end-run').onclick=async()=>{
+ let engine,state;const r={complete:false,scope:'One actual isolated four-deck reverse boundary Play; generated audio/physical mute, no native/listening/reversal-quality/Sync-pop proof.'};
+ try{
+  assert(location.port==='8874','Dedicated port8874 required');assert(localStorage.length===0||localStorage.getItem('openplay-core-controls-owned')==='true','Refusing unowned origin');
+  localStorage.setItem('openplay-core-controls-owned','true');localStorage.setItem(sessionKey,JSON.stringify({settings:{'Analyze Stems':false}}));
+  frame.src='workspace-preview.html?reverse-end='+Date.now();await new Promise(resolve=>frame.onload=resolve);await until(()=>app()&&!app().state.analysis,'workspace');
+  ({engine,state}=app());await engine.resume();engine.audioMonitor.mutePhysical(true);assert(engine.audioMonitor.snapshot().physicalMuted,'Physical mute');input('#deck-count',4,'change');await until(()=>doc().querySelectorAll('.library-wave-preview img').length>0,'library previews');
+  const d=state.decks[0];click('[data-action="reverse"][data-deck="0"]');await until(()=>d.reverse,'Reverse enabled');assert(engine.position(d)===0&&!d.playing&&!d.loop,'Reverse boundary setup');
+  const nodes=[...doc().querySelectorAll('.deck button,.deck input,#mixer button,#mixer input,[data-waveform-scrub],#detail-wave')];click('[data-action="play"][data-deck="0"]');await until(()=>!d.playQueued&&!d.processing,'Reverse preparation settled');await sleep(100);
+  Object.assign(r,{playing:d.playing,processing:d.processing,reverse:d.reverse,position:engine.position(d),anchorPosition:d.anchorPosition,duration:d.track.duration,voicePresent:engine.voices.has(0),observedControls:nodes.length,retainedControls:nodes.filter(n=>n.isConnected).length,playControls:doc().querySelectorAll('[data-action="play"]').length,previewImages:doc().querySelectorAll('.library-wave-preview img').length});
+  assert(d.playing&&engine.voices.has(0)&&r.position>r.duration-2&&r.position<r.duration,'Reverse Play immediately ends at the beginning');assert(r.observedControls===r.retainedControls&&r.playControls===4&&r.previewImages>0,'Restart lost controls or previews');r.complete=true;
+ }catch(error){r.error=error.message;}
+ finally{if(engine&&state){for(const d of state.decks){if(d.playing||d.processing||d.playQueued)click(`[data-action="play"][data-deck="${d.index}"]`);engine.pause(d);}await until(()=>state.decks.every(d=>!d.playing&&!d.processing&&!d.playQueued),'Stopped cleanup');r.physicalMuted=engine.audioMonitor.snapshot().physicalMuted;r.allStopped=true;}result.textContent=JSON.stringify(r,null,2);}
+};
+document.querySelector('#loop-end-run').onclick=async()=>{
+ let engine,state;const r={complete:false,scope:'One actual isolated four-deck End→Loop and muted valid Play/invalid-loop rejection; generated track, no listening/native/Sync-pop proof.'};
+ try{
+  assert(location.port==='8874','Dedicated port8874 required');assert(localStorage.length===0||localStorage.getItem('openplay-core-controls-owned')==='true','Refusing unowned origin');
+  localStorage.setItem('openplay-core-controls-owned','true');localStorage.setItem(sessionKey,JSON.stringify({quantize:false,settings:{'Analyze Stems':false}}));
+  frame.src='workspace-preview.html?loop-end='+Date.now();await new Promise(resolve=>frame.onload=resolve);await until(()=>app()&&!app().state.analysis,'workspace');
+  ({engine,state}=app());await engine.resume();engine.audioMonitor.mutePhysical(true);assert(engine.audioMonitor.snapshot().physicalMuted,'Physical mute');
+  input('#deck-count',4,'change');await until(()=>doc().querySelectorAll('.library-wave-preview img').length>0,'library previews');
+  const d=state.decks[0],w=frame.contentWindow;if(d.quantize??state.quantize)click('[data-action="quantize"][data-deck="0"]');assert((d.quantize??state.quantize)===false,'Quantize must be off');const overview=doc().querySelector('[data-seek="0"]');overview.focus();overview.dispatchEvent(new w.KeyboardEvent('keydown',{key:'End',code:'End',bubbles:true,cancelable:true}));await until(()=>engine.position(d)===d.track.duration,'End seek');
+  const selector='.deck button,.deck input,#mixer button,#mixer input,[data-waveform-scrub],#detail-wave,tr[data-track],.library-wave-preview img',nodes=[...doc().querySelectorAll(selector)],before={loop:d.loop,loopIn:d.loopIn,loopOut:d.loopOut};
+  click('[data-action="loop"][data-deck="0"]');await new Promise(resolve=>w.requestAnimationFrame(()=>w.requestAnimationFrame(resolve)));
+  Object.assign(r,{before,after:{loop:d.loop,loopIn:d.loopIn,loopOut:d.loopOut},position:engine.position(d),duration:d.track.duration,observedNodes:nodes.length,retainedNodes:nodes.filter(n=>n.isConnected).length,notice:doc().querySelector('#notice')?.textContent,playControls:doc().querySelectorAll('[data-action="play"]').length,previewImages:doc().querySelectorAll('.library-wave-preview img').length});
+  assert(!d.loop&&d.loopIn===before.loopIn&&d.loopOut===before.loopOut,'Track-end Loop created invalid active bounds');assert(r.observedNodes===r.retainedNodes&&r.playControls===4&&r.previewImages>0,'Rejected loop replaced controls or previews');
+  assert(r.notice.includes('Loop Out must be after Loop In'),'Loop rejection must explain valid bounds');
+  overview.dispatchEvent(new w.KeyboardEvent('keydown',{key:'Home',code:'Home',bubbles:true,cancelable:true}));await until(()=>engine.position(d)===0,'Home seek');click('[data-action="play"][data-deck="0"]');await until(()=>d.playing&&!d.processing,'valid Play');
+  const voice=engine.voices.get(0),token=engine.startTokens.get(0),rate=d.rate,position=engine.position(d);let rejected='';try{await engine.setLoop(d,true,5,5);}catch(error){rejected=error.name;}
+  await sleep(40);r.active={rejected,sameVoice:engine.voices.get(0)===voice,sameStartToken:engine.startTokens.get(0)===token,sameRate:d.rate===rate,playing:d.playing,clockAdvanced:Number.isFinite(engine.position(d))&&engine.position(d)>position,loop:d.loop};
+  assert(rejected==='RangeError'&&r.active.sameVoice&&r.active.sameStartToken&&r.active.sameRate&&r.active.playing&&r.active.clockAdvanced&&!d.loop,'Invalid loop changed the active voice or clock');r.complete=true;
+ }catch(error){r.error=error.message;}
+ finally{if(engine&&state){for(const d of state.decks)engine.pause(d);r.physicalMuted=engine.audioMonitor.snapshot().physicalMuted;r.allStopped=state.decks.every(d=>!d.playing&&!d.processing&&!d.playQueued);}result.textContent=JSON.stringify(r,null,2);}
+};
+document.querySelector('#pfl-refresh-run').onclick=async()=>{
+ let engine,state;const r={complete:false,scope:'Actual isolated four-deck headphone Cue on/off; generated tracks, physical mute, no playback or hardware/listening proof.',stages:[]};
+ try{
+  assert(location.port==='8874','Dedicated port8874 required');assert(localStorage.length===0||localStorage.getItem('openplay-core-controls-owned')==='true','Refusing unowned origin');
+  localStorage.setItem('openplay-core-controls-owned','true');localStorage.setItem(sessionKey,JSON.stringify({settings:{'Analyze Stems':false}}));
+  frame.src='workspace-preview.html?pfl-refresh='+Date.now();await new Promise(resolve=>frame.onload=resolve);await until(()=>app()&&!app().state.analysis,'workspace');
+  ({engine,state}=app());await engine.resume();engine.audioMonitor.mutePhysical(true);assert(engine.audioMonitor.snapshot().physicalMuted,'Physical mute');
+  input('#deck-count',4,'change');await until(()=>doc().querySelectorAll('.library-wave-preview img').length>0,'library previews');
+  const selector='.deck button,.deck input,#mixer button,#mixer input,[data-waveform-scrub],#detail-wave,tr[data-track],.library-wave-preview img',w=frame.contentWindow;
+  for(const enabled of [true,false]){
+   const nodes=[...doc().querySelectorAll(selector)],cue=doc().querySelector('[data-action="pfl"][data-deck="0"]'),other=doc().querySelector('[data-mix="1:level"]'),value=other.value;
+   other.focus();cue.click();await new Promise(resolve=>w.requestAnimationFrame(()=>w.requestAnimationFrame(resolve)));
+   const current=doc().querySelector('[data-action="pfl"][data-deck="0"]');
+   r.stages.push({enabled,observedNodes:nodes.length,retainedNodes:nodes.filter(n=>n.isConnected).length,unrelatedFocus:doc().activeElement===other,unrelatedValue:other.isConnected&&other.value===value,sameCue:current===cue,selected:state.decks[0].pfl,engineSelected:engine.nodes[0].pfl,pressed:current.getAttribute('aria-pressed'),active:current.classList.contains('active'),playControls:doc().querySelectorAll('[data-action="play"]').length,previewImages:doc().querySelectorAll('.library-wave-preview img').length});
+  }
+  assert(r.stages.every(s=>s.observedNodes===s.retainedNodes&&s.unrelatedFocus&&s.unrelatedValue&&s.sameCue),'Headphone Cue replaces controls or loses unrelated focus');
+  assert(r.stages.every(s=>s.selected===s.enabled&&s.engineSelected===s.enabled&&s.pressed===String(s.enabled)&&s.active===s.enabled&&s.playControls===4&&s.previewImages>0),'Headphone Cue presentation/routing selection or previews missing');r.complete=true;
+ }catch(error){r.error=error.message;}
+ finally{
+  if(engine&&state){engine.setPFL(0,false);state.decks[0].pfl=false;for(const d of state.decks)engine.pause(d);r.physicalMuted=engine.audioMonitor.snapshot().physicalMuted;r.allStopped=state.decks.every(d=>!d.playing&&!d.processing&&!d.playQueued);}
+  result.textContent=JSON.stringify(r,null,2);
+ }
+};
 async function stage(name,playing,extra={}){const {engine}=app(),at=engine.ctx.currentTime-engine.recordStarted;events.push({name,playing,from:at+.15,to:at+.4,...extra});await sleep(500);}
 document.querySelector('#run').onclick=async()=>{
  let originalFile;
@@ -69,5 +163,111 @@ document.querySelector('#run').onclick=async()=>{
   }
   if(!report.error&&(report.metadataTracks!==10||report.previewImages!==2||report.controls.play!==2||report.controls.eq!==2))report.error='Core metadata, filtered previews or controls missing';
   report.complete=checks.length===3&&report.audioPassed&&!report.error;document.querySelector('#original').textContent=JSON.stringify(report);show();
+ }
+};
+
+document.querySelector('#cue-refresh-run').onclick=async()=>{
+ let engine,state;const r={complete:false,scope:'Actual four-deck Compact Cue key release with generated audio, physical output muted; no listening/native/pointer-capture proof.'};
+ try{
+  assert(location.port==='8874','Dedicated port8874 required');
+  assert(localStorage.length===0||localStorage.getItem('openplay-core-controls-owned')==='true','Refusing unowned origin');
+  localStorage.setItem('openplay-core-controls-owned','true');
+  localStorage.setItem(sessionKey,JSON.stringify({settings:{'Analyze Stems':false,'Playback Keys Use Shift':false}}));
+  frame.src='workspace-preview.html?cue-refresh='+Date.now();await new Promise(resolve=>frame.onload=resolve);
+  await until(()=>app()&&!app().state.analysis,'workspace');({engine,state}=app());
+  await engine.resume();engine.audioMonitor.mutePhysical(true);assert(engine.audioMonitor.snapshot().physicalMuted,'Physical mute');
+  input('#deck-count',4,'change');await until(()=>doc().querySelectorAll('[data-action="play"]').length===4,'four decks');
+  await until(()=>doc().querySelectorAll('.library-wave-preview img').length>0,'library previews');
+  const d=state.decks[0],w=frame.contentWindow,cue=doc().querySelector('[data-action="cue"][data-deck="0"]');
+  cue.focus();cue.dispatchEvent(new w.KeyboardEvent('keydown',{key:' ',code:'Space',bubbles:true,cancelable:true}));
+  await until(()=>d.playing&&!d.processing,'temporary Cue audition');
+  const selector='.deck button,.deck input,#mixer button,#mixer input,[data-waveform-scrub],#detail-wave,tr[data-track],.library-wave-preview img',nodes=[...doc().querySelectorAll(selector)];
+  const knob=doc().querySelector('[data-mix="1:level"]');knob.focus();const value=knob.value;
+  knob.dispatchEvent(new w.KeyboardEvent('keyup',{key:' ',code:'Space',bubbles:true,cancelable:true}));
+  await until(()=>!d.playing&&!d.processing,'Cue release');
+  await new Promise(resolve=>w.requestAnimationFrame(()=>w.requestAnimationFrame(resolve)));
+  r.observedNodes=nodes.length;r.retainedNodes=nodes.filter(n=>n.isConnected).length;r.unrelatedMixerFocused=doc().activeElement===knob;
+  r.mixerValueRetained=knob.isConnected&&knob.value===value;r.playControls=doc().querySelectorAll('[data-action="play"]').length;
+  r.previewImages=doc().querySelectorAll('.library-wave-preview img').length;r.cueReturnedPaused=Math.abs(engine.position(d)-d.cue)<.001;
+  assert(r.retainedNodes===r.observedNodes&&r.unrelatedMixerFocused&&r.mixerValueRetained,'Cue release replaced controls or lost unrelated mixer focus');
+  assert(r.playControls===4&&r.previewImages>0&&r.cueReturnedPaused,'Cue return or controls/previews missing');r.complete=true;
+ }catch(error){r.error=error.message;}
+ finally{
+  if(engine&&state){for(const d of state.decks)engine.pause(d);r.physicalMuted=engine.audioMonitor.snapshot().physicalMuted;r.allStopped=state.decks.every(d=>!d.playing&&!d.processing&&!d.playQueued);}
+  result.textContent=JSON.stringify(r,null,2);
+ }
+};
+
+document.querySelector('#cue-edit-run').onclick=async()=>{
+ let engine,state;const r={complete:false,scope:'One actual isolated four-deck hot-cue create/edit/delete sequence; generated audio, no playback or native/listening proof.',stages:[]};
+ try{
+  assert(location.port==='8874','Dedicated port8874 required');assert(localStorage.length===0||localStorage.getItem('openplay-core-controls-owned')==='true','Refusing unowned origin');
+  localStorage.setItem('openplay-core-controls-owned','true');localStorage.setItem(sessionKey,JSON.stringify({settings:{'Analyze Stems':false,'Instant Doubles':false}}));
+  frame.src='workspace-preview.html?cue-edit='+Date.now();await new Promise(resolve=>frame.onload=resolve);await until(()=>app()&&!app().state.analysis,'workspace');
+  ({engine,state}=app());await engine.resume();engine.audioMonitor.mutePhysical(true);assert(engine.audioMonitor.snapshot().physicalMuted,'Physical mute');
+  input('#deck-count',4,'change');await load(state.decks[0].track,1);await until(()=>doc().querySelectorAll('.library-wave-preview img').length>0,'library previews');
+  const w=frame.contentWindow,track=state.decks[0].track,pad=index=>doc().querySelector(`[data-action="pad"][data-deck="${index}"][data-pad="0"]`);
+  const settle=()=>new Promise(resolve=>w.requestAnimationFrame(()=>w.requestAnimationFrame(resolve)));
+  const selector='.deck button,.deck input,#mixer button,#mixer input,[data-waveform-scrub],#detail-wave,tr[data-track],.library-wave-preview img';
+  const begin=()=>{const p=pad(0);p.focus();return{p,nodes:[...doc().querySelectorAll(selector)]};};
+  const capture=(name,before)=>r.stages.push({name,observed:before.nodes.length,retained:before.nodes.filter(n=>n.isConnected).length,padFocused:doc().activeElement===before.p,ownerLabel:pad(0).textContent,duplicateLabel:pad(1).textContent,ownerAria:pad(0).getAttribute('aria-label'),duplicateAria:pad(1).getAttribute('aria-label')});
+  let before=begin();before.p.dispatchEvent(new w.KeyboardEvent('keydown',{key:' ',code:'Space',bubbles:true,cancelable:true}));before.p.dispatchEvent(new w.KeyboardEvent('keyup',{key:' ',code:'Space',bubbles:true,cancelable:true}));
+  await until(()=>!!track.cues[0],'cue created');await settle();capture('create',before);assert(pad(0).classList.contains('set')&&pad(1).classList.contains('set'),'Shared cue creation stale');
+  before=begin();before.p.dispatchEvent(new w.MouseEvent('contextmenu',{bubbles:true,cancelable:true}));
+  const form=doc().querySelector('#modal-body form');form.elements.name.value='Owned cue';form.elements.position.value='1.25';form.requestSubmit();await until(()=>!doc().querySelector('#modal').open,'cue edit');await settle();capture('edit',before);
+  assert(track.cues[0].name==='Owned cue'&&track.cues[0].position===1.25&&pad(0).textContent.includes('Owned cue')&&pad(1).textContent.includes('Owned cue'),'Shared cue edit stale');
+  before=begin();before.p.dispatchEvent(new w.KeyboardEvent('keydown',{key:' ',code:'Space',shiftKey:true,bubbles:true,cancelable:true}));before.p.dispatchEvent(new w.KeyboardEvent('keyup',{key:' ',code:'Space',shiftKey:true,bubbles:true,cancelable:true}));
+  await until(()=>!track.cues[0],'cue deleted');await settle();capture('delete',before);assert(!pad(0).classList.contains('set')&&!pad(1).classList.contains('set'),'Shared cue deletion stale');
+  r.previewImages=doc().querySelectorAll('.library-wave-preview img').length;r.playControls=doc().querySelectorAll('[data-action="play"]').length;
+  assert(r.stages.every(x=>x.observed===x.retained&&x.padFocused),'Hot-cue edit replaced controls or lost pad focus');assert(r.previewImages>0&&r.playControls===4,'Core controls/previews missing');r.complete=true;
+ }catch(error){r.error=error.message;}
+ finally{if(engine&&state){for(const d of state.decks)engine.pause(d);r.physicalMuted=engine.audioMonitor.snapshot().physicalMuted;r.allStopped=state.decks.every(d=>!d.playing&&!d.processing&&!d.playQueued);}result.textContent=JSON.stringify(r,null,2);}
+};
+
+document.querySelector('#scratch-load-run').onclick=async()=>{
+ let engine,state,preload,schedulerYield;const r={complete:false,scope:'Four real-track loads, cold native-yield scratch and same-buffer timer fallback; physical output muted, no Sync/listening or long-session proof.',loads:[],warm:[]};
+ result.textContent='Preparing the isolated four-track load check…';
+ try{
+  assert(location.port==='8874','Dedicated port8874 required');assert(localStorage.length===0||localStorage.getItem('openplay-core-controls-owned')==='true','Refusing unowned origin');
+  const manifest=await(await fetch('/__trace-inputs/manifest')).json();assert(manifest.length===4,'Exactly four pinned local tracks required');
+  localStorage.setItem('openplay-core-controls-owned','true');localStorage.setItem(sessionKey,JSON.stringify({settings:{'Analyze Stems':false,'Use Auto Gain':false,'Instant Doubles':false}}));
+  frame.src='workspace-preview.html?scratch-load='+Date.now();await new Promise(resolve=>frame.onload=resolve);await until(()=>app()&&!app().state.analysis,'workspace');
+  ({engine,state}=app());const w=frame.contentWindow;await engine.resume();engine.audioMonitor.mutePhysical(true);assert(engine.audioMonitor.snapshot().physicalMuted,'Physical mute');state.analysisSettings.onImport=false;
+  const transfer=new w.DataTransfer();for(let i=0;i<4;i++){
+   const response=await fetch('/__trace-inputs/'+i),bytes=await response.arrayBuffer();assert(response.ok,'Local audio response');
+   const hash=[...new Uint8Array(await crypto.subtle.digest('SHA-256',bytes))].map(n=>n.toString(16).padStart(2,'0')).join('');assert(hash===manifest[i].sha256,'Original audio hash changed');
+   transfer.items.add(new w.File([bytes],manifest[i].name,{type:'audio/mpeg'}));
+  }
+  const files=doc().querySelector('#audio-files');files.files=transfer.files;const tracks=await files.onchange({target:files});assert(tracks.length===4,'Real track import');
+  input('#deck-count',4,'change');preload=engine.preloadDeckScratch;engine.preloadDeckScratch=function(d){r.warm.push({deck:d.index,at:performance.now(),track:d.track.id});return preload.call(this,d);};
+  const start=performance.now();for(let i=0;i<4;i++){const at=performance.now(),cached=engine.buffers.has(tracks[i].id);await load(tracks[i],i);const b=engine.buffers.get(tracks[i].id);r.loads.push({deck:i,cached,loadMilliseconds:performance.now()-at,duration:tracks[i].duration,sampleRate:b.sampleRate,channels:b.numberOfChannels,frames:b.length});}
+  const warmPromises=[...engine.scratchCache.entries.values()].map(entry=>entry.promise);await Promise.all(warmPromises);
+  r.automaticScratchRequests=r.warm.length;r.cacheEntriesBeforeGesture=engine.scratchCache.entries.size;
+  r.scratchInputPCMBytesBeforeGesture=[...engine.scratchCache.entries.values()].reduce((sum,entry)=>sum+[entry.original,...entry.stems||[]].reduce((n,b)=>n+b.length*b.numberOfChannels*4,0),0);
+  const colored=canvas=>{if(!canvas?.width||!canvas.height)return false;const pixels=canvas.getContext('2d').getImageData(0,0,canvas.width,canvas.height).data;let count=0;for(let i=0;i<pixels.length;i+=4)if(Math.max(pixels[i],pixels[i+1],pixels[i+2])-Math.min(pixels[i],pixels[i+1],pixels[i+2])>20&&++count>20)return true;return false;};
+  for(let attempt=0;attempt<240&&!state.decks.every(d=>colored(doc().querySelector('#wave-'+d.index)));attempt++)await sleep(250);
+  r.allOverviewsPainted=state.decks.every(d=>colored(doc().querySelector('#wave-'+d.index)));r.loadToObservedWaveformsMilliseconds=performance.now()-start;
+  assert(r.allOverviewsPainted,'Decoded deck overviews did not paint');
+  const selector='.deck button,.deck input,#mixer button,#mixer input,[data-waveform-scrub],#detail-wave,tr[data-track],.library-wave-preview img',nodes=[...doc().querySelectorAll(selector)],platter=doc().querySelector('[data-deck-scratch="0"]');platter.focus();
+  r.nativeYieldAvailable=typeof w.scheduler?.yield==='function';r.nativeYieldCalls=0;if(r.nativeYieldAvailable){schedulerYield=w.scheduler.yield;w.scheduler.yield=function(){r.nativeYieldCalls++;return schedulerYield.call(this);};}
+  const gestureAt=performance.now();platter.dispatchEvent(new w.KeyboardEvent('keydown',{key:' ',code:'Space',bubbles:true,cancelable:true}));
+  await until(()=>platter.dataset.scratchPhase==='active','first scratch ready');r.firstGestureReadyMilliseconds=performance.now()-gestureAt;r.firstGestureSourceCount=engine.scratchCache.peek(0)?.transport.state().sourceCount;
+  platter.dispatchEvent(new w.KeyboardEvent('keyup',{key:' ',code:'Space',bubbles:true,cancelable:true}));await until(()=>!engine.deckScratchRequests.size&&!state.decks[0].scratchPreparing,'scratch release');
+  r.observedNodes=nodes.length;r.retainedNodes=nodes.filter(n=>n.isConnected).length;r.gestureRequests=r.warm.length-r.automaticScratchRequests;
+  if(r.nativeYieldAvailable){
+   const buffer=engine.buffers.get(state.decks[0].track.id);r.comparisonGeometry={sampleRate:buffer.sampleRate,channels:buffer.numberOfChannels,frames:buffer.length};
+   engine.clearDeckScratchCache(0);w.scheduler.yield=undefined;
+   const at=performance.now();platter.dispatchEvent(new w.KeyboardEvent('keydown',{key:' ',code:'Space',bubbles:true,cancelable:true}));await until(()=>platter.dataset.scratchPhase==='active','timer fallback scratch ready');
+   r.sameBufferTimerReadyMilliseconds=performance.now()-at;r.sameBufferReferenceRetained=engine.buffers.get(state.decks[0].track.id)===buffer;
+   platter.dispatchEvent(new w.KeyboardEvent('keyup',{key:' ',code:'Space',bubbles:true,cancelable:true}));await until(()=>!engine.deckScratchRequests.size&&!state.decks[0].scratchPreparing,'timer release');
+   assert(r.sameBufferReferenceRetained&&nodes.every(n=>n.isConnected),'Comparison changed buffer/control ownership');
+  }
+  r.playControls=doc().querySelectorAll('[data-action="play"]').length;r.previewImages=doc().querySelectorAll('.library-wave-preview img').length;
+  assert(r.firstGestureSourceCount>=1&&r.retainedNodes===r.observedNodes&&r.playControls===4&&r.previewImages>0,'First scratch or controls/previews missing');
+  assert(r.automaticScratchRequests===0&&r.cacheEntriesBeforeGesture===0,'Ordinary loads still prepare unrequested scratch PCM');r.complete=true;
+ }catch(error){r.error=error.message;}
+ finally{
+  if(engine&&state){if(preload)engine.preloadDeckScratch=preload;if(schedulerYield)frame.contentWindow.scheduler.yield=schedulerYield;for(const d of state.decks){engine.pause(d);engine.clearDeckScratchCache(d.index);}r.physicalMuted=engine.audioMonitor.snapshot().physicalMuted;r.allStopped=state.decks.every(d=>!d.playing&&!d.processing&&!d.playQueued);r.scratchEntriesAfterCleanup=engine.scratchCache.entries.size;}
+  result.textContent=JSON.stringify(r,null,2);
  }
 };

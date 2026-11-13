@@ -21,3 +21,26 @@ test('a map that moves a steady grid away from its onsets is rejected',()=>{
 test('silence cannot validate a proposed correction',()=>{
   assert.equal(checkGridProposal(new Float32Array(rate*duration),rate,reference,proposal(.025)).status,'insufficient');
 });
+test('many onsets in half a track cannot validate a whole-track correction',()=>{
+  const pcm=new Float32Array(rate*duration*2);pcm.set(pulses(.025));
+  const result=checkGridProposal(pcm,rate,reference,proposal(.025));
+  assert(result.events>100,'event count alone must not validate unchecked sections');
+  assert.equal(result.status,'insufficient');
+});
+test('a later bass lobe does not replace the first strong attack when checking a correction',()=>{
+  const pcm=pulses(0),later=pulses(.05);
+  for(let i=0;i<pcm.length;i++)pcm[i]+=1.2*later[i];
+  const lateGrid={bpm:120,firstBeat:.02};
+  const corrected=proposal(0);
+  const result=checkGridProposal(pcm,rate,lateGrid,corrected);
+  assert.equal(result.status,'improved');
+  assert(result.afterMedianSeconds<.01,'correction should follow the known first attack');
+  assert.equal(checkGridProposal(pcm,rate,reference,proposal(.02)).status,'worse');
+});
+test('an earlier bass figure does not replace the closer beat attack',()=>{
+  const pcm=pulses(.025),earlier=pulses(-.04);
+  for(let i=0;i<pcm.length;i++)pcm[i]+=.8*earlier[i];
+  const result=checkGridProposal(pcm,rate,reference,proposal(.025));
+  assert.equal(result.status,'improved');
+  assert(result.afterMedianSeconds<.01);
+});

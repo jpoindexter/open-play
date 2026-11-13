@@ -1,0 +1,93 @@
+{
+  "date": "2026-10-25",
+  "candidate": "Open Play Playback Test0.1.56",
+  "sourceCommit": "3667d6fcfe47b82a671606e1ed914432b452c693",
+  "reviewedHead": "0cd2ec851e6b0e7a88d956368047ef512568d4c6",
+  "scope": "One actual native four-deck Compact Horizontal\u2192Vertical\u2192Horizontal usability sequence; no broad soak, test matrix, source patch or rebuild.",
+  "setup": {
+    "tracks": {
+      "A": "DJ W!LD \u2014 Love Every Day (Andres Remix)",
+      "B": "Jewel Kid \u2014 In The Dance",
+      "C": "Radio Slave ft Kameelah Waheed \u2014 All Rize (Boogie Vice & N-You-Up Olympico Dub)",
+      "D": "Mr. Fingers \u2014 Moonglow"
+    },
+    "origin": "Existing16-track saved library; ordinary Load controls.",
+    "recording": "REC inactive; Start available and Download disabled before setup. No new recording.",
+    "mute": "All4channel levels0; all headphone CUE selections0; master meter minus infinity in live observations.",
+    "sync": "Off; no new beatmatch or musical Sync acceptance. C already has no saved BPM/grid; its lane correctly shows NO GRID."
+  },
+  "observations": [
+    {
+      "view": "Horizontal",
+      "playing": 4,
+      "positions": [
+        0.356,
+        0.257,
+        0.222,
+        0.17
+      ],
+      "filterD": 0
+    },
+    {
+      "view": "Vertical",
+      "playing": 4,
+      "positions": [
+        24.052,
+        23.953,
+        23.918,
+        23.866
+      ],
+      "filterD": 0.01,
+      "visual": "Four vertical waveform lanes and complete deck/mixer/library surfaces observed."
+    },
+    {
+      "view": "Vertical",
+      "playing": 4,
+      "filterD": 0.02,
+      "interaction": "Same native AX control508 accepted Right .01\u2192.02 after transition; keyboard usability evidence, not DOM identity or held-pointer proof."
+    },
+    {
+      "view": "Horizontal",
+      "playing": 4,
+      "visual": "Screenshot shows Horizontal selector, four horizontal lanes and all deck/mixer/library surfaces.",
+      "axCaveat": "Combo AXValue continued reporting Vertical before and after screenshot; current visual and reported value disagree. No attribution to app/React/Astryx/Chromium/capture layer is established."
+    }
+  ],
+  "cleanup": {
+    "playingDecks": 0,
+    "positions": [
+      104.654,
+      104.654,
+      104.666,
+      104.654
+    ],
+    "filterD": 0,
+    "levels": [
+      0.8,
+      0.8,
+      0.8,
+      0.8
+    ],
+    "crossfader": 0,
+    "masterDB": -10,
+    "libraryTracks": 16,
+    "view": "Horizontal/Compact/four decks, same loaded real tracks retained, all Sync off.",
+    "session": "Four intentional successful Play actions; existing play handler appends history/counts. No Clear/New session/tag/grid/media edit. Extra live History readback after cleanup was not executed because Mac locked; record persistence is not newly proved by this sequence."
+  },
+  "result": "Native four-real-track orientation state/control usability observed; prior stopped-demo-only gap advanced.",
+  "limits": [
+    "No frame/native timing trace or quantitative speedup; not a completed native performance comparison.",
+    "AX item reuse is not DOM-node identity; selector focus is expected; no held-pointer capture tested.",
+    "Muted output, no PCM recording/user listening; no pop-free, Sync alignment or hardware claim.",
+    "Visible screenshot versus native accessibility value disagreement is tracked on existing UI-004; cause unverified."
+  ],
+  "trello": {
+    "parent": "CORE-FIX-07",
+    "accessibility": "UI-004",
+    "newCards": 0,
+    "completions": 0,
+    "readback": "Full157card inventory:9complete; all list/completion/closed states unchanged; CORE-FIX-07/UI-004 descriptions and existing core comment exact."
+  },
+  "next": "Prepare one-action native timing/retained-node observation using existing private capture assets while locked; execute after unlock. Keep genuinely pending Sync\u2192OFF ownership window separate; no broad soak.",
+  "lockAfterCleanup": "CUA reported Mac locked on the subsequent History inspection. Last executed native observation already confirmed0playing/filterneutral/levels80%/crosscentre. Do not bypass lock."
+}

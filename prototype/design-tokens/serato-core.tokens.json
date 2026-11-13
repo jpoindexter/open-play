@@ -1,9 +1,9 @@
 {
-  "$description": "Open Play core-performance visual tokens derived from installed Serato screenshots. v0.1.0; night-mode reference only. No copied branding, raster controls or font assets.",
+  "$description": "Open Play visual system: shared product tokens for standard Astryx and custom DJ controls. Historical filename and reference provenance retained.",
   "$extensions": {
     "org.openplay": {
-      "version": "0.1.0",
-      "date": "2026-10-19",
+      "version": "0.2.0",
+      "date": "2026-10-27",
       "references": [
         {
           "path": "local-evidence/core-design-190/serato-practice-empty.png",
@@ -14,6 +14,17 @@
           "path": "local-evidence/desktop-0.1.23-native/serato-before-quit.png",
           "sha256": "ed91a0ea71db09d9ec7bbba35984c305b59a471512d25a02314f3d06bd58427f",
           "authority": "historical installed loaded Vertical capture"
+        },
+        {
+          "path": "local-evidence/rekordbox-design-system-2026-10-25.rea.json",
+          "authority": "REA fresh installed 7.2.19.0342 2Deck Horizontal; saved same-binary 2/4Deck Vertical captures supplement geometry",
+          "evidenceId": "ev_a845746a8ff8ee3bb086dd0fc3b18542677c35576fe0927987dd986fa6043c37",
+          "targetSha256": "07dcecbaf304f777e435539c83c7dcc02e41de1eaf2e0a75e8a9852e4411a244",
+          "note": "Observed raster palette and UI anatomy, not original vendor tokens. Exact type and spacing remain inferred. See docs/design-system/REKORDBOX_REFERENCE_2026-10-25.md."
+        },
+        {
+          "path": "local-evidence/dj-app-complete-reference-2026-10-29/open-play-approved-reference.png",
+          "authority": "Owner-approved Open Play graphite concept. Native measurements are macOS logical points, proposed component sizes CSS pixels; no vendor code/artwork bundled."
         }
       ],
       "scale": {
@@ -28,7 +39,26 @@
       "observed": "Flat palette, selected/disabled/empty states and loaded Vertical anatomy.",
       "inferred": "Semantic roles, exact font/weights, normalized spacing, hover/focus, responsive behavior.",
       "missing": "Exact source token names, unseen states and other source themes.",
-      "waveformReference": "https://support.serato.com/hc/en-us/articles/224969307-Main-Waveform-Display"
+      "waveformReference": "https://support.serato.com/hc/en-us/articles/224969307-Main-Waveform-Display",
+      "dayMode": {
+        "background": "{primitive.dayBackground}",
+        "panel": "{primitive.dayPanel}",
+        "borderStrong": "{primitive.dayBorder}",
+        "text": "{primitive.dayText}",
+        "textMuted": "{primitive.dayMuted}",
+        "selected": "{primitive.daySelected}",
+        "textOnSelected": "{primitive.dayText}",
+        "recessed": "{primitive.white}",
+        "platter": "{primitive.white}",
+        "platterText": "{primitive.black}",
+        "control": "{primitive.dayPanel}",
+        "controlEdge": "{primitive.dayMuted}",
+        "raised": "{primitive.dayBackground}",
+        "controlHighlight": "{primitive.dayPanel}",
+        "controlShadow": "{primitive.dayBorder}",
+        "capEdge": "{primitive.dayMuted}"
+      },
+      "adaptation": "User-directed flat-black product surfaces with existing color accents; reference captures remain unchanged."
     }
   },
   "primitive": {
@@ -44,41 +74,45 @@
     },
     "canvas": {
       "$type": "color",
-      "$value": "#111111",
-      "$description": "Flat-color sampling from installed Serato practice screen, 19 October 2026.",
+      "$value": "#000000",
+      "$description": "Open Play flat-black surface role, adapted per user direction on 27 October 2026.",
       "$extensions": {
         "org.openplay": {
-          "confidence": "observed"
+          "confidence": "user-directed adaptation",
+          "referenceValue": "#111111"
         }
       }
     },
     "row": {
       "$type": "color",
-      "$value": "#1d1d1d",
-      "$description": "Flat-color sampling from installed Serato practice screen, 19 October 2026.",
+      "$value": "#080808",
+      "$description": "Open Play flat-black surface role, adapted per user direction on 27 October 2026.",
       "$extensions": {
         "org.openplay": {
-          "confidence": "observed"
+          "confidence": "user-directed adaptation",
+          "referenceValue": "#1d1d1d"
         }
       }
     },
     "surface": {
       "$type": "color",
-      "$value": "#222222",
-      "$description": "Flat-color sampling from installed Serato practice screen, 19 October 2026.",
+      "$value": "#080808",
+      "$description": "Open Play flat-black surface role, adapted per user direction on 27 October 2026.",
       "$extensions": {
         "org.openplay": {
-          "confidence": "observed"
+          "confidence": "user-directed adaptation",
+          "referenceValue": "#222222"
         }
       }
     },
     "raised": {
       "$type": "color",
-      "$value": "#444444",
-      "$description": "Flat-color sampling from installed Serato practice screen, 19 October 2026.",
+      "$value": "#242424",
+      "$description": "Open Play flat-black surface role, adapted per user direction on 27 October 2026.",
       "$extensions": {
         "org.openplay": {
-          "confidence": "observed"
+          "confidence": "user-directed adaptation",
+          "referenceValue": "#444444"
         }
       }
     },
@@ -311,14 +345,173 @@
             "confidence": "inferred"
           }
         }
+      },
+      "64": {
+        "$type": "dimension",
+        "$value": {
+          "value": 64,
+          "unit": "px"
+        }
+      },
+      "72": {
+        "$type": "dimension",
+        "$value": {
+          "value": 72,
+          "unit": "px"
+        }
+      },
+      "96": {
+        "$type": "dimension",
+        "$value": {
+          "value": 96,
+          "unit": "px"
+        }
+      },
+      "180": {
+        "$type": "dimension",
+        "$value": {
+          "value": 180,
+          "unit": "px"
+        }
+      },
+      "264": {
+        "$type": "dimension",
+        "$value": {
+          "value": 264,
+          "unit": "px"
+        }
+      },
+      "20": {
+        "$type": "dimension",
+        "$value": {
+          "value": 20,
+          "unit": "px"
+        },
+        "$description": "Open Play four-pixel layout rhythm; inferred, not measured vendor spacing token."
+      },
+      "28": {
+        "$type": "dimension",
+        "$value": {
+          "value": 28,
+          "unit": "px"
+        },
+        "$description": "Open Play four-pixel layout rhythm; inferred, not measured vendor spacing token."
+      },
+      "36": {
+        "$type": "dimension",
+        "$value": {
+          "value": 36,
+          "unit": "px"
+        },
+        "$description": "Open Play four-pixel layout rhythm; inferred, not measured vendor spacing token."
+      },
+      "44": {
+        "$type": "dimension",
+        "$value": {
+          "value": 44,
+          "unit": "px"
+        },
+        "$description": "Open Play four-pixel layout rhythm; inferred, not measured vendor spacing token."
+      },
+      "52": {
+        "$type": "dimension",
+        "$value": {
+          "value": 52,
+          "unit": "px"
+        },
+        "$description": "Open Play four-pixel layout rhythm; inferred, not measured vendor spacing token."
+      },
+      "18": {
+        "$type": "dimension",
+        "$value": {
+          "value": 18,
+          "unit": "px"
+        }
+      },
+      "104": {
+        "$type": "dimension",
+        "$value": {
+          "value": 104,
+          "unit": "px"
+        }
+      },
+      "160": {
+        "$type": "dimension",
+        "$value": {
+          "value": 160,
+          "unit": "px"
+        }
+      },
+      "280": {
+        "$type": "dimension",
+        "$value": {
+          "value": 280,
+          "unit": "px"
+        }
+      },
+      "208": {
+        "$type": "dimension",
+        "$value": {
+          "value": 208,
+          "unit": "px"
+        }
+      },
+      "88": {
+        "$type": "dimension",
+        "$value": {
+          "value": 88,
+          "unit": "px"
+        }
+      },
+      "14": {
+        "$type": "dimension",
+        "$value": {
+          "value": 14,
+          "unit": "px"
+        }
+      },
+      "144": {
+        "$type": "dimension",
+        "$value": {
+          "value": 144,
+          "unit": "px"
+        }
+      },
+      "220": {
+        "$type": "dimension",
+        "$value": {
+          "value": 220,
+          "unit": "px"
+        }
+      },
+      "240": {
+        "$type": "dimension",
+        "$value": {
+          "value": 240,
+          "unit": "px"
+        }
+      },
+      "108": {
+        "$type": "dimension",
+        "$value": {
+          "value": 108,
+          "unit": "px"
+        }
+      },
+      "1000": {
+        "$type": "dimension",
+        "$value": {
+          "value": 1000,
+          "unit": "px"
+        }
       }
     },
     "type": {
       "10": {
         "$type": "dimension",
         "$value": {
-          "value": 10,
-          "unit": "px"
+          "value": 0.625,
+          "unit": "rem"
         },
         "$description": "",
         "$extensions": {
@@ -330,8 +523,8 @@
       "11": {
         "$type": "dimension",
         "$value": {
-          "value": 11,
-          "unit": "px"
+          "value": 0.6875,
+          "unit": "rem"
         },
         "$description": "",
         "$extensions": {
@@ -343,8 +536,8 @@
       "12": {
         "$type": "dimension",
         "$value": {
-          "value": 12,
-          "unit": "px"
+          "value": 0.75,
+          "unit": "rem"
         },
         "$description": "",
         "$extensions": {
@@ -356,8 +549,8 @@
       "16": {
         "$type": "dimension",
         "$value": {
-          "value": 16,
-          "unit": "px"
+          "value": 1.0,
+          "unit": "rem"
         },
         "$description": "",
         "$extensions": {
@@ -369,8 +562,8 @@
       "20": {
         "$type": "dimension",
         "$value": {
-          "value": 20,
-          "unit": "px"
+          "value": 1.25,
+          "unit": "rem"
         },
         "$description": "",
         "$extensions": {
@@ -382,8 +575,8 @@
       "26": {
         "$type": "dimension",
         "$value": {
-          "value": 26,
-          "unit": "px"
+          "value": 1.625,
+          "unit": "rem"
         },
         "$description": "",
         "$extensions": {
@@ -391,6 +584,14 @@
             "confidence": "inferred"
           }
         }
+      },
+      "14": {
+        "$type": "dimension",
+        "$value": {
+          "value": 0.875,
+          "unit": "rem"
+        },
+        "$description": "Compact track title / reading role."
       }
     },
     "font": {
@@ -446,28 +647,180 @@
           "confidence": "inferred"
         }
       }
+    },
+    "dayBackground": {
+      "$type": "color",
+      "$value": "#d2d4d7"
+    },
+    "dayPanel": {
+      "$type": "color",
+      "$value": "#eeeeee"
+    },
+    "dayBorder": {
+      "$type": "color",
+      "$value": "#a1a6ad"
+    },
+    "dayText": {
+      "$type": "color",
+      "$value": "#16191c"
+    },
+    "dayMuted": {
+      "$type": "color",
+      "$value": "#48505a"
+    },
+    "daySelected": {
+      "$type": "color",
+      "$value": "#b8d9ee"
+    },
+    "neutral": {
+      "canvas": {
+        "$type": "color",
+        "$value": "#000000",
+        "$description": "Open Play flat-black adaptation requested 27 October 2026; not a new vendor measurement.",
+        "$extensions": {
+          "org.openplay": {
+            "confidence": "user-directed adaptation",
+            "referenceValue": "#0f0f0f"
+          }
+        }
+      },
+      "panel": {
+        "$type": "color",
+        "$value": "#121414",
+        "$description": "Open Play graphite adaptation of approved October reference; inferred visual role, not a recovered vendor token.",
+        "$extensions": {
+          "org.openplay": {
+            "confidence": "user-directed adaptation",
+            "referenceValue": "#1e1e1e"
+          }
+        }
+      },
+      "control": {
+        "$type": "color",
+        "$value": "#1a1c1c",
+        "$description": "Open Play graphite adaptation of approved October reference; inferred visual role, not a recovered vendor token.",
+        "$extensions": {
+          "org.openplay": {
+            "confidence": "user-directed adaptation",
+            "referenceValue": "#282828"
+          }
+        }
+      },
+      "hover": {
+        "$type": "color",
+        "$value": "#292d2c",
+        "$description": "Open Play graphite adaptation of approved October reference; inferred visual role, not a recovered vendor token.",
+        "$extensions": {
+          "org.openplay": {
+            "confidence": "user-directed adaptation",
+            "referenceValue": "#353535"
+          }
+        }
+      },
+      "selection": {
+        "$type": "color",
+        "$value": "#314b67",
+        "$description": "Flat-fill RGB sample from REA rekordbox reference; display sampling, not vendor source token.",
+        "$extensions": {
+          "org.openplay": {
+            "confidence": "observed"
+          }
+        }
+      },
+      "active": {
+        "$type": "color",
+        "$value": "#2465c7",
+        "$description": "Open Play adaptation for readable active text.",
+        "$extensions": {
+          "org.openplay": {
+            "confidence": "inferred"
+          }
+        }
+      },
+      "divider": {
+        "$type": "color",
+        "$value": "#292c2b",
+        "$description": "Open Play graphite adaptation of approved October reference; inferred visual role, not a recovered vendor token."
+      },
+      "controlEdge": {
+        "$type": "color",
+        "$value": "#777777",
+        "$description": "Visible fader/knob boundary on the black control face."
+      }
+    },
+    "monoFont": {
+      "$type": "fontFamily",
+      "$value": [
+        "ui-monospace",
+        "SFMono-Regular",
+        "Menlo",
+        "monospace"
+      ]
+    },
+    "leading": {
+      "body": {
+        "$type": "number",
+        "$value": 1.4
+      },
+      "control": {
+        "$type": "number",
+        "$value": 1.2
+      },
+      "display": {
+        "$type": "number",
+        "$value": 1.1
+      }
+    },
+    "iconStroke": {
+      "$type": "number",
+      "$value": 2.25,
+      "$description": "Lucide 24-unit viewBox stroke: 1.5 logical px at 16px display."
+    },
+    "weight": {
+      "regular": {
+        "$type": "number",
+        "$value": 400
+      },
+      "strong": {
+        "$type": "number",
+        "$value": 600
+      },
+      "bold": {
+        "$type": "number",
+        "$value": 700
+      }
+    },
+    "controlHighlight": {
+      "$type": "color",
+      "$value": "#353a38"
+    },
+    "controlShadow": {
+      "$type": "color",
+      "$value": "#0b0d0c"
+    },
+    "capEdge": {
+      "$type": "color",
+      "$value": "#929b95"
+    },
+    "cue": {
+      "$type": "color",
+      "$value": "#f6bd4b"
+    },
+    "playing": {
+      "$type": "color",
+      "$value": "#69e87c"
     }
   },
   "semantic": {
     "background": {
       "$type": "color",
-      "$value": "{primitive.surface}",
-      "$description": "",
-      "$extensions": {
-        "org.openplay": {
-          "confidence": "inferred"
-        }
-      }
+      "$value": "{primitive.neutral.canvas}",
+      "$description": "Shared Open Play background role; reference-derived with minimal styling."
     },
     "panel": {
       "$type": "color",
-      "$value": "{primitive.surface}",
-      "$description": "",
-      "$extensions": {
-        "org.openplay": {
-          "confidence": "inferred"
-        }
-      }
+      "$value": "{primitive.neutral.panel}",
+      "$description": "Shared Open Play panel role; reference-derived with minimal styling."
     },
     "recessed": {
       "$type": "color",
@@ -481,37 +834,22 @@
     },
     "row": {
       "$type": "color",
-      "$value": "{primitive.canvas}",
-      "$description": "",
-      "$extensions": {
-        "org.openplay": {
-          "confidence": "inferred"
-        }
-      }
+      "$value": "{primitive.neutral.canvas}",
+      "$description": "Shared Open Play row role; reference-derived with minimal styling."
     },
     "rowAlternate": {
       "$type": "color",
-      "$value": "{primitive.row}",
-      "$description": "",
-      "$extensions": {
-        "org.openplay": {
-          "confidence": "inferred"
-        }
-      }
+      "$value": "{primitive.neutral.panel}",
+      "$description": "Shared Open Play rowAlternate role; reference-derived with minimal styling."
     },
     "raised": {
       "$type": "color",
-      "$value": "{primitive.raised}",
-      "$description": "",
-      "$extensions": {
-        "org.openplay": {
-          "confidence": "inferred"
-        }
-      }
+      "$value": "{primitive.neutral.hover}",
+      "$description": "Shared Open Play raised role; reference-derived with minimal styling."
     },
     "border": {
       "$type": "color",
-      "$value": "{primitive.canvas}",
+      "$value": "{primitive.neutral.divider}",
       "$description": "",
       "$extensions": {
         "org.openplay": {
@@ -561,13 +899,8 @@
     },
     "selected": {
       "$type": "color",
-      "$value": "{primitive.selected}",
-      "$description": "",
-      "$extensions": {
-        "org.openplay": {
-          "confidence": "inferred"
-        }
-      }
+      "$value": "{primitive.neutral.selection}",
+      "$description": "Shared Open Play selected role; reference-derived with minimal styling."
     },
     "focus": {
       "$type": "color",
@@ -581,7 +914,7 @@
     },
     "platter": {
       "$type": "color",
-      "$value": "{primitive.white}",
+      "$value": "{primitive.black}",
       "$description": "",
       "$extensions": {
         "org.openplay": {
@@ -591,7 +924,7 @@
     },
     "platterText": {
       "$type": "color",
-      "$value": "{primitive.black}",
+      "$value": "{primitive.text}",
       "$description": "",
       "$extensions": {
         "org.openplay": {
@@ -836,6 +1169,276 @@
       "$type": "color",
       "$value": "{primitive.raised}",
       "$description": "Independent waveform readability role; not a claim of a reference-app token."
+    },
+    "standardControlHeight": {
+      "$type": "dimension",
+      "$value": "{primitive.space.32}"
+    },
+    "iconSize": {
+      "$type": "dimension",
+      "$value": "{primitive.space.16}"
+    },
+    "sectionGap": {
+      "$type": "dimension",
+      "$value": "{primitive.space.16}"
+    },
+    "controlRadius": {
+      "$type": "dimension",
+      "$value": "{primitive.space.2}"
+    },
+    "focusWidth": {
+      "$type": "dimension",
+      "$value": "{primitive.space.2}"
+    },
+    "fieldWidth": {
+      "$type": "dimension",
+      "$value": "{primitive.space.180}"
+    },
+    "selectWidth": {
+      "$type": "dimension",
+      "$value": "{primitive.space.72}"
+    },
+    "textAreaHeight": {
+      "$type": "dimension",
+      "$value": "{primitive.space.96}"
+    },
+    "meterWidth": {
+      "$type": "dimension",
+      "$value": "{primitive.space.64}"
+    },
+    "captionSize": {
+      "$type": "dimension",
+      "$value": "{primitive.type.11}"
+    },
+    "textLineHeight": {
+      "$type": "dimension",
+      "$value": "{primitive.space.16}"
+    },
+    "sectionInset": {
+      "$type": "dimension",
+      "$value": "{primitive.space.12}"
+    },
+    "narrowDeckHeight": {
+      "$type": "dimension",
+      "$value": "{primitive.space.264}"
+    },
+    "control": {
+      "$type": "color",
+      "$value": "{primitive.neutral.control}",
+      "$description": "Shared Open Play control role; reference-derived with minimal styling."
+    },
+    "active": {
+      "$type": "color",
+      "$value": "{primitive.neutral.active}",
+      "$description": "Shared Open Play active role; reference-derived with minimal styling."
+    },
+    "chrome": {
+      "$type": "color",
+      "$value": "{primitive.neutral.canvas}",
+      "$description": "Shared Open Play chrome role; reference-derived with minimal styling."
+    },
+    "space": {
+      "0": {
+        "$type": "dimension",
+        "$value": "{primitive.space.0}"
+      },
+      "4": {
+        "$type": "dimension",
+        "$value": "{primitive.space.4}"
+      },
+      "8": {
+        "$type": "dimension",
+        "$value": "{primitive.space.8}"
+      },
+      "12": {
+        "$type": "dimension",
+        "$value": "{primitive.space.12}"
+      },
+      "16": {
+        "$type": "dimension",
+        "$value": "{primitive.space.16}"
+      },
+      "20": {
+        "$type": "dimension",
+        "$value": "{primitive.space.20}"
+      },
+      "24": {
+        "$type": "dimension",
+        "$value": "{primitive.space.24}"
+      },
+      "28": {
+        "$type": "dimension",
+        "$value": "{primitive.space.28}"
+      },
+      "32": {
+        "$type": "dimension",
+        "$value": "{primitive.space.32}"
+      },
+      "36": {
+        "$type": "dimension",
+        "$value": "{primitive.space.36}"
+      },
+      "40": {
+        "$type": "dimension",
+        "$value": "{primitive.space.40}"
+      },
+      "44": {
+        "$type": "dimension",
+        "$value": "{primitive.space.44}"
+      },
+      "48": {
+        "$type": "dimension",
+        "$value": "{primitive.space.48}"
+      },
+      "52": {
+        "$type": "dimension",
+        "$value": "{primitive.space.52}"
+      },
+      "64": {
+        "$type": "dimension",
+        "$value": "{primitive.space.64}"
+      },
+      "2": {
+        "$type": "dimension",
+        "$value": "{primitive.space.2}"
+      },
+      "18": {
+        "$type": "dimension",
+        "$value": "{primitive.space.18}"
+      },
+      "104": {
+        "$type": "dimension",
+        "$value": "{primitive.space.104}"
+      },
+      "128": {
+        "$type": "dimension",
+        "$value": "{primitive.space.128}"
+      },
+      "160": {
+        "$type": "dimension",
+        "$value": "{primitive.space.160}"
+      },
+      "280": {
+        "$type": "dimension",
+        "$value": "{primitive.space.280}"
+      },
+      "208": {
+        "$type": "dimension",
+        "$value": "{primitive.space.208}"
+      },
+      "224": {
+        "$type": "dimension",
+        "$value": "{primitive.space.224}"
+      },
+      "88": {
+        "$type": "dimension",
+        "$value": "{primitive.space.88}"
+      },
+      "14": {
+        "$type": "dimension",
+        "$value": "{primitive.space.14}"
+      },
+      "144": {
+        "$type": "dimension",
+        "$value": "{primitive.space.144}"
+      },
+      "220": {
+        "$type": "dimension",
+        "$value": "{primitive.space.220}"
+      },
+      "240": {
+        "$type": "dimension",
+        "$value": "{primitive.space.240}"
+      },
+      "108": {
+        "$type": "dimension",
+        "$value": "{primitive.space.108}"
+      }
+    },
+    "microSize": {
+      "$type": "dimension",
+      "$value": "{primitive.type.10}"
+    },
+    "controlSize": {
+      "$type": "dimension",
+      "$value": "{primitive.type.11}"
+    },
+    "trackCompactSize": {
+      "$type": "dimension",
+      "$value": "{primitive.type.14}"
+    },
+    "headingSize": {
+      "$type": "dimension",
+      "$value": "{primitive.type.20}"
+    },
+    "readingSize": {
+      "$type": "dimension",
+      "$value": "{primitive.type.14}"
+    },
+    "monoFont": {
+      "$type": "fontFamily",
+      "$value": "{primitive.monoFont}"
+    },
+    "iconStroke": {
+      "$type": "number",
+      "$value": "{primitive.iconStroke}"
+    },
+    "leading": {
+      "body": {
+        "$type": "number",
+        "$value": "{primitive.leading.body}"
+      },
+      "control": {
+        "$type": "number",
+        "$value": "{primitive.leading.control}"
+      },
+      "display": {
+        "$type": "number",
+        "$value": "{primitive.leading.display}"
+      }
+    },
+    "weight": {
+      "regular": {
+        "$type": "number",
+        "$value": "{primitive.weight.regular}"
+      },
+      "strong": {
+        "$type": "number",
+        "$value": "{primitive.weight.strong}"
+      },
+      "bold": {
+        "$type": "number",
+        "$value": "{primitive.weight.bold}"
+      }
+    },
+    "controlEdge": {
+      "$type": "color",
+      "$value": "{primitive.neutral.controlEdge}"
+    },
+    "controlHighlight": {
+      "$type": "color",
+      "$value": "{primitive.controlHighlight}"
+    },
+    "controlShadow": {
+      "$type": "color",
+      "$value": "{primitive.controlShadow}"
+    },
+    "capEdge": {
+      "$type": "color",
+      "$value": "{primitive.capEdge}"
+    },
+    "cue": {
+      "$type": "color",
+      "$value": "{primitive.cue}"
+    },
+    "playing": {
+      "$type": "color",
+      "$value": "{primitive.playing}"
+    },
+    "performanceMinWidth": {
+      "$type": "dimension",
+      "$value": "{primitive.space.1000}",
+      "$description": "Existing desktop host minimum. Below this width preserve control geometry with horizontal scrolling; not a vendor measurement."
     }
   },
   "component": {
@@ -891,6 +1494,48 @@
             "confidence": "inferred"
           }
         }
+      },
+      "narrowHeight": {
+        "$type": "dimension",
+        "$value": "{semantic.narrowDeckHeight}"
+      },
+      "overviewHeight": {
+        "$type": "dimension",
+        "$value": "{semantic.space.44}",
+        "$description": "Full-track overview well, measured from installed rekordbox PERF-2H and PERF-4V captures at 1 px per logical point; tolerance \u00b12 px."
+      },
+      "fourHorizontalOverviewHeight": {
+        "$type": "dimension",
+        "$value": "{semantic.space.32}",
+        "$description": "Four-deck horizontal full-track overview well, measured from PERF-4H at 1 px per logical point; tolerance \u00b12 px."
+      },
+      "toolsHeight": {
+        "$type": "dimension",
+        "$value": "{semantic.space.32}"
+      },
+      "toolsControlHeight": {
+        "$type": "dimension",
+        "$value": "{semantic.space.24}"
+      },
+      "compactBodyMin": {
+        "$type": "dimension",
+        "$value": "{semantic.space.108}"
+      },
+      "transportSize": {
+        "$type": "dimension",
+        "$value": "{semantic.space.36}"
+      },
+      "padHeight": {
+        "$type": "dimension",
+        "$value": "{semantic.space.20}"
+      },
+      "fourDeckBase": {
+        "$type": "dimension",
+        "$value": "{semantic.space.220}"
+      },
+      "expandedBodyMin": {
+        "$type": "dimension",
+        "$value": "{semantic.space.144}"
       }
     },
     "library": {
@@ -913,6 +1558,169 @@
             "confidence": "inferred"
           }
         }
+      }
+    },
+    "mixer": {
+      "channelWidth": {
+        "$type": "dimension",
+        "$value": "{semantic.space.52}"
+      },
+      "mirroredColumnWidth": {
+        "$type": "dimension",
+        "$value": "{semantic.space.44}"
+      },
+      "knobSize": {
+        "$type": "dimension",
+        "$value": "{semantic.space.24}"
+      },
+      "knobRow": {
+        "$type": "dimension",
+        "$value": "{semantic.space.36}"
+      },
+      "faderWidth": {
+        "$type": "dimension",
+        "$value": "{semantic.space.32}"
+      },
+      "faderMinHeight": {
+        "$type": "dimension",
+        "$value": "{semantic.space.48}"
+      },
+      "faderInlineHeight": {
+        "$type": "dimension",
+        "$value": "{semantic.space.64}"
+      },
+      "capWidth": {
+        "$type": "dimension",
+        "$value": "{semantic.space.28}",
+        "$description": "Compatibility alias; new fader anatomy consumes component.fader."
+      },
+      "capHeight": {
+        "$type": "dimension",
+        "$value": "{semantic.space.14}",
+        "$description": "Compatibility alias; new fader anatomy consumes component.fader."
+      },
+      "tickWidth": {
+        "$type": "dimension",
+        "$value": "{semantic.space.20}",
+        "$description": "Compatibility alias; new fader anatomy consumes component.fader."
+      },
+      "majorTickWidth": {
+        "$type": "dimension",
+        "$value": "{semantic.space.28}",
+        "$description": "Compatibility alias; new fader anatomy consumes component.fader."
+      },
+      "trackWidth": {
+        "$type": "dimension",
+        "$value": "{semantic.space.4}",
+        "$description": "Compatibility alias; new fader anatomy consumes component.fader."
+      },
+      "trackInset": {
+        "$type": "dimension",
+        "$value": "{semantic.space.8}",
+        "$description": "Compatibility alias; new fader anatomy consumes component.fader."
+      },
+      "gap": {
+        "$type": "dimension",
+        "$value": "{semantic.space.4}"
+      },
+      "inset": {
+        "$type": "dimension",
+        "$value": "{semantic.space.4}"
+      },
+      "channelLabelHeight": {
+        "$type": "dimension",
+        "$value": "{semantic.space.12}"
+      },
+      "cueHeight": {
+        "$type": "dimension",
+        "$value": "{semantic.space.20}"
+      },
+      "horizontalWidth": {
+        "$type": "dimension",
+        "$value": "{semantic.space.144}"
+      },
+      "twoDeckHeight": {
+        "$type": "dimension",
+        "$value": "{semantic.space.280}"
+      },
+      "twoDeckDisc": {
+        "$type": "dimension",
+        "$value": "{semantic.space.104}"
+      },
+      "verticalHeight": {
+        "$type": "dimension",
+        "$value": "{semantic.space.160}"
+      },
+      "surface": {
+        "$type": "color",
+        "$value": "{semantic.panel}"
+      },
+      "control": {
+        "$type": "color",
+        "$value": "{semantic.control}"
+      },
+      "pointer": {
+        "$type": "color",
+        "$value": "{semantic.text}"
+      },
+      "tick": {
+        "$type": "color",
+        "$value": "{semantic.textMuted}"
+      },
+      "edge": {
+        "$type": "color",
+        "$value": "{semantic.controlEdge}"
+      },
+      "track": {
+        "$type": "color",
+        "$value": "{semantic.recessed}"
+      },
+      "focus": {
+        "$type": "color",
+        "$value": "{semantic.focus}"
+      },
+      "selected": {
+        "$type": "color",
+        "$value": "{semantic.active}"
+      },
+      "mirroredWidth": {
+        "$type": "dimension",
+        "$value": "{semantic.space.208}"
+      },
+      "fourWidth": {
+        "$type": "dimension",
+        "$value": "{semantic.space.240}"
+      },
+      "compactDiscColumn": {
+        "$type": "dimension",
+        "$value": "{semantic.space.88}"
+      }
+    },
+    "fader": {
+      "capLength": {
+        "$type": "dimension",
+        "$value": "{semantic.space.28}",
+        "$description": "Shared painted cap length across channel, pitch and crossfader; Open Play adaptation of measured reference anatomy."
+      },
+      "capDepth": {
+        "$type": "dimension",
+        "$value": "{semantic.space.14}"
+      },
+      "trackWidth": {
+        "$type": "dimension",
+        "$value": "{semantic.space.4}"
+      },
+      "tickWidth": {
+        "$type": "dimension",
+        "$value": "{semantic.space.20}"
+      },
+      "majorTickWidth": {
+        "$type": "dimension",
+        "$value": "{semantic.space.28}"
+      },
+      "trackInset": {
+        "$type": "dimension",
+        "$value": "{semantic.space.8}"
       }
     }
   }

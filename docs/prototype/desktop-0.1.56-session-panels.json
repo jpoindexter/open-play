@@ -1,0 +1,47 @@
+{
+  "date": "2026-10-25",
+  "candidate": "Open Play Playback Test 0.1.56",
+  "sourceCommit": "3667d6fcfe47b82a671606e1ed914432b452c693",
+  "defect": "Prepare add/clear and manual History insertion refreshed the panel without persisting their edits; New session discarded the active list instead of retaining a prior session.",
+  "implementation": {
+    "module": "prototype/session-panels.js",
+    "lines": 39,
+    "integration": "Existing createPanels routes/destructured collaborators; saved historySessions restored/snapshotted in app.js and validated alongside existing history.",
+    "behavior": "Prepare and inserted History changes persist immediately; New session moves prior entries into a saved archive, selectable for reading/CSV export. Display local time; retain ISO timestamps in storage/CSV. Existing sharing simulation remains labeled."
+  },
+  "focusedCheck": {
+    "command": "node --test prototype/session-panels.test.mjs",
+    "before": "Extracted unchanged original handlers: RED saved Prepare [] instead of [next].",
+    "after": "GREEN1/1: actual extracted panel handlers with isolated collaborators and existing session storage/validation; Prepare add/clear, manual History insertion, archive transition/read/export/reload, invalid archive rejection and legacy-history compatibility.",
+    "limits": "Controlled panel/query collaborators and memory storage. This is not a native archive-selector/New session or real disk-full interaction."
+  },
+  "native": {
+    "method": "Trusted actual native clicks; exact56 bundle quit, process exit confirmed, same bundle reopened. No playback or recording.",
+    "history": "Existing96entries preserved. Insert selected Constant Change produced entry97/deck2/inserted/local display10/25/2026,3:59:05PM; exact visible entry survived restart.",
+    "prepare": "Initially empty. Add selected Constant Change; same button/track present after restart.",
+    "startup": "Exact0.1.56 title;0playing;16saved tracks/library preview images; current Horizontal/Compact two decks.",
+    "cleanup": "Panels closed;0playing,A/Blevels80%,crosscentre,Master\u221210dB.",
+    "notExecuted": "Native New session/archive-selection/export; no live history cleared."
+  },
+  "preservation": {
+    "closedProfileBackup": "local-evidence/desktop-builds/0.1.56/profile-before-native",
+    "recordingBeforeSwitch": "55stopped;REC00:00/Start available/Download disabled. Prior saved53capture retained.",
+    "liveData": "Retained original history; one intentional inserted entry and one prepared track added; no media deletion/change.",
+    "compatibility": "Old sessions without historySessions remain readable in56. Older app versions do not retain the new archive field on subsequent save; use current56 with archives. Closed55 profile retained for recovery."
+  },
+  "package": "docs/prototype/desktop-0.1.56-playback-package.json",
+  "inspection": "docs/prototype/desktop-0.1.56-playback-inspection.json",
+  "checks": "Existing immutable archive/host5passed0failed; syntax/diff checks. No broad suite or matrix repeated.",
+  "trello": {
+    "cards": [
+      "LIB-008",
+      "LIB-016",
+      "SYS-002"
+    ],
+    "newCards": 0,
+    "fullFeatureCompletions": 0,
+    "remaining": "Native archive read/export, complete session editing/non-file/TXT/M3U semantics, exact automatic-entry rules and fault recovery remain open.",
+    "readback": "Three descriptions/unchanged incomplete states and existing core comment read back exactly; preserved criteria/history/model guidance."
+  },
+  "next": "Return to existing core Sync/stall cards and concrete outstanding control/transport defects; preserve53listening,54fader,55count and56session evidence. Hardware remains separately deferred."
+}

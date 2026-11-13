@@ -6,6 +6,9 @@ export function createCueHolds({
   record,
   persist,
   render,
+  refresh = render,
+  refreshCues = render,
+  cancelPendingPlay = () => {},
   notify,
 }) {
   const held = new Map();
@@ -20,11 +23,12 @@ export function createCueHolds({
   async function press(key, d, hot = null, remove = false) {
     if (!d.track || held.has(key)) return;
     const position = selectedStem(d) ? engine.selectedPosition(d) : engine.position(d);
+    if (hot === null || (!remove && d.track.cues[hot])) cancelPendingPlay(d);
     if (hot !== null) {
       if (remove) {
         d.track.cues[hot] = null;
         persist();
-        render();
+        refreshCues(d.track);
         return;
       }
       if (!d.track.cues[hot]) {
@@ -33,18 +37,19 @@ export function createCueHolds({
           name: `Cue ${hot + 1}`,
         };
         persist();
-        render();
+        refreshCues(d.track);
         return;
       }
     } else if (d.playing && !selectedStem(d)) {
       engine.pause(d);
       await engine.seek(d, d.cue);
-      render();
+      refresh();
       return;
     } else if (!selectedStem(d) && Math.abs(position - d.cue) > 0.04) {
       d.cue = quantized(d, position);
+      engine.pause(d);
       await engine.seek(d, d.cue);
-      render();
+      refresh();
       return;
     }
     engine.init();
@@ -79,10 +84,16 @@ export function createCueHolds({
       record(d, { kind: "cue", cue: hot, position: target });
     }
     try {
-      await engine.seek(d, target);
-      if (!current(h)) return;
-      if ((!h.released || h.latched) && !d.playing) await engine.start(d);
-      if (!current(h)) return;
+      const seeking = engine.seek(d, target);
+      let token = engine.startTokens.get(d.index);
+      await seeking;
+      if (!current(h) || engine.startTokens.get(d.index) !== token) return;
+      if ((!h.released || h.latched) && !d.playing) {
+        const starting = engine.start(d);
+        token = engine.startTokens.get(d.index);
+        await starting;
+      }
+      if (!current(h) || engine.startTokens.get(d.index) !== token) return;
       if (h.released && !h.wasPlaying && !h.latched) {
         engine.pause(d);
         d.position = target;
@@ -107,7 +118,7 @@ export function createCueHolds({
       engine.pause(h.d);
       await engine.seek(h.d, h.target);
     } else if (h.wasPlaying) await engine.endSlip(h.d, "cue");
-    if (current(h)) render();
+    if (current(h)) refresh();
   }
   function latch(d) {
     let latched = false;

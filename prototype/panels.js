@@ -1,4 +1,9 @@
-import {validateBackup,trackMetadata} from './library-state.js';
+import {showHelp} from './help-panel.js';
+import {createPerformancePanelNavigation} from './performance-panel-navigation.js';
+import {createSessionPanels} from './session-panels.js';
+import {saveTrackDetails,refreshTrackDetails} from './track-details.js';
+import {saveBeatgrid} from './beatgrid-save.js';
+import {validateBackup,createLibraryBackup} from './library-state.js';
 import {trackGainDB} from './track-gain.js';
 import {createDeckMIDIRouter,deckMIDITargets,libraryMIDITargets,fxMIDITargets,samplerMIDITargets,herculesPlaybackMappings} from './deck-midi.js';
 import {createBeatgrid,gridBPM} from './beatgrid.js';
@@ -71,6 +76,8 @@ export function createPanels(a) {
   const monitorState=()=>({mix:percent('Cue Mix',.5),volume:percent('Cue Volume',.1),masterCue:s.settings['Master Cue']===true,splitCue:s.settings['Split Cue']===true,mono:s.settings['Output Mode']==='Mono'});
   engine.setMonitorSettings(monitorState());
   engine.setMixerSettings(mixerSettingsFromPreferences(s.settings));
+  function refreshChannelFilters(){document.documentElement.dataset.channelFilters=String(s.settings['Channel Filters']===true);}
+  refreshChannelFilters();
   function applyEQBoost(){
     const previous=engine.eqBoost,next=normalizeEQBoost(s.settings['EQ Boost']);
     for(const deck of s.decks)for(const band of eqBands)deck[band]=rescaleEQGain(deck[band],previous,next);
@@ -98,20 +105,20 @@ export function createPanels(a) {
         (v) => `<option ${v === selected ? "selected" : ""}>${esc(v)}</option>`,
       )
       .join("");
-  function bindPanel() {
-    const close = $("#close-panel");
-    if (close)
-      close.onclick = () => {
-        $("#panel").hidden = true;
-        s.panel = null;
-        $$("[data-panel]").forEach((b) => b.classList.remove("active"));
-      };
-  }
-  function open(name) {
+  const {prepare,history}=createSessionPanels({...a,head,badge,refresh});
+  const performancePanels=createPerformancePanelNavigation({state:s,$,$$,
+    render:name=>({fx,sampler,scratch,flip,video,recording,link,files,prepare,history})[name]?.(),
+    returnToSettings:scroll=>{
+      const navigation=window.openPlay?.workspaceSettings;
+      if(navigation)navigation.restore(scroll);else settings();
+    },
+  });
+  function open(name,settingsScroll=null) {
     if(name!=='video')videoAssignmentUI?.cancel('MIDI assignment exited before changing views.');
     if (
       [
         "settings",
+        "layouts",
         "audio",
         "hardware",
         "midi",
@@ -127,6 +134,7 @@ export function createPanels(a) {
       ].includes(name)
     ) {
       if (name === "settings") return settings();
+      if (name === "layouts") return settings("Layouts");
       if (name === "audio") return settings("Audio");
       if (name === "hardware") return hardware();
       if (name === "midi") return midi();
@@ -149,46 +157,9 @@ export function createPanels(a) {
         return stems();
       }
     }
-    if (s.panel === name && !$("#panel").hidden) {
-      $("#panel").hidden = true;
-      s.panel = null;
-      return;
-    }
-    s.panel = name;
-    $("#panel").hidden = false;
-    ({
-      fx,
-      sampler,
-      scratch,
-      flip,
-      video,
-      recording,
-      link,
-      files,
-      prepare,
-      history,
-    })[name]?.();
-    bindPanel();
-    $$("[data-panel]").forEach((b) =>
-      b.classList.toggle("active", b.dataset.panel === name),
-    );
+    performancePanels.open(name,settingsScroll);
   }
-  function refresh() {
-    if (s.panel)
-      ({
-        fx,
-        sampler,
-        scratch,
-        flip,
-        video,
-        recording,
-        link,
-        files,
-        prepare,
-        history,
-      })[s.panel]?.();
-    bindPanel();
-  }
+  function refresh(){performancePanels.refresh();}
   function newCrate(smart) {
     crateEditor(
       {
@@ -363,35 +334,27 @@ export function createPanels(a) {
       ]
         .map(
           ([k, l]) =>
-            `<label>${l}<input name="${k}" value="${k === "bpm" && !t[k] ? "" : esc(t[k])}" ${k === "bpm" ? 'type="number" min="1" max="999" step=".01"' : ""}></label>`,
+            `<label>${l}<input name="${k}" value="${k === "bpm" && !t[k] ? "" : esc(t[k])}" ${k === "bpm" ? 'type="number" min="1" max="999" step="any"' : ""}></label>`,
         )
         .join(
           "",
         )}<label>Rating<select name="rating">${[0, 1, 2, 3, 4, 5].map((n) => `<option value="${n}" ${t.rating === n ? "selected" : ""}>${n ? "★".repeat(n) : "Unrated"}</option>`).join("")}</select></label><label>Color<input type="color" name="color" value="${esc(t.color)}"></label><label><span>Protect beatgrid</span><input type="checkbox" name="locked" ${t.locked ? "checked" : ""}></label></div><p class="muted">Edits apply to prototype state. Original audio tags are never rewritten. Demo annotations are not measured key/BPM analysis.</p><div class="form-actions"><button type="button" id="mark-missing">${t.missing ? "Clear missing simulation" : "Simulate missing file"}</button><button type="button" id="add-prepare">Add to Prepare</button><button type="submit">Save details</button></div></form>`,
       (body) => {
-        body.querySelector("form").onsubmit = (e) => {
+        const form=body.querySelector("form"),save=form.querySelector('[type="submit"]');
+        const status=document.createElement('p');status.setAttribute('role','status');status.setAttribute('aria-live','polite');form.append(status);
+        let saving=false;
+        form.onsubmit = async (e) => {
           e.preventDefault();
-          const f = new FormData(e.target);
-          t.metadataSources ??= {};
-          if (Number(f.get("bpm")) !== t.bpm) t.metadataSources.bpm = "manual";
-          if (String(f.get("key")) !== t.key) t.metadataSources.key = "manual";
-          t.metadataRevision = (t.metadataRevision || 0) + 1;
-          for (const k of [
-            "title",
-            "artist",
-            "album",
-            "key",
-            "comment",
-            "color",
-          ])
-            t[k] = f.get(k);
-          t.bpm = Number(f.get("bpm")) || 0;
-          t.rating = Number(f.get("rating"));
-          t.locked = f.has("locked");
-          persist();
-          renderTracks();
-          renderDecks();
-          $("#modal").close();
+          if(saving)return;
+          saving=true;save.disabled=true;status.textContent='Saving details…';
+          try{
+            await saveTrackDetails(t,new FormData(form),engine,persist);
+            if(form.isConnected)$("#modal").close();
+          }catch(error){status.textContent=error.message;}
+          finally{
+            renderTracks();refreshTrackDetails(s,t,time);a.drawWaves(t);
+            saving=false;save.disabled=false;
+          }
         };
         $("#mark-missing").onclick = () => {
           t.missing = !t.missing;
@@ -418,13 +381,13 @@ export function createPanels(a) {
           c.name = f.get("name");
           c.position = Number(f.get("position"));
           persist();
-          renderDecks();
+          a.refreshCueControls(d.track);
           $("#modal").close();
         };
         $("#delete-cue").onclick = () => {
           d.track.cues[n] = null;
           persist();
-          renderDecks();
+          a.refreshCueControls(d.track);
           $("#modal").close();
         };
       },
@@ -454,28 +417,39 @@ export function createPanels(a) {
           download(
             "open-play-library.json",
             JSON.stringify(
-              {
-                format: "open-play-prototype-1",
-                crates: s.crates,
-                settings: s.settings,
-                tags: s.tracks.map(t => ({id:t.id,...trackMetadata(t)})),
-              },
+              createLibraryBackup(s),
               null,
               2,
             ),
           );
-        $("#restore-library").onchange = async (e) => {
+        const restoreInput = $("#restore-library");
+        let restoreGeneration = 0;
+        restoreInput.onchange = async (e) => {
+          const generation=++restoreGeneration;
+          const owned=()=>generation===restoreGeneration&&restoreInput.isConnected&&$("#modal")?.open&&$("#restore-library")===restoreInput;
+          const requireIdle=()=>{
+            if(s.decks.some(d=>d.playing||d.playQueued||d.processing)||s.samples?.some(bank=>bank.some(slot=>slot.playing)))
+              throw new Error("Pause decks and samples and wait for playback preparation to finish before restoring a library backup. Nothing was restored.");
+          };
           try {
-            const file=e.target.files?.[0];if(!file)return;
-            const data=validateBackup(JSON.parse(await file.text()),s.tracks);
-            if(s.decks.some(d=>d.playing||d.playQueued)||s.samples?.some(bank=>bank.some(slot=>slot.playing)))
-              throw new Error("Pause decks and samples before restoring a library backup. Nothing was restored.");
+            const file=e.target.files?.[0];if(!file||!owned())return;
+            requireIdle();
+            const text=await file.text();if(!owned())return;
+            requireIdle();
+            const data=validateBackup(JSON.parse(text),s.tracks);
             s.crates=data.crates;
             Object.assign(s.settings,data.settings);
-            for(const {id,...metadata} of data.tags){const track=trackById(id);if(track)Object.assign(track,metadata);}
+            a.setMasterOutput(s.settings['Master Output Level']??0,{save:false});
+            a.setMasterVolume(percent('Master Volume',1),{save:false});
+            for(const {id,...metadata} of data.tags){
+              const track=trackById(id);
+              if(track)Object.assign(track,metadata);
+              else if(/^local-[a-f0-9]{64}$/.test(id))s.localTags[id.slice(6)]=metadata;
+            }
             for(const track of s.tracks)a.trackGain.refresh(track);
             engine.setMonitorSettings(monitorState());
             engine.setMixerSettings(mixerSettingsFromPreferences(s.settings));
+            refreshChannelFilters();
             applyEQBoost();
             const saved=persist();
             renderCrates();
@@ -485,7 +459,7 @@ export function createPanels(a) {
               ? "Metadata restored and saved. Backups contain no audio bytes; unmatched tracks must be imported separately."
               : "Metadata restored in this session only. Saving failed; export a backup before closing.";
           } catch (err) {
-            $("#library-tool-result").textContent = err.message;
+            if(owned())$("#library-tool-result").textContent = err.message;
           }
         };
         $("#find-duplicates").onclick = () => {
@@ -536,9 +510,10 @@ export function createPanels(a) {
     dialog(`Beatgrid · ${t.title}`,
       `<p>Set the downbeat and base tempo. Each red Beat Warp Marker changes the grid tempo from its source position. Forward Smart Sync uses this map for playback, including browser keylock.</p><div class="form-grid"><label>BPM<input id="grid-bpm" type="number" min="1" max="999" step="any" value="${t.bpm||120}" ${t.locked?'disabled':''}></label><label>Downbeat offset (seconds)<input id="grid-offset" type="number" step=".001" value="${t.grid??0}" ${t.locked?'disabled':''}></label><label>Marker source time (seconds)<input id="grid-warp-time" type="number" min="0" step=".001" value="${engine.position(d).toFixed(3)}" ${t.locked?'disabled':''}></label><label>Tempo after marker (BPM)<input id="grid-warp-bpm" type="number" min="1" max="999" step="any" value="${gridBPM(t,engine.position(d))}" ${t.locked?'disabled':''}></label></div><div class="panel-controls"><button id="grid-half">½ BPM</button><button id="grid-double">×2 BPM</button><button id="grid-playhead">Use playhead</button><button id="grid-marker">Set warp marker</button><button id="grid-clear">Clear markers</button><button id="grid-save">Save grid</button></div><div id="grid-markers"></div><section aria-label="Whole-track tempo drift"><div class="panel-controls"><button id="grid-drift-check">Check whole-track drift</button><button id="grid-drift-stage" disabled>Stage correction</button></div><p id="grid-drift-status" role="status" aria-live="polite"></p><p>Pulse estimates may differ from musical kicks. Staging replaces this dialog’s draft only; Save grid applies it. Close to cancel.</p></section><p id="grid-status" role="status" aria-live="polite"></p>`,
       body=>{
+        const save=$('#grid-save'),status=$('#grid-status');let saving=false;
         const candidate=()=>({...t,bpm:Number($('#grid-bpm').value),grid:Number($('#grid-offset').value),gridWarpMarkers:draft});
         function validate(){const track=candidate();if(!Number.isFinite(track.bpm)||track.bpm<1||track.bpm>999||!Number.isFinite(track.grid))throw new Error('Enter a valid BPM and downbeat offset.');return createBeatgrid(track);}
-        function error(e){$('#grid-status').textContent=e.message;}
+        function error(e){status.textContent=e.message;}
         function render(){
           $('#grid-markers').innerHTML=`<table><thead><tr><th>Source time</th><th>Tempo from marker</th><th></th></tr></thead><tbody>${draft.map((m,n)=>`<tr><td>${time(m.time)}</td><td>${m.bpm} BPM</td><td><button data-remove-warp="${n}" ${t.locked?'disabled':''}>Remove marker ${n+1}</button></td></tr>`).join('')||'<tr><td colspan="3">No tempo changes</td></tr>'}</tbody></table>${t.gridMarkers?.length&&!clearLegacy?'<p>Legacy time-only annotations are preserved. Add tempo markers to define changes.</p>':''}`;
           body.querySelectorAll('[data-remove-warp]').forEach(button=>button.onclick=()=>{if(!t.locked){draft.splice(Number(button.dataset.removeWarp),1);render();}});
@@ -556,15 +531,15 @@ export function createPanels(a) {
           }catch(e){draft.splice(0,draft.length,...old);error(e);}
         };
         $('#grid-clear').onclick=()=>{if(!t.locked){draft.length=0;clearLegacy=true;render();$('#grid-status').textContent='Marker removal staged. Save grid to apply.';}};
-        $('#grid-save').onclick=async()=>{
+        save.onclick=async()=>{
+          if(saving)return;
           if(t.locked)return notify('Beatgrid locked.');
           try{
-            validate();const next=candidate(),before=engine.onGridWillChange?.(t);t.bpm=next.bpm;t.grid=next.grid;t.gridWarpMarkers=draft.map(m=>({...m}));if(clearLegacy)t.gridMarkers=[];
-            t.metadataSources={...t.metadataSources,bpm:'manual',grid:'manual'};t.metadataRevision=(t.metadataRevision||0)+1;
-            persist();
-            try{await engine.onGridChanged?.(t,before);}catch(e){renderDecks();renderTracks();throw new Error('Grid saved; playback realignment failed: '+e.message);}
-            renderDecks();renderTracks();$('#modal').close();
+            validate();saving=true;save.disabled=true;status.textContent='Saving grid…';
+            try{await saveBeatgrid(t,candidate(),clearLegacy,engine,persist);}catch(e){a.drawWaves(t);renderTracks();throw e;}
+            a.drawWaves(t);renderTracks();if(save.isConnected)$('#modal').close();
           }catch(e){error(e);}
+          finally{saving=false;save.disabled=false;}
         };
         mountGridDrift({body,deck:d,engine,apply:next=>{
           $('#grid-bpm').value=next.bpm;$('#grid-offset').value=next.firstBeat;
@@ -578,7 +553,7 @@ export function createPanels(a) {
     activeSettings = tab;
     const layoutOptions=$('#workspace-layout-options');
     const rows=settingsSchema[tab]||[];
-    const tabs=[...Object.keys(settingsSchema),...(layoutOptions?['Layouts']:[])];
+    const tabs=[...Object.keys(settingsSchema),...(layoutOptions?['Layouts','Advanced']:[])];
     const sharedVideo=rows.some(([name])=>videoSetupField(name));
     dialog(
       "Setup",
@@ -589,7 +564,7 @@ export function createPanels(a) {
         )
         .join(
           "",
-        )}</nav><p class="muted">Preferences persist in this browser. Hardware, DSP, provider and native-format controls are simulated unless the review report says otherwise. No account or paid unlock is required.</p>${tab==='Layouts'?layoutOptions.innerHTML:''}<div class="settings-grid">${rows
+        )}</nav><p class="muted">Preferences persist in this browser. Hardware, DSP, provider and native-format controls are simulated unless the review report says otherwise. No account or paid unlock is required.</p>${tab==='Layouts'?layoutOptions.innerHTML+'<div data-workspace-display></div>':tab==='Advanced'?'<h3>Troubleshooting</h3><div data-workspace-diagnostics></div>':''}<div class="settings-grid">${rows
         .map(([name, type, value]) => {
           if(name==='Output Device')return `<label class="setting"><span>Output Device</span><button id="choose-real-output">Output selection & channels</button></label>`;
           const field=videoSetupField(name);
@@ -607,7 +582,7 @@ export function createPanels(a) {
         })
         .join(
           "",
-        )}</div>${tab==='DJ Preferences'?'<p class="muted">Auto Gain uses measured integrated K-weighted loudness. Independent reference mapping:89→−18LUFS,92→−15LUFS. Exact Serato calibration remains unmeasured. New analysis during playback waits for the next load/trigger; reference/mode changes apply immediately. Control-click gain sets0; Alt-click restores its computed value.</p>':''}${tab==='Mixer'?'<p class="muted">EQ Boost changes the live positive EQ range to6dB or12dB for GUI and MIDI. Changing range preserves positive knob position; neutral and cuts stay unchanged. Cue Mix, Cue Volume, Master Cue, Split Cue and Mono output control real audio buses. Crossfader type, curve amount (0 slow · 100 fast), reverse, disable, A/B/Thru assignment and upfader curve also affect live audio. The midpoint Linear/upfader defaults preserve the previous mix. Curve equations are independent approximations of documented behavior; exact vendor curves are unmeasured. Cue volume10% is unity; higher values add up to12dB. Four-channel routing is applied separately in Devices. Physical headphone/master sockets and exact reference curves remain unverified.</p>':''}${sharedVideo?'<p class="muted">Recording resolution, media treatment and fade speed share the live Video controls. Fade speed runs from Slow (10s) to Fast (0.25s), using the existing independent linear duration. Match live output preserves the existing capture default. Other Video output preferences on this tab remain stored simulations.</p><p id="video-setup-status" role="status" aria-live="polite"></p>':''}<div class="form-actions">${tab === "MIDI" ? '<button id="open-mapping">Mapping editor</button>' : ""}${tab === "CD/Vinyl" ? '<button id="open-calibration">Calibration simulation</button>' : ""}${tab === "Library + Display" ? '<button id="open-providers">Provider settings</button>' : ""}${tab === "Audio" ? '<button id="open-devices">Audio output routing</button><button id="song-info">Livestream song info</button>' : ""}${tab === "FX" ? '<button id="open-fx">FX catalog & presets</button>' : ""}<button id="reset-settings">Reset this tab</button><button id="save-settings">Close</button></div>`,
+        )}</div>${tab==='DJ Preferences'?'<p class="muted">Auto Gain uses measured integrated K-weighted loudness. Independent reference mapping:89→−18LUFS,92→−15LUFS. Exact Serato calibration remains unmeasured. New analysis during playback waits for the next load/trigger; reference/mode changes apply immediately. Control-click gain sets0; Alt-click restores its computed value.</p>':''}${tab==='Mixer'?'<p class="muted">Channel Filters shows and enables the channel-effect knobs. Turning it off hides and bypasses them while keeping their positions. EQ Boost changes the live positive EQ range to6dB or12dB for GUI and MIDI. Changing range preserves positive knob position; neutral and cuts stay unchanged. Cue Mix, Cue Volume, Master Cue, Split Cue and Mono output control real audio buses. Crossfader type, curve amount (0 slow · 100 fast), reverse, disable, A/B/Thru assignment and upfader curve also affect live audio. The midpoint Linear/upfader defaults preserve the previous mix. Curve equations are independent approximations of documented behavior; exact vendor curves are unmeasured. Cue volume10% is unity; higher values add up to12dB. Four-channel routing is applied separately in Devices. Physical headphone/master sockets and exact reference curves remain unverified.</p>':''}${sharedVideo?'<p class="muted">Recording resolution, media treatment and fade speed share the live Video controls. Fade speed runs from Slow (10s) to Fast (0.25s), using the existing independent linear duration. Match live output preserves the existing capture default. Other Video output preferences on this tab remain stored simulations.</p><p id="video-setup-status" role="status" aria-live="polite"></p>':''}<div class="form-actions">${tab === "MIDI" ? '<button id="open-mapping">Mapping editor</button>' : ""}${tab === "CD/Vinyl" ? '<button id="open-calibration">Calibration simulation</button>' : ""}${tab === "Library + Display" ? '<button id="open-providers">Provider settings</button>' : ""}${tab === "Audio" ? '<button id="open-devices">Audio output routing</button><button id="song-info">Livestream song info</button>' : ""}${tab === "FX" ? '<button id="open-fx">FX catalog & presets</button>' : ""}${tab!=='Advanced'?'<button id="reset-settings">Reset this tab</button>':''}<button id="save-settings">Close</button></div>`,
       (body) => {
         body.querySelectorAll('[data-workspace-choice]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.workspaceChoice===document.body.dataset.workspace)));
         body
@@ -637,7 +612,10 @@ export function createPanels(a) {
               if(input.dataset.setting==='Master Volume')a.setMasterVolume(percent('Master Volume',1));
               if(input.dataset.setting==='EQ Boost'){applyEQBoost();renderMixer();}
               if(['Use Auto Gain','Auto Gain Reference'].includes(input.dataset.setting)){a.trackGain.refreshAll();renderDecks();}
-              if(mixerFields.has(input.dataset.setting)){engine.setMixerSettings(mixerSettingsFromPreferences(s.settings));renderMixer();}
+              if(mixerFields.has(input.dataset.setting)){
+                engine.setMixerSettings(mixerSettingsFromPreferences(s.settings));
+                if(input.dataset.setting==='Channel Filters')refreshChannelFilters();else renderMixer();
+              }
               persist();
               if (input.dataset.setting === "Sync Mode") {samplerSync.settingsChanged();renderDecks();}
               if (input.dataset.setting === "Library Text Size")
@@ -650,7 +628,8 @@ export function createPanels(a) {
             }),
         );
         $("#save-settings").onclick = () => $("#modal").close();
-        $("#reset-settings").onclick = () => {
+        const resetTab=$("#reset-settings");
+        if(resetTab)resetTab.onclick = () => {
           if(tab==='Layouts'){body.querySelector('[data-workspace-choice="rekordbox"]')?.click();return;}
           try {
             if(sharedVideo)resetVideoSetupSettings(s.video,{setRecordingQuality:value=>videoMixer.setRecordingQuality(value)});
@@ -661,11 +640,12 @@ export function createPanels(a) {
           for (const [name, type, v] of settingsSchema[tab])
             if (type !== "section"&&!videoSetupField(name)) s.settings[name] = v;
           if(tab==='DJ Preferences'){a.trackGain.refreshAll();renderDecks();}
-          if(tab==='Mixer'){a.setMasterVolume(percent('Master Volume',1));engine.setMonitorSettings(monitorState());engine.setMixerSettings(mixerSettingsFromPreferences(s.settings));applyEQBoost();renderMixer();}
+          if(tab==='Mixer'){a.setMasterVolume(percent('Master Volume',1));engine.setMonitorSettings(monitorState());engine.setMixerSettings(mixerSettingsFromPreferences(s.settings));refreshChannelFilters();applyEQBoost();renderMixer();}
           persist();
           settings(tab);
           if(sharedVideo&&s.panel==='video')refresh();
         };
+        window.openPlay?.workspaceSettings?.mount(body,tab);
         if ($("#open-mapping")) $("#open-mapping").onclick = midi;
         if ($("#open-calibration")) $("#open-calibration").onclick = hardware;
         if ($("#open-providers"))
@@ -680,8 +660,9 @@ export function createPanels(a) {
             );
         if ($("#open-fx"))
           $("#open-fx").onclick = () => {
+            const scroll=$("#modal-body").scrollTop;
             $("#modal").close();
-            open("fx");
+            open("fx",scroll);
           };
       },
     );
@@ -1475,59 +1456,6 @@ export function createPanels(a) {
         "SIMULATED: copying/moving a library entry must preserve media identity and use reversible conflict handling. Native file operations are not implemented.";
     };
   }
-  function prepare() {
-    $("#panel").innerHTML =
-      head("Prepare", "REAL SESSION LIST", true) +
-      `<div class="panel-controls"><button id="prepare-add">Add selected</button><button id="prepare-clear">Clear Prepare</button></div><div class="log">${s.prepare.map((id) => `<button data-prepare-load="${id}">${esc(trackById(id)?.title || id)}</button>`).join(" ") || "Prepare is empty. Add a library track before auditioning."}</div>`;
-    $("#prepare-add").onclick = () => {
-      if (!s.prepare.includes(s.selected)) s.prepare.push(s.selected);
-      refresh();
-    };
-    $("#prepare-clear").onclick = () => {
-      s.prepare = [];
-      refresh();
-    };
-    $$("[data-prepare-load]").forEach(
-      (b) => (b.onclick = () => load(s.focus, b.dataset.prepareLoad)),
-    );
-  }
-  function history() {
-    $("#panel").innerHTML =
-      head("History", "REAL BROWSER PLAY HISTORY", true) +
-      `<div class="panel-controls"><button id="history-export">Export CSV</button><button id="history-insert">Insert selected track</button><button id="history-clear">New session</button><button id="history-share">Live playlist</button></div><div class="log">${s.history.map((h, i) => `${i + 1}. ${esc(h.title)} · deck ${h.deck} · ${esc(h.time)} ${h.inserted ? "(inserted)" : ""}`).join("<br>") || "No tracks played in this prototype session."}</div>`;
-    $("#history-export").onclick = () => {
-      const cell = (v) => '"' + String(v).replaceAll('"', '""') + '"';
-      download(
-        "open-play-history.csv",
-        "title,deck,time\n" +
-          s.history
-            .map((h) => [h.title, h.deck, h.time].map(cell).join(","))
-            .join("\n"),
-        "text/csv",
-      );
-    };
-    $("#history-insert").onclick = () => {
-      const t = trackById(s.selected);
-      if (t)
-        s.history.push({
-          id: t.id,
-          title: t.title,
-          deck: s.focus + 1,
-          time: new Date().toISOString(),
-          inserted: true,
-        });
-      refresh();
-    };
-    $("#history-clear").onclick = () => {
-      s.history = [];
-      refresh();
-    };
-    $("#history-share").onclick = () =>
-      dialog(
-        "Live playlist",
-        `${badge("SHARING SIMULATION")}<p>Publishing requires an optional service and an explicit user action. This prototype has no backend and publishes nothing.</p><label>Session title <input value="Open Play session"></label><p class="muted">Native/service acceptance: explicit opt-in, connection recovery, correct currently playing metadata, privacy and export.</p>`,
-      );
-  }
   function outputRoutingMarkup(){
     engine.init();const value=audioOutputs.snapshot(),layout=value.routing?.layout||'stereo';
     return `<div class="device-card"><h3>Audio output · live routing</h3>${badge('REAL AUDIO BUSES · PHYSICAL SOCKETS UNVERIFIED',true)}<div class="form-grid"><label>Output device<select id="audio-output-device" aria-label="Audio output device"><option value="">System default</option>${value.outputs.filter(x=>x.deviceId!=='default').map(x=>`<option value="${esc(x.deviceId)}" ${x.deviceId===value.deviceId?'selected':''}>${esc(x.label)}</option>`).join('')}</select></label><label>Output layout<select id="audio-output-layout"><option value="stereo" ${layout==='stereo'?'selected':''}>Stereo master only</option><option value="four-channel" ${layout==='four-channel'?'selected':''}>Four channels · master + cue</option></select></label><label>Master channels<select id="audio-master-pair">${options(['1–2','3–4'],s.settings['Master Channels']||'1–2')}</select></label><label>Headphone channels<select id="audio-cue-pair">${options(['3–4','1–2'],s.settings['Headphone Channels']||'3–4')}</select></label></div><div class="panel-controls"><button id="audio-output-refresh">Refresh audio outputs</button><button id="audio-output-select" ${value.canSelect?'':'disabled'}>Use selected output</button><button id="audio-output-apply">Apply channels</button><button id="audio-monitor-settings">Cue mix & volume</button></div><p id="audio-output-status" class="muted" role="status" aria-live="polite"></p><p class="muted">Cue buttons feed the headphone bus before the channel level and crossfader. Stereo master mode never folds cue into speakers. Four-channel mode requires an explicitly selected output exposing at least4channels. Output selection returns to stereo master; apply channel pairs afterward. This does not verify a device’s physical sockets or hot-unplug safety.</p></div>`;
@@ -1674,7 +1602,7 @@ export function createPanels(a) {
     slot.name=list[next];slot.params={};slot.on=false;applyFX();
     if(s.panel==='fx')refresh();notify(`FX unit ${bank+1}: ${slot.name}.`);
   }
-  const deckMIDI=createDeckMIDIRouter({state:s,engine,jogBend:a.jogBend,actions:{...a,midiSample,scratchAction,libraryControl,selectFX},applyFX,onStatus:notify,onChange:change=>{
+  const deckMIDI=createDeckMIDIRouter({state:s,engine,jogBend:a.jogBend,actions:{...a,deckAction:(action,index,el)=>a.deckAction(action,index,el,action==='play'?{playbackOrigin:'midi'}:{}),midiSample,scratchAction,libraryControl,selectFX},applyFX,onStatus:notify,onChange:change=>{
     if(change.field && change.field!=='tempo'){
       const slider=$(`[data-mix="${change.deck}:${change.field}"]`);if(slider)slider.value=change.value;
     }
@@ -1723,7 +1651,7 @@ export function createPanels(a) {
         return;
       }
       const d = s.decks[m.target.includes("2") ? 1 : 0];
-      if (m.target.endsWith("play") && message.pressed) await a.play(d);
+      if (m.target.endsWith("play") && message.pressed) await a.play(d,{origin:'midi',event:message});
       if (m.target.endsWith("cue") && message.pressed)
         await a.deckAction("cue", d.index, {});
       if(m.target==="Master Output Level"){
@@ -1981,7 +1909,7 @@ export function createPanels(a) {
       const r = t?.analysisResult;
       if (!r)
         return `<p>${t ? esc(t.title) : "No track selected"}: no measured result yet.${t?.analysisError ? ` ${esc(t.analysisError)}` : ""}</p>`;
-      return `<strong>${esc(t.title)}</strong><dl><dt>Measured BPM</dt><dd>${r.bpm?.toFixed(2) || "Unknown"} · confidence ${percent(r.tempo?.confidence)} · library ${esc(t.bpm || "unknown")}</dd><dt>Measured key</dt><dd>${esc(r.key || "Unknown")} · confidence ${percent(r.keyEstimate?.confidence)} · library ${esc(t.key || "unknown")}</dd><dt>Level</dt><dd>RMS ${db(r.gain.rmsDbfs)} · sample peak ${db(r.gain.samplePeakDbfs)} · ${r.gain.clippedSamples} clipped samples</dd><dt>Integrated loudness</dt><dd>${Number.isFinite(r.loudness?.integratedLUFS)?`${r.loudness.integratedLUFS.toFixed(2)} LUFS · full input · K-weighted/gated`:`Unknown · ${esc(r.loudness?.reason||"re-analyze for loudness")}`}</dd><dt>Suggested gain</dt><dd>${r.gain.recommendedDb === null ? "Unknown" : `${r.gain.recommendedDb.toFixed(2)} dB`} · ungated RMS target; not LUFS or true peak</dd><dt>Pulse grid</dt><dd>${r.grid ? `${r.grid.beats.length} beats, first pulse ${r.grid.firstBeat.toFixed(3)} s; downbeat unverified` : "Unknown"}</dd><dt>Coverage</dt><dd>${r.analyzedDuration.toFixed(1)} / ${r.duration.toFixed(1)} seconds for tempo/key${r.partial ? " · partial" : ""}; whole input for level</dd></dl><p>${esc(a.analysisFieldHint(t, "bpm"))}<br>${esc(a.analysisFieldHint(t, "key"))}${t.locked ? "<br>Beatgrid is protected." : ""}</p><p class="muted">${r.warnings.map(esc).join(" · ")}</p>`;
+      return `<strong>${esc(t.title)}</strong><dl><dt>Measured BPM</dt><dd>${r.bpm?.toFixed(2) || "Unknown"} · confidence ${percent(r.tempo?.confidence)} · library ${esc(t.bpm || "unknown")}</dd><dt>Measured key</dt><dd>${esc(r.key || "Unknown")} · confidence ${percent(r.keyEstimate?.confidence)} · library ${esc(t.key || "unknown")}</dd><dt>Level</dt><dd>RMS ${db(r.gain.rmsDbfs)} · sample peak ${db(r.gain.samplePeakDbfs)} · ${r.gain.clippedSamples} clipped samples</dd><dt>Integrated loudness</dt><dd>${Number.isFinite(r.loudness?.integratedLUFS)?`${r.loudness.integratedLUFS.toFixed(2)} LUFS · full input · K-weighted/gated`:`Unknown · ${esc(r.loudness?.reason||"re-analyze for loudness")}`}</dd><dt>Suggested gain</dt><dd>${r.gain.recommendedDb === null ? "Unknown" : `${r.gain.recommendedDb.toFixed(2)} dB`} · ungated RMS target; not LUFS or true peak</dd><dt>Pulse grid</dt><dd>${r.grid ? `${(r.grid.beats?.length??r.grid.beatCount)} beats, first pulse ${r.grid.firstBeat.toFixed(3)} s; downbeat unverified` : "Unknown"}</dd><dt>Coverage</dt><dd>${r.analyzedDuration.toFixed(1)} / ${r.duration.toFixed(1)} seconds for tempo/key${r.partial ? " · partial" : ""}; whole input for level</dd></dl><p>${esc(a.analysisFieldHint(t, "bpm"))}<br>${esc(a.analysisFieldHint(t, "key"))}${t.locked ? "<br>Beatgrid is protected." : ""}</p><p class="muted">${r.warnings.map(esc).join(" · ")}</p>`;
     };
     dialog(
       "Analysis and caches",
@@ -2074,28 +2002,14 @@ export function createPanels(a) {
   }
 
   function help() {
-    dialog(
-      "Help & keyboard controls",
-      `<div class="help-grid">${helpKeys.map(([name, key]) => `<div><span>${name}</span><kbd>${key}</kbd></div>`).join("")}</div><div class="note-box">Temporary deck Cue: while paused, press to set the cue at the current position; hold to audition, release to return paused. Hold Cue and press Play to continue after release. Mixer headphone CUE selects a deck for the separate headphone bus; configure its output in Devices. Computer stereo alone does not provide independent headphone monitoring.</div><div class="note-box">Shortcuts listed here are implemented prototype bindings. The full reference shortcut inventory includes unresolved right-deck loop-key conflicts and Play expansion differences. Browser-reserved shortcuts and Escape behavior differ from the native app.</div><div class="panel-controls"><button id="help-coverage">Coverage report</button><button id="help-stems">Stems preparation</button><button id="help-system">Diagnostics / services</button><label>Search official help <input id="help-search"></label><button id="help-go">Search</button></div><p class="muted">Control descriptions use native browser tooltips. Context menu / right-click a track for metadata and missing-file fixtures; right-click a cue to rename or edit it.</p>`,
-      () => {
-        $("#help-coverage").onclick = coverage;
-        $("#help-stems").onclick = stems;
-        $("#help-system").onclick = system;
-        $("#help-go").onclick = () =>
-          window.open(
-            "https://support.serato.com/hc/en-us/search?query=" +
-              encodeURIComponent($("#help-search").value),
-            "_blank",
-            "noopener",
-          );
-      },
-    );
+    showHelp({dialog,$,helpKeys,coverage,stems,system});
   }
+
   const routeNotes = {
     library:
       "Real local import, selection, search, sort, metadata fixtures, crates, multi-rule smart crates, nested membership, collapse, favorites and backups. Native tags, filesystem import and interoperability remain gaps.",
     history:
-      "Real in-session play history, Prepare and CSV export. Live publication, persistent session editing and exact reference rules remain gaps.",
+      "Saved play history, archived sessions, Prepare and CSV export. Non-file editing, TXT/M3U, live publication and exact reference rules remain gaps.",
     analysis:
       "Real local PCM BPM/key/level and initial constant-grid analysis with confidence, cancellation and protected metadata. Real-music accuracy, variable grids and reference equivalence remain gaps.",
     decks:
@@ -2124,10 +2038,11 @@ export function createPanels(a) {
       "Six provider-specific interactive access/playlist/cache/failure fixtures. No provider credentials, catalog or streaming integration.",
     settings:
       "Eight settings tabs with persisted values and conditional actions. Some settings affect prototype behavior; native processing controls are explicit fixtures. Exact layout/conditional-state parity remains open.",
-    help: "Implemented shortcut list, contextual titles, official search and diagnostics. Native accessibility/screen-reader equivalence untested.",
+    help: "Implemented shortcut list, contextual titles, Open Play manual/search and diagnostics. Native accessibility/screen-reader equivalence untested.",
     system:
       "Research, provenance and lifecycle diagnostics. Local Electron0.1.3 test build and scoped hardware evidence exist separately; this page does not attest the running package. Installer/update/rollback, long-session and full native/reference acceptance remain open.",
   };
+
   function coverage() {
     dialog(
       "Coverage & evidence",
@@ -2190,7 +2105,7 @@ export function createPanels(a) {
   function system() {
     dialog(
       "System, services & evidence",
-      `<div class="device-card"><h3>Open Play · browser review candidate</h3><p>Independent HTML/CSS/JavaScript implementation. A local Electron test build exists; this browser page does not identify or verify a running desktop package. Core playback needs no hosted backend, account, telemetry or artificial local feature paywall. Optional local stems require the documented model/environment setup.</p><div class="panel-controls"><button id="diagnostics-export">Export diagnostics</button><button id="diagnostics-offline">Check local state</button><button id="system-backup">Library backup</button></div><pre id="diagnostic-result" class="log">Audio context: ${engine.ctx?.state || "not created"}\nBrowser sample rate: ${engine.ctx?.sampleRate || "unknown"}\nDecoded buffers: ${engine.buffers.size}\nPrototype persistence: ${s.sessionSaved ? "saved this session" : "not yet saved this session"}\nDesktop evidence: version0.1.3 historical test checkpoint\nHardware evidence: Hercules browser knob in0.1.1; cue/master isolation in0.1.3 user-confirmed\nCurrent hardware connection and full parity: not established by this panel</pre></div><div class="note-box">Installer/update/rollback, full crash recovery, long-session stability, multi-device drift, extension isolation and reproducible native builds remain acceptance work. Imported audio is saved locally when browser storage succeeds; failures remain session-only and are reported in Files. App quit/reopen/playback acceptance is still pending for this source revision. No source Serato binaries, artwork, models or code are shipped here.</div><p><a href="../FULL_BUILD_PLAN.md" target="_blank">Build plan</a> · <a href="../docs/research/SOURCE_CONFLICTS.md" target="_blank">Source conflicts</a> · <a href="../docs/research/HISTORICAL_GATING.md" target="_blank">Historical gating</a> · <a href="../docs/decisions/001-foundation-and-models.md" target="_blank">Foundation / model decision</a></p>`,
+      `<div class="device-card"><h3>Open Play · browser review candidate</h3><p>Independent HTML/CSS/JavaScript implementation. A local Electron test build exists; this browser page does not identify or verify a running desktop package. Core playback needs no hosted backend, account, telemetry or artificial local feature paywall. Optional local stems require the documented model/environment setup.</p><div class="panel-controls"><button id="diagnostics-export">Export diagnostics</button><button id="diagnostics-offline">Check local state</button><button id="system-backup">Library backup</button></div><pre id="diagnostic-result" class="log">Audio context: ${engine.ctx?.state || "not created"}\nBrowser sample rate: ${engine.ctx?.sampleRate || "unknown"}\nDecoded buffers: ${engine.buffers.size}\nPrototype persistence: ${s.sessionSaved ? "saved this session" : "not yet saved this session"}\nDesktop evidence: version0.1.3 historical test checkpoint\nHardware evidence: Hercules browser knob in0.1.1; cue/master isolation in0.1.3 user-confirmed\nCurrent hardware connection and full parity: not established by this panel\nRecent Play commands (last 32, memory only; input flags alone do not identify the actor):\n${esc(JSON.stringify(window.openPlay?.exportDiagnostics?.().playbackIntents || [],null,2))}</pre></div><div class="note-box">Installer/update/rollback, full crash recovery, long-session stability, multi-device drift, extension isolation and reproducible native builds remain acceptance work. Imported audio is saved locally when browser storage succeeds; failures remain session-only and are reported in Files. App quit/reopen/playback acceptance is still pending for this source revision. No source Serato binaries, artwork, models or code are shipped here.</div><p><a href="../FULL_BUILD_PLAN.md" target="_blank">Build plan</a> · <a href="../docs/research/SOURCE_CONFLICTS.md" target="_blank">Source conflicts</a> · <a href="../docs/research/HISTORICAL_GATING.md" target="_blank">Historical gating</a> · <a href="../docs/decisions/001-foundation-and-models.md" target="_blank">Foundation / model decision</a></p>`,
       () => {
         $("#diagnostics-export").onclick = () =>
           download(

@@ -1,0 +1,197 @@
+{
+  "date": "2026-10-26",
+  "base": "11672a6 (analysis path in immutable staged0.1.60 source8bd3d86)",
+  "scope": "Current HTML actual worker completion progress event and original Analysis settings handlers; four playing real tracks, physical mute. Controlled RED separately uses actual enqueueAnalysis/AudioEngine/Smart Sync with held resume and stub result.",
+  "controlled": {
+    "red": "Old Sync resolves committed after BPM120\u2192100/grid0\u21920.1 replacement; expected AbortError",
+    "green": "Old Sync canceled; original voice/master/rate retained; fresh rate1.26 against126BPM",
+    "targetedCases": 3,
+    "affectedAnalysisChecks": 21,
+    "failures": 0
+  },
+  "worker": {
+    "status": "Cancellation checked; stopped",
+    "cancellation": {
+      "action": "Replace analyzed grid",
+      "before": [
+        {
+          "playing": true,
+          "processing": false,
+          "queued": false,
+          "sync": true,
+          "rate": 1,
+          "audible": 1
+        },
+        {
+          "playing": true,
+          "processing": false,
+          "queued": false,
+          "sync": false,
+          "rate": 1,
+          "audible": 1
+        },
+        {
+          "playing": true,
+          "processing": false,
+          "queued": false,
+          "sync": false,
+          "rate": 1,
+          "audible": 1
+        },
+        {
+          "playing": true,
+          "processing": false,
+          "queued": false,
+          "sync": false,
+          "rate": 1,
+          "audible": 1
+        }
+      ],
+      "target": 0.99009900990099,
+      "tracks": [
+        "Disaffected",
+        "Fort Romeau - Lovin' U [REKIDS297] - 003 - Fort Romeau - Breathe Trip Mix [REKIDS297]",
+        "DJ W!LD - Sweet & Spicy EP (The W Label) - 003 - DJ W!LD - Call Me Later (W Label)",
+        "Mike Shannon - Off World Synthetics EP [REKIDS279] - 003 - Mike Shannon - Only Noodles [REKIDS279]"
+      ],
+      "pending": {
+        "state": {
+          "playing": true,
+          "processing": true,
+          "queued": false,
+          "sync": false,
+          "rate": 0.99009900990099,
+          "audible": 1
+        },
+        "transforms": 1,
+        "startToken": 7
+      },
+      "grid": {
+        "before": 128.27,
+        "saved": 127
+      },
+      "after": [
+        {
+          "playing": true,
+          "processing": false,
+          "queued": false,
+          "sync": true,
+          "rate": 1,
+          "audible": 1
+        },
+        {
+          "playing": true,
+          "processing": false,
+          "queued": false,
+          "sync": false,
+          "rate": 1,
+          "audible": 1
+        },
+        {
+          "playing": true,
+          "processing": false,
+          "queued": false,
+          "sync": false,
+          "rate": 1,
+          "audible": 1
+        },
+        {
+          "playing": true,
+          "processing": false,
+          "queued": false,
+          "sync": false,
+          "rate": 1,
+          "audible": 1
+        }
+      ],
+      "voicesRetained": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "nodesRetained": 233,
+      "pendingObserved": true,
+      "retained": 233,
+      "physicalMuted": true,
+      "freshSync": {
+        "scheduled": {
+          "playing": true,
+          "processing": false,
+          "queued": false,
+          "sync": true,
+          "rate": 1,
+          "audible": 1
+        },
+        "audioTime": 110.57922902494332,
+        "untilAudio": 110.59249433106577,
+        "bpm": 127,
+        "expected": 1,
+        "state": {
+          "playing": true,
+          "processing": false,
+          "queued": false,
+          "sync": true,
+          "rate": 1,
+          "audible": 1
+        },
+        "masterRetained": true
+      },
+      "passed": true,
+      "stopped": true,
+      "sessionUnchanged": true
+    },
+    "errors": [],
+    "sourceHashes": {
+      "app.js": "90053cf75cf016a7beb1ee8c6ee8d590e3cc805797738b6512a6a09f8dacec40",
+      "panels.js": "a6b9ef31fd67bf4b868ce0e161c198f392a3172bbaa73798af3242ff50f9dce0",
+      "track-details.js": "50590fb8a6aff23a87baa4ab168b0c7daec6c264e927d89c6cd5197b6a9fadfa",
+      "engine.js": "f4c4f9ea56e10f8cb3c9140295c9398e939971e42ed0c51b0d94addf2562fea1",
+      "smart-sync.js": "727d15fe411fca43be083ed7f0572f2d7ccb09fdba1bab0c6b3ccb5499359cdd",
+      "source-waveform.js": "2c21bf9bf88b1f9c629a9f0c332a57c1624d62412124e076c1728288bfc7e033",
+      "detail-waveform.js": "9b00ff3dea9e60ca7f59474067a7c7760c3d9797559e789721bd69dd10a478ea",
+      "four-deck-soak-harness.js": "4fd73fd624a882f6d77ad1e9c9110f94a7b297fa2495c0cb62e1414e69560ca0",
+      "four-deck-soak-worklet.js": "13d043b3c76fbe87e5a4f51cca92b050b235bb5036ef442746bdcefd3425e202",
+      "four-deck-trace.js": "f654c2bd9d886ae96d3a0474aade36d1597733a4f2fbfcd20e704dbb3fea3d6b",
+      "library-waveform-preview.js": "6b824d42b6953cbb1ffef7fd0faab93ba9949f620f8806f658faa31ba6c137c8",
+      "transport-presentation.js": "de8edb79c5430daf7e50ae75bbd3418452e3a0fa543479be13ad466388285d61",
+      "library-rows.js": "423ee7addf78d09c68b29ae899f163dda6a46d47114c326a78166712804b2847",
+      "four-deck-analysis-check.js": "8698797e77cfcef2104c21855766ba9ba5eaf611961184680d9d3f4fc5a9e3a3",
+      "analysis.js": "8cc165de4c77f70ce55bb4146b80f6ad6cc5671815b8fc2beb45d23fe18718ad",
+      "analysis-worker.js": "18043ae5c789285252ffae7e2bad6213367af7bcbec0e44e101b91637a3ef514",
+      "track-gain.js": "f390adbddd4e317444294a92d9e5a82b89d6abaa591578a158a00308628d5bfa",
+      "analysis-presentation.js": "f075f342343738ca753d830b9b89a071e51f90e74c203a1a015bfcf174107bca",
+      "analysis-input.js": "0e88089e891c3ab57c261eac27ce981de3c11999e00ea38416be7e560fd7f4e3",
+      "four-deck-overlap-check.js": "e03865cb68ffaf2779ba681fa67f26c155d9ea9924640895530fca403987fc01"
+    },
+    "controls": {
+      "analysisStatus": "Finished: 1 measured, 0 failed. Existing/manual metadata and locked grids preserved unless replacement was requested.",
+      "eq": 12,
+      "filters": 4,
+      "levels": 4,
+      "modalOpen": false,
+      "pads": 32,
+      "play": 4,
+      "previews": 3,
+      "rows": 16,
+      "tempo": 4
+    }
+  },
+  "identities": {
+    "originals": 8,
+    "sha256BytesMtimeUnchanged": true,
+    "runtimeSourceHashes": 20,
+    "allMatch": true
+  },
+  "excludedAttempt": "First worker diagnostic used non-exported app.enqueueAnalysis and failed before worker replacement. Cleanup stopped/muted/session unchanged; retained privately, not regraded. Corrected existing-control workflow repeated once.",
+  "limits": [
+    "Not independent PCM continuity, listening or pop-free proof",
+    "No measured whole-session frame-time gain",
+    "No exact-native pending/held-gesture or hardware acceptance",
+    "Staged0.1.60 and running0.1.59 remain unchanged; no new package or launch"
+  ],
+  "trello": {
+    "url": "https://trello.com/c/ATvPhflV",
+    "complete": false
+  }
+}

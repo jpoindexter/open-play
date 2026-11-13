@@ -1,8 +1,24 @@
 # Open Play HTML review candidate
 
-Active core view: [rekordbox layout preview](http://127.0.0.1:8848/prototype/layout-preview.html). Keep an existing server/session running; do not restart or reload it for board administration. If a server is needed, run `python3 scripts/serve_prototype.py --port 8848` from the repository root and open `/prototype/layout-preview.html`.
+## Current core status —30 October2026
 
-Core playback needs a modern browser with Web Audio and no package install or hosted service. Recording uses MediaRecorder. Optional stems/model services are outside the current core workflow. See [the audit and implementation sequence](../docs/prototype/CORE_DJ_AUDIT_2026-10-20.md) and [current status](../docs/delivery/CORE_DJ_FIRST.md). The 21 October audit reconciliation is historical evidence. The latest pass reproduced and repaired a playing key-lock timing gap, then completed a 20-minute four-deck session with eight different real tracks and 15 replacements. Authorized local desktop 0.1.44 opens stopped with the existing 16-track library. Ordinary Sync guards, all controls/layouts and previews remain. See [executed measurements and open pop/lag limits](../docs/prototype/CORE_FOUR_DECK_SOAK_2026-10-23.md). Rare frame stalls (up to 329 ms), broader pops, human listening and hardware acceptance remain open. Prior Cue/EQ/Autoplay, restore/startup/save and cache safety remain. Five existing Trello summaries read back 23 October; browser audio, native startup and human evidence stay separate. [Decoded cache resource measurements](../docs/prototype/CORE_DECODED_CACHE_2026-10-23.md). [Current waveform/native evidence and remaining Sync gates](../docs/prototype/WAVEFORM_READABILITY_035.md).
+Private desktop **0.1.124** is current/default, source1306423. Public grid publication revokes related pending Simple alignment before metadata changes; delayed Loop Roll release checks its own transport token before follow-up Seek so a newer saved-loop recall wins. Two focused source RED→GREEN checks pass. Package5/5/private seal and paused native recovery observed:30.097/34.086s,16tracks/12visible previews/core controls. Relevant changed native races, PCM and listening remain pending. Goal active, audio muted. Genericpop/stall/startup60 and hardware gates remain OPEN. [Delivery and limits](../docs/prototype/CORE_GRID_ROLL_RELEASE_124_NATIVE_2026-10-30.json). No full-core/public-beta claim.
+
+## Historical0.1.94 checkpoint
+
+**Current/default0.1.94**, sourceaa07a04: both CORE-FIX-44queue layers included, archive/source/controlled-host5/5. Actual native settled startup restores Constant Change/DJ W!LD paused50.716/62.715s,16tracks,2Play/tempo,6EQ and12materialized library previews; master−10.04344/silent UI meter.256-file120945306Bclosed92profile hash/mtime revalidated before launch. No main Play/Sync/REC Start or profile restore. [Native delivery and limits](../docs/prototype/DESKTOP_CORE_094_2026-10-28.md).
+
+Current/playback/named starters94syntax checked; exact bundle launch observed separately. Inactive92hash/version/process verified and retired with its versioned starter; only94bundle retained. Mac locked again after the settled capture; final native read blocked. Keep current native failure/playing/listening/pop/stall/physical gates OPEN. Reuse prior53manual/jog/EQ/Cue/stop evidence. [Ordered requirement audit](../docs/prototype/CORE_DJ_REENTRY_2026-10-28.md).
+
+The separate blue Oxide study remains preview-only; planned Colors settings do not replace the current workspace. Readable deck/library energy envelopes from92and all controls/layouts remain in94; large detail rendering unchanged. No full-core/public-beta/parity claim.
+
+CORE-FIX-41: actual blank-BPM save with tempo markers wrote0and blocked reload. Two preflight lines now preserve track/store, keep the editor/inline warning and reload healthy; source/browser evidence and1focused regression executed. CORE-FIX-40's prior3360→0idle Sync writes and actual states retain scope; one affected pending-OFF fixture is repaired with current collaborators. No broad tests or DSP rewrite. These narrow repairs do not close intermittent Sync pops or long-session stalls. [Executed data save/reload](../docs/prototype/TRACK_DETAILS_GRID_VALIDITY_2026-10-28.md).
+
+Prior84four-real-track loop resize/exit/Sync follow-through retains its bounded source/runtime scope: other three voices/rates,241tracked controls/rows/previews and focus retained, whole6s first-master-channel PCM finite/nonzero, observed maximum tick8.6ms/frame interval34.2ms. No audible, stereo, native or long-session acceptance. [Evidence](../docs/prototype/FOUR_DECK_LOOP_TRANSITIONS_2026-10-28.md).
+
+Trello194cards/17complete after44, ANA-FIX-09 and planned UI-COLOR-01and existing parent/current-summary readback. Broader core/Sync-pop/stall/listening/hardware/release cards remain OPEN; original criteria/history/model guidance retained. Prior53manual/jog/EQ/Cue/stop scope retained. Limited public beta accelerated target3–5working days, safer budget5–10, conditional on current listening/data/install and signing/distribution gates. No public release/full-core/parity claim.
+
+For HTML review, reuse the existing server/session. If none is running, `python3 scripts/serve_prototype.py --port 8848` serves `/prototype/workspace-preview.html` from the repository root. Do not reload a live session for board administration.
 
 This is an independently written HTML/CSS/JavaScript review prototype. **It does
 not establish 1:1 Serato parity.** All 110 inventoried feature groups have a
@@ -42,7 +58,7 @@ stops browser audio. Control-C in the launcher terminal stops the server.
 - [Coverage manifest](../docs/prototype/coverage-manifest.json)
 - [Independent Claude audit](../handoffs/codex-to-claude-completeness-audit.md)
 
-Historical local desktop approvals are retained in `../docs/approvals.md`. Current work is HTML only; no desktop build/integration or public release. Source checks and historical native evidence do not establish current musical/hardware or full vendor parity.
+Historical local desktop approvals are retained in `../docs/approvals.md`. Current work includes the authorized private local desktop candidate; no public release or full native acceptance. Source checks and historical native evidence do not establish current musical/hardware or full vendor parity.
 
 ## Functional closure pass
 

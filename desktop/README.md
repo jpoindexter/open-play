@@ -1,8 +1,12 @@
 # Open Play desktop test
 
+**Current private package:0.1.58/source2ba58bb.** Actual native startup shows the shared header,16saved tracks and16waveform previews; two demo decks remain stopped. Native four-real-track quit/reopen recovery is pending because pointer/keyboard input is unreliable. Use the versioned58bundle while it is open; do not launch another playback-test version over it. The Current launcher still targets57. [Current delivery and limits](../docs/prototype/TRY_CURRENT_DESKTOP.md). Newer repository UI work is not in this immutable package; no public beta published.
+
+## Historical host and0.1.37reference
+
 [Current core audit and execution order](../docs/prototype/CORE_DJ_AUDIT_2026-10-21.md). Current playback packaging uses `desktop/package-playback.mjs` and immutable versioned output; generic `npm start` / `npm run package` below target the older host. Do not overwrite an existing candidate or substitute a historical build for current acceptance. No new package was built in this audit.
 
-**Current local core test:0.1.37 / sourcece5c124.** Use `Start Open Play Current Test.command` or the versioned0.1.37launcher. Actual2/4H/V Compact waveform rulers, real-track Sync states and retained controls/previews were observed; Jason accepted the latest pair as aligned/clean and easier to follow; remaining manual/EQ/Cue and reliability gates stay open. [Corpus/native evidence and acceptance gaps](../docs/prototype/WAVEFORM_READABILITY_035.md). Earlier notes are historical. Package checks do not establish listening or device quality.
+**Historical local core test:0.1.37 / sourcece5c124.** Use `Start Open Play Current Test.command` or the versioned0.1.37launcher. Actual2/4H/V Compact waveform rulers, real-track Sync states and retained controls/previews were observed; Jason accepted the latest pair as aligned/clean and easier to follow; remaining manual/EQ/Cue and reliability gates stay open. [Corpus/native evidence and acceptance gaps](../docs/prototype/WAVEFORM_READABILITY_035.md). Earlier notes are historical. Package checks do not establish listening or device quality.
 
 The default **Start Open Play Desktop.command** opens local test **0.1.6**. The separate **Start Open Play Desktop 0.1.5.command** preserves the prior persistence/keylock build; earlier0.1.3/0.1.1 launchers remain available. Quit the running test before switching versions. This is the already-approved Electron wrapper around the existing browser implementation, with no native DSP rewrite or public release.
 

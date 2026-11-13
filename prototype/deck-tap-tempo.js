@@ -14,7 +14,8 @@ export function createDeckTapTempo({engine,persist=()=>{},render=()=>{},notify=(
   const bpm=Math.round(Math.max(1,Math.min(999,result.setting.bpm/rate))*100)/100;
   const before=engine.onGridWillChange?.(track);track.bpm=bpm;
   track.metadataSources={...track.metadataSources,bpm:'manual'};track.metadataRevision=(track.metadataRevision||0)+1;
-  persist();await engine.onGridChanged?.(track,before);render();notify(`Deck ${d.index+1} tapped BPM ${bpm.toFixed(2)} · playback-rate compensated.`);
+  persist();try{await engine.onGridChanged?.(track,before);}finally{render(track);}
+  notify(`Deck ${d.index+1} tapped BPM ${bpm.toFixed(2)} · playback-rate compensated.`);
   return{...result,sourceBPM:bpm,rate};
  }
  return{tap,diagnostics:index=>{const s=sessions.get(index);return s?{...s.clock.diagnostics(0),rate:s.rate,track:s.track.id}:null;}};

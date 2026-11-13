@@ -1,0 +1,79 @@
+{
+  "date": "2026-10-28",
+  "baselineTrackDetailsCommit": "522a5eaa7bc74cce47b25b4e44cf0496d161f21c",
+  "baselineTrackDetailsSHA256": "4705998c8f1f3c25ffed8ac2aa34f0a5f1072cda5d3ebf47b6bcdf721ca82e8d",
+  "baselineScope": "Original tracked Track Details module served through one owned fixed route, within current workspace dependencies. Not an entire old repository checkout.",
+  "baseline": {
+    "controlledValidWarpSetup": true,
+    "attempted": {
+      "bpm": 0,
+      "warpMarkers": [
+        {
+          "time": 10,
+          "bpm": 121
+        }
+      ],
+      "dialogOpen": false,
+      "inlineStatus": "",
+      "typedBPM": "",
+      "saveReenabled": true,
+      "storedUnchanged": false,
+      "storedBPM": 0,
+      "physicalMuted": true
+    },
+    "reload": {
+      "savedRecordUnchanged": true,
+      "recoveryBlocked": true,
+      "recoveryText": "Saved session could not be loaded. Invalid library data: warp grid. Nothing was restored. Automatic saving is paused to protect the original. Stored audio is unchanged. Export the original data, then restore a valid backup in Library tools or save this recovery session.",
+      "bpm": 124,
+      "playing": false,
+      "physicalMuted": true
+    },
+    "playControls": 2,
+    "previews": 0
+  },
+  "repaired": {
+    "controlledValidWarpSetup": true,
+    "attempted": {
+      "bpm": 120,
+      "warpMarkers": [
+        {
+          "time": 10,
+          "bpm": 121
+        }
+      ],
+      "dialogOpen": true,
+      "inlineStatus": "Invalid library data: warp grid. Nothing was restored.",
+      "typedBPM": "",
+      "saveReenabled": true,
+      "storedUnchanged": true,
+      "storedBPM": 120,
+      "physicalMuted": true
+    },
+    "reload": {
+      "savedRecordUnchanged": true,
+      "recoveryBlocked": false,
+      "recoveryText": "",
+      "bpm": 120,
+      "warpMarkers": [
+        {
+          "time": 10,
+          "bpm": 121
+        }
+      ],
+      "playing": false,
+      "physicalMuted": true
+    },
+    "playControls": 2,
+    "previews": 0
+  },
+  "settledRepairedPreviewImages": 7,
+  "focusedRegression": {
+    "file": "prototype/track-details-grid-validity.test.mjs",
+    "before": "Missing expected rejection",
+    "after": "1/1 pass; invalid warped clear preserves track/storage/hooks; unwarped clear remains compatible"
+  },
+  "repairedTrackDetailsSHA256": "41843f7953e13f7c738d0253073f621c215e1242ddedae206ef3210ed4ad944b",
+  "scope": "Actual form save and fresh isolated browser reload with controlled valid warp metadata, generated audio and physical mute. No real media used, native-profile change, current native save interaction, crash/fault migration breadth, listening or hardware proof.",
+  "cleanup": "Owned frame/storage/tab/server stopped/cleared; temporary sources retained byte-identically then removed. Current86and user profile unchanged."
+}

@@ -1,0 +1,111 @@
+{
+  "date": "2026-10-30",
+  "native131": {
+    "completed": false,
+    "failure": "Ready library previews changed",
+    "cleanup": {
+      "allStopped": true,
+      "physicalMuted": true,
+      "methodsRestored": true
+    },
+    "sourceStable": true,
+    "render": {
+      "frames": 217471,
+      "sampleRate": 48000,
+      "finite": true,
+      "peak": 0.02027040906250477,
+      "window": {
+        "start": 4,
+        "end": 8.530645833333333
+      }
+    },
+    "scope": "Packaged generated-only four-deck workspace, real AudioContext and cold pitch-render Worker. First completed render result is held before engine continuation; queued Auto Loop or Beat Jump yields to newer saved-loop recall through normal mode/pad handlers. Not natural scheduling probability, master PCM, music/listening, controller or general pop/stall proof."
+  },
+  "browserDiagnosis": {
+    "completed": false,
+    "sameFailure": "Ready library previews changed",
+    "readyBefore": 8,
+    "readyAfter": 8,
+    "changedIDs": [
+      "demo-1"
+    ],
+    "unchangedSources": 7,
+    "fixtureTrack": {
+      "id": "demo-1",
+      "bpm": 120,
+      "seed": 1003,
+      "freq": 61.735
+    },
+    "oldPreviewKey": "demo-1:1003:126:61.735",
+    "updatedPreviewKey": "demo-1:1003:120:61.735",
+    "cleanup": {
+      "allStopped": true,
+      "physicalMuted": true,
+      "methodsRestored": true
+    }
+  },
+  "repair": "Checker refreshes setup-modified BPM using two ordinary sort clicks to preserve original row order, waits for its matching ready preview, then freezes the strict retention baseline. All ready sources remain required afterward. Product transport/DSP/preview code unchanged.",
+  "native132": {
+    "completed": false,
+    "failure": "Prepared track preview timed out",
+    "cleanup": {
+      "allStopped": true,
+      "physicalMuted": true,
+      "methodsRestored": true
+    },
+    "cause": "One sort refresh moved the edited row offscreen; its intentionally lazy thumbnail was not prepared. No transport overlap began."
+  },
+  "sourceChecks": "Checker and packager syntax/diff checked. No broad source/DSP suite rerun. The actual native checker is the focused assert-based check.",
+  "limits": [
+    "Native131 overall FAILED and is retained",
+    "Transport assertions were reached before the preview assertion; no complete native pass attributed to131",
+    "Browser tracing result is not native evidence",
+    "No master PCM, music listening, physical controller or general pop/stall resolution"
+  ],
+  "rawEvidence": {
+    "failed-native-132.png": "6ecd04598ab4e5feab25f7df146be74221a8c812909995be0777b660a27fbbf8",
+    "browser-preview-trace.json": "bd6e81f30563e9e6bba3c2312313ca74d8b8e5221d54a85532fab7da82a8b719",
+    "main-after.txt": "b54fb1300898f9d81d0ff5039a2724e6410f680694992b4461bdca6b2ab1ae1a",
+    "browser-corrected-setup.json": "4206cfb10f71a3ca707bd4d2f266d15993cdc30c363abac603bc12f07558bf5c",
+    "failed-native.png": "c2e46caa7e6836354e61b2290972925b1a0d6af54f9ef3e3fd497d16347cb959",
+    "failed-ax.txt": "aba19940f879d6ad375d5353a86d91d17252b4dd3cde14b8d1289e018395ad01",
+    "failed-native.json": "e15de3bbca9a1f0f7b57008b6d06ebdbc011755cb6223d023dba1f008fb81b65",
+    "profile-recovery.json": "2fd9fc981e10be403b87831f9b89064026ef330393976dc140b239439c598626",
+    "failed-132-ax.txt": "5a1ef7d7d43aaef9ae81e1ce5d3a586fc34bdd989b1ed29b99e7a1e13a342812",
+    "failed-native-132.json": "a568c3ae6f5aee192b6f8b155eecbb5cd9e69db02e6aa042fc9a830530867052",
+    "main-132-before.txt": "4a4710bed285bc538001ac3e856da89eb4fb5698785da3e1417cb00f4a512440"
+  },
+  "correctedBrowser": {
+    "completed": true,
+    "after": {
+      "token": 6,
+      "position": 11,
+      "anchor": 1.6934467120181407,
+      "loopIn": 11,
+      "loopOut": 12,
+      "autoLoopBeats": null,
+      "loopLength": 2,
+      "playing": true,
+      "seeks": [
+        11
+      ],
+      "renderCalls": 3,
+      "siblingControlsRetained": 172,
+      "previewSourcesRetained": 6,
+      "previewImagesAfter": 6
+    },
+    "cleanup": {
+      "allStopped": true,
+      "physicalMuted": true,
+      "methodsRestored": true
+    },
+    "sourceStable": true,
+    "scope": "Actual browser real-Worker overlap after double sort preserves row order. Not native evidence."
+  },
+  "native133": {
+    "completed": true,
+    "report": "QUEUED_LOOP_133_NATIVE_2026-10-30.json",
+    "sourceCommit": "753cd22e01cb4f846fcb8943946c11268a98d255",
+    "note": "Both failed native attempts above remain failures; final result is separately executed with corrected setup and strict preview retention."
+  }
+}

@@ -1,0 +1,137 @@
+{
+  "date": "2026-10-29",
+  "version": "0.1.107",
+  "sourceCommit": "27e916a7b48d586de049a848d7628c851eb011a3",
+  "asarSHA256": "53bf9cd8602a7d19bab5ae13e773fa657a27db44d38f915abc91ac57395d1911",
+  "card": "https://trello.com/c/Y2hYnQnS",
+  "status": "One protected native startup stayed paused; original startup incident remains unresolved",
+  "package": {
+    "completed": true,
+    "passed": 5,
+    "strictDeepAdHocSignatureVerified": true
+  },
+  "profileBackup": {
+    "closedAppConfirmed": true,
+    "files": 257,
+    "bytes": 120714493,
+    "copyMatches": true,
+    "originalHashMtimeUnchanged": true,
+    "backup": "local-evidence/core-native-107-2026-10-29/profile-106-before-107",
+    "canonicalManifestSHA256": "a307b99b9dcb1ca92ae9ae5487c1dd88f2f6f71a159d8ae6378fd1c691d07605",
+    "retiredGeneratedVersion": "0.1.106",
+    "retiredASARSHA256": "6f0340b1f33edf060e6e3cd454896e9b92f1c551ad89802f21bc45f513495953",
+    "rollbackVersion": "0.1.105"
+  },
+  "native": {
+    "initialLaunchObserved": true,
+    "startupPlayCommands": [],
+    "mainBeforePositions": [
+      114.836,
+      112.561
+    ],
+    "mainAfterPositions": [
+      114.836,
+      112.561
+    ],
+    "mainTransportActions": 0,
+    "libraryTracks": 16,
+    "materializedLibraryPreviews": 12,
+    "playButtons": 2,
+    "tempoControls": 2,
+    "isolatedWindow": "Existing volatile/device-denied Core transport ownership workspace; broad ownership/jog buttons not run",
+    "demoPlayCommands": [
+      {
+        "at": 23526.899999976158,
+        "deck": 1,
+        "intent": "toggle",
+        "playing": false,
+        "processing": false,
+        "queued": false,
+        "origin": "gui",
+        "ready": true,
+        "visibility": "visible",
+        "eventType": "click",
+        "trusted": true,
+        "code": null,
+        "ctrl": false,
+        "meta": false,
+        "alt": false,
+        "shift": false,
+        "repeat": false,
+        "button": 0,
+        "pointerType": "mouse",
+        "targetTag": "BUTTON",
+        "targetAction": "play"
+      },
+      {
+        "at": 33269.39999997616,
+        "deck": 1,
+        "intent": "toggle",
+        "playing": true,
+        "processing": false,
+        "queued": false,
+        "origin": "gui",
+        "ready": true,
+        "visibility": "visible",
+        "eventType": "click",
+        "trusted": true,
+        "code": null,
+        "ctrl": false,
+        "meta": false,
+        "alt": false,
+        "shift": false,
+        "repeat": false,
+        "button": 0,
+        "pointerType": "mouse",
+        "targetTag": "BUTTON",
+        "targetAction": "play"
+      }
+    ],
+    "demoFinalDecksStopped": true,
+    "isolatedWindowClosed": true,
+    "systemOutput": "Selected MacBook Pro Speakers; Mute checkbox1 during launch/demo, restored0 after all playback stopped",
+    "finalMainMeter": "minus infinity"
+  },
+  "launchers": {
+    "currentAndPlayback": "0.1.107",
+    "versioned": "0.1.107",
+    "rollback": "0.1.105",
+    "syntaxChecked": true,
+    "launcherExecution": false,
+    "exactBundleLaunch": true
+  },
+  "limits": [
+    "No unexpected startup event reproduced or cause established",
+    "CUA clicks themselves produced trusted=true; that flag alone does not identify a human actor",
+    "No fresh real-track listening, current musical Sync or hardware acceptance",
+    "No generic-pop/stall resolution or public-beta claim"
+  ],
+  "next": "Keep bounded trace available. Capture the next actual unexpected Play event without clearing its command history; diagnose that origin before transport changes. Continue other reproduced core work without repeating clean startup tests.",
+  "evidenceSHA256": {
+    "before-ax.txt": "3a3fca2207aebbc2942b38295904b7435a5eea247084be6a557bfe42acda924b",
+    "demo-command-trace.json": "8ee5fb3266026613e64317b1baabc2842b32d4628fa566dde9c6bb8a3b940224",
+    "demo-trace-ax.txt": "e2977cd3777f5b73b80fe7edc790dfd4d015ffabb86cad94299895d30edcce7f",
+    "final-main-ax.txt": "48bc42172921f96ab26ddbdb0fcfb6c141b34f9556d68357de7a5f14e3cb3394",
+    "final-main.png": "5140805b9a9e55a65ff5619043c02a4bc39513e451ce95a276e8244e570a38b3",
+    "main-after-check-ax.txt": "48bc42172921f96ab26ddbdb0fcfb6c141b34f9556d68357de7a5f14e3cb3394",
+    "profile-copy-receipt.json": "f1c04890e32c077cac31a411e785176614c08d03012d5f0a82f33417ad3da810",
+    "recording-before-ax.txt": "d6b12143a4e2eec15971859e7cf80e39699dfb2feb7e7e9df5c7c8b2b16ce956",
+    "startup-ax.txt": "05ffdb9779a5bd962665564f2d7be6d8fcb0885bc8bd2578db3e6d664c353c62",
+    "startup-trace-ax.txt": "47e2b493f56254c91575b8a4d6ef6e30e136808e3c02c0fc19226035c5212c28",
+    "system-mute-before-ax.txt": "99114c645afe647e7b2416fef6c2784742cf7022a940791bb9dfc230669d13ac",
+    "system-mute-restored-ax.txt": "7ae44f53f8b1a98dcdbde204d52996f2d2dc756407958a20ea6fd3c18011f96e"
+  },
+  "trello": {
+    "cards": 228,
+    "complete": 34,
+    "updatedAndReadBack": [
+      "CORE-FIX-60",
+      "CORE-001",
+      "CORE-LIVE-01"
+    ],
+    "newCards": 0,
+    "closedCards": 0,
+    "protected107StartupAcceptanceChecked": true,
+    "startupCauseStillUnknown": true
+  }
+}

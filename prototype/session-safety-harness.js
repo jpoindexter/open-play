@@ -13,6 +13,82 @@ async function restore(data){
  await input.onchange({target:input});return doc().querySelector('#library-tool-result').textContent;
 }
 const metadata=()=>JSON.stringify({crates:state().crates,settings:state().settings,tags:state().tracks.map(t=>({id:t.id,title:t.title,cues:t.cues,savedLoops:t.savedLoops,color:t.color}))});
+document.querySelector('#details-run').onclick=async()=>{
+ let w,write;const report={complete:false,scope:'Actual isolated Track Details form with injected storage quota failure; no audio or native acceptance.'};
+ output.textContent='Checking Track Details…';
+ try{
+  assert(location.port==='8872','Use dedicated port8872, never the live app origin.');
+  assert(localStorage.getItem('openplay-safety-owned')==='true'||localStorage.length===0,'Origin has existing data; refusing to overwrite it.');
+  localStorage.setItem('openplay-safety-owned','true');
+  await boot();w=frame.contentWindow;write=w.Storage.prototype.setItem;
+  const track=state().decks[0].track,stored=localStorage.getItem(sessionKey),bpm=track.bpm+1;
+  doc().querySelector(`[data-track="${track.id}"]`).dispatchEvent(new w.MouseEvent('contextmenu',{bubbles:true,cancelable:true}));
+  const form=doc().querySelector('#track-form'),save=form.querySelector('[type="submit"]');
+  form.elements.title.value='Quota details';form.elements.bpm.value=String(bpm);
+  w.Storage.prototype.setItem=function(key,value){if(key===sessionKey)throw new w.DOMException('Controlled full storage','QuotaExceededError');return write.call(this,key,value);};
+  form.requestSubmit();await wait(()=>!save.disabled,'details save completion');
+  report.modalOpenAfterFailure=doc().querySelector('#modal').open;report.status=form.querySelector(':scope > [role="status"]').textContent;
+  assert(report.modalOpenAfterFailure,'Track Details closed after saving failed');
+  assert(/session only.*Saving failed/s.test(report.status),'Details failure was not explained inside the form');
+  assert(localStorage.getItem(sessionKey)===stored,'Failed save changed the stored session');
+  assert(track.title==='Quota details'&&track.bpm===bpm,'Unsaved edits were lost');
+  w.Storage.prototype.setItem=write;form.requestSubmit();await wait(()=>!doc().querySelector('#modal').open,'details retry');
+  await boot();assert(state().decks[0].track.title==='Quota details'&&state().decks[0].track.bpm===bpm,'Retried details lost after reload');
+  assert(state().decks.every(d=>!d.playing&&!d.playQueued),'Unexpected playback');
+  report.complete=true;report.retrySurvivesReload=true;
+ }catch(error){report.error=error.message;}
+ finally{if(w&&write)w.Storage.prototype.setItem=write;output.textContent=JSON.stringify(report,null,2);}
+};
+document.querySelector('#grid-run').onclick=async()=>{
+ let w,write;const report={complete:false,scope:'Actual isolated beatgrid editor with injected storage failure; no audio or native acceptance.'};
+ output.textContent='Checking beatgrid save…';
+ try{
+  assert(location.port==='8872','Use dedicated port8872, never the live app origin.');
+  assert(localStorage.getItem('openplay-safety-owned')==='true'||localStorage.length===0,'Origin has existing data; refusing to overwrite it.');
+  localStorage.setItem('openplay-safety-owned','true');await boot();w=frame.contentWindow;write=w.Storage.prototype.setItem;
+  const track=state().decks[0].track,stored=localStorage.getItem(sessionKey),bpm=track.bpm+1,offset=.125;
+  click('[data-deck="0"][data-action="grid"]');doc().querySelector('#grid-bpm').value=bpm;doc().querySelector('#grid-offset').value=offset;
+  doc().querySelector('#grid-warp-time').value=2;doc().querySelector('#grid-warp-bpm').value=bpm+2;click('#grid-marker');
+  w.Storage.prototype.setItem=function(key,value){if(key===sessionKey)throw new w.DOMException('Controlled full storage','QuotaExceededError');return write.call(this,key,value);};
+  click('#grid-save');await wait(()=>!doc().querySelector('#modal').open||/Saving failed/.test(doc().querySelector('#grid-status').textContent),'grid save completion');
+  report.modalOpenAfterFailure=doc().querySelector('#modal').open;report.status=doc().querySelector('#grid-status').textContent;
+  assert(report.modalOpenAfterFailure,'Beatgrid editor closed after saving failed');
+  assert(/session only.*Saving failed/s.test(report.status),'Grid save failure was not explained');
+  assert(localStorage.getItem(sessionKey)===stored,'Failed grid save changed stored session');
+  assert(track.bpm===bpm&&track.grid===offset&&track.gridWarpMarkers.some(m=>m.time===2&&m.bpm===bpm+2),'Unsaved grid edits were lost');
+  w.Storage.prototype.setItem=write;click('#grid-save');await wait(()=>!doc().querySelector('#modal').open,'grid retry');
+  await boot();const restored=state().decks[0].track;
+  assert(restored.bpm===bpm&&restored.grid===offset&&restored.gridWarpMarkers.some(m=>m.time===2&&m.bpm===bpm+2),'Retried grid lost after reload');
+  assert(state().decks.every(d=>!d.playing&&!d.playQueued),'Unexpected playback');
+  report.complete=true;report.retrySurvivesReload=true;report.viewportPreviews=doc().querySelectorAll('.library-wave-preview img').length;
+ }catch(error){report.error=error.message;}
+ finally{if(w&&write)w.Storage.prototype.setItem=write;output.textContent=JSON.stringify(report,null,2);}
+};
+document.querySelector('#grid-owner-run').onclick=async()=>{
+ let engine,original,release;const report={complete:false,scope:'Actual isolated grid UI with controlled pending callback; no audio timing or native proof.'};
+ output.textContent='Checking pending grid dialog…';
+ try{
+  assert(location.port==='8872','Use dedicated port8872, never the live app origin.');
+  assert(localStorage.getItem('openplay-safety-owned')==='true'||localStorage.length===0,'Origin has existing data; refusing to overwrite it.');
+  localStorage.setItem('openplay-safety-owned','true');await boot();engine=frame.contentWindow.openPlay.engine;original=engine.onGridChanged;
+  let entries=0;const waiting=new Promise(resolve=>{release=resolve;});
+  engine.onGridChanged=async(...args)=>{entries++;await original?.apply(engine,args);await waiting;};
+  click('[data-deck="0"][data-action="grid"]');doc().querySelector('#grid-bpm').value=state().decks[0].track.bpm+1;
+  const save=doc().querySelector('#grid-save'),handler=save.onclick,pending=[];
+  save.onclick=e=>{const work=handler.call(save,e);pending.push(work);return work;};
+  click('#grid-save');click('#grid-save');await wait(()=>entries>0,'pending realignment');
+  report.saveEntriesWhilePending=entries;report.saveDisabledWhilePending=save.disabled;
+  click('#modal-close');click('[data-panel="settings"]');const title=doc().querySelector('#modal-title').textContent;
+  release();await Promise.all(pending);
+  report.replacementDialogOpen=doc().querySelector('#modal').open;report.replacementTitle=doc().querySelector('#modal-title').textContent;
+  assert(entries===1&&report.saveDisabledWhilePending,'Pending grid save accepted duplicate submission');
+  assert(report.replacementDialogOpen&&report.replacementTitle===title,'Old grid save closed a replacement dialog');
+  engine.onGridChanged=original;click('#modal-close');click('[data-deck="0"][data-action="grid"]');click('#grid-save');
+  await wait(()=>!doc().querySelector('#modal').open,'new owned grid save');report.subsequentOwnedSaveCloses=true;
+  assert(state().decks.every(d=>!d.playing&&!d.playQueued),'Unexpected playback');report.complete=true;
+ }catch(error){report.error=error.message;}
+ finally{release?.();if(engine&&original)engine.onGridChanged=original;output.textContent=JSON.stringify(report,null,2);}
+};
 document.querySelector('#run').onclick=async()=>{
  try{
   assert(location.port==='8872','Use dedicated port8872, never the live app origin.');

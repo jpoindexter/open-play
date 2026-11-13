@@ -1,0 +1,43 @@
+{
+  "date": "2026-10-29",
+  "baseline": "1372f99d18f85f2adde56d9d2f5cfcc49eebfba1",
+  "card": "https://trello.com/c/T04RKxyX",
+  "failure": "Held raw jog1.248 while grouped nominal tempo1.32 is preparing; blurrelease incorrectlywrites1.32 toretainedvoice. Grouprejects and nominalrollsback1.2but source stays1.32.",
+  "secondFailure": "After retained-rate-only correction, successful pending handoff keeps frozen held-jog clock and starts27.36msahead of independently computed retained source. Preboundary bridge differs19.2ms.",
+  "repair": "Neutralrelease uses owned pending previousRate. Raw jog clockcell follows rate/anchor changes into pending captured clocks; neutral release detaches the voice property. Current identity guards prevent retired snapshots refreshing from replacement anchors. Special transport paths retained.",
+  "actualSourceChecks": {
+    "permanentRegression": "prototype/jog-sync-release.test.mjs",
+    "regressionCases": 4,
+    "affectedJogChecks": 2,
+    "focusedTotal": "6/6",
+    "failureRateBefore": 1.32,
+    "failureRateAfter": 1.2,
+    "successfulAnchorErrorBeforeSeconds": 0.02735999999999983,
+    "successfulAnchorErrorAfterSeconds": 0,
+    "preboundaryPositionAfter": 12.6048,
+    "boundaryPositionAfter": 12.8088,
+    "oracle": "Captured release anchors and raw source playbackRate, independent of voiceClock",
+    "scope": "Actual engine/jog/controller ownership modules with controlled clock/graph/adapter and one preparation rejection; not PCM/native/music/physical proof"
+  },
+  "engineSHA256Before": "30a07200ac370d3bef84f5f7c6d70c644aa724d76f0526e7da7eadcb6cdb804d",
+  "engineSHA256After": "d129f0293938543410daaf7239895fcc2eb284dcdb2f5c9ef1a8fe8f118120ed",
+  "newRegressionLines": 70,
+  "independentSourceReview": "No concrete new blocker; persistent-cell stale raw rate/loop risk corrected by neutral detachment; current identity/bridge handling reviewed without new tests.",
+  "rawEvidence": "local-evidence/jog-sync-release-2026-10-29/",
+  "evidenceHashes": {
+    "result-red.json": "4cefb549d1d5206fcd8ee516eaad1c28fdb88f6f293910755b869d80009484cd",
+    "output-red.txt": "8a442328057064b7b444fcefa1e0b5565c7c0187be06e9a11f31f392990f1840",
+    "result-green.json": "5440198617f80fea89bd5a8477dfb1f0b02b6159f4d0fbcac43caa07f1d8c241",
+    "success-clock-after.json": "98c3da59f28434c184356466ae6ccd9c8bb00520b3cc7c051cadd5fa11935846",
+    "success-clock-repaired.json": "65b1922d7df7b3165c4c59fd6622fe28bda8ff03c1a049f464cac43c69104922",
+    "complete-focused-green.txt": "8115717f8f7a7da9dce0c84d35878e028261a9f83a13983b8679976ac02c1c25"
+  },
+  "nativeChangedPath": "One native106 isolated generated-audio graph workflow passed controlled participant rejection and success. Actual H/installed rendererblur; exactboundary/preboundarypredictions; allStopped/physicalMute/sourceStable. See JOG_SYNC_RELEASE_NATIVE_106_2026-10-29.json. No actualrendererfailure/PCM/music/controller proof.",
+  "customerPopCausality": "Unknown. Do not close generic CORE-FIX-01 from this repair.",
+  "preservation": "No normal app controls/layouts/library previews removed; no original media or normal profile edited by controlled checks.",
+  "deferred": [
+    "Fresh listening and physicalHercules/headphone routing",
+    "Genericnativepops/stalls absentconcretecapture"
+  ],
+  "startupIncident": "CORE-FIX-60 observed unexpectedBstartupPlay; owner denied Play, MIDIinputlog empty, cause unknown. Not attributed to this repair; no clean106startupclaim."
+}

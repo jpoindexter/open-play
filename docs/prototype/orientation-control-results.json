@@ -1,0 +1,150 @@
+{
+  "date": "2026-10-24",
+  "sourceCommit": "ba4f0de803e9eafcfe4ef780ed43f9f66c2188a2",
+  "scope": "Actual-source controlled DOM/paint ownership regressions and separately observed stopped-demo current HTML geometry; not real-track node identity, musical output or native timing acceptance.",
+  "sourceSHA256": {
+    "prototype/app.js": "cf6ba2a1ec441917e958d631cd2219dcf318f3780e3594a60d6b5f0dbfd0cd7d",
+    "prototype/layout-orientation.test.mjs": "2da2ea3871daaefdabf001128936b92db1222719aad258b3b44cc2cffae75bc8"
+  },
+  "focused": {
+    "passed": 7,
+    "failed": 0,
+    "tapSHA256": "e6cd9c359b4ccd15de9c0edd7d5f5ec954b679f7cdacee13634f21da933104cb"
+  },
+  "fullNode": {
+    "passed": 161,
+    "failed": 0,
+    "tapSHA256": "297fadc4e62cef3429e8d7efc356cd5e25fd789fb645990f8228bf27ef618035"
+  },
+  "regressions": [
+    "Two/four decks Horizontal to Vertical and Vertical to Horizontal retain control/detail/lane/mixer/footer/preview objects, focused values and correct classes/axes",
+    "Orientation shape cache preserves subsequent actual targeted render without replacing siblings/mixer",
+    "Same-value forced workspace dispatch and non-H/V layouts retain full-render recovery",
+    "Missing detail surfaces recover structurally",
+    "RAF invokes drawWaves without treating the timestamp as its track filter"
+  ],
+  "independentSourceReview": "No concrete introduced regression found in narrow helper/callers review; actual-source7/7 independently rerun.",
+  "liveGeometry": {
+    "runtime": "Fresh isolated current-source IAB origin; stopped generated demo tracks; no real music started",
+    "workspace": "rekordbox",
+    "density": "compact",
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "observed": [
+      {
+        "decks": 2,
+        "orientation": "horizontal",
+        "canvas": {
+          "width": 1272,
+          "height": 132
+        },
+        "libraryPreviewImages": 6
+      },
+      {
+        "decks": 2,
+        "orientation": "vertical",
+        "canvas": {
+          "width": 240,
+          "height": 156
+        },
+        "scrubAxes": [
+          "y",
+          "y"
+        ],
+        "playTempoLowCountsEach": 2,
+        "libraryPreviewImages": 6
+      },
+      {
+        "decks": 4,
+        "orientation": "vertical",
+        "canvas": {
+          "width": 240,
+          "height": 156
+        },
+        "scrubAxes": [
+          "y",
+          "y",
+          "y",
+          "y"
+        ],
+        "playTempoLowCountsEach": 4,
+        "libraryPreviewImages": 7
+      },
+      {
+        "decks": 4,
+        "orientation": "horizontal",
+        "canvas": {
+          "width": 1272,
+          "height": 168
+        },
+        "scrubAxes": [
+          "x",
+          "x",
+          "x",
+          "x"
+        ],
+        "playTempoLowCountsEach": 4,
+        "libraryPreviewImages": 7
+      }
+    ],
+    "consoleWarningsOrErrors": 0,
+    "finalScreenshotSHA256": "15be1874c629f989e401a4e310fd1f407f7807b0c9c7c7367b213c4317f53936",
+    "limitations": "Counts/geometry and inspected screenshots do not establish all targets fit in the viewport, actual node identity, pointer-while-playing, acoustic quality or all six workspace recovery. Library may extend below viewport."
+  },
+  "remaining": [
+    "Matched native orientation comparison across same real tracks",
+    "Live real-track node/voice/preview retention and focused control use",
+    "All-six-workspace fallback integration",
+    "Separate edited-grid Sync real-track integration",
+    "Other unattributed stalls and intermittent audible pops; manual/hardware gates"
+  ],
+  "finalFullNode": {
+    "passed": 161,
+    "failed": 0,
+    "tapSHA256": "26de5e04488122072204c4d0e7e057069a794366ba8e206f5a4e17e807a893b5"
+  },
+  "matchedNativeAttempt": {
+    "status": "not-executed-ui-locked",
+    "accepted": false,
+    "baselineSourceCommit": "99abf2a89d5371b3f7ce4c151570f1b7fb4b6a4c",
+    "candidateSourceCommit": "ba4f0de803e9eafcfe4ef780ed43f9f66c2188a2",
+    "sourceFilesPerManifest": 20,
+    "parentImportedOrClickedRun": false,
+    "bypassAttempted": false,
+    "onlyOwnedFreshHostAndServerClosed": true,
+    "normal52AppTouched": false,
+    "limit": "Prepared diagnostic/self-check and launched window are not a native timing comparison or real-track candidate acceptance."
+  },
+  "additionalTargetedChecks": {
+    "scope": "Controlled module/controller collaborators; not actual browser musical/native/hardware acceptance.",
+    "scripts": [
+      {
+        "file": "scripts/test_smart_sync_tempo_basis.mjs",
+        "exitCode": 0,
+        "checks": 5
+      },
+      {
+        "file": "scripts/test_smart_sync_primary_tempo.mjs",
+        "exitCode": 0,
+        "checks": 5
+      },
+      {
+        "file": "scripts/test_sync_tempo_handoff.mjs",
+        "exitCode": 0,
+        "checks": 4
+      },
+      {
+        "file": "scripts/test_analysis_controller.mjs",
+        "exitCode": 0,
+        "checks": 14
+      }
+    ],
+    "standardControlRegression": {
+      "file": "prototype/ui/controls.test.mjs",
+      "passed": 1,
+      "failed": 0
+    }
+  }
+}

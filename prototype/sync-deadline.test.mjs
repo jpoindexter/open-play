@@ -58,3 +58,42 @@ test('enabling keylock on a paused deck does not queue playback',async()=>{
  engine.createForwardKeylock=async()=>{throw Error('A paused keylock change must not prepare playback');};
  await engine.setPitch(deck,{keylock:true});assert.equal(deck.playing,false);assert.equal(deck.position,3);assert.equal(deck.keylock,true);assert.equal(engine.voices.size,0);
 });
+for(const scenario of [{name:'playing',late:true,playing:true},{name:'paused',late:true,playing:false},{name:'on-time',late:false,playing:true}])test(`${scenario.name} warped-loop Sync respects the audio-thread start deadline`,async t=>{
+ const f=fixture(),{engine,deck,old}=f;const original=globalThis.AudioWorkletNode;let disconnected=false;
+ t.after(()=>{globalThis.AudioWorkletNode=original;});
+ Object.assign(deck,{loop:true,loopIn:2,loopOut:6,playing:scenario.playing});Object.assign(deck.track,{grid:0,gridWarpMarkers:[{time:4,bpm:124}]});
+ if(!scenario.playing)engine.voices.delete(0);
+ const {createBeatgrid}=await import('./beatgrid.js');
+ engine.onGridTimeline=(d,{position,when})=>createBeatgrid(d.track).timeline({position,when,bpm:d.track.bpm*d.rate,loop:{start:d.loopIn,end:d.loopOut}});
+ engine.ctx.sampleRate=44100;engine.ctx.audioWorklet={addModule:async()=>{}};
+ engine.buffer=async()=>({duration:20,sampleRate:44100,numberOfChannels:1,getChannelData:()=>new Float32Array(32)});
+ globalThis.AudioWorkletNode=class{
+  constructor(ctx){this.port={close(){},postMessage:message=>{if(message.type==='dispose')return;queueMicrotask(()=>{
+   if(message.type==='start'&&scenario.late)ctx.currentTime=message.options.when+.02;
+   this.port.onmessage({data:{id:message.id,result:message.options?{...message.options,playing:true}:{}}});
+  });}};}connect(){}disconnect(){disconnected=true;}
+ };
+ const operation=engine.synchronize(deck,{rate:1.05,priorClock:at=>3+at-1,positionAt:()=>3.05});
+ if(scenario.late){
+  await assert.rejects(operation,/missed its lead/);
+  assert.equal(engine.voices.get(0),scenario.playing?old:undefined);assert.deepEqual(f.retired,[]);assert.equal(deck.rate,1);assert.equal(deck.playing,scenario.playing);assert.equal(deck.processing,false);assert.equal(disconnected,true);if(!scenario.playing)assert.equal(deck.position,3);
+ }else{
+  const result=await operation;assert.equal(result.when,1.05);assert.equal(result.position,3.05);assert.equal(deck.playing,true);assert.deepEqual(f.retired,[old]);assert.notEqual(engine.voices.get(0),old);assert.equal(disconnected,false);
+ }
+});
+for(const explicit of [false,true])test(`rejected ${explicit?'positioned':'grid-owned'} loop change restores retained-audio bounds`,async()=>{
+ const {engine,deck,old}=fixture();Object.assign(deck,{loop:true,loopIn:2,loopOut:6});old.gridTimeline={};engine.position=()=>3;
+ engine.start=async()=>{engine.startTokens.set(0,1);throw Error('Sync start missed its lead');};
+ await assert.rejects(engine.setLoop(deck,true,4,8,explicit?{positionAt:()=>4}:{}),/missed its lead/);
+ assert.equal(engine.voices.get(0),old);assert.equal(deck.playing,true);assert.deepEqual([deck.loop,deck.loopIn,deck.loopOut],[true,2,6]);
+});
+test('rejected loop preparation never rolls back a newer loop command',async()=>{
+ const {engine,deck,old}=fixture();Object.assign(deck,{loop:true,loopIn:2,loopOut:6});old.gridTimeline={};engine.position=()=>3;
+ engine.start=async()=>{engine.startTokens.set(0,1);await Promise.resolve();engine.startTokens.set(0,2);Object.assign(deck,{loop:false,loopIn:9,loopOut:11});throw Error('Superseded');};
+ await assert.rejects(engine.setLoop(deck,true,4,8),/Superseded/);assert.deepEqual([deck.loop,deck.loopIn,deck.loopOut],[false,9,11]);
+});
+test('accepted grid-owned loop change keeps the new bounds',async()=>{
+ const {engine,deck,old}=fixture();Object.assign(deck,{loop:true,loopIn:2,loopOut:6});old.gridTimeline={};engine.position=()=>3;
+ engine.start=async()=>{engine.startTokens.set(0,1);engine.voices.set(0,{gridTimeline:{}});};
+ await engine.setLoop(deck,true,4,8);assert.deepEqual([deck.loop,deck.loopIn,deck.loopOut],[true,4,8]);
+});

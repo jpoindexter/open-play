@@ -1,0 +1,95 @@
+{
+  "observedAt": "2026-10-25T12:39:07.052365+00:00",
+  "version": "0.1.53",
+  "sourceCommit": "f2895174f493d2a4468533488f98342fa92599a2",
+  "scope": "Initial native four-deck Sync/crossfade pass plus operator-assisted manual/EQ/Cue follow-up. The private recording contains only the initial pass.",
+  "tracks": {
+    "A": "Anika Kunst — Constant Change",
+    "B": "Anika Kunst — Prism",
+    "C": "Jewel Kid — In The Dance",
+    "D": "BX 3"
+  },
+  "setup": {
+    "view": "Horizontal / Compact",
+    "observedPlayingDecks": 4,
+    "audibleDecks": [
+      "A",
+      "B"
+    ],
+    "backgroundChannelLevels": {
+      "C": 0,
+      "D": 0
+    },
+    "headphoneCue": "off on all four channels",
+    "sync": "A playing first; B synced while paused, then started; A/B both displayed132 BPM",
+    "requestedAction": "Slow crossfade left to right to centre while listening and watching A/B waveforms"
+  },
+  "userResult": "Aligned and smooth—no pops or waveform stalls",
+  "acceptance": "Scoped user acceptance for this session only. It does not close intermittent Sync pops, rare stalls, other track sections or physical routing.",
+  "capture": {
+    "path": "local-evidence/core-listening-0.1.53-2026-10-25/four-deck-listening.webm",
+    "bytes": 2728270,
+    "sha256": "eb039dbca595e2aa660ad89be5af7e2f754fdc655bc7845b22e4e4d566bb170b",
+    "lastObservedRecordingTimerBeforeStop": "03:34.3",
+    "decodedOrAnalyzed": false,
+    "scope": "Initial four-deck Sync/crossfade only; manual/EQ/Cue follow-up was not recorded."
+  },
+  "cleanup": "Native UI showed0playing decks before recording stop; no restart issued. Recording stopped and saved. Crossfader observed centred; C/D channel levels remain muted.",
+  "remaining": "Independent headphones/master/Hercules acceptance deferred by user; intermittent pops/rare stalls and the focused native analysis-refresh path remain open.",
+  "followUp": {
+    "observedAt": "2026-10-25T13:20:15.818756+00:00",
+    "operator": "Codex operated the actual native controls; Jason listened. No automatic Sync used in the manual portion.",
+    "manualTransition": {
+      "A": "132.0 BPM displayed, Sync off",
+      "B": "Tempo fader +1.5%,131.9 BPM displayed, Sync off",
+      "actions": "Trusted H jog holds and native crossfader A to B to centre; returned from jog to nominal tempo",
+      "userResult": "Yes—aligned through the manual transition",
+      "scope": "One short visual/grid-assisted manual transition judged by the user; not agent beatmatching by ear or whole-track zero drift."
+    },
+    "EQ": {
+      "channels": [
+        "A",
+        "B"
+      ],
+      "actions": "Each LOW/MID/HIGH cut to−24dB individually, then double-click reset0dB; opposite deck stopped",
+      "userResults": {
+        "B": "Yes—all three cuts and resets sounded right",
+        "A": "Yes—A’s cuts and resets sounded correct too"
+      },
+      "baseline": "B LOW was already−24dB at EQ setup and reset before the pass. Both channels neutral at completion."
+    },
+    "temporaryCue": {
+      "deck": "B Prism",
+      "cuePositionSeconds": 58.674,
+      "hold": "K held1.4seconds; release observed paused at58.674",
+      "latch": "Keyboard K held while native Play clicked; after release UI showed1playing and position59.106",
+      "stop": "Pause observed0playing, position113.513, master meter−infinity",
+      "userResult": "Yes—audition, release, latch and final stop sounded correct",
+      "automationLimit": "Two-letter key chord unsupported by computer-use tool; used held keyboard Cue plus mouse Play instead. No application failure inferred."
+    },
+    "hardware": {
+      "currentAudioInventory": [
+        "MacBook Pro Microphone",
+        "MacBook Pro Speakers",
+        "iPhone Microphone",
+        "Microsoft Teams Audio"
+      ],
+      "HerculesPresent": false,
+      "userDisposition": "Leave the hardware session for later",
+      "remaining": "Independent headphones/master routing and Hercules controls in the core workflow remain unaccepted."
+    },
+    "noBroadReruns": true,
+    "finalCleanup": {
+      "playingDecks": 0,
+      "sync": "off on all four decks",
+      "pitch": "0% on all four decks",
+      "EQ": "A/B LOW/MID/HIGH neutral",
+      "crossfader": "centre",
+      "backgroundChannelLevels": {
+        "C": 0.8,
+        "D": 0.8
+      },
+      "masterDB": -10.0
+    }
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "date": "2026-10-24",
+  "status": "Candidate source repair; controlled behavior executed, real-track HTML/native integration pending",
+  "baselineCommit": "df48b502f0c85cd66b55dfa20041bb929a3e9362",
+  "card": "https://trello.com/c/ixqGkEo6",
+  "scope": "Actual SmartSync/AudioEngine with controlled clock/graph/keylock acknowledgements. No PCM, listening, native-device or audible-pop acceptance.",
+  "baselineFailure": {
+    "oldBPM": 120,
+    "savedBPM": 100,
+    "savedGridSeconds": 0.1,
+    "committedRate": 1.05,
+    "mappedFollowerBPM": 105,
+    "outgoingBPM": 126,
+    "beatErrorAfterOneSecond": 0.35,
+    "falseBeatSync": true
+  },
+  "intermediateFailuresRetained": [
+    "Revision-only cancellation rejected early resume but late keylock ACK still routed old audio before rejection",
+    "Settled Sync-button request did not cover an armed Play alignment still waiting for ACK"
+  ],
+  "repair": [
+    "Grid capture revokes pending Sync or current alignment ownership before applying replacement metadata",
+    "Abort only the current valid alignment transform; preserve a newer unrelated manual start",
+    "Start cleanup requires the same token, track and controller even after cancellation",
+    "Synchronize checks its captured controller after await and rolls back only its own uncommitted rate"
+  ],
+  "verification": {
+    "newCases": 6,
+    "earlyPlayingAndPausedBaselineFailed": 2,
+    "lateFlatAndWarpedACKIntermediateFailed": 2,
+    "armedPlayIntermediateFailed": 1,
+    "newerManualOwnerControlPassed": true,
+    "finalFocused": {
+      "tests": 15,
+      "passed": 15,
+      "failed": 0,
+      "tapSHA256": "2242054ad300ff0c84220e014e9cac56b557603300045e3762f20a8ac665fa91"
+    },
+    "fullNode": {
+      "command": "node --test prototype/*.test.mjs",
+      "tests": 154,
+      "passed": 154,
+      "failed": 0,
+      "tapSHA256": "34b0ed09389592cde3295cdc0090cd64e0fc9c7dbb29a9e535e6035c70bc7a0f"
+    },
+    "freshSyncRate": 1.26,
+    "freshSyncMappedBPM": 126,
+    "freshSyncPhaseAfterOneSecondVerified": true,
+    "originalVoiceAndOutgoingMasterRetained": true,
+    "stalePreparationNoRouteOrRetirement": true,
+    "cleanupAndNewerManualOwnerVerified": true
+  },
+  "sourceSHA256": {
+    "prototype/engine.js": "f22ad68f894f91cb9f7d0ec273f703fac4d3fa2196821392bb0833305f376c67",
+    "prototype/smart-sync.js": "8bd44d3218537e187f48f84722c502ee17efc316d7335fe84a636da9f310630e",
+    "prototype/sync-ownership.test.mjs": "60a908f7591ca537b875526be26ff7acabe9757aa38ed937317e0ab6121568cf",
+    "prototype/sync-grid-ownership.test.mjs": "1f3d23c41c2414a4e3ae797cbc077c890a32ff38e5aa8c93702a2d0ec3f5680f"
+  },
+  "noChangesTo": [
+    "Layout adapters",
+    "Custom DJ control markup/styles",
+    "Waveform rendering and library previews",
+    "Original music files",
+    "Normal desktop52 package/profile"
+  ],
+  "nativeStallCapture": "Independent diagnostic serves pinned baseline52, not this candidate; no causal-performance claim from its result",
+  "notChecked": [
+    "Real-track grid-save/Sync ordering in current HTML",
+    "Current repaired desktop build/native live controls",
+    "Actual pop occurrence or audio quality",
+    "Late-track corpus musical drift",
+    "Human manual transition/EQ/Cue/clean-stop judgment",
+    "Physical headphone/master/controller routing",
+    "Complete vendor parity"
+  ]
+}

@@ -1,0 +1,26 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><title>Library row preservation regression</title>
+<button id="run">Run library row checks</button><pre id="result">Ready</pre><div id="tracks"></div>
+<script type="module">
+import {renderLibraryRows} from './library-rows.js';
+const root=document.querySelector('#tracks'),result=document.querySelector('#result');
+const row=(id,title,plays=0)=>`<tr data-track="${id}" tabindex="0" class="" aria-selected="false"><td>♫</td><td>${title}</td><td>${plays}</td></tr>`;
+const header='<th>Status</th><th>Title</th><th>Plays</th>',checks=[];
+const assert=(value,label)=>{if(!value)throw Error(label);checks.push(label);};
+document.querySelector('#run').onclick=()=>{try{
+ renderLibraryRows(root,header,'title,plays',[row('a','Alpha'),row('b','Beta')]);
+ const a=root.querySelector('[data-track=a]'),b=root.querySelector('[data-track=b]'),title=a.children[1],preview=document.createElement('td');
+ preview.className='library-wave-preview';preview.innerHTML='<img alt="Full-track waveform: Alpha">';a.children[0].after(preview);a.focus();
+ renderLibraryRows(root,header,'title,plays',[row('a','Alpha'),row('b','Beta')]);
+ assert(a.isConnected&&b.isConnected,'Unchanged rows retain identity');assert(document.activeElement===a,'Row focus survives refresh');assert(preview.isConnected,'Preview stays attached');
+ renderLibraryRows(root,header,'title,plays',[row('a','Alpha',1),row('b','Beta')]);
+ assert(a===root.querySelector('[data-track=a]')&&preview.isConnected,'Play count changes retain row and preview');assert(a.lastElementChild.textContent==='1'&&title.isConnected,'Only changed metadata cell updates');
+ renderLibraryRows(root,header,'title,plays',[row('b','Beta'),row('a','Alpha',1),row('c','Gamma')]);
+ assert(root.querySelector('tbody').children[0]===b&&a.isConnected&&preview.isConnected,'Reordering preserves keyed rows and previews');
+ renderLibraryRows(root,header,'title,plays',[row('a','Renamed',1)]);
+ assert(!b.isConnected&&a.isConnected&&preview.isConnected&&a.children[2].textContent==='Renamed','Filtering and metadata edits retain surviving preview');
+ renderLibraryRows(root,header,'artist,plays',[row('a','Artist',1)]);assert(!a.isConnected,'Column changes rebuild the table');
+ root.innerHTML='<div class="art-grid">Artwork</div>';renderLibraryRows(root,header,'artist,plays',[row('a','Artist',1)]);assert(!!root.querySelector('table'),'Artwork to table restores rows');
+ root.innerHTML='<div class="empty">Empty</div>';renderLibraryRows(root,header,'artist,plays',[row('a','Artist',1)]);assert(!!root.querySelector('[data-track=a]'),'Empty to populated restores rows');
+ result.textContent=JSON.stringify({status:'Passed',checks});
+}catch(error){result.textContent=JSON.stringify({status:'Failed',checks,error:error.message});}};
+</script></html>

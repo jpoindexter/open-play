@@ -17,11 +17,11 @@ export function createTrackGain({state,engine,persist=()=>{},onChange=()=>{}}){
   track.playbackGainDb=value;delete track.autoGainDeferred;
   for(const d of state.decks)if(d.track?.id===track.id)engine.setDeckTrackGain(d.index,value);engine.updateSampleTrackGain(track,value);onChange(track,value);if(changed)persist();return value;
  }
- function set(track,value){
+ function set(track,value,{save=true}={}){
   if(!track)throw Error('Load a track first.');value=boundedTrackGain(value);const info=data(track);prepare(track,info);
   if(info.enabled&&info.available){track.autoGainOffsetDb=value-info.baseDB;delete track.autoGainPendingDb;}
   else{track.trackGainDb=value;track.sampleGain=value;track.autoGainSchema=1;if(info.enabled)track.autoGainPendingDb=value;}
-  refresh(track);persist();return value;
+  refresh(track);if(save)persist();return value;
  }
  function measurementReady(track){
   const active=state.decks.some(d=>d.track?.id===track.id&&(d.playing||d.processing||d.playQueued))||[...(engine.samples?.values()||[]),...(engine.sampleRequests?.values()||[])].some(v=>v.track?.id===track.id);

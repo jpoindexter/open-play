@@ -1,0 +1,223 @@
+{
+  "date": "2026-10-24",
+  "baselineCommit": "ba4f0de803e9eafcfe4ef780ed43f9f66c2188a2",
+  "repairSourceCommit": "6980024abc675bac8843223cfabfa236b27adf8c",
+  "scope": "Actual AudioEngine/SmartSync methods with controlled graph, adapters and audio clock; BPM parameter timing/ownership only, not actual audio or native acceptance.",
+  "sourceSHA256": {
+    "prototype/engine.js": "e6a474333038b70ac481a85a96fc3fd09d80c7ebfbc6cc7151af6cf3f835afd3",
+    "prototype/deck-tempo.js": "8834de1db544204d1baab0b282b3b2063941629d6bf255a83de5cf5177ac744e",
+    "prototype/sync-fx-boundary.test.mjs": "79dcc7e98fabd2466e1da2c10cc16ffe52b44245091b3c1c44793a5a840c6503"
+  },
+  "baselineObserved": {
+    "parentFlatCase": {
+      "audioClockSeconds": 10,
+      "futureHandoffSeconds": 10.17,
+      "audibleBPM": 120,
+      "prematureChannelAndUnitBPM": 240
+    },
+    "mixedCases": {
+      "activeKeylockedAndRawBeforeBoundary": [
+        120,
+        120
+      ],
+      "pausedPlannedBPM": 132,
+      "prematureGroupWrittenBPM": [
+        132,
+        132,
+        132
+      ]
+    },
+    "warpedPreparation": {
+      "localSourceBPM": 150,
+      "audibleSourceRate": 0.8,
+      "correctMusicalBPM": 120,
+      "incorrectBaseCalculationBPM": 96
+    },
+    "replacementRace": {
+      "newTrackNominalBPM": 90,
+      "newRate": 0.9,
+      "currentBPM": 81,
+      "oldGroupUnitOverwriteBPM": 132
+    },
+    "parentFixtureSetupFailureExcluded": true,
+    "actualBaselineFocused": {
+      "total": 7,
+      "passed": 1,
+      "failed": 6,
+      "tapSHA256": "1416c5d0f4ec8eeba86d59746334b8cfbdf578b7926bcf50448c2a0782236f17"
+    }
+  },
+  "repair": {
+    "reusesExisting": [
+      "currentDeckBPM",
+      "updateFXBPMs"
+    ],
+    "ownedGroupGuards": [
+      "track identity",
+      "rate",
+      "rate request owner",
+      "playing start generation"
+    ],
+    "nodeBasedBPMVectorProtectsNewerOwner": true,
+    "revokedStartStopsAfterResumeBeforeFX": true,
+    "changedClockDSPFadeOrGestureBranch": false
+  },
+  "focused": {
+    "passed": 7,
+    "failed": 0,
+    "tapSHA256": "a659fc976b57aa97365f61d312fe11127ff7d7829b395a250fcb1697224ee556"
+  },
+  "fullNode": {
+    "passed": 168,
+    "failed": 0,
+    "tapSHA256": "b987ed5a68425b6d9bb5e732de58df42fc237ea857a40be337d172c36f443897"
+  },
+  "independentReview": {
+    "focusedPassed": 7,
+    "concreteIntroducedRegressionFound": false,
+    "limit": "Source/controlled execution only."
+  },
+  "existingChecks": {
+    "syncTempoHandoff": {
+      "passed": true,
+      "scope": "Two audio-time barrier ownership/failure policy; no actual audio/native/hardware proof",
+      "checks": [
+        "all preparation ready before common output time",
+        "all future starts armed before any group commit",
+        "render failure aborts owners and rejects waits",
+        "missed lead rejects group instead of late commit"
+      ]
+    },
+    "smartTempoBasis": {
+      "passed": true,
+      "scope": "Smart Sync/GUI coordinate integration with controlled engine collaborators; actual browser musical workflow required separately.",
+      "tests": [
+        {
+          "name": "First paused primary Sync at90BPM establishes nominal90/120 before relative slider movement",
+          "passed": true
+        },
+        {
+          "name": "Repeated primary Sync after a paused seek to150BPM retains the shared90BPM basis",
+          "passed": true
+        },
+        {
+          "name": "First running primary Sync derives common tempo from local BPM and audible source rate",
+          "passed": true
+        },
+        {
+          "name": "Secondary arming uses the coherent shared tempo and its own base BPM",
+          "passed": true
+        },
+        {
+          "name": "Invalid nominal transport range rejects before publishing Sync state",
+          "passed": true
+        }
+      ]
+    },
+    "smartPrimaryTempo": {
+      "passed": true,
+      "scope": "Controlled Smart Sync collaborators: primary local warp progression versus nominal/shared-tempo changes, source Pause and own token cancellation. Actual browser phase/audio checked separately.",
+      "checks": [
+        "Natural local .84\u21921.4 progression at constant nominal126 joins Beat Sync",
+        "Primary nominal-rate change rejects stale join",
+        "Shared tempo changes before nominal transport commit reject stale join",
+        "Primary Pause before scheduling rejects",
+        "Joining deck current-owner token cancellation rejects"
+      ]
+    },
+    "liveKeylockOriginal": {
+      "fixtureRepairSourceCommit": "9a8451a4e013e707e3b4da2863d4d06cd618c5d7",
+      "baselineUnchangedOriginalFailureExecuted": true,
+      "currentOriginalFailureExecuted": true,
+      "fixtureChange": "Controlled deckInput getter alias to input; production has a separate actual gain node.",
+      "allNineOriginalCheckStatementsAndAssertionsRetained": true,
+      "parentRerun": {
+        "passed": 9,
+        "failed": 0,
+        "engineSHA256": "e6a474333038b70ac481a85a96fc3fd09d80c7ebfbc6cc7151af6cf3f835afd3",
+        "endEngineSHA256": "e6a474333038b70ac481a85a96fc3fd09d80c7ebfbc6cc7151af6cf3f835afd3"
+      },
+      "scriptSHA256": "c126abf1c3483dab5a2811f54206bfa6160ebf6975ff64ed3df3d3fdeaf3638c",
+      "limit": "Actual current AudioEngine start/control/routing/retirement methods with controlled adapter, native graph and clock collaborators. No actual browser PCM, physical hardware, native app or integrated audio acceptance. Source may be concurrently edited by parent; hashes delimit read-only review.",
+      "sourceBoundaryHashesRecordedAndObservedEqual": true,
+      "hashEqualityEnforcedByOriginalScript": false
+    },
+    "fxTempoEngine": {
+      "checks": [
+        {
+          "name": "Uninitialized engine retains independent timing scalars and snapshots caller settings",
+          "passed": true
+        },
+        {
+          "name": "Existing effect slots receive manual bank BPM and independent route-derived automatic BPM without graph rebuild",
+          "passed": true
+        },
+        {
+          "name": "Real setRate reconfiguration holds manual timing while automatic timing follows its changed deck",
+          "passed": true
+        },
+        {
+          "name": "Restore automatic uses current track tempo and preserves existing processors and other bank authority",
+          "passed": true
+        },
+        {
+          "name": "Master and sampler automatic fallbacks retain existing route policy while manual remains bank-owned",
+          "passed": true
+        },
+        {
+          "name": "Semantic Video Echo uses the same effective bank timing after real engine reconfiguration",
+          "passed": true
+        },
+        {
+          "name": "Canonical metadata BPM synchronization updates automatic audio and Video timing once without erasing manual authority",
+          "passed": true
+        },
+        {
+          "name": "Metadata synchronization never initializes DSP, and rejected input preserves the current clock",
+          "passed": true
+        }
+      ],
+      "passed": 8,
+      "failed": 0,
+      "scope": "Actual AudioEngine configureFX/setRate and semantic query with controlled existing effect slot updates; not browser DSP, measured repeat intervals, live UI, musical/reference or native acceptance."
+    }
+  },
+  "liveStatus": {
+    "userRequestedLiveChecksRemainPreparedUntilUnlock": true,
+    "newLiveUIOrAudioActions": 0,
+    "normal52ProfileTouched": false,
+    "noNewDesktopBuild": true,
+    "orientationComparisonPinnedSeparately": "99abf2a versus ba4f0de, isolating orientation change; not this later FX repair."
+  },
+  "limits": [
+    "No actual captured effect-parameter timing, native trace or PCM of this new repair",
+    "Existing renderer-tick refresh is retained; no sample-accurate effect scheduling claim during a main-thread stall",
+    "Intermittent audible Sync pops and other unattributed stalls remain open",
+    "No new musical listening, late-song grid, headphone/master/controller or full-core acceptance"
+  ],
+  "deferredSourceObservations": [
+    {
+      "existingCard": "CORE-FIX-10",
+      "observation": "Three orientation changes before a frame queue three final-state overview draws;0deck/0mixer rebuilds in controlled fixture.",
+      "scope": "Source work count only; not a measured latency improvement or cause of prior native stalls.",
+      "productChangeMade": false
+    },
+    {
+      "existingCard": "UI-HY-01",
+      "observation": "Projected Traktor-flat waveform paint assigns sizing metadata every frame:3frames/3assignments,2unchanged.",
+      "scope": "Source write inventory only; no actual style invalidation/latency/pop attribution. Decoration is event-driven and other per-frame control synchronizers already cache values.",
+      "productChangeMade": false
+    }
+  ],
+  "sameParentReproductionAfterRepair": {
+    "exitCode": 0,
+    "audioClockSeconds": 10,
+    "futureHandoffSeconds": 10.17,
+    "requestedRate": 2,
+    "audibleRate": 1,
+    "channelBPM": 120,
+    "unitBPM": 120,
+    "prematureUnitRefreshCalls": 0,
+    "logSHA256": "2a99ebcd867a245374a8ce21f46736a4e0cd5998ca47c33762e803ec116fab20"
+  }
+}

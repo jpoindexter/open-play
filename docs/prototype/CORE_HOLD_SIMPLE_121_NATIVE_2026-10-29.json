@@ -1,0 +1,67 @@
+{
+  "date": "2026-10-29",
+  "version": "0.1.121",
+  "sourceCommit": "a1fabe02b9c7305210a08046c956a203f4732eb1",
+  "asarSHA256": "8742e7b630035047069246bf4fad511b32c845e19208882983626028f9a16d03",
+  "sourceRepairs": "CORE_HOLD_SIMPLE_2026-10-29.json",
+  "packageInspection": "desktop-0.1.121-playback-core-holds.json",
+  "adHocSealVerified": true,
+  "nativeRecovery": {
+    "executed": true,
+    "positions": [
+      30.097,
+      34.086
+    ],
+    "tracks": 16,
+    "controls": {
+      "visibleLibraryPreviews": 12,
+      "playButtons": 2,
+      "tempoFaders": 2,
+      "channelEQKnobs": 6
+    },
+    "masterDB": -10.04344,
+    "masterMeter": "minusInfinity",
+    "observation": "Actual native paused recovery; Play icons and silent meter. No main Play/Sync/REC Start invoked. Full prequit snapshot plus recording preflight/closed panel diffs saved.",
+    "visualScreenshotInspected": true,
+    "startupNotice": "Loaded tracks restored paused. Tempo and Sync start reset.",
+    "recordingBeforeQuit": "Idle Start recording,00:00.0"
+  },
+  "closedProfileRecovery": {
+    "source": "/Users/jasonpoindexter/Library/Application Support/Open Play Playback Test",
+    "copy": "/Users/jasonpoindexter/Documents/GitHub/Open Play/local-evidence/core-native-121-2026-10-29/profile-120-before-121",
+    "files": 261,
+    "bytes": 120231830,
+    "manifestSHA256": "efa323d8622ec60988f5073224481e48279d92192f81f3b4a918203c1853bf0e",
+    "sourceBeforeCopyAfterEqual": true,
+    "method": "closed-profile cp -cRp; file hashes sizes mtimes equal",
+    "originalsPreserved": true
+  },
+  "cleanup": {
+    "removedInactiveVersion": "0.1.120",
+    "verifiedOldArchiveSHA256": "f20b027ae52f7f7b2306d063b73ba9a95081164f1ad90e8f54a5a324e12638fb",
+    "oldProcessAbsent": true,
+    "new121ProcessObserved": true,
+    "removedBundleLogicalBytes": 605423494,
+    "removedOwnPackagingZipBytes": 130738603,
+    "remainingBundles": [
+      "0.1.121"
+    ],
+    "profileRecovery": "profile-recovery.json",
+    "originalMediaRecordingsProfilesUnrelatedDraftsPreserved": true,
+    "launchersSyntaxChecked": 3,
+    "nativeExactBundleLaunchedSeparately": true
+  },
+  "goal": "Active, audio muted, per explicit human instruction",
+  "checks": "Three focused RED/GREEN regressions only; no broad suite or new diagnostic helper",
+  "notExecuted": [
+    "Native held-Slicer Pause and held-Pitch4to2to4 interaction",
+    "Native delayed Simple completion after new Play/manual tempo",
+    "PCM/live-WASM changed-path or listening/hardware acceptance"
+  ],
+  "open": [
+    "Generic intermittent Sync pop and waveform-stall reports",
+    "Original106 unexpected-start report CORE-FIX-60",
+    "Owner listening/focus and Hercules/headphone/speaker gates"
+  ],
+  "limits": "No full core/public beta/vendor parity claim. Prior53/109/120accepted evidence retains original scope;120grid scenario not rerun."
+}

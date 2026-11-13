@@ -1,0 +1,130 @@
+{
+  "date": "2026-10-29",
+  "baselineCommit": "a8b0d460b2dc86c9296e024a2761e17b41f491e3",
+  "status": "Three source repairs; private123/native delivery pending",
+  "ownerInstruction": "Goal active; audio muted; preserve controls/layouts/previews/media/session; no broad reruns",
+  "simpleLeaderTempo": {
+    "baseline": "a8b0d46",
+    "defect": "New leader tempo after playing Simple alignment scheduling did not revoke its held incoming ACK",
+    "repair": "Reuse cancelSimpleSync in public createSyncTempoRequests setRate entry; related incoming/leader requests canceled before mutation, unrelated requests retained",
+    "productDiff": "sync-tempo-requests.js2addedlines,68total",
+    "testFile": "simple-sync-lifecycle.test.mjs",
+    "testFileLines": 166,
+    "focusedCommand": "node --test --test-name-pattern='new leader tempo cancels owned Simple alignment' prototype/simple-sync-lifecycle.test.mjs",
+    "red": {
+      "tests": 1,
+      "pass": 0,
+      "fail": 1,
+      "assertion": "Leader tempo intent must revoke old alignment before held ACK commits"
+    },
+    "green": {
+      "tests": 1,
+      "pass": 1,
+      "fail": 0
+    },
+    "assertions": [
+      "Actual A tempoUp commits1.001 and retains outgoingvoice",
+      "Old BownedACK aborted beforecommit, rejectsAbortError and preparedadapterdisposed",
+      "Boriginalplayingvoice/rate1 retained, no falseA/Bsyncflags or successnotice",
+      "Fresh A/Brequest survives actual unrelatedCtempoUp and aligns at new126.126BPM target",
+      "Fresh Bvoice commits correctly and Aoutgoingvoice/rate retained",
+      "Final voices/transforms empty and all controlledadaptersdisposed"
+    ],
+    "actualModules": [
+      "Extracted app deckAction",
+      "createTempoSlider",
+      "createSyncTempoRequests",
+      "createSlicer",
+      "synchronizeSimple",
+      "AudioEngine",
+      "createSyncMaster"
+    ],
+    "callerReview": [
+      "Only production factorycaller app assigns returned function to engine.onRateRequest",
+      "engine.setRate validates rate before publichook; syncInternal:true bypasses hook",
+      "cancelLoad/cancelAll properties remain on same returned function",
+      "sync.js has no imports; no introduced modulecycle"
+    ],
+    "evidenceSHA256": {
+      "red.txt": "119e3410a51c030f8c75b77a62aa9ddc46ecc40e0547134e016ad24c747399dc",
+      "green.txt": "96f1fe54286214ddd8e3faa4742a7485cef5d947f2ab0340051dd30f005558f5",
+      "source-before.sha256": "a7178bf7c59e07ae1e1fdb31c9d29066ae84da337f98acdaa7d88669e867fe9a",
+      "failing-result.json": "13c368fa50d19f89da9411f48ea4ff2c475f5ed7f4e9942c11ec3a0df5f04718"
+    },
+    "limits": [
+      "Controlled graph/clock/buffer/live adapterACK, not actualWASM/PCM/native/hearing/physicalproof",
+      "One focused case only, no broad suite or ordinary replay",
+      "No attribution to reported pops or waveformstalls"
+    ]
+  },
+  "loopRollStop": {
+    "baseline": "a8b0d46",
+    "red": {
+      "path": "red.txt",
+      "assertion": "Stopped Loop Roll retained temporary loop: true!==false"
+    },
+    "green": {
+      "path": "green-final.txt",
+      "command": "node --test --test-name-pattern='normal Stop restores only' prototype/loop-presentation.test.mjs",
+      "passed": 1,
+      "failed": 0
+    },
+    "affectedExistingCheck": {
+      "path": "green.txt",
+      "passed": 2,
+      "failed": 0,
+      "scope": "One new ownership case plus existing loop command/feedback integration, before final explicit h-presence guard; final focused case rerun afterward."
+    },
+    "runtimeLines": 96,
+    "testLines": 87,
+    "sourceSHA256": {
+      "prototype/app.js": "1ea892804ce97cc36a67a728b2d7681018656e00c5e5d32fb7d1f1b78e81bb4c",
+      "prototype/loop-pads.js": "d9389bfec1108aa7605f6d10c16be1188b6eb80d3b003f084c69073f88a3f631",
+      "prototype/loop-presentation.test.mjs": "1b98457e0cb2a466e4f09f6556858df6ad925d6ee835fb606039b87e9c124b9a"
+    },
+    "limits": [
+      "Actual LoopPads and AudioEngine raw loop/pause plus extracted appStop; raw source/clock graph objects controlled.",
+      "No real AudioContext, PCM, native, music, listening, controller, measured stall or pop proof.",
+      "Newer different loop bounds, different track, changed transport token and pending preparation boundaries checked; raw identical-bounds/same-token newer intention is not independently identifiable by these guards."
+    ],
+    "cleanup": "Each controlled fixture pauses every deck; pending gate is released in finally. No originals, saved profile, native session or physical output touched."
+  },
+  "loopRollCountReduction": "Same guarded restore cancellation wired before pause on count4to2; wiring source-inspected, no separate behavioral count/roll case executed",
+  "flip": {
+    "rootCause": "Actual saved/temporary Flip start passed bare global renderer after its async first event",
+    "change": "Pass completed deck; app reuses existing switch and loop/transport presentation helpers with structural fallbacks",
+    "command": "node --test --test-name-pattern='actual Flip completion refreshes' prototype/flip-cancellation.test.mjs",
+    "red": "Global renderer call1; expected0",
+    "green": "1pass: actual module/extracted app wiring + real presentation helpers retain controlled unrelated nodes/focus and update current deck",
+    "scope": "Controlled DOM/engine collaborators, not native identity or measured stall/pop cause",
+    "evidenceSHA256": {
+      "red.txt": "2b2b8db1cf555d548af33c84bb81edf771446da7b4dd391e4f68217debd1dda2",
+      "green.txt": "4c6406afcbe43bae0c45ca17a5445d26b1b3cfb99b7d27d42fe35e5afffd619e"
+    }
+  },
+  "sourceSHA256": {
+    "prototype/app.js": "1ea892804ce97cc36a67a728b2d7681018656e00c5e5d32fb7d1f1b78e81bb4c",
+    "prototype/flip.js": "f3602da4154f3864a9d0ed7ab916934afc5d8692a9d14b4eac89a039aa5bd212",
+    "prototype/loop-pads.js": "d9389bfec1108aa7605f6d10c16be1188b6eb80d3b003f084c69073f88a3f631",
+    "prototype/sync-tempo-requests.js": "97b42a739fe039ddb8b8b1e0a5bdf4b0bc3f24f57dc24021f90cf00c2e343afb",
+    "prototype/flip-cancellation.test.mjs": "31c493add916f421fc8dfbc77b57cdc1326d45646928f2f84936ec790f1a670b",
+    "prototype/loop-presentation.test.mjs": "1b98457e0cb2a466e4f09f6556858df6ad925d6ee835fb606039b87e9c124b9a",
+    "prototype/simple-sync-lifecycle.test.mjs": "a22583e91406fc68d29eb66ff470d32d41a84c0e34df73db8e1324e3e531f7c9"
+  },
+  "handwrittenModuleLines": {
+    "prototype/flip.js": 160,
+    "prototype/loop-pads.js": 96,
+    "prototype/sync-tempo-requests.js": 68,
+    "prototype/flip-cancellation.test.mjs": 122,
+    "prototype/loop-presentation.test.mjs": 87,
+    "prototype/simple-sync-lifecycle.test.mjs": 166
+  },
+  "fixtureCompatibility": "Nine existing extracted-Play/count fixtures receive necessary rolling/cancelDeck collaborators; syntax checked, clean cases not rerun",
+  "limits": [
+    "Three new focused RED/GREEN scenarios, one affected existing loop-feedback check; final Loop guard rerun after explicit owner-presence correction",
+    "No new diagnostic helper, broad suite, native changed-path, PCM/live-worklet, music/listening/hardware acceptance",
+    "Count-reduction Roll behavior source-wired only; raw newer identical-bounds/same-token loop intention not independently identified",
+    "Generic pop/stall/startup60 reports remain open; no speculative audio-clock or raster change",
+    "Original audio/recordings/profile/recovery copies/unrelated design draft untouched by source edits"
+  ]
+}

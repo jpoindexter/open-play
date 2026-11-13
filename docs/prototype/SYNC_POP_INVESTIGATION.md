@@ -1,10 +1,14 @@
-# Sync pop investigation — 20 October 2026
+# Sync pop investigation
 
-## Current disposition — 23 October 2026
+## Current disposition —29 October2026
 
-**OPEN for the broader intermittent report.** Desktop 0.1.44/source a6600e0 retains ordinary and live-key-lock missed-deadline guards, and extends the existing advancing-clock handoff to ordinary forward key-lock changes. A new eight-real-track session failed after 404.86 s: key-lock enable lost approximately 216 ms declared-grid phase. Focused actual-adapter capture confirms 204.83 ms exact silence before, none after, with old audio retained and zero phase loss. The repaired 1208 s four-deck run completes 15 replacements and six playing-Sync actions with no non-finite or post-startup exact-silence telemetry. Maximum sampled declared-grid error 5.54 microseconds; not measured kick alignment or listening acceptance. 71 Node tests, package 5/5 and existing-profile stopped startup. [Current report](CORE_FOUR_DECK_SOAK_2026-10-23.md), [prior missed-deadline repair](CORE_FOUR_DECK_WAVEFORMS_2026-10-23.md), [ordinary-start repair](CORE_SYNC_LAG_2026-10-23.md).
+OPEN for intermittent pops, broader musical/grid alignment and four-deck stalls; recent scoped successes do not erase prior reports. Current/default110/source64c0554 has5/5archive/host inspection and stopped native startup30.097/34.086,16tracks/12previews. No main audio run in110.
 
-These executed mechanisms do not establish the cause of every historical event, especially paused-incoming and physical-output reports. Keep actual-user-event capture, listening and hardware gates open. Rare waveform frame stalls remain (worst 329 ms); callback p95 and clean real-song telemetry do not prove pop-free acoustics or full frame compliance. Next renderer work needs event timestamps and a trace around replacement/preview work, not an unproven GC/GPU explanation.
+109/source377dc16 repaired a demonstrated paused Home seek→tempo-only→Play phase bypass and misleading BEAT SYNC text. Actual native sequentialPlay retained armed launch and Jason accepted alignment through bassswap/crossfade without anotherSync press. Original108failed and109accepted captures are retained privately. This is one specific launch acceptance, not a generic pop fix.
+
+Separate Fader Start bypass reproduced799.524ms declared bar-phase error in actual handler/engine.110includes34-line shared launch module and4focused MIDI-router/engine checks with cancellation/back-cue; physical/native changed-path listening remainspending. Current source does not alter DSP or grids against an unreproduced pop. [Latest receipt](FADER_START_110_NATIVE_2026-10-29.json).
+
+Preserve next actual pop/stall with track/rate/position/master/action timing and in-memory Play-command export before reload. Source timeline/finite samples are not listening proof. Physical Hercules/headphones remain deferred; reuse prior53ordinarymanual/EQ/Cue/stop scope. No broad clean-case repeats.
 
 ## Historical investigation
 

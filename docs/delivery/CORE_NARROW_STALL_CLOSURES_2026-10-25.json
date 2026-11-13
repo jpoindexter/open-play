@@ -1,0 +1,139 @@
+{
+  "date": "2026-10-25",
+  "reviewedSource": "8596e472c716f0f1d238c4dafeadd4c07c2518c8",
+  "purpose": "Close satisfied narrow stall fixes without repeating their accepted checks or closing parent reliability defects.",
+  "currentSourceComparisons": [
+    {
+      "card": "ANA-FIX-01",
+      "path": "prototype/analysis.js",
+      "matchesRepairCommit": "bab8042",
+      "sha256": "8cc165de4c77f70ce55bb4146b80f6ad6cc5671815b8fc2beb45d23fe18718ad"
+    },
+    {
+      "card": "ANA-FIX-01",
+      "path": "prototype/analysis-input.js",
+      "matchesRepairCommit": "bab8042",
+      "sha256": "0e88089e891c3ab57c261eac27ce981de3c11999e00ea38416be7e560fd7f4e3"
+    },
+    {
+      "card": "ANA-FIX-04",
+      "path": "prototype/app.js",
+      "section": "async function load(",
+      "matchesRepairCommit": "3fed6dc",
+      "sectionSHA256": "838633b9a2ba67f0b05a3ee94001449c3dd249f663d02ad4e91b4640d9db15ee"
+    },
+    {
+      "card": "ANA-FIX-05",
+      "path": "prototype/app.js",
+      "section": "function drawWaves(",
+      "matchesRepairCommit": "f5e23cd",
+      "sectionSHA256": "f0867c3982cef1c1816e2cf83238c0e77521358eaa6425ecb81502068845c212"
+    }
+  ],
+  "retainedEvidence": [
+    {
+      "card": "ANA-FIX-01",
+      "runtimeReceipt": "docs/prototype/active-analysis-results.json",
+      "runtimeReceiptSHA256": "96748f04e97c37cf1446b02254c36f343fcebc0efcb8b1c5301fe30fa3186d0d",
+      "finalRun": {
+        "seconds": 320.207299999997,
+        "rotations": 15,
+        "workers": 8,
+        "loadChecks": 43,
+        "transportChecks": 20,
+        "layouts": 24,
+        "removedRows": 0,
+        "removedPreviews": 0
+      },
+      "independentPCMReceipt": "docs/prototype/active-analysis-pcm-inspection.json",
+      "inspectionSHA256": "134dea5b8bd007425320d26411fcfee71ceeec9e826b835d8521413ecd7ed2ee",
+      "retainedPCMSeconds": 184,
+      "wholeWindows": 28,
+      "scope": "Retained executed repair-time evidence; current narrow product implementation byte-identical. Not a new runtime/PCM/native/music run."
+    },
+    {
+      "card": "ANA-FIX-04",
+      "runtimeReceipt": "docs/prototype/load-continuation-results.json",
+      "runtimeReceiptSHA256": "7004ed44e35f369600deba614544f399bcde11d4cc9082f1cdeb83cb357c119a",
+      "finalRun": {
+        "seconds": 321.152,
+        "rotations": 15,
+        "workers": 8,
+        "loadChecks": 43,
+        "transportChecks": 20,
+        "layouts": 24,
+        "removedRows": 0,
+        "removedPreviews": 0
+      },
+      "independentPCMReceipt": "docs/prototype/load-continuation-pcm-inspection.json",
+      "inspectionSHA256": "7228f562fcc224d58e63faaa7e0b8e228e2d4b584cc3f5f3e48148dcb61133cb",
+      "retainedPCMSeconds": 148,
+      "wholeWindows": 23,
+      "scope": "Retained executed repair-time evidence; current narrow product implementation byte-identical. Not a new runtime/PCM/native/music run."
+    },
+    {
+      "card": "ANA-FIX-05",
+      "runtimeReceipt": "docs/prototype/profile-ready-results.json",
+      "runtimeReceiptSHA256": "1ac879592e8bc8dae73d68435c38f88d80d33dbb368aa79620d8347166cf7e16",
+      "finalRun": {
+        "seconds": 320.1825,
+        "rotations": 15,
+        "workers": 8,
+        "loadChecks": 43,
+        "transportChecks": 20,
+        "layouts": 24,
+        "removedRows": 0,
+        "removedPreviews": 0
+      },
+      "independentPCMReceipt": "docs/prototype/profile-ready-pcm-inspection.json",
+      "inspectionSHA256": "a038583339259b6c5072bfa3aa11520adc69bf80c7f7e2adb867f5998cf101d9",
+      "retainedPCMSeconds": 164,
+      "wholeWindows": 27,
+      "scope": "Retained executed repair-time evidence; current narrow product implementation byte-identical. Not a new runtime/PCM/native/music run."
+    }
+  ],
+  "criteriaDisposition": {
+    "ANA-FIX-01": "Heartbeat, exact PCM/options/transfer, staging abort/source attachment and matched bounded-copy probe verified by retained tests/probe; final four-deck controls/master/previews and complete PCM evidence retained. General allocation/GC/pop/native limits belong to parents.",
+    "ANA-FIX-04": "Actual load/draw ownership regression, matched same-action continuation and full four-deck control/preview/master/PCM acceptance recorded. Load function identical to delivered repair. Residual native/structural/unattributed/pop limits stay on parents.",
+    "ANA-FIX-05": "Owner/alias/replacement callback tests, current labels/ARIA/global fallback, matched owner-only visits and full current-at-repair software session/PCM recorded. drawWaves identical. Native frame/physical held gesture/musical limits stay on parents."
+  },
+  "board": {
+    "plannedNarrowCompletions": [
+      "ANA-FIX-01",
+      "ANA-FIX-04",
+      "ANA-FIX-05"
+    ],
+    "leaveOpen": [
+      "CORE-FIX-01",
+      "CORE-FIX-07",
+      "CORE-FIX-08",
+      "CORE-FIX-15",
+      "CORE-001"
+    ],
+    "newCards": 0,
+    "readback": "Final full157card readback: exact3closure and4parent descriptions, three completions, four parents incomplete; all157list/closed states and154other completion states preserved. Existing core comment exact.",
+    "totalCards": 157,
+    "completedBefore": 6,
+    "completedAfter": 9,
+    "untouchedDispositionsPreserved": true
+  },
+  "notExecuted": "No new test/synthetic matrix, browser session, waveform trace, PCM run, normal-profile interaction, package or hardware work. Receipt and source review only.",
+  "next": "One existing unexecuted native integration: current-source four-deck live orientation retention/event window. Reuse existing diagnostic assets only if their one-action scope can avoid rerunning the broad soak; otherwise prepare that bounded action. Sync-pop incident and rollback/OFF native windows remain separate.",
+  "currentAudioCodeComparisons": [
+    {
+      "path": "prototype/engine.js",
+      "sameAs": "5a8f45f",
+      "sha256": "f4c4f9ea56e10f8cb3c9140295c9398e939971e42ed0c51b0d94addf2562fea1"
+    },
+    {
+      "path": "prototype/smart-sync.js",
+      "sameAs": "5a8f45f",
+      "sha256": "727d15fe411fca43be083ed7f0572f2d7ccb09fdba1bab0c6b3ccb5499359cdd"
+    },
+    {
+      "path": "prototype/sync.js",
+      "sameAs": "5a8f45f",
+      "sha256": "cf188c9738963f8f64a41a2a373427849f67a30f97f7bee38ce92fc047407025"
+    }
+  ]
+}

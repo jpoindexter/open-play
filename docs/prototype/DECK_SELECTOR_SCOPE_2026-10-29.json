@@ -1,0 +1,30 @@
+{
+  "date": "2026-10-29",
+  "baseline": "a9b295c9fe8235a2a098a28957fba7f68a3d3af6",
+  "scope": "Source change-handler/renderer API contract. Not native DOM, pointer capture, audible output or timing proof.",
+  "reproduced": "A deck-local Pitch Play range selector requested global renderDecks(undefined), rebuilding unrelated decks/mixer. The same global call was present in simulated deck-mode selection.",
+  "repair": "Two renderDecks(d.index) calls reuse existing partial article renderer. Shape mismatch/missing target retains existing full fallback; mixer does not depend on these deck-local fields. No transport/DSP change.",
+  "verification": {
+    "command": "node --test prototype/performance-mode-presentation.test.mjs",
+    "red": "Existing tab/loop-mode case passed; new actual change-handler case failed undefined !==1.",
+    "green": "2cases passed,0failed: existing tab/loop-mode plus Pitch Play range/simulated mode selector contract. Other deck fields unchanged; mode simulation notice retained.",
+    "broadSuite": false,
+    "nativeOrAudio": false,
+    "review": "Independent read-only renderer/adapter review found no blocker; only affected article/overview changes, mixer and other deck structures retained when shape matches."
+  },
+  "sourceSHA256": {
+    "prototype/app.js": "9d6d8426502051aa364ebb6fc9c53d9813a01681637b1da241941b6e545a47d4",
+    "prototype/performance-mode-presentation.test.mjs": "51d24bf4129207c665ee7edbf4b9b128e4f01074035e0e938878a1417ff8da70"
+  },
+  "artifactSHA256": {
+    "before.txt": "66ef729efce373e80ab4207af8722b9b7ea4fcf245ad61c62c040e8106c5d1c0",
+    "after.txt": "288b42a74ca3087a8ec18d46c3f2fb23407558731b6c682904f7bc38c967573a"
+  },
+  "privateEvidence": "local-evidence/deck-selector-presentation-2026-10-29",
+  "batchWith": "PITCH_CONTROL_RETENTION_2026-10-29.json",
+  "limits": [
+    "Per-deck redraw is still a structural replacement of the selected deck.",
+    "No new DVS/hardware support; modes remain simulated.",
+    "No claim of native gesture retention, measured stall reduction or Sync-pop causation."
+  ]
+}

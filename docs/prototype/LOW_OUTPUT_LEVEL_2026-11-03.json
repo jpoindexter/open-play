@@ -1,0 +1,75 @@
+{
+  "date": "2026-11-03",
+  "candidate": "0.1.138",
+  "userReport": "Playing a track in Open Play sounded much quieter than Serato and other apps. Exact compared track/settings/device/OS volume not captured.",
+  "observedNative": {
+    "masterOutputDisplayDB": -10,
+    "trackGainDisplayDB": {
+      "A": -7,
+      "B": -3.2
+    },
+    "channelLevel": 0.8,
+    "channelTrimDB": 0,
+    "masterVolumePercent": 100,
+    "autoGainEnabled": true,
+    "autoGainReference": "92 dB",
+    "crossfader": "center, Linear, amount50",
+    "upfaderCurve": 50,
+    "channelFiltersEnabled": false
+  },
+  "derivedNotMeasuredComparison": {
+    "faderDB": -1.938200260161128,
+    "masterHeadroomDB": 3,
+    "crossfaderGain": 1,
+    "approxSingleDeckReductionVsOriginalDB": {
+      "A": -21.93820026016113,
+      "B": -18.138200260161128
+    },
+    "masterAt0WouldRecoverDB": 10,
+    "scope": "Approximation from displayed rounded values, source gain curves and no limiter gain reduction; not a Serato measurement or perceived loudness ratio."
+  },
+  "sourceFindings": [
+    "Fresh engine master defaults to0dB/100%; currentminus10 is a restored session setting, not the default.",
+    "Track gain \u2192 EQ/trim/upfader/crossfader \u2192 Master Output Level \u00d7 Master Volume \u21923dB headroom/limiter \u2192 audio monitor.",
+    "Native Mixer Master Volume is100%; no extra reduction from that setting.",
+    "AutoGain92 maps independently to-15LUFS; exact vendor loudness calibration remains unmeasured."
+  ],
+  "reusedEvidence": {
+    "file": "docs/prototype/master-output-browser-results.json",
+    "masterDSPBytesStillMatch": {
+      "master-output.js": true,
+      "master-output-kernel.js": true,
+      "master-output-worklet.js": true
+    },
+    "priorNeutralRMSExpected": 0.25029663242522665,
+    "scope": "Existing actual-browser muted stage evidence; not a fresh current full-engine/reference loudness capture. No broad rerun."
+  },
+  "referenceDocs": [
+    {
+      "url": "https://support.serato.com/hc/en-us/articles/224966287-Master-Output-Level",
+      "fact": "Serato performance master neutral0dB; offline player uses a separate volume control."
+    },
+    {
+      "url": "https://support.serato.com/hc/en-us/articles/234988368-Offline-Player-Volume",
+      "fact": "Serato offline volume ranges off to100%; reset100%."
+    }
+  ],
+  "sessionPreserved": {
+    "positions": [
+      161.797,
+      111.183
+    ],
+    "tracks": 25,
+    "masterUnchanged": true,
+    "allAudioStopped": true,
+    "originalSettingsTabRestored": true,
+    "audioStarted": false
+  },
+  "next": "CORE-FIX-75: one muted current-engine level capture and matched reference-mode comparison; owner listening with neutral master when present. Change DSP only against a measured mismatch.",
+  "unverified": [
+    "Difference to Serato with identical track/output/OS volume/settings",
+    "Audible outcome at neutral master",
+    "Current complete signal-path PCM level"
+  ],
+  "rawEvidence": "local-evidence/output-level-2026-11-03/"
+}

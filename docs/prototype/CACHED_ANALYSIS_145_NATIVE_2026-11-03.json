@@ -1,0 +1,152 @@
+{
+  "date": "2026-11-03",
+  "version": "0.1.145",
+  "sourceCommit": "562d5ab5b31c154a365d46aad37e3bda232f0473",
+  "archiveSHA256": "495afb38ff7486b46980d56084a2fcf5a668197c52b9ebe8d172916ac7ed37ca",
+  "card": "https://trello.com/c/0miBNmOr",
+  "productionRepair": "One shared load predicate reuses persisted analysisResult instead of treating session-only analyzed:false as missing analysis. Missing results and required loudness upgrades still enqueue; explicit Analyze is unchanged.",
+  "sourceVerification": {
+    "red": "Actual extracted load queued1instead0 for restored current measurements.",
+    "green": "One new composed regression covers reuse, missing result, legacy gain upgrade, Auto Gain off, existing decoded-only import; all five affected load/overview tests pass.",
+    "newModules": 0,
+    "broadSuiteRuns": 0
+  },
+  "packageInspection": {
+    "passed": 5,
+    "failed": 0,
+    "receipt": "desktop-0.1.145-playback-cached-analysis.json"
+  },
+  "nativeVerification": {
+    "workflow": "Normal generated-only isolated Analysis Save/export; Cmd+R; normal export; one explicit Analyze selected track; normal export. No injected native state or diagnostic Run action.",
+    "afterReloadStatus": "Ready, without the prior two-track Finished analysis message.",
+    "resultsAcrossReload": {
+      "demo-0": {
+        "measuredAt": "2026-11-03T22:29:11.823Z",
+        "resultEqual": true,
+        "beatCount": 99
+      },
+      "demo-1": {
+        "measuredAt": "2026-11-03T22:29:12.142Z",
+        "resultEqual": true,
+        "beatCount": 101
+      }
+    },
+    "exportAndExplicitAnalysis": {
+      "selected": {
+        "id": "demo-0",
+        "before": "2026-11-03T22:29:11.823Z",
+        "after": "2026-11-03T22:36:38.202Z",
+        "changed": true
+      },
+      "unselectedResultUnchanged": true,
+      "tagCount": 8,
+      "exports": [
+        {
+          "name": "generated-before-145.json",
+          "bytes": 20945,
+          "sha256": "8397d981aec60080b7e439df73586f176d6447de25de3c008a3887fba2c7959f"
+        },
+        {
+          "name": "generated-manual-145.json",
+          "bytes": 20945,
+          "sha256": "be077ee0f245c4ac73ca864ecc28725d4d924c5446ad72cf694d9fdd4ebaef04"
+        },
+        {
+          "name": "generated-reloaded-145.json",
+          "bytes": 20945,
+          "sha256": "8397d981aec60080b7e439df73586f176d6447de25de3c008a3887fba2c7959f"
+        }
+      ]
+    },
+    "controlPresence": {
+      "main-145-start.txt": {
+        "play": 2,
+        "tempo": 2,
+        "eq": 6,
+        "level": 2,
+        "fullTrackWaveforms": 9,
+        "allImages": 9,
+        "silentMeter": true
+      },
+      "main-final.txt": {
+        "play": 2,
+        "tempo": 2,
+        "eq": 6,
+        "level": 2,
+        "fullTrackWaveforms": 9,
+        "allImages": 9,
+        "silentMeter": true
+      },
+      "isolated-final.txt": {
+        "play": 2,
+        "tempo": 2,
+        "eq": 6,
+        "level": 2,
+        "fullTrackWaveforms": 8,
+        "allImages": 8,
+        "silentMeter": true
+      }
+    },
+    "scope": "Identical full analysis results and measuredAt across reload; explicit Analyze changes only selected result. AX inventories show accessible presence, not DOM identity, pointer capture, CPU or frame performance."
+  },
+  "mainSession": {
+    "tracks": 25,
+    "positionsSeconds": [
+      161.797,
+      111.183
+    ],
+    "masterDb": -10.04344,
+    "paused": true,
+    "sameAccessibleControlsAndPreviewsBeforeAfter": true,
+    "isolatedWindowClosed": true
+  },
+  "audioBoundary": "No Play, Sync, Cue, recording Start or sample action issued. Stopped timers and silent meter observed. No physical-mute flag, PCM, listening or hardware acceptance is claimed for this non-playing UI workflow.",
+  "closedProfileRecovery": {
+    "source": "/Users/jasonpoindexter/Library/Application Support/Open Play Playback Test",
+    "recovery": "/Users/jasonpoindexter/Documents/GitHub/Open Play/local-evidence/profile-recovery/pre-cached-analysis-0.1.144-2026-11-03",
+    "files": 281,
+    "bytes": 221862619,
+    "hashSizeMtimeEqual": true,
+    "copy": "APFS clone, not hard-linked",
+    "old144Processes": 0
+  },
+  "cleanup": {
+    "remove": "/Users/jasonpoindexter/Documents/GitHub/Open Play/local-evidence/desktop-builds/0.1.144",
+    "logicalBytes": 611784846,
+    "oldArchiveVerified": true,
+    "retainedBuild": "/Users/jasonpoindexter/Documents/GitHub/Open Play/local-evidence/desktop-builds/0.1.145",
+    "newArchiveVerified": true,
+    "process": "43952 /Users/jasonpoindexter/Documents/GitHub/Open Play/local-evidence/desktop-builds/0.1.145/Open Play Playback Test-darwin-arm64/Open Play Playback Test.app/Contents/MacOS/Open Play Playback Test",
+    "remoteSource": "562d5ab5b31c154a365d46aad37e3bda232f0473",
+    "recovery": {
+      "source": "/Users/jasonpoindexter/Library/Application Support/Open Play Playback Test",
+      "recovery": "/Users/jasonpoindexter/Documents/GitHub/Open Play/local-evidence/profile-recovery/pre-cached-analysis-0.1.144-2026-11-03",
+      "files": 281,
+      "bytes": 221862619,
+      "hashSizeMtimeEqual": true,
+      "copy": "APFS clone, not hard-linked",
+      "old144Processes": 0
+    },
+    "retainedCache": "One official current Electron44.9.0 ZIP130738603B; reused without download.",
+    "preserved": [
+      "Original music",
+      "Recordings",
+      "All profiles/recoveries",
+      "Unrelated owner draft"
+    ],
+    "removed": true,
+    "retainedBuildVersions": [
+      "0.1.145"
+    ]
+  },
+  "launchers": "Current/playback/named145 syntax checked; exact app opened separately. Launcher execution not claimed.",
+  "priorIncident": "Prior temporary browser origin18874 deletion remains disclosed in ANALYSIS_STORAGE_2026-11-03.json/LIB-FIX-10; exact contents unknown/unrecovered. No browser storage helper or cleanup used this pass.",
+  "remaining": [
+    "No claim of general Sync-pop, waveform-stall, total CPU/RSS/GC or long-session resolution.",
+    "Owner listening/controller, numeric entry06, Sync70, matched output75, startup60 and full beta remain open.",
+    "Cached-analysis settings invalidation remains existing explicit Analyze policy; this does not add automatic reanalysis for every changed analysis setting."
+  ],
+  "trelloReceipt": "cached-analysis-145-trello-2026-11-03.json",
+  "privateEvidence": "local-evidence/cached-analysis-2026-11-03/",
+  "goal": "Active; user away, no playback."
+}

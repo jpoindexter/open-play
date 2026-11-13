@@ -9,9 +9,9 @@ function fixture(extra={}){
  const sync=createSmartSync({engine,state});return{deck,state,engine,sync,calls};
 }
 async function check(name,run){try{await run();tests.push({name,passed:true});}catch(e){tests.push({name,passed:false,error:e.message});}}
-await check('First paused primary Sync at90BPM establishes nominal90/120 before relative slider movement',async()=>{
+await check('First paused primary Sync at90BPM establishes nominal90/120 before absolute slider movement',async()=>{
  const f=fixture();await f.sync.press(f.deck);near(f.sync.captureTempo(),90);near(f.deck.rate,.75);
- const slider=createTempoSlider({setRate:async(d,r)=>{const bpm=f.sync.tempo(d,r);for(const member of f.state.decks)member.rate=bpm/member.track.bpm;}});near(slider.view(f.deck).position,0);await slider.set(f.deck,6);near(f.deck.rate,.81);near(f.sync.captureTempo(),97.2);
+ const slider=createTempoSlider({setRate:async(d,r)=>{const bpm=f.sync.tempo(d,r);for(const member of f.state.decks)member.rate=bpm/member.track.bpm;}});near(slider.view(f.deck).position,-25);await slider.set(f.deck,-19);near(f.deck.rate,.81);near(f.sync.captureTempo(),97.2);
 });
 await check('Repeated primary Sync after a paused seek to150BPM retains the shared90BPM basis',async()=>{
  const f=fixture();await f.sync.press(f.deck);f.deck.position=1;await f.sync.press(f.deck);near(f.sync.captureTempo(),90);near(f.deck.rate,.75);

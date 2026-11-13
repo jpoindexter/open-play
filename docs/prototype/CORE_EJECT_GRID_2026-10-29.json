@@ -1,0 +1,79 @@
+{
+  "date": "2026-10-29",
+  "baselineCommit": "d6e12c0ff427eff7aedf5e5dffcdd1151b6983d0",
+  "desktopStatus": "Source repair pending118package; running117 not changed by source edits",
+  "repairs": {
+    "eject": {
+      "rootCause": "Ordinary Eject called renderDecks without its deck index, requesting all decks/mixer to rebuild",
+      "change": "One line uses existing partial renderDecks(index), preserving structural/missing-target fallback",
+      "actualRoute": "Extracted actual app deckAction with controlled engine/cancellation collaborators",
+      "red": "undefined !== 1 at renderDecks assertion after Eject",
+      "green": "One focused case passes; target empty/paused/position0/previous-track retained; cancellation order and prune/reconcile retained; render target index1",
+      "command": "node --test --test-name-pattern=\"eject revokes\" prototype/performance-mode-presentation.test.mjs",
+      "independentReview": "Read-only peer confirmed real click reachability and existing partial renderer treatment of shared scrub nodes, target overview and mixer",
+      "scope": "Render-call contract only; no actual native node identity, duration, latency or pop proof"
+    },
+    "gridCancellation": {
+      "sourceBaseline": "d6e12c0ff427eff7aedf5e5dffcdd1151b6983d0",
+      "defect": "Canceled grid realignment failure stops a newer same-track Tempo Sync Play",
+      "actualModules": [
+        "AudioEngine",
+        "createSmartSync"
+      ],
+      "fixture": "Existing sync-grid-ownership.test.mjs forward-keylock controlled graph/clock/adapter ACK fixture",
+      "route": [
+        "Smart Sync press commits",
+        "manual manipulation leaves Tempo Sync",
+        "captureGrid then grid120/0 to100/.1",
+        "edited realignment held at actual adapter ACK",
+        "ordinary pause + smart.paused",
+        "fresh engine.start + smart.played commits newer voice",
+        "old canceled ACK resolves and edited rejects AbortError"
+      ],
+      "baselineResult": "RED: obsolete catch deletes newer voice and clears Sync",
+      "repair": "Capture actual engine start token immediately after owned synchronize invocation; include it in edited validity for scheduling, commit and failure safety",
+      "focusedCommand": "node --test --test-name-pattern='canceled grid realignment must not stop' prototype/sync-grid-ownership.test.mjs",
+      "red": {
+        "tests": 1,
+        "pass": 0,
+        "fail": 1
+      },
+      "green": {
+        "tests": 1,
+        "pass": 1,
+        "fail": 0
+      },
+      "assertions": [
+        "New voice identity/start token/playing/rate/Sync TEMPO retained after stale AbortError",
+        "Outgoing leader unchanged",
+        "Still-current real preparation error preserves existing explicit stop/Sync-off safety policy",
+        "Final voices/transforms empty, controlled adapters disposed"
+      ],
+      "productDiff": "smart-sync.js5lines changed:3additions/2deletions",
+      "regressionAddedLines": 24,
+      "evidenceSHA256": {
+        "red.txt": "3f2573b57aedead39a4a77a30f39f8cd7d81bd40d628b044f6488c35bec46bd7",
+        "green.txt": "f151fa652600da38707783a57e8da5a9f095d4f02a472923fc6767885b03e5d7",
+        "source-before.sha256": "5bd502930470f72b0a60b15c99985e6723542042bf8bad8931093e6001bb57bc"
+      },
+      "limits": [
+        "Controlled actual engine/Smart Sync graph and ACK ownership proof only",
+        "No PCM, real-worklet DSP, native main Compact/four-deck controls, audible Sync-pop/stall or physical/controller acceptance",
+        "No original media, main profile or recordings touched; no desktop build or broad suite",
+        "Initial ad-hoc raw fixture lacked createGain; that setup error is ungraded, followed by valid actual-engine reproduction and retained RED/GREEN using existing live fixture"
+      ]
+    }
+  },
+  "sourceSHA256": {
+    "prototype/app.js": "5cc5baae1c3fa8f60639ce8371476426deb884a9a46d957cc78424e185bd198b",
+    "prototype/smart-sync.js": "ab0564e20e10358217f5db7950a0600166744797f9c853618f6d1e0a95969096",
+    "prototype/performance-mode-presentation.test.mjs": "a4fe3a178d569c473c8163a2c3a0c3f87f8968fdbf536ad9d5b0659d2185fa43",
+    "prototype/sync-grid-ownership.test.mjs": "48c2a57719f3ca2b8ffa80e39f92d6fae41fbde84c536da247fb8679b0e63712"
+  },
+  "verificationPolicy": "Two unique focused RED/GREEN cases, no broad suite/new diagnostic/DSP patch. Other existing grid-path checks only if changed ownership reveals a concrete need.",
+  "limits": [
+    "Controlled actual module/handler evidence is not native playing/held DOM, music quality, physical/controller, Sync-pop-free or long-session stall proof.",
+    "Existing Smart Sync module is legacy328lines; this slice adds1netline there, no broad refactor. New regression additions15and24lines in existing focused files; no runtime abstraction/dependency.",
+    "All original media, main profile, recordings, controls/layouts/previews and unrelated design draft retained."
+  ]
+}

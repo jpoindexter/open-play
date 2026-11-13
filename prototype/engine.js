@@ -14,12 +14,15 @@ import { describeAudioVideoLinks } from "./video-audio-fx-state.js";
 import { effectiveFXBPM, normalizeFXTempoSettings } from "./fx-tempo.js";
 import {createAudioMonitor,monitorSettings as normalizeMonitorSettings} from './audio-monitor.js';
 import {createWarpLoopTransport} from './warp-loop.js';
+import {setDeckReverse} from './deck-reverse.js';
 import {createSyncTempoHandoff} from './sync-tempo-handoff.js';
 import {startSyncedSample,sampleVoiceClock,disposeSampleVoice} from './sample-sync-transport.js';
 import {createReverseCensorPlan} from './reverse-censor-plan.js';
 import {CensorBacking} from './censor-backing.js';
 import {createBeatgrid} from './beatgrid.js';
+import {currentDeckBPM} from './deck-tempo.js';
 import {normalizeMixerSettings,crossfaderGain,upfaderGain,eqBands,normalizeEQBoost,boundedEQGain,rescaleEQGain} from './mixer-curves.js';
+import {applyChannelFilterRouting,disposeChannelFilterRouting} from './channel-filter-routing.js';
 import {createMasterOutput} from './master-output.js';
 import {normalizedMasterDB} from './master-output-kernel.js';
 import {trackGainDB,boundedTrackGain} from './track-gain.js';
@@ -59,6 +62,7 @@ export class AudioEngine {
     this.samplerRoute = "Master";
     this.startTokens = new Map();
     this.rateOwners = new WeakMap();
+    this.syncedRateRequests = new WeakMap();
     this.fxChains = [];
     this.fxState = null;
     this.channelFXType = "Filter";
@@ -175,12 +179,15 @@ export class AudioEngine {
       throw new Error("Audio file unavailable. Re-import this local file.");
     const sr = 22050,
       seconds = 48,
+      chunkFrames = 32768,
       b = this.ctx.createBuffer(2, sr * seconds, sr),
       beat = 60 / track.bpm;
     for (let c = 0; c < 2; c++) {
       const a = b.getChannelData(c);
       let seed = track.seed + c * 97;
       for (let i = 0; i < a.length; i++) {
+        // Cold library previews must not synthesize a whole fixture in one UI task.
+        if (i && i % chunkFrames === 0) await new Promise(resolve => setTimeout(resolve, 0));
         const t = i / sr,
           p = t % beat;
         seed = (seed * 1664525 + 1013904223) >>> 0;
@@ -229,14 +236,15 @@ export class AudioEngine {
     if (pending && pending.track === d.track && !pending.controller.signal.aborted)
       return this.stemSlipClockPosition(pending.clock, d.track.duration, this.ctx?.currentTime || 0);
     if (!d.playing || !this.ctx) return d.position;
+    const reverse=gridVoice?.reverse??d.reverse;
     let p =
       d.anchorPosition +
       Math.max(0, this.ctx.currentTime - d.anchorTime) *
         this.voiceRateAt(d,gridVoice,this.ctx.currentTime) *
-        (d.reverse ? -1 : 1);
+        (reverse ? -1 : 1);
     if (d.loop && d.loopOut > d.loopIn) {
       const n = d.loopOut - d.loopIn;
-      if (p >= d.loopOut || (d.reverse && p < d.loopIn))
+      if (p >= d.loopOut || (reverse && p < d.loopIn))
         p = d.loopIn + ((((p - d.loopIn) % n) + n) % n);
     }
     return Math.max(0, Math.min(d.track?.duration || 48, p));
@@ -307,7 +315,11 @@ export class AudioEngine {
     job.timer = setTimeout(poll, Math.max(10, (end - this.ctx.currentTime) * 1000));
   }
   voiceClock(d, voice) {
-    if(voice?.handoffBefore&&!voice.gridTimeline&&!voice.liveKeylock){const bridge=voice.handoffBefore,after=this.voiceClock(d,{...voice,handoffBefore:null});return at=>at<bridge.until?bridge.clock(at):after(at);}
+    if(voice?.handoffBefore&&!voice.gridTimeline&&!voice.liveKeylock){
+      const bridge=voice.handoffBefore;
+      if(voice.jogClock&&this.voices.get(d.index)===voice)voice.jogClock.clock=this.voiceClock(d,{...voice,jogClock:null,handoffBefore:null});
+      const after=this.voiceClock(d,{...voice,handoffBefore:null});return at=>at<bridge.until?bridge.clock(at):after(at);
+    }
 
     if(voice?.censorReverse){const duration=d.track.duration;return at=>voice.handoffBefore&&at<voice.handoffBefore.until?voice.handoffBefore.clock(at):duration-voice.censorReverse.position(at);}
     if (voice?.gridTimeline) return at => voice.handoffBefore && at < voice.handoffBefore.until ? voice.handoffBefore.clock(at) : voice.gridTimeline.clock(at);
@@ -317,9 +329,14 @@ export class AudioEngine {
       return value.phase === 'idle' && value.playing ? advanceDeckScratchPosition(value.audiblePosition,
         Math.max(0, at - value.audioTime) * value.rate * (value.reverse ? -1 : 1), value.duration, value.loop) : value.audiblePosition;
     };
-    const start = d.anchorPosition, time = d.anchorTime, rate = this.voiceRateAt(d,voice,this.ctx?.currentTime||0) * (d.reverse ? -1 : 1), playing = d.playing,
+    const start = d.anchorPosition, time = d.anchorTime, rate = this.voiceRateAt(d,voice,this.ctx?.currentTime||0) * ((voice?.reverse??d.reverse) ? -1 : 1), playing = d.playing,
       position = d.position, duration = d.track.duration, loop = d.loop ? {start:d.loopIn,end:d.loopOut} : null;
-    return at => playing ? advanceDeckScratchPosition(start, Math.max(0,at-time)*rate, duration,loop) : position;
+    const clock=at=>playing?advanceDeckScratchPosition(start,Math.max(0,at-time)*rate,duration,loop):position;
+    if(!voice?.jogClock)return clock;
+    const cell=voice.jogClock;
+    // Current captures refresh active jogs; retired clones keep their own anchors.
+    if(this.voices.get(d.index)===voice)cell.clock=clock;
+    return at=>cell.clock(at);
   }
   audibleRate(d) {
     const voice = this.voices.get(d.index);
@@ -372,7 +389,8 @@ export class AudioEngine {
       const ack=await transport.start({track:reversePlan?.track||{bpm:d.track.bpm,grid:d.track.grid,duration:d.track.duration,gridWarpMarkers:d.track.gridWarpMarkers},loop:reversePlan?reversePlan.loop(loop):timeline.loop,bpm:timeline.bpm,position:reversePlan?reversePlan.duration-position:position,when,renderedLoop:transformed});
       if(handoff)await handoff.arm(d.index);
       if(!current())return;
-      const voice={sources:[],warpLoopTransport:transport,liveOwnerController:controller,gridTimeline:timeline,stemGains:[],handoffBefore:old&&playing?{until:when,owner:old,clock:oldClock,rate:at=>this.voiceRateAt(d,old,at)}:null};
+      if(this.ctx.currentTime>=ack.when-.005)throw Error('Sync start missed its lead; previous audio retained. Try Sync again.');
+      const voice={sources:[],pitchSettings:{keylock,keyShift:semitones},warpLoopTransport:transport,liveOwnerController:controller,gridTimeline:timeline,stemGains:[],handoffBefore:old&&playing?{until:when,owner:old,clock:oldClock,rate:at=>this.voiceRateAt(d,old,at)}:null};
       this.routeOrdinaryVoice(d,voice,transport.outputs,buffers.length===5,{when,reuseVoice:old});committed=true;this.retireVoiceAt(d.index,old,when);
       d.position=reversePlan?reversePlan.duration-ack.position:ack.position;d.anchorPosition=d.position;d.anchorTime=when;d.playing=true;
     }finally{if(!committed)transport?.dispose();}
@@ -422,7 +440,7 @@ export class AudioEngine {
       if(handoff)await handoff.arm(d.index);
       if (!current()) return;
       if(this.ctx.currentTime>=ack.when-.005)throw Error('Sync start missed its lead; previous audio retained. Try Sync again.');
-      const voice = {sources: [], liveKeylock: adapter, liveOwnerController: controller, gridTimeline, reservedStems:adapter.reservedStems, stemsReady:buffers.length===5, stemGains: [],
+      const voice = {sources: [], pitchSettings:{keylock:d.keylock,keyShift:d.keyShift||0}, liveKeylock: adapter, liveOwnerController: controller, gridTimeline, reservedStems:adapter.reservedStems, stemsReady:buffers.length===5, stemGains: [],
         handoffBefore: old && initiallyPlaying ? {until: ack.when, owner:old, clock: oldClock, rate: at => this.voiceRateAt(d, old, at)} : null};
       this.routeOrdinaryVoice(d, voice, adapter.outputs, buffers.length === 5 || adapter.reservedStems, {when: ack.when, reuseVoice: old});
       committed = true;
@@ -431,6 +449,7 @@ export class AudioEngine {
     } finally {if (!committed) await adapter?.dispose();}
   }
   async start(d, {positionAt, priorClock,handoff=null,preparedStems} = {}) {
+    if(d.track)this.validateLoop(d);
     this.onValidateTransport?.(d);
     this.cancelDeckScratchRequest(d);
     if (!d.track) throw new Error("Load a track first.");
@@ -474,14 +493,24 @@ export class AudioEngine {
     handoff?.watch(d.index,controller,()=>this.startTokens.get(d.index)===token&&d.track===track);
     try {
       await this.resume();
-      this.nodes[d.index].channelBpm = (track.bpm || 120) * this.audibleRate(d);
+      if(!current())return;
+      this.nodes[d.index].channelBpm = currentDeckBPM(d,this,{smartSync:true}) || 120;
       await this.applyChannelFX(d.index);
+      if(!current())return;
       const original = await this.buffer(track);
       const stems = preparedStems===undefined?this.stemBuffers.get(track.id):preparedStems;
       let buffers = stems ? [original, ...stems] : [original];
       const transformed = keylock || shift !== 0;
       const scale = transformed ? tempo : 1;
+      // Keep pre-loop audio and 2s DSP context; only the render copy changes origin.
+      const renderWindow=transformed&&d.loop&&(tempo!==1||shift!==0)?{
+        start:Math.max(0,Math.floor((Math.min(d.position,d.loopIn)-2)*original.sampleRate))/original.sampleRate,
+        end:Math.min(original.length,Math.ceil((Math.max(d.position,d.loopOut)+2)*original.sampleRate))/original.sampleRate,
+      }:null;
+      const sourceTime=position=>(d.reverse?(renderWindow?.end??track.duration)-position:position-(renderWindow?.start??0))/scale;
       if (!current()) return;
+      // Mirror forward-end Play before either raw or pitch preparation.
+      if(d.reverse&&!d.loop&&!d.playing&&!positionAt&&d.position<=0)d.position=track.duration;
       if(d.loop&&track.gridWarpMarkers?.length&&this.onGridTimeline?.(d,{position:d.position,when:this.ctx.currentTime})){
         await this.startWarpLoop(d,buffers,controller,current,{positionAt,priorClock,keylock,semitones:shift,handoff});return;
       }
@@ -499,6 +528,7 @@ export class AudioEngine {
               tempo,
               semitones: shift + (keylock ? 0 : 12 * Math.log2(tempo)),
               signal: controller.signal,
+              window: renderWindow,
             }),
           );
           if (!current()) return;
@@ -513,6 +543,8 @@ export class AudioEngine {
         syncWhen = handoff?await handoff.prepared(d.index,this.ctx.currentTime+.03):this.ctx.currentTime+.03;
         const aligned = positionAt(syncWhen);
         if (!Number.isFinite(aligned) || aligned < 0 || aligned >= track.duration) throw new RangeError("Invalid synchronized source position.");
+        if(renderWindow&&(aligned<renderWindow.start||aligned>renderWindow.end))
+          throw new RangeError('Synchronized position is outside the prepared render window; previous audio retained.');
         d.position = aligned;
       }
       if (!d.reverse && d.position >= track.duration) d.position = 0;
@@ -532,18 +564,18 @@ export class AudioEngine {
         for (const event of gridTimeline?.events || []) source.playbackRate.setValueAtTime(event.rate,event.when);
         source.loop = d.loop;
         source.loopStart =
-          (d.reverse ? track.duration - d.loopOut : d.loopIn) / scale;
+          sourceTime(d.reverse ? d.loopOut : d.loopIn);
         source.loopEnd =
-          (d.reverse ? track.duration - d.loopIn : d.loopOut) / scale;
+          sourceTime(d.reverse ? d.loopIn : d.loopOut);
         return source;
       });
       if(handoff||positionAt){
-        const voice={sources,timelineScale:scale,gridTimeline,stemGains:[],handoffBefore:old?{until:when,owner:old,clock:priorClock||this.voiceClock(d,old),rate:at=>this.voiceRateAt(d,old,at)}:null};let committed=false;
+        const voice={sources,pitchSettings:{keylock,keyShift:shift},reverse:!!d.reverse,timelineScale:scale,renderWindow,gridTimeline,stemGains:[],handoffBefore:old?{until:when,owner:old,clock:priorClock||this.voiceClock(d,old),rate:at=>this.voiceRateAt(d,old,at)}:null};let committed=false;
         try{
           // Never replace audible audio with a source whose aligned start is already late.
           const requireLead=()=>{if(this.ctx.currentTime>=when-.005)throw Error('Sync start missed its lead; previous audio retained. Try Sync again.');};
           requireLead();
-          sources.forEach(source=>source.start(when,Math.max(0,Math.min(source.buffer.duration-1/source.buffer.sampleRate,(d.reverse?track.duration-d.position:d.position)/scale))));
+          sources.forEach(source=>source.start(when,Math.max(0,Math.min(source.buffer.duration-1/source.buffer.sampleRate,sourceTime(d.position)))));
           await handoff?.arm(d.index);if(!current())return;
           requireLead();
           this.routeOrdinaryVoice(d,voice,sources,!!stems,{when,reuseVoice:old});committed=true;this.retireVoiceAt(d.index,old,when);
@@ -555,7 +587,10 @@ export class AudioEngine {
       const voice = sources[0];
       voice.sources = sources;
       voice.sourceGates=sources.map(()=>this.ctx.createGain());
+      voice.reverse = !!d.reverse;
+      voice.pitchSettings = {keylock,keyShift:shift};
       voice.timelineScale = scale;
+      voice.renderWindow = renderWindow;
       voice.gridTimeline = gridTimeline;
       const stemState = stems ? this.ensureStemState(d) : null;
       voice.stemHistoryState = stemState;
@@ -597,7 +632,7 @@ export class AudioEngine {
             0,
             Math.min(
               source.buffer.duration - 1 / source.buffer.sampleRate,
-              (d.reverse ? track.duration - d.position : d.position) / scale,
+              sourceTime(d.position),
             ),
           ),
         ),
@@ -606,7 +641,7 @@ export class AudioEngine {
       handoff?.fail(error);
       if (error.name !== "AbortError") throw error;
     } finally {
-      if (current()) {
+      if (this.startTokens.get(d.index) === token && d.track === track && this.transforms.get(d.index) === controller) {
         d.processing = false;
         this.transforms.delete(d.index);
         this.onProcessing(d);
@@ -614,24 +649,43 @@ export class AudioEngine {
     }
   }
 
+  captureRateChange(d,rate){
+    const prior=this.rateOwners.get(d),track=d.track,voice=this.voices.get(d.index),token=this.startTokens.get(d.index),controller=this.transforms.get(d.index);
+    // A warped source's local playback rate is not its nominal rollback tempo.
+    const inherit=prior?.pending&&(prior.started||!prior.playing)&&prior.track===track&&prior.voice===voice&&prior.token===token&&prior.controller===controller&&prior.rate===d.rate;
+    return{track,voice,rate,playing:d.playing,token,controller,previousOwner:prior,beforeRate:d.rate,previousRate:inherit?prior.previousRate:d.rate,pending:true,attempted:false,started:false};
+  }
+  restoreRateChange(d,owner,allowed){
+    if(d.track!==owner.track||d.rate!==owner.rate||this.rateOwners.get(d)!==owner)return false;
+    if(owner.attempted&&!owner.started&&this.voices.get(d.index)===owner.voice&&this.startTokens.get(d.index)===owner.token&&this.transforms.get(d.index)===owner.controller){
+      d.rate=owner.beforeRate;
+      if(owner.previousOwner)this.rateOwners.set(d,owner.previousOwner);else this.rateOwners.delete(d);
+      return false;
+    }
+    if(!allowed)return false;
+    d.rate=owner.previousRate;return true;
+  }
   async synchronize(d, {rate, positionAt, priorClock}) {
-    const track = d.track, previousRate = d.rate, previousPosition = d.position;
-    this.rateOwners.set(d, {});
-    let scheduled = false, token;
+    const owner=this.captureRateChange(d,rate),track=owner.track,previousPosition=d.position;
+    this.rateOwners.set(d, owner);
+    let scheduled = false, token, controller;
     d.rate = rate;
     try {
+      owner.attempted=true;
       const starting=this.start(d, {priorClock, positionAt: when => {const position = positionAt(when); scheduled = true; return position;}});
-      token=this.startTokens.get(d.index);await starting;
-      if (!scheduled || d.track !== track || d.rate !== rate || !d.playing)
+      token=this.startTokens.get(d.index);controller=this.transforms.get(d.index);
+      owner.started=token!==owner.token||controller!==owner.controller;
+      if(owner.started){owner.token=token;owner.controller=controller;}else owner.pending=false;
+      await starting;
+      if (controller?.signal.aborted || !scheduled || d.track !== track || d.rate !== rate || !d.playing || this.rateOwners.get(d) !== owner || this.startTokens.get(d.index) !== token)
         throw new DOMException("Sync preparation superseded.", "AbortError");
       return {when: d.anchorTime, position: d.anchorPosition, rate};
     } catch (error) {
-      if (d.track === track && d.rate === rate) {
-        d.rate = previousRate;
+      if(this.restoreRateChange(d,owner,this.startTokens.get(d.index)===token||(!d.playing&&!d.processing&&!this.voices.has(d.index)))){
         if(!d.playing&&this.startTokens.get(d.index)===token)d.position=previousPosition;
       }
       throw error;
-    }
+    }finally{owner.pending=false;owner.previousOwner=null;owner.voice=null;owner.controller=null;owner.track=null;}
   }
 
   pause(d, { preserveStemExit = false } = {}) {
@@ -649,7 +703,7 @@ export class AudioEngine {
     this.stopSource(d.index, { preserveStemExit });
   }
   async seek(d, p) {
-    this.onManualPosition?.(d);
+    this.onManualPosition?.(d,{seek:true});
     if(this.voices.get(d.index)?.gridTimeline){
       const was=d.playing||d.processing;this.pause(d,{preserveStemExit:true});
       d.position=Math.max(0,Math.min(d.track.duration,p));
@@ -689,7 +743,9 @@ export class AudioEngine {
       throw Error('Jog bend is not available during preparation, warped Sync, scratch or Stem Slip.');
     if(factor!==1&&!voice.liveKeylock&&(d.keylock||d.keyShift))
       throw Error('This rendered loop/reverse pitch path cannot bend while preserving key.');
-    const rate=Math.max(.25,Math.min(4,d.rate*factor));
+    const owner=this.rateOwners.get(d);
+    const nominalRate=factor===1&&owner?.pending&&owner.voice===voice&&owner.track===d.track?owner.previousRate:d.rate;
+    const rate=Math.max(.25,Math.min(4,nominalRate*factor));
     if(factor!==1)this.onManualPosition?.(d);
     if(voice.deckScratchTransport){
       const transport=voice.deckScratchTransport;
@@ -701,14 +757,25 @@ export class AudioEngine {
       if(!current()||ack.superseded)return false;
       d.position=ack.position;d.anchorPosition=ack.position;d.anchorTime=ack.when;
     }else{
-      const position=this.position(d),when=this.ctx.currentTime;
+      const now=this.ctx.currentTime,when=Math.max(now,voice.handoffBefore?.until||now);
+      const position=when>now?this.voiceClock(d,voice)(when):this.position(d);
       for(const source of voice.sources)source.playbackRate.value=rate/(voice.timelineScale||1);
       d.position=position;d.anchorPosition=position;d.anchorTime=when;
+      const cell=voice.jogClock||(voice.jogClock={});
+      cell.clock=this.voiceClock(d,{...voice,jogClock:null,handoffBefore:null});
+      if(factor===1)delete voice.jogClock;
     }
-    return {rate,nominalRate:d.rate};
+    return {rate,nominalRate};
+  }
+  cancelSyncedRates(d){
+    const pending=this.syncedRateRequests.get(d);
+    if(!pending)return null;
+    pending.group.fail(new DOMException('Synced tempo superseded by track load.','AbortError'));
+    return pending.settled;
   }
   async setSyncedRates(changes,{participants=[]}={}){
-    const saved=changes.map(({deck,rate})=>({deck,rate,owner:{},previous:deck.rate,track:deck.track,playing:deck.playing,clock:this.voiceClock(deck,this.voices.get(deck.index))}));
+    if(changes.some(({rate})=>!Number.isFinite(rate)||rate<.25||rate>4))throw new RangeError('Tempo must be between 0.25× and 4×.');
+    const saved=changes.map(({deck,rate})=>({deck,rate,owner:this.captureRateChange(deck,rate),track:deck.track,playing:deck.playing,clock:this.voiceClock(deck,this.voices.get(deck.index))}));
     if(saved.some(x=>x.deck.processing&&!x.playing))throw Error('Finish deck preparation before changing group tempo.');
     const active=saved.filter(x=>x.playing);
     const gesture=active.some(x=>this.voices.get(x.deck.index)?.deckScratchTransport||(x.deck.stemSlip&&x.deck.stemSlip!=='off'));
@@ -720,29 +787,42 @@ export class AudioEngine {
     if(gesture||(!requiresPreparation&&!participants.length))return Promise.all(saved.map(x=>this.setRate(x.deck,x.rate,{syncInternal:true})));
     const ids=[...active.map(x=>x.deck.index),...participants.map(x=>x.id)];
     const group=ids.length?createSyncTempoHandoff(this.ctx,ids):null;
+    let settle;const request={group,settled:new Promise(resolve=>settle=resolve)};
+    for(const x of saved)this.syncedRateRequests.set(x.deck,request);
     try{
       const jobs=saved.map(async x=>{
         this.rateOwners.set(x.deck,x.owner);
         x.deck.rate=x.rate;
-        try{if(x.playing)await this.start(x.deck,{priorClock:x.clock,positionAt:x.clock,handoff:group});}catch(error){group?.fail(error);throw error;}
+        try{if(x.playing){
+          x.owner.attempted=true;
+          const pending=this.start(x.deck,{priorClock:x.clock,positionAt:x.clock,handoff:group}),token=this.startTokens.get(x.deck.index),controller=this.transforms.get(x.deck.index);
+          x.owner.started=token!==x.owner.token||controller!==x.owner.controller;
+          if(x.owner.started){x.owner.token=token;x.owner.controller=controller;}else x.owner.pending=false;
+          await pending;
+        }}catch(error){group?.fail(error);throw error;}
       });
       jobs.push(...participants.map(x=>x.start(group).catch(error=>{group?.fail(error);throw error;})));
-      const results=await Promise.allSettled(jobs);const failed=results.find(r=>r.status==='rejected');if(failed){group?.fail(failed.reason);throw failed.reason;}group?.finish();
-      for(const x of saved)if(this.nodes[x.deck.index]){this.nodes[x.deck.index].channelBpm=x.track.bpm*x.rate;try{await this.applyChannelFX(x.deck.index);}catch(error){this.onError?.(error);}}
-      if(this.fxState){for(const x of saved)this.fxState[2][x.deck.index]=x.track.bpm*x.rate;try{this.configureFX(...this.fxState);}catch(error){this.onError?.(error);}}
+      const jobsSettled=Promise.allSettled(jobs),results=await(group?Promise.race([jobsSettled,group.failure]):jobsSettled);const failed=results.find(r=>r.status==='rejected');if(failed){group?.fail(failed.reason);throw failed.reason;}group?.finish();
+      const bpms=this.nodes.map(node=>node.channelBpm||120);
+      for(const x of saved)if(this.nodes[x.deck.index]&&x.deck.track===x.track&&x.deck.rate===x.rate&&this.rateOwners.get(x.deck)===x.owner&&(!x.playing||group?.owns(x.deck.index)))
+        bpms[x.deck.index]=currentDeckBPM(x.deck,this,{smartSync:true})||120;
+      try{this.updateFXBPMs(bpms);}catch(error){this.onError?.(error);}
     }catch(error){
       group?.fail(error);
       // Stop revokes a voice token, but must still roll back this uncommitted
       // rate. A newer rate request, track or active voice retains authority.
-      for(const x of saved)if(x.deck.track===x.track&&x.deck.rate===x.rate&&this.rateOwners.get(x.deck)===x.owner&&
-        (!x.playing||group?.owns(x.deck.index)||(!x.deck.playing&&!x.deck.processing&&!this.voices.has(x.deck.index)))){
-        x.deck.rate=x.previous;x.deck.processing=false;const controller=group?.controller(x.deck.index);if(this.transforms.get(x.deck.index)===controller)this.transforms.delete(x.deck.index);this.onProcessing(x.deck);
+      for(const x of saved)if(this.restoreRateChange(x.deck,x.owner,!x.playing||group?.owns(x.deck.index)||(!x.deck.playing&&!x.deck.processing&&!this.voices.has(x.deck.index)))){
+        x.deck.processing=false;const controller=group?.controller(x.deck.index);if(this.transforms.get(x.deck.index)===controller)this.transforms.delete(x.deck.index);this.onProcessing(x.deck);
       }
       throw error;
-    }finally{group?.dispose();}
+    }finally{for(const x of saved){if(this.syncedRateRequests.get(x.deck)===request)this.syncedRateRequests.delete(x.deck);x.owner.pending=false;x.owner.previousOwner=null;x.owner.voice=null;x.owner.controller=null;x.owner.track=null;}group?.dispose();settle();}
   }
   async setRate(d, rate, {syncInternal = false} = {}) {
+    if(!Number.isFinite(rate)||rate<.25||rate>4)throw new RangeError('Tempo must be between 0.25× and 4×.');
     if (!syncInternal && this.onRateRequest) return this.onRateRequest(d, rate);
+    const voice=this.voices.get(d.index);
+    if(d.playing&&!voice?.deckScratchTransport&&!voice?.censorReverse&&(!d.stemSlip||d.stemSlip==='off')&&(voice?.gridTimeline||((d.keylock||d.keyShift)&&!voice?.liveKeylock)))
+      return this.setSyncedRates([{deck:d,rate}]);
     this.rateOwners.set(d, {});
     this.cancelDeckScratchRequest(d);
     if (this.voices.get(d.index)?.gridTimeline) {
@@ -786,14 +866,14 @@ export class AudioEngine {
     }
     const live = this.voices.get(d.index)?.liveKeylock;
     if (live) {
-      const previous = d.rate; d.rate = rate;
+      const previous = d.rate, track=d.track; d.rate = rate;
       if (d.processing) return this.start(d); // Supersede prepared settings while old audio continues.
-      let ack; try {ack = await live.update({rate});} catch (error) {if (error.name === 'AbortError') return; if (d.rate === rate) d.rate = previous; throw error;}
+      let ack; try {ack = await live.update({rate});} catch (error) {if (error.name === 'AbortError') return; if (d.track===track && this.voices.get(d.index)?.liveKeylock===live && d.rate === rate) d.rate = previous; throw error;}
       if (this.voices.get(d.index)?.liveKeylock !== live || ack.superseded) return;
       d.position = ack.position; d.anchorPosition = ack.position; d.anchorTime = ack.when;
-      if (this.nodes[d.index]) {this.nodes[d.index].channelBpm = (d.track.bpm || 120) * this.audibleRate(d); await this.applyChannelFX(d.index);}
+      if (this.nodes[d.index]) {this.nodes[d.index].channelBpm = currentDeckBPM(d,this,{smartSync:true}) || 120; await this.applyChannelFX(d.index);}
       if (this.voices.get(d.index)?.liveKeylock !== live) return;
-      if (this.fxState) {this.fxState[2][d.index] = (d.track.bpm || 120) * this.audibleRate(d); this.configureFX(...this.fxState);}
+      if (this.fxState) {this.fxState[2][d.index] = currentDeckBPM(d,this,{smartSync:true}) || 120; this.configureFX(...this.fxState);}
       return;
     }
     const p = this.position(d);
@@ -815,29 +895,42 @@ export class AudioEngine {
       for (const source of s.sources || [s]) source.playbackRate.value = rate;
     if (was && restart) await this.start(d);
     if (this.nodes[d.index]) {
-      this.nodes[d.index].channelBpm = (d.track?.bpm || 120) * rate;
+      this.nodes[d.index].channelBpm = currentDeckBPM(d,this,{smartSync:true}) || 120;
       await this.applyChannelFX(d.index);
     }
     if (this.fxState) {
-      this.fxState[2][d.index] = (d.track?.bpm || 120) * rate;
+      this.fxState[2][d.index] = currentDeckBPM(d,this,{smartSync:true}) || 120;
       this.configureFX(...this.fxState);
     }
   }
+  validateLoop(d,on=d.loop,start=d.loopIn,end=d.loopOut){
+    if(on&&(!Number.isFinite(start)||!Number.isFinite(end)||!Number.isFinite(d.track?.duration)||start<0||end<=start||end>d.track.duration))
+      throw new RangeError('Loop Out must be after Loop In, with both inside the track.');
+  }
   async setLoop(d, on, start, end, {positionAt=null,priorClock=null,playing=d.playing}={}) {
+    this.validateLoop(d,on,start,end);
     this.onValidateTransport?.(d,{loop:on,loopIn:start,loopOut:end});
+    const track=d.track,voice=this.voices.get(d.index),previous={loop:d.loop,loopIn:d.loopIn,loopOut:d.loopOut};
+    const restart=async options=>{
+      const pending=this.start(d,options),token=this.startTokens.get(d.index);
+      try{await pending;}catch(error){
+        if(d.track===track&&this.voices.get(d.index)===voice&&this.startTokens.get(d.index)===token)Object.assign(d,previous);
+        throw error;
+      }
+    };
     if(positionAt){
       const position=positionAt(this.ctx.currentTime),prior=priorClock||this.voiceClock(d,this.voices.get(d.index));
       if(!Number.isFinite(position)||position<0||position>d.track.duration)throw new RangeError('Invalid loop transition position.');
       d.position=this.position(d);d.loop=on;d.loopIn=start;d.loopOut=end;
       // One owned preparation selects source position at its actual future
       // output time, without a second render/seek after preparing the loop.
-      if(playing)await this.start(d,{priorClock:prior,positionAt});
+      if(playing)await restart({priorClock:prior,positionAt});
       else{this.pause(d,{preserveStemExit:true});d.position=position;}
       return;
     }
-    if(this.voices.get(d.index)?.gridTimeline){
+    if(voice?.gridTimeline||voice?.renderWindow){
       const prior=this.voiceClock(d,this.voices.get(d.index)),was=d.playing;d.position=this.position(d);d.loop=on;d.loopIn=start;d.loopOut=end;
-      if(was)await this.start(d,{priorClock:prior,positionAt:at=>{const p=prior(at);return on&&p>=end?start+((p-start)%(end-start)+(end-start))%(end-start):p;}});
+      if(was)await restart({priorClock:prior,positionAt:at=>{const p=prior(at);return on&&p>=end?start+((p-start)%(end-start)+(end-start))%(end-start):p;}});
       return;
     }
     if (this.voices.get(d.index)?.deckScratchTransport || this.voices.get(d.index)?.liveKeylock || this.deckScratchRequests.has(d.index)) {
@@ -873,8 +966,11 @@ export class AudioEngine {
     }
   }
   setMixerSettings(value) {
+    const filtersEnabled=this.mixerSettings.filtersEnabled;
     this.mixerSettings=normalizeMixerSettings(value);
     this.setCross(this.cross);
+    if(filtersEnabled!==this.mixerSettings.filtersEnabled)
+      Promise.all(this.nodes.map((_,i)=>this.applyChannelFX(i))).catch(error=>this.onError?.(error));
     return structuredClone(this.mixerSettings);
   }
   setDeckTrackGain(index,value){
@@ -952,51 +1048,16 @@ export class AudioEngine {
     await Promise.all(this.nodes.map((_, i) => this.applyChannelFX(i)));
   }
   async applyChannelFX(i) {
-    await this.effectsReady;
-    const n=this.nodes[i];
+    const n=this.nodes[i],epoch=n.channelFXEpoch;
+    if(this.mixerSettings.filtersEnabled)await this.effectsReady;
+    if(this.nodes[i]!==n||n.channelFXEpoch!==epoch)return;
     for(const strip of [n,n.stemMonitor].filter(Boolean)){
       if(strip!==n){strip.channelValue=n.channelValue;strip.channelBpm=n.channelBpm;}
       this.applyChannelFXStrip(strip);
     }
   }
   applyChannelFXStrip(n) {
-    const value = n.channelValue || 0,
-      name = this.channelFXType;
-    if (name === "Filter") {
-      n.channelEffect?.dispose();
-      n.channelEffect = null;
-      n.high.disconnect();
-      n.filter.disconnect();
-      if (value === 0) {
-        n.high.connect(n.monitorTap||n.gain);
-        return;
-      }
-      n.high.connect(n.filter);
-      n.filter.connect(n.monitorTap||n.gain);
-      n.filter.type = value < 0 ? "lowpass" : "highpass";
-      n.filter.frequency.setTargetAtTime(
-        value < 0
-          ? 20000 * Math.pow(0.003, -value)
-          : 20 * Math.pow(1000, value),
-        this.ctx.currentTime,
-        0.015,
-      );
-      return;
-    }
-    const spec = {
-      name: `Channel ${name}`,
-      on: value !== 0,
-      depth: Math.abs(value) * 100,
-      beat: "1/2",
-      params: {},
-    };
-    if (n.channelEffect?.update?.(spec, n.channelBpm || 120) === true) return;
-    n.channelEffect?.dispose();
-    n.high.disconnect();
-    n.filter.disconnect();
-    n.channelEffect = createEffect(this.ctx, spec, n.channelBpm || 120);
-    n.high.connect(n.channelEffect.input);
-    n.channelEffect.output.connect(n.monitorTap||n.gain);
+    applyChannelFilterRouting(this.ctx,n,{enabled:this.mixerSettings.filtersEnabled,name:this.channelFXType,value:n.channelValue||0,bpm:n.channelBpm||120,onError:error=>this.onError?.(error)});
   }
 
   updateFXBPMs(bpms) {
@@ -1172,11 +1233,14 @@ export class AudioEngine {
   async setPitch(d, { keylock = d.keylock, semitones = d.keyShift || 0 } = {}) {
     this.onValidateTransport?.(d,{keylock,keyShift:semitones});
     this.cancelDeckScratchRequest(d);
+    const voice=this.voices.get(d.index),track=d.track;
+    // Pending deck settings are not the retained transport's rollback basis.
+    const previous=voice?.pitchSettings||{keylock:d.keylock,keyShift:d.keyShift};
     if(this.voices.get(d.index)?.gridTimeline){
-      const track=d.track,previous={keylock:d.keylock,keyShift:d.keyShift},clock=this.voiceClock(d,this.voices.get(d.index)),was=d.playing||d.processing;
+      const clock=this.voiceClock(d,voice),was=d.playing||d.processing;let token=this.startTokens.get(d.index);
       d.position=this.position(d);d.keylock=keylock;d.keyShift=semitones;
-      try{if(was)await this.start(d,{priorClock:clock,positionAt:clock});}
-      catch(error){if(d.track===track&&d.keylock===keylock&&d.keyShift===semitones)Object.assign(d,previous);throw error;}
+      try{if(was){const pending=this.start(d,{priorClock:clock,positionAt:clock});token=this.startTokens.get(d.index);await pending;}}
+      catch(error){if(d.track===track&&this.voices.get(d.index)===voice&&this.startTokens.get(d.index)===token&&d.keylock===keylock&&d.keyShift===semitones)Object.assign(d,previous);throw error;}
       return;
     }
     if (d.stemSlip && d.stemSlip !== "off") {
@@ -1195,18 +1259,20 @@ export class AudioEngine {
     }
     const live = this.voices.get(d.index)?.liveKeylock;
     if (live) {
-      const previous = {keylock:d.keylock,keyShift:d.keyShift}; d.keylock = keylock; d.keyShift = semitones;
-      if (d.processing) return this.start(d);
-      let ack; try {ack = await live.update({keylock: !!keylock, semitones});} catch (error) {if (error.name === 'AbortError') return; if (d.keylock === keylock && d.keyShift === semitones) Object.assign(d,previous); throw error;}
-      if (this.voices.get(d.index)?.liveKeylock === live && !ack.superseded) {d.keylock = keylock; d.keyShift = semitones;}
+      d.keylock = keylock; d.keyShift = semitones;let token=this.startTokens.get(d.index);
+      let ack; try {
+        if(d.processing){const pending=this.start(d);token=this.startTokens.get(d.index);await pending;return;}
+        ack = await live.update({keylock: !!keylock, semitones});
+      } catch (error) {if (error.name === 'AbortError') return; if (d.track===track && this.voices.get(d.index)===voice && this.startTokens.get(d.index)===token && d.keylock === keylock && d.keyShift === semitones) Object.assign(d,previous); throw error;}
+      if (this.voices.get(d.index)?.liveKeylock === live && !ack.superseded) {d.keylock = keylock; d.keyShift = semitones;voice.pitchSettings={keylock,keyShift:semitones};}
       return;
     }
-    if(d.playing&&!d.reverse){
-      const track=d.track,previous={keylock:d.keylock,keyShift:d.keyShift},clock=this.voiceClock(d,this.voices.get(d.index));
+    if(d.playing&&(!d.reverse||(!this.voices.get(d.index)?.deckScratchTransport&&!this.voices.get(d.index)?.censorReverse))){
+      const clock=this.voiceClock(d,voice);
       const handoff=createSyncTempoHandoff(this.ctx,[d.index]);
       d.keylock=keylock;d.keyShift=semitones;
       try{await this.start(d,{priorClock:clock,positionAt:clock,handoff});handoff.finish();}
-      catch(error){handoff.fail(error);if(d.track===track&&handoff.owns(d.index)&&d.keylock===keylock&&d.keyShift===semitones)Object.assign(d,previous);throw error;}
+      catch(error){handoff.fail(error);if(d.track===track&&this.voices.get(d.index)===voice&&handoff.owns(d.index)&&d.keylock===keylock&&d.keyShift===semitones)Object.assign(d,previous);throw error;}
       finally{handoff.dispose();}
       return;
     }
@@ -1438,20 +1504,7 @@ export class AudioEngine {
     if (voice) voice.stemInitialized = true;
   }
   async setReverse(d, reverse) {
-    this.onValidateTransport?.(d,{reverse});
-    if(reverse!==d.reverse)this.onManualPosition?.(d);
-    if (d.stemSlip && d.stemSlip !== "off") {
-      d.reverse = reverse;
-      if (reverse) {
-        await this.beginStemSlipGesture(d, "transport:reverse");
-        await this.voices.get(d.index)?.stemSlipTransport.command("reverse", {owner: "transport:reverse", reverse});
-      } else await this.endStemSlipGesture(d, "transport:reverse");
-      return;
-    }
-    const playing = d.playing || d.processing;
-    this.pause(d, { preserveStemExit: true });
-    d.reverse = reverse;
-    if (playing) await this.start(d);
+    return setDeckReverse(this,d,reverse);
   }
   // Whole-deck scratch uses original PCM, independently of the pitch renderer.
   // Ownership is invalidated synchronously before asynchronous preparation can commit.
@@ -2180,6 +2233,7 @@ export class AudioEngine {
       this.stopSample(slot);
   }
   silence() {
+    this.onRateRequest?.cancelAll?.();
     for(const lease of this.deckScratchShadows.values())lease.dispose();
     this.scratchCache.clearAll();
     for (const d of this.deckStates.values()) {
@@ -2192,9 +2246,9 @@ export class AudioEngine {
       state.histories.forEach((history) => history.clear());
     this.stopAllSamples();
     for (const channel of this.nodes) {
+      channel.channelFXEpoch=(channel.channelFXEpoch||0)+1;
       for (const n of [channel,channel.stemMonitor].filter(Boolean)) {
-      n.channelEffect?.dispose();
-      n.channelEffect = null;
+      disposeChannelFilterRouting(n);
       n.channelValue = 0;
       n.high.disconnect();
       n.filter.disconnect();

@@ -1,0 +1,118 @@
+{
+  "date": "2026-10-29",
+  "card": "CORE-FIX-15",
+  "baseline": "67d529a2f30fec557976c643842a5c0335719f4c",
+  "scope": "Actual AudioEngine + Smart Sync + actual live keylock/Signalsmith WASM in controlled host/clock/ports; generated input. Not native or acoustic proof.",
+  "failure": {
+    "beforeOFF": {
+      "sameLiveVoice": true,
+      "tokenUnchanged": true,
+      "processing": false,
+      "nominalRate": 1.05,
+      "adapterRate": 1,
+      "schedules": 1,
+      "pending": true
+    },
+    "afterOFF": {
+      "sameLiveVoice": true,
+      "tokenUnchanged": true,
+      "sync": false,
+      "state": "off",
+      "nominalRate": 1.05,
+      "adapterRate": 1.05,
+      "audibleRate": 1.05,
+      "newScheduleCommands": 1,
+      "scheduledWhen": 0.4953333333333333
+    },
+    "outcome": {
+      "status": "rejected",
+      "name": "AbortError",
+      "message": "Sync preparation superseded."
+    },
+    "order": [
+      "fill-held-before-original",
+      "first-OFF",
+      "release-fill",
+      "schedule-issued",
+      "scheduled",
+      "disposed"
+    ]
+  },
+  "repair": {
+    "file": "prototype/smart-sync.js",
+    "behavior": "Playing live-keylock tempo-only Sync uses the existing owned synchronize handoff with the same incoming clock. No master phase snap, live adapter API or DSP rule change.",
+    "tradeoff": "Prepares a replacement voice instead of reusing the in-place adapter; native timing/sonics remain separate."
+  },
+  "after": {
+    "beforeOFF": {
+      "sameLiveVoice": true,
+      "tokenUnchanged": false,
+      "processing": true,
+      "nominalRate": 1.05,
+      "adapterRate": 1,
+      "schedules": 1,
+      "pending": true
+    },
+    "afterOFF": {
+      "sameLiveVoice": true,
+      "tokenUnchanged": false,
+      "sync": false,
+      "state": "off",
+      "nominalRate": 1,
+      "adapterRate": 1,
+      "audibleRate": 1,
+      "newScheduleCommands": 0,
+      "scheduledWhen": 0.16999999999999998
+    },
+    "outcome": {
+      "status": "rejected",
+      "name": "AbortError",
+      "message": "Sync preparation superseded."
+    },
+    "completed": true,
+    "cleanup": {
+      "voices": 0,
+      "transforms": 0,
+      "smartPending": false,
+      "allStopped": true,
+      "adapterDisposed": true,
+      "timerCleared": true,
+      "retainedPCMBytes": 0
+    },
+    "sourceStable": true
+  },
+  "focusedRegression": {
+    "file": "prototype/smart-tempo-off.test.mjs",
+    "red": "Old retained adapter newly changed1\u21921.05 after OFF",
+    "green": 3,
+    "covers": [
+      "Owned pending replacement OFF",
+      "Newer manual tempo remains authoritative",
+      "Committed live voice remains unchanged after pre-program OFF; accepted retry keeps matched pitch"
+    ]
+  },
+  "sourceHashes": {
+    "red": {
+      "prototype/app.js": "b3d74e1e8474fab8703a4d9e7fc45def5a1bf5d99d858c90d92a3480eaed341c",
+      "prototype/engine.js": "036f084a42177cb58eeaf926b3fd3d5ea6f0ef7b2fe9aefcb1974711ee89261b",
+      "prototype/smart-sync.js": "24ed13aa60a16a72ed3ee93cbf3cd57c5831f27d1cc27dbb2ba59d5fe41ed1d6",
+      "prototype/keylock-shadow-live.js": "41bf27051270a4741f83b59bc7c0111767b589ef3986b4aafb43ad36dc067551",
+      "prototype/vendor/signalsmith-stretch/SignalsmithStretch-open-play-history.mjs": "1f470f846a993cc750ee2e111817adb08879493025c7322eadc8cf98323e4ef8"
+    },
+    "green": {
+      "prototype/app.js": "b3d74e1e8474fab8703a4d9e7fc45def5a1bf5d99d858c90d92a3480eaed341c",
+      "prototype/engine.js": "036f084a42177cb58eeaf926b3fd3d5ea6f0ef7b2fe9aefcb1974711ee89261b",
+      "prototype/smart-sync.js": "3f92e91425a351d59718d45daa030b71a692657ad7bf7f29afefda4873883625",
+      "prototype/keylock-shadow-live.js": "41bf27051270a4741f83b59bc7c0111767b589ef3986b4aafb43ad36dc067551",
+      "prototype/vendor/signalsmith-stretch/SignalsmithStretch-open-play-history.mjs": "1f470f846a993cc750ee2e111817adb08879493025c7322eadc8cf98323e4ef8"
+    }
+  },
+  "nativeCheck": "Queued for private111; current110normal session remains unchanged/stopped",
+  "genericPopStallStartupDefects": "Open; no causality claim",
+  "nativeFollowThrough": {
+    "version": "0.1.112",
+    "completed": true,
+    "receipt": "SMART_LIVE_OFF_112_NATIVE_2026-10-29.json",
+    "scope": "One controlled next-factory cancellation in actual packaged app; not original fill gate or generic pop/sonic/hardware proof"
+  }
+}

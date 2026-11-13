@@ -1,0 +1,43 @@
+{
+  "date": "2026-10-28",
+  "baselineCommit": "523b6b683af07c7a147fe21e4505b63344006038",
+  "baseline": {
+    "bpm": 123,
+    "grid": 0.3560693446462153,
+    "duration": 448.0058125,
+    "position": 0,
+    "notice": "Loop Out must be after Loop In, with both inside the track.",
+    "scope": "Actual isolated real-track Loop press at source zero, key shift reset; grid values recorded from saved native accessibility state; no Play issued",
+    "originalSnappedTime": -0.13173553340256516,
+    "oldQuantizedLoopRejected": true,
+    "inputHash": "633c327923c1917b1473b24444b8ee2e1caee53411d11cfe0810d22b060b6d6c"
+  },
+  "repaired": {
+    "physicalMuted": true,
+    "allStopped": true,
+    "duration": 448.0058125,
+    "bpm": 123,
+    "grid": 0.3560693446462153,
+    "keyShift": 0,
+    "loop": true,
+    "loopIn": 0,
+    "loopOut": 1.951219512195122,
+    "firstCue": {
+      "position": 0,
+      "name": "Cue 1"
+    },
+    "notice": "Finished: 3 measured, 0 failed. Existing/manual metadata and locked grids preserved unless replacement was requested.",
+    "playControls": 4,
+    "previews": 9
+  },
+  "focusedRegression": {
+    "file": "prototype/quantize-boundary.test.mjs",
+    "lines": 18,
+    "baseline": "negative snapped time -0.13173553340256516 fails legal-source-bound check",
+    "repaired": "one composed boundary test passes; file end, interior, fractional and Quantize-off behavior checked"
+  },
+  "originalInputHashAndMtimeUnchanged": true,
+  "ownedSessionStoppedCleared": true,
+  "temporarySourceAndMediaPathsRemoved": true,
+  "scope": "Actual isolated real-track zero-position Loop and keyboard-created Cue, all stopped/physically muted. Shared source positions are bounded without changing grid/DSP/clock/transport guards. Not native boundary playback, listening, Sync-pop, keylocked-loop rendering, frame-rate or full Quantize parity acceptance."
+}

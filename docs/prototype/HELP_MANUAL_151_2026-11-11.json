@@ -1,0 +1,60 @@
+{
+  "date": "2026-11-11",
+  "version": "0.1.151",
+  "sourceCommit": "f0ebf35f286f65943d9fa455dfec39eff3a14bc3",
+  "asarSHA256": "e8e9df5f2f369b46c3f82d7c05e4cd509075f6c62bbc3c7317e7ac4047262522",
+  "criterion": "Native Help opens Open Play manual/search in the external browser; Enter works through Astryx; preserved player stops safely.",
+  "baseline": "Actual Help callback opened Serato search; desktop denied all child-window URLs. A native provisional151 check then exposed lost Enter on the Astryx proxy.",
+  "repair": {
+    "panel": "prototype/help-panel.js, small extracted Help component; local shortcuts/Cue guidance and diagnostic controls retained.",
+    "desktop": "desktop/manual-links.cjs,14lines; exact HTTPS manual origin only, own app source page, no credentials/custom ports/POST; all child windows still denied and top-level navigation policy unchanged.",
+    "Enter": "Help-local capture listener before Astryx portal key stop; rejects composition and modified Enter; no generic keyboard/transport changes.",
+    "packaging": "All current-main packaging callers include shared handler; pinned historical hosts unchanged."
+  },
+  "sourceChecks": [
+    "One actual Help baseline callback fails expected Open Play origin.",
+    "One focused Help component test passes, including query encoding/capture/Enter guards/local callbacks.",
+    "One focused actual desktop-handler test passes allowed/denied destinations and sync/async browser failure; two existing package staging-cleanup checks passed. No broad suite."
+  ],
+  "archiveInspection": {
+    "passed": 5,
+    "failed": 0,
+    "receipt": "docs/prototype/desktop-0.1.151-playback-manual-final.json"
+  },
+  "native": {
+    "provisional": "Manual button and Search button reached site; observed14temporesults. Enter failed before capture repair; provisional archive retired, receipts retained privately.",
+    "final": "Exact f0ebf35 archive: Help→visible Astryx search→tempo→Return opens default Brave at https://open-play-help.vercel.app/?q=tempo,14articles. Help and own browser tabs closed.",
+    "mainPositions": [
+      6.927,
+      206.068
+    ],
+    "masterDb": -10.08,
+    "libraryRows": 25,
+    "controls": {
+      "play": 2,
+      "tempo": 2,
+      "EQ": 6,
+      "level": 2,
+      "visiblePreviews": 12
+    },
+    "finalMeter": "−infinity",
+    "finalOutput": "MacBook Pro Speakers0%/Mute1",
+    "notPerformed": "No Play/Sync/Cue/RECStart, no listening or Hercules. Whole151metadata export was not repeated; prior150 exact-export evidence remains separately scoped."
+  },
+  "profileRecovery": {
+    "oldProcessAbsent": true,
+    "source": "/Users/jasonpoindexter/Library/Application Support/Open Play Playback Test",
+    "recovery": "local-evidence/profile-recovery/pre-help-151",
+    "files": 278,
+    "logicalBytes": 221734868,
+    "hashSizeMtimeEqual": true,
+    "separateInodes": true
+  },
+  "retention": {
+    "inactive149LogicalBytesRetired": 611821087,
+    "unpublishedProvisional151Replaced": true,
+    "retained": "151current +150rollback; no media/profiles/recordings/recovery removed."
+  },
+  "remaining": "Owner musical Sync/pop/volume/visual acceptance, clean public install/recovery, final trust/license/notices and publication. Help guide baseline remains explicitly0.1.89; final release instructions need refresh. No public release or broad accessibility certification.",
+  "privateEvidence": "local-evidence/help-route-151/"
+}

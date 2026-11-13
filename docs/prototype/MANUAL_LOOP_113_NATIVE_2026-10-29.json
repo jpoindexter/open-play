@@ -1,0 +1,173 @@
+{
+  "date": "2026-10-29",
+  "card": "CORE-FIX-64",
+  "url": "https://trello.com/c/uxjrqqFH",
+  "version": "0.1.113",
+  "sourceCommit": "74ed9f6482df56d8a44924b89c839a4d705c312c",
+  "asarSHA256": "af47d77dbd69aed344f3f5d2e09f1d8e237f301bec8e6fb9bd3260822ce02914",
+  "executedNativeCheck": {
+    "startedAt": "2026-10-29T17:18:54.919Z",
+    "completed": true,
+    "scope": "Actual packaged generated-only workspace, native AudioContext/raw AudioBuffer voice, installed saved-loop pad and normal library selection/Load handlers. One next-resume gate before real delegation; not the original rendered-worker gate, natural renderer failure, PCM, music, listening, physical output, OS focus or controller proof.",
+    "sourceBefore": {
+      "app.js": "b3d74e1e8474fab8703a4d9e7fc45def5a1bf5d99d858c90d92a3480eaed341c",
+      "engine.js": "036f084a42177cb58eeaf926b3fd3d5ea6f0ef7b2fe9aefcb1974711ee89261b",
+      "manual-loops.js": "abc09bd34bd359a836870c22d6418a6bf53442ddf54e40232ec68df38b3d2439",
+      "manual-loop-load-check.js": "567b55ae4aba17cb7f00977f4bdd749ac50a6a073c4d64a5d648303f6d36bc75"
+    },
+    "previewBefore": [
+      {
+        "track": "demo-0",
+        "src": "blob:http://127.0.0.1:18775/7d0d0d42-2a7a-42f4-a3c2-b7df64892e3d"
+      },
+      {
+        "track": "demo-6",
+        "src": "blob:http://127.0.0.1:18775/0e623a14-91db-40ce-9ef2-45d1174936af"
+      },
+      {
+        "track": "demo-7",
+        "src": "blob:http://127.0.0.1:18775/f617199d-1e62-4ae2-a14d-290c01647059"
+      },
+      {
+        "track": "demo-2",
+        "src": "blob:http://127.0.0.1:18775/045fe6a8-2c08-4f00-b821-f33e7b2b78cd"
+      },
+      {
+        "track": "demo-5",
+        "src": "blob:http://127.0.0.1:18775/e958f13a-dea2-4bca-817f-c6f0d2414edf"
+      },
+      {
+        "track": "demo-4",
+        "src": "blob:http://127.0.0.1:18775/12662c78-4b98-4bbf-bb1f-8528094e4dee"
+      },
+      {
+        "track": "demo-3",
+        "src": "blob:http://127.0.0.1:18775/60c380c4-e491-4bf9-ae06-373d9aed0b00"
+      }
+    ],
+    "initial": {
+      "track": "demo-1",
+      "position": 6.5364399092970515,
+      "rate": 1,
+      "loop": false,
+      "savedLoop": {
+        "start": 1,
+        "end": 2
+      }
+    },
+    "held": {
+      "track": "demo-1",
+      "position": 1,
+      "processing": true,
+      "token": 4,
+      "calls": 1,
+      "delegated": 0
+    },
+    "controlStages": [
+      {
+        "stage": "saved-loop preparation held",
+        "total": 166,
+        "missing": []
+      },
+      {
+        "stage": "normal B Load completed",
+        "total": 166,
+        "missing": []
+      },
+      {
+        "stage": "old loop preparation settled",
+        "total": 166,
+        "missing": []
+      }
+    ],
+    "loaded": {
+      "track": "demo-0",
+      "position": 0,
+      "loopLength": 8,
+      "token": 5,
+      "controllerAborted": true
+    },
+    "resumeOutcome": "fulfilled",
+    "after": {
+      "track": "demo-0",
+      "position": 0,
+      "loopLength": 8,
+      "token": 5,
+      "playing": false,
+      "loop": false,
+      "queued": false,
+      "voice": false,
+      "calls": 1,
+      "delegated": 1
+    },
+    "previews": {
+      "before": 7,
+      "after": 8,
+      "matched": 7
+    },
+    "cleanup": {
+      "allStopped": true,
+      "physicalMuted": true,
+      "resumeRestored": true
+    },
+    "sourceAfter": {
+      "app.js": "b3d74e1e8474fab8703a4d9e7fc45def5a1bf5d99d858c90d92a3480eaed341c",
+      "engine.js": "036f084a42177cb58eeaf926b3fd3d5ea6f0ef7b2fe9aefcb1974711ee89261b",
+      "manual-loops.js": "abc09bd34bd359a836870c22d6418a6bf53442ddf54e40232ec68df38b3d2439",
+      "manual-loop-load-check.js": "567b55ae4aba17cb7f00977f4bdd749ac50a6a073c4d64a5d648303f6d36bc75"
+    },
+    "sourceStable": true,
+    "finishedAt": "2026-10-29T17:18:55.131Z"
+  },
+  "originalResultSHA256": "fe386762a26e327bc9719e6de63b62d905cfa5c3bd1c65430e102b1263954d72",
+  "packageInspection": {
+    "passed": 5,
+    "failed": 0,
+    "scope": "Archive source identity, fixtures and controlled host callbacks; separate from native execution"
+  },
+  "normalSession": {
+    "observedBeforeAndAfter": true,
+    "mainPlaySyncRecordStartInvoked": false,
+    "positions": [
+      30.097,
+      34.086
+    ],
+    "tracks": 16,
+    "materializedLibraryPreviews": 12,
+    "playControls": 2,
+    "tempoControls": 2,
+    "eqControls": 6,
+    "meter": "minus infinity",
+    "checkerClosed": true
+  },
+  "profileCopy": {
+    "at": "2026-10-29T17:18:09.497860+00:00",
+    "method": "closed-profile APFS copy-on-write cp -cRp",
+    "files": 259,
+    "logicalBytes": 120230231,
+    "byteHashMtimeEqual": true,
+    "manifestSHA256": "0cce774b37786a6af4406fbcd6fe2ae66e59b4a5c159d6e51fe5e40d5f51804a"
+  },
+  "cleanup": {
+    "at": "2026-10-29T17:19:41.260702+00:00",
+    "retiredVersion": "0.1.112",
+    "sha256Verified": true,
+    "inactiveVerified": true,
+    "logicalBytes": 808291155,
+    "ownPackagingCacheBytes": 130738603,
+    "retainedCurrent": "0.1.113",
+    "protected": "Original music, recordings, all profile recovery copies and unrelated drafts retained"
+  },
+  "launchers": {
+    "currentPlaybackNamed": "0.1.113",
+    "syntaxChecked": true,
+    "exactBundleExecuted": true,
+    "launcherCommandsSeparatelyExecuted": false
+  },
+  "closureScope": "Bounded software ownership: canceled active/queued saved-loop actions do not change replacement/stopped position, loop length or token. Original actual-module/engine/appLoad rendered-Worker RED, direct queued-Stop RED and final three regression cases; one actual native four-deck raw-pad/Load/resume-gate path. No audio/DSP/layout change.",
+  "remaining": [
+    "Native controlled raw resume gate differs from original rendered Worker gate; no every-backend/mode/failure claim.",
+    "No new native queued-Stop capture, PCM, music listening, long-session or physical controller/headphone acceptance.",
+    "Broader DEK-004/017/CORE-001 and intermittent pop/stall/startup60 criteria remain open."
+  ]
+}

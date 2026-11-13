@@ -1,18 +1,27 @@
 // Controller integration: real app function bodies and PCM, stubbed DOM/decode.
 import fs from "node:fs";
 import vm from "node:vm";
+import assert from "node:assert/strict";
 import { webcrypto } from "node:crypto";
 import { analyzePCM } from "../prototype/analysis.js";
 import { snapshotVideoState } from "../prototype/video-state.js";
 import { normalizeFXTempoSettings } from "../prototype/fx-tempo.js";
+import {trackMetadata,validateMetadata} from "../prototype/library-state.js";
+import {createSessionStorage} from "../prototype/session-storage.js";
+import {createLocalAudioLibrary} from "../prototype/local-audio-library.js";
+import {normalizeStemCrateTrack} from "../prototype/stem-crate.js";
+import {createTrackGain} from "../prototype/track-gain.js";
 const source = fs.readFileSync("prototype/app.js", "utf8");
 const fixtureSource = fs.readFileSync("scripts/test_analysis.mjs", "utf8");
+function section(text,start,end){
+ const from=text.indexOf(start),to=text.indexOf(end);
+ assert(from>=0&&from===text.lastIndexOf(start),`Expected one source boundary: ${start}`);
+ assert(to>from&&to===text.lastIndexOf(end),`Expected one later source boundary: ${end}`);
+ return text.slice(from,to);
+}
 const fixtureContext = vm.createContext({ Float32Array, Math });
 vm.runInContext(
-  fixtureSource.slice(
-    fixtureSource.indexOf("const sr"),
-    fixtureSource.indexOf("const start"),
-  ) + ";globalThis.pulse=pulse;globalThis.melody=melody;",
+  section(fixtureSource,"const sr =", "const start =") + ";globalThis.pulse=pulse;globalThis.melody=melody;",
   fixtureContext,
 );
 function wav(data) {
@@ -39,12 +48,14 @@ function wav(data) {
 const pulse = fixtureContext.pulse(128, 24),
   melody = fixtureContext.melody(0, false, 24),
   silent = new Float32Array(44100 * 8);
+const evidenceDir=process.env.OPENPLAY_ANALYSIS_CONTROLLER_EVIDENCE||"local-evidence/analysis-ui";
+fs.mkdirSync(evidenceDir,{recursive:true});
 for (const [name, data] of [
   ["pulse-128", pulse],
   ["c-major", melody],
   ["silence", silent],
 ])
-  fs.writeFileSync(`local-evidence/analysis-ui/${name}.wav`, wav(data));
+  fs.writeFileSync(`${evidenceDir}/${name}.wav`, wav(data));
 const buffer = {
   numberOfChannels: 1,
   sampleRate: 44100,
@@ -67,16 +78,26 @@ const state = {
   localTags: {},
   decks: [],
   settings: {},
+  localAudio: {},
   analysis: false,
 };
-const saved = {};
 const storage = {};
+const sessionStorage=createSessionStorage({getItem:key=>storage[key]??null,setItem:(key,value)=>{storage[key]=value;}});
+// No IndexedDB in this Node check: exercise the real session-only import fallback.
+const localAudio=createLocalAudioLibrary({factory:null});
 const results = [];
 let gate = null;
 const context = vm.createContext({
   state,
   snapshotVideoState,
   normalizeFXTempoSettings,
+  trackMetadata,
+  validateMetadata,
+  normalizeStemCrateTrack,
+  sessionStorage,
+  localAudio,
+  localAudioWarning() {},
+  updateSessionStatus() {},
   localStorage: {
     setItem(k, v) {
       storage[k] = v;
@@ -90,23 +111,21 @@ const context = vm.createContext({
   AbortController,
   CustomEvent: class {},
   crypto: webcrypto,
-  colors: ["#fff"],
+  colors: ["#ffffff"],
   document: { dispatchEvent() {} },
   $: node,
   notify() {},
-  persist() {
-    for (const t of state.tracks)
-      if (t.contentHash)
-        saved[t.contentHash] = structuredClone(t.analysisResult);
-  },
   renderTracks() {},
   renderDecks() {},
   drawWaves() {},
+  refreshAnalysisControls() {},
+  smartSync: {reconcile() {}},
   engine: {
     async buffer() {
       if (gate) await gate;
       return buffer;
     },
+    updateSampleTrackGain() {},
   },
   analyzeBuffer: async (b, o) =>
     analyzePCM([b.getChannelData(0)], b.sampleRate, o),
@@ -114,19 +133,16 @@ const context = vm.createContext({
   filtered: () => state.tracks,
 });
 vm.runInContext(
-  source.slice(
-    source.indexOf("const metadataFields"),
-    source.indexOf("function dialog("),
-  ),
+  section(source,"function sessionSnapshot()", "function dialog(").replace("export function persist()", "function persist()"),
   context,
 );
 vm.runInContext(
-  source.slice(
-    source.indexOf("async function importFiles("),
-    source.indexOf("\nfunction download("),
-  ),
+  section(source,"let importTail=Promise.resolve();", "\nfunction download("),
   context,
 );
+assert.equal(typeof context.persist,"function","Actual persistence was not extracted");
+for(const name of ["importFiles","analyze","enqueueAnalysis","cancelAnalysis"])assert.equal(typeof context[name],"function",`Actual controller missing: ${name}`);
+context.trackGain=createTrackGain({state,engine:context.engine,persist:()=>context.persist()});
 function check(name, pass) {
   results.push({ name, passed: !!pass });
 }
@@ -275,7 +291,7 @@ console.log(
     {
       executedAt: new Date().toISOString(),
       boundary:
-        "Actual app controller functions, stub DOM and decode; real analyzePCM. Does not prove browser decoding, Worker or visible controls.",
+        "Actual app controller/import/persistence functions, real analyzePCM and library/storage/gain modules; controlled DOM/decode and session-only import fallback. Does not prove IndexedDB persistence, browser decoding, Worker or visible controls.",
       passed: results.filter((x) => x.passed).length,
       total: results.length,
       results,

@@ -1,0 +1,157 @@
+{
+  "date": "2026-10-28",
+  "scope": "Focused source/browser/offline generated-signal evidence; no current native musical or hardware acceptance",
+  "queuedTempo": {
+    "criterion": "Accepted same-track Load cancels old shared tempo intentions, settles owned rollback while old resume remains held, rearms against settled126, accepts fresh127.2 and ignores late old completion",
+    "focusedRegression": {
+      "file": "prototype/tempo-load-ownership.test.mjs",
+      "red": "127.2 !==126",
+      "green": "1/1",
+      "cases": [
+        "Smart GUI waiter",
+        "Smart direct shared waiter",
+        "Simple direct shared waiter"
+      ],
+      "gate": "Real AudioEngine.start resume deferred with controlled graph/buffer; remains held until Load completes",
+      "extraAssertions": [
+        "Locked Load retains owner",
+        "Old active and queued commands AbortError",
+        "Fresh post-Load input accepted",
+        "Late old resume cannot clobber"
+      ]
+    },
+    "directLifetimeChecks": [
+      {
+        "file": "scripts/test_sync_tempo_handoff.mjs",
+        "observed": "passed",
+        "reason": "Handoff failure promise added"
+      },
+      {
+        "file": "prototype/sync-rate-owner-basis.test.mjs",
+        "observed": "9/9",
+        "reason": "Prepared group catch/finally can now settle before aborted jobs return"
+      },
+      {
+        "file": "prototype/sync-reload-ownership.test.mjs",
+        "observed": "1/1",
+        "reason": "Existing ordinary Sync rate-owner deletion moved after prepared-group settlement"
+      }
+    ],
+    "actualBrowser": {
+      "file": "browser-after.txt",
+      "observed": "passed",
+      "origin": "Owned18854",
+      "mode": "Generated four-deck Compact physically muted",
+      "heldOldGateAtLoadCompletion": true,
+      "outgoingVoiceRetained": true,
+      "otherControlNodesRetained": 138,
+      "waveformImageNodesRetained": 8,
+      "cleanup": "All decks stopped and physically muted; about:blank; owned server stopped"
+    },
+    "notExecuted": [
+      "Full Node suite",
+      "Updated autoplay/overview/video controlled fixtures",
+      "Native app",
+      "Human listening",
+      "Hardware",
+      "Broad DSP or MIDI parity"
+    ],
+    "normalSession": "No native/main/profile/original-audio actions"
+  },
+  "parentPCMInspection": [
+    {
+      "file": "before",
+      "frames": 36864,
+      "allFinite": true,
+      "steps": [
+        -0.2982889786362648,
+        0.1491444893181324
+      ],
+      "fullFadeMaxSteps": [
+        0.2982889786362648,
+        0.1491444893181324
+      ],
+      "dryBound": 0.026161251692057227
+    },
+    {
+      "file": "after",
+      "frames": 36864,
+      "allFinite": true,
+      "steps": [
+        0.0017110258340835571,
+        -0.0008555129170417786
+      ],
+      "fullFadeMaxSteps": [
+        0.026105238124773677,
+        0.01305261906239311
+      ],
+      "dryBound": 0.026161251692057227
+    }
+  ],
+  "stallTriage": {
+    "date": "2026-10-28",
+    "scope": "Read-only triage of retained historical actual four-deck evidence; no new run or product edit. Browser/native labels remain distinct. No listening, pop causation, current native performance or global no-stall claim.",
+    "latestRetainedBrowserAction": {
+      "path": "local-evidence/four-deck-loop-transitions-2026-10-28/result.json",
+      "description": "28 October real-track keyed-loop transitions; isolated physically muted browser",
+      "tick": {
+        "count": 508,
+        "p95": 1.5,
+        "max": 8.599999994039536
+      },
+      "frameIntervals": {
+        "count": 507,
+        "p95": 17.599999999998545,
+        "max": 34.200000000004366
+      },
+      "longTasks": []
+    },
+    "olderBrowserAttributionGap": {
+      "path": "docs/prototype/terminal-analysis-results.json",
+      "runLabel": "final",
+      "frames": [
+        {
+          "startTime": 426325,
+          "duration": 242.5,
+          "renderStart": 426556,
+          "beforeRenderingMs": 231,
+          "scripts": []
+        },
+        {
+          "startTime": 627999.3999999911,
+          "duration": 189.80000001192093,
+          "renderStart": 628178.799999997,
+          "beforeRenderingMs": 179.40000000596046,
+          "scripts": []
+        }
+      ],
+      "limit": "Empty LoAF scripts do not prove no JavaScript; no event-aligned native attribution supports a new source repair for these gaps."
+    },
+    "alreadyAddressedMeasuredPaths": {
+      "orientation": {
+        "historicalNativeEvidence": "docs/prototype/native-stall-capture-results.json",
+        "historicalFrameMs": 100.29999999701977,
+        "historicalMechanism": "Orientation handler rebuilt deck and mixer trees; categories/invalidation counts were not unique-node costs.",
+        "currentSource": "prototype/app.js",
+        "function": "refreshWaveformOrientation",
+        "currentContract": "Matching Horizontal/Vertical shape updates waveform orientation and scrub lanes without replacing deck/mixer trees."
+      },
+      "cachedPreview": {
+        "evidence": "docs/prototype/cached-library-preview-geometry-results.json",
+        "currentSource": "prototype/library-waveform-preview.js",
+        "currentContract": "Existing predicate guard reordered; not a general cache/DSP/layout rewrite."
+      }
+    },
+    "disposition": "No new measured source-supported unresolved cause identified. Retain broader stalls/pops open; next actual residual event needs event-aligned native trace. No clean/general soak justified."
+  },
+  "sourceSHA256": {
+    "prototype/app.js": "1dc7519b14c4423bd4eeafbd9547466a932b2c3de379e19b87f308b4ae4e046b",
+    "prototype/engine.js": "67ec78f0816395f3e8aac232cfbf2bfab712ad55b638d990a725953940cce961",
+    "prototype/sync-tempo-handoff.js": "23e27d852e24e5d074f4a96bc493096072fcc8f2f909e5c63fe39f0dd7791f2c",
+    "prototype/sync-tempo-requests.js": "35ceca9bfac2377fa815255653777f0d33eeffc7dc0ef9c13250763861aafb09",
+    "prototype/audio-monitor.js": "b6884c5ecb18d3620ce665d3d6c5d716d61397c9a5b886e83422653fc5493cc5"
+  },
+  "genericSyncPopOrStallResolution": false,
+  "listening": "pending",
+  "hardware": "pending"
+}

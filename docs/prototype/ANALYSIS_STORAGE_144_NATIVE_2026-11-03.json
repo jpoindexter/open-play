@@ -1,0 +1,146 @@
+{
+  "date": "2026-11-03",
+  "version": "0.1.144",
+  "sourceCommit": "ad48133c551f11cb574032e919d4df97cd7985fb",
+  "archiveSHA256": "ec43e4d7d06426ec2dad68dc36de29c8c6d292a65c6adced12e313e877580f3a",
+  "packageInspection": {
+    "passed": 5,
+    "failed": 0,
+    "receipt": "desktop-0.1.144-playback-analysis-storage.json"
+  },
+  "card": "https://trello.com/c/SkySPrF3",
+  "productionRepair": "Shared metadata projection writes validated beatCount instead of two pulse arrays; analyzer arrays remain unchanged in memory, other summary/metadata/grid/warp/cue fields retained. Analysis reader accepts legacy arrays and compact counts.",
+  "verification": {
+    "newModules": 0,
+    "newDiagnosticRuns": 0,
+    "newBroadTests": 0,
+    "priorSourceChecks": "15 affected checks and one RED\u2192GREEN retained, not rerun.",
+    "priorBrowser": "400 synthetic metadata entries5600705\u2192270305characters; old writeQuotaExceeded/compactsave+normalSave+reload accepted. No native400-track/media or universal-quota claim.",
+    "nativeWorkflow": [
+      "Actual isolated generated-only Analysis settings panel shows99beats/first pulse.484s.",
+      "Save analysis settings; System UI reports saved this session and recent Play commands[].",
+      "Normal Export prototype backup\u2192native Save dialog\u2192private generated-library-144.json.",
+      "Independently parsed eight generated tags; counts99/101 and firstBeat preserved, both pulse arrays absent.",
+      "Normal Restore backup file-picker\u2192Metadata restored and saved.",
+      "Analysis UI immediately after compact restore reads99beats without formatter error.",
+      "Normal Cmd+R reload of isolated window only; stays stopped, eight tracks/previews/core controls present, Analysis UI remains99beats.",
+      "Isolated window closed; main144paused session verified."
+    ],
+    "nativeExport": {
+      "bytes": 20945,
+      "sha256": "5d06ddf95b9c03fe318e8e9f3899b151e9da43c1771db5ad97e2e0acbfc14984",
+      "tags": 8,
+      "analysed": [
+        {
+          "id": "demo-0",
+          "beatCount": 99,
+          "tempoBeatCount": 99,
+          "firstBeat": 0.48385594603086446,
+          "duration": 48,
+          "bpm": 123.99837788777907
+        },
+        {
+          "id": "demo-1",
+          "beatCount": 101,
+          "tempoBeatCount": 101,
+          "firstBeat": 6.8721052706166574e-06,
+          "duration": 48,
+          "bpm": 126.00007594783067
+        }
+      ],
+      "redundantPulseArrays": 0,
+      "generatedOnly": true
+    },
+    "reloadLimit": "Startup reanalyzes the two loaded generated decks. Reload usability/count equality alone does not prove the identical restored analysis object survived. Immediate post-restore panel and saved JSON provide compact-format reader evidence.",
+    "controlPresence": {
+      "main-144-start.txt": {
+        "play": 2,
+        "tempo": 2,
+        "eq": 6,
+        "level": 2,
+        "previews": 12,
+        "silent": true
+      },
+      "main-final.txt": {
+        "play": 2,
+        "tempo": 2,
+        "eq": 6,
+        "level": 2,
+        "previews": 12,
+        "silent": true
+      },
+      "isolated-final.txt": {
+        "play": 2,
+        "tempo": 2,
+        "eq": 6,
+        "level": 2,
+        "previews": 8,
+        "silent": true
+      }
+    },
+    "identityLimit": "AX inventory proves accessible control/preview presence, not DOM identity or pointer capture."
+  },
+  "audioBoundary": "No Play/Sync/Cue/recording Start or sample action issued in main or isolated workflow. Timers remain stopped, visible master silent. No physical-mute flag, PCM or acoustic acceptance is claimed for this non-playing UI workflow.",
+  "mainSession": {
+    "tracks": 25,
+    "positionsSeconds": [
+      161.797,
+      111.183
+    ],
+    "masterDb": -10.04344,
+    "readyPreviews": 12,
+    "play": 2,
+    "tempo": 2,
+    "eq": 6,
+    "level": 2,
+    "paused": true,
+    "noMainPlaySyncCueRecordRestore": true
+  },
+  "closedProfileRecovery": {
+    "source": "/Users/jasonpoindexter/Library/Application Support/Open Play Playback Test",
+    "recovery": "/Users/jasonpoindexter/Documents/GitHub/Open Play/local-evidence/profile-recovery/pre-analysis-0.1.143-2026-11-03",
+    "files": 280,
+    "bytes": 221811585,
+    "hashSizeMtimeEqual": true,
+    "copy": "APFS clone, not hard-linked",
+    "old143Processes": 0
+  },
+  "cleanup": {
+    "remove": "/Users/jasonpoindexter/Documents/GitHub/Open Play/local-evidence/desktop-builds/0.1.143",
+    "logicalBytes": 611728002,
+    "retainedBuild": "/Users/jasonpoindexter/Documents/GitHub/Open Play/local-evidence/desktop-builds/0.1.144",
+    "retainedCache": "One official current44.9.0runtime ZIP130738603B retained; no new download needed.",
+    "recovery": {
+      "source": "/Users/jasonpoindexter/Library/Application Support/Open Play Playback Test",
+      "recovery": "/Users/jasonpoindexter/Documents/GitHub/Open Play/local-evidence/profile-recovery/pre-analysis-0.1.143-2026-11-03",
+      "files": 280,
+      "bytes": 221811585,
+      "hashSizeMtimeEqual": true,
+      "copy": "APFS clone, not hard-linked",
+      "old143Processes": 0
+    },
+    "remoteSource": "ad48133c551f11cb574032e919d4df97cd7985fb",
+    "process": "35673 /Users/jasonpoindexter/Documents/GitHub/Open Play/local-evidence/desktop-builds/0.1.144/Open Play Playback Test-darwin-arm64/Open Play Playback Test.app/Contents/MacOS/Open Play Playback Test",
+    "preserved": [
+      "Original music",
+      "Recordings",
+      "All profiles/recoveries",
+      "Unrelated owner draft"
+    ],
+    "removed": true,
+    "retainedBuildVersions": [
+      "0.1.144"
+    ]
+  },
+  "launchers": "Current/playback/named144 syntax checked; exact app opened separately; launcher execution not claimed.",
+  "priorIncident": "Earlier temporary browser test-origin18874record deletion remains disclosed in ANALYSIS_STORAGE_2026-11-03.json/LIB-FIX-10. Exact cleared contents were not captured/recovered. No browser storage helper or cleanup ran this native pass; normal profile recovered/retained as observed.",
+  "compatibility": "Legacy array records readable; newly compact records require updated reader. Closed143profile recovery retained; no old-binary downgrade promise.",
+  "remaining": [
+    "Broader LIB-011/SYS-002 recovery/migration/concurrent edits remain open.",
+    "Owner listening/controller, numeric entry06, Sync70, matched volume75, generic pops/stalls/startup60/full beta remain open.",
+    "No total CPU/RSS/GC/frame/long-session or musical tightness improvement proven by storage size or UI evidence."
+  ],
+  "trelloReceipt": "analysis-storage-144-trello-2026-11-03.json",
+  "privateEvidence": "local-evidence/analysis-native-2026-11-03/",
+  "goal": "Active; audio muted/no playback; owner/controller later."
+}

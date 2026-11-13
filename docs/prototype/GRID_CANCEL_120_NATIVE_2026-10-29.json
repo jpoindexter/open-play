@@ -1,0 +1,210 @@
+{
+  "date": "2026-10-29",
+  "version": "0.1.120",
+  "sourceCommit": "550ff9533bedec9405d0ed5d6d5066db07052414",
+  "asarSHA256": "f20b027ae52f7f7b2306d063b73ba9a95081164f1ad90e8f54a5a324e12638fb",
+  "productSource": "Playback/transport/rendering implementation unchanged from118/594d223; diagnostic correction fromf4b50ba is now included",
+  "packageInspection": "desktop-0.1.120-playback-grid-cancel.json",
+  "adHocSeal": {
+    "command": "codesign --verify --deep --strict <exact120bundle>",
+    "exitCode": 0,
+    "scope": "Private ad-hoc seal, not Developer ID/notarization/public distribution proof"
+  },
+  "scopedNativeCheck": {
+    "executed": true,
+    "completed": true,
+    "route": "Actual packaged generated-only four-deck Compact workspace, native AudioContext/live WASM and installed Grid Save/modal Close/Play handlers. Setup seeds generated PCM/metadata and uses engine.seek to establish Tempo Sync. One old resume is held before real delegation; new Play uses unmodified resume/WASM. Not natural failure, PCM, audible pop/stall, music, OS focus, physical MIDI or socket proof.",
+    "actions": [
+      "Actual Play A/B and Sync, engine.seek only as labeled Tempo-state setup",
+      "Actual Grid Save120\u2192100BPM/downbeat0\u2192.1, old resume held",
+      "Actual modal Close, Play Pause then newer Play, old resume released"
+    ],
+    "setup": {
+      "deckCount": 4,
+      "density": "compact",
+      "orientation": "Horizontal",
+      "syncState": "tempo",
+      "rate": 1.05,
+      "liveAdapterRate": 1.05,
+      "controls": 225,
+      "previews": 8
+    },
+    "held": {
+      "bpm": 100,
+      "grid": 0.1,
+      "token": 4,
+      "rate": 1.26,
+      "syncState": "tempo",
+      "calls": 1,
+      "delegated": 0,
+      "status": "Saving grid\u2026"
+    },
+    "newer": {
+      "token": 6,
+      "rate": 1.26,
+      "adapterState": {
+        "when": 16.354308390022677,
+        "position": 2.685966666666664,
+        "playing": true,
+        "rate": 1.26,
+        "keylock": true,
+        "semitones": 0,
+        "effectiveSemitones": 0
+      },
+      "syncState": "tempo"
+    },
+    "after": {
+      "sameVoice": true,
+      "sameAdapter": true,
+      "token": 6,
+      "rate": 1.26,
+      "adapterState": {
+        "when": 16.354308390022677,
+        "position": 2.7225380952380904,
+        "playing": true,
+        "rate": 1.26,
+        "keylock": true,
+        "semitones": 0,
+        "effectiveSemitones": 0
+      },
+      "sync": true,
+      "syncState": "tempo",
+      "playing": true,
+      "processing": false,
+      "queued": false,
+      "status": "Grid saved; playback realignment failed: Sync preparation superseded.",
+      "statusConnected": true,
+      "calls": 2,
+      "delegated": 1,
+      "retainedControls": 225,
+      "previewsBefore": 8,
+      "unrelatedPreviewsBefore": 7,
+      "unrelatedPreviewsMatched": 7,
+      "changedPreviewTracks": [
+        "demo-1"
+      ],
+      "editedPreview": {
+        "track": "demo-1",
+        "keyBefore": "demo-1:1003:120:61.735",
+        "keyAfter": "demo-1:1003:100:61.735",
+        "ready": true,
+        "present": true
+      }
+    },
+    "outgoingVoiceTokenRateRetained": true,
+    "independentResultReadback": "Exact handled cancellation, new voice/adapter/token/rate/TEMPO,225controls,7unrelatedpreviews and decoded edited-preview all asserted from saved result",
+    "prior119": "Original overallFAIL retained;120is a separate corrected execution, not a regrade"
+  },
+  "cleanupNormalizationMismatches": [
+    {
+      "object": "deck1",
+      "key": "syncState",
+      "expectedOwn": false,
+      "actualOwn": true
+    },
+    {
+      "object": "deck1",
+      "key": "syncRole",
+      "expectedOwn": false,
+      "actualOwn": true
+    },
+    {
+      "object": "deck0",
+      "key": "syncState",
+      "expectedOwn": false,
+      "actualOwn": true
+    },
+    {
+      "object": "deck0",
+      "key": "syncRole",
+      "expectedOwn": false,
+      "actualOwn": true
+    }
+  ],
+  "cleanupRemainingMismatches": [],
+  "cleanup": {
+    "allStopped": true,
+    "physicalMuted": true,
+    "resumeRestored": true,
+    "adaptersDisposed": true,
+    "settingsAndMetadataRestored": true,
+    "buffersRestored": true,
+    "historyRestored": true,
+    "prepareRestored": true,
+    "storageRestored": true
+  },
+  "adapterCleanup": [
+    {
+      "disposed": true,
+      "timerCleared": true,
+      "retainedPCMBytes": 0
+    },
+    {
+      "disposed": true,
+      "timerCleared": true,
+      "retainedPCMBytes": 0
+    },
+    {
+      "disposed": true,
+      "timerCleared": true,
+      "retainedPCMBytes": 0
+    }
+  ],
+  "sourceStable": true,
+  "nativeMainSession": {
+    "pausedPositionsSeconds": [
+      30.097,
+      34.086
+    ],
+    "libraryTracks": 16,
+    "visiblePreviews": 12,
+    "playButtons": 2,
+    "tempoFaders": 2,
+    "eqControls": 6,
+    "mainPlaySyncRECStartInvoked": false,
+    "ownedCheckerClosed": true,
+    "profileRestoredOverNewerState": false
+  },
+  "closedProfileRecovery": {
+    "closedProcessVerified": true,
+    "files": 261,
+    "bytes": 120231690,
+    "hashAndMtimeEqual": true,
+    "manifestSHA256": "3d9671a6ebfc6fd11f24715f36b884180c58b0f6e6a5be5e75ee64ca35c00fcb",
+    "recoveryCopy": "local-evidence/core-native-120-2026-10-29/profile-119-before-120",
+    "method": "APFS copy-on-write cp -cR; originals retained"
+  },
+  "cleanupDelivery": {
+    "at": "2026-10-29T20:50:44.881532+00:00",
+    "retiredVersion": "0.1.119",
+    "sha256Verified": true,
+    "inactiveVerified": true,
+    "logicalBytes": 808668687,
+    "ownPackagingCacheBytes": 130738603,
+    "retainedCurrent": "0.1.120",
+    "onlyOneBundle": true,
+    "protected": "Original music, recordings, recovery profiles and unrelated drafts retained",
+    "launcherSyntaxChecked": 3,
+    "launchersExecuted": false
+  },
+  "launchers": {
+    "currentDefault": "0.1.120",
+    "syntaxChecked": 3,
+    "exactAppExecuted": true,
+    "launcherScriptsExecuted": false
+  },
+  "evidenceSHA256": {
+    "grid-result.json": "bf839f2f35967f877d6b931f26e6e2bb7d7811d75d97d06275d4f2b253326fb8",
+    "grid-result-ax.txt": "8835adccffe73bb7e3fe93fd9b2be71b279929e1fd86095f27e33e519c2191d2",
+    "grid-result.png": "1617aa9856dfeedce1bc392d8a4a4943a9cee25a6cc6f981e64e97b33ccd4bc4",
+    "main120-settled.txt": "2ef08a41edcd3e138fb434546e8f3060c6c7244c8d5d7f2ddaaf462a05fbba21",
+    "main-after-check.txt": "2ef08a41edcd3e138fb434546e8f3060c6c7244c8d5d7f2ddaaf462a05fbba21"
+  },
+  "limits": [
+    "One corrected native generated4deckCompact controlled-resume scenario, no broad suite or repeated clean matrices.",
+    "No natural-worklet failure, PCM/audio-quality, varied-real-track listening, OS focus/pointer-capture, physical MIDI/socket or pop/stall-free proof.",
+    "Generic intermittent Sync pops/stalls and unexpected106startup remain open; prior53/109mixing acceptance retains scope.",
+    "No complete Serato/rekordbox parity, full-core or public-beta acceptance."
+  ],
+  "next": "Stop repeating this scoped success. Preserve next actual pop/stall/startup event; relevant owner listening/focus/Hercules remain deferred."
+}

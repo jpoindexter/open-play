@@ -7,6 +7,7 @@ const {syncHeadphoneControls}=await import('./headphone-preview.js');
 const {refineRotaryControls,syncRotaryControls}=await import('./rotary-preview.js');
 const {refineFaders,syncFaders}=await import('./fader-preview.js');
 const {refineXoneScales}=await import('./xone-preview.js');
+const {refineDeckToolRails}=await import('./deck-tool-rails.js');
 const monitorAPI={...window.openPlay,persist};
 const {installLibraryWaveforms}=await import('./library-waveform-preview.js');
 installLibraryWaveforms(window.openPlay);
@@ -89,6 +90,7 @@ function decorate(){
     refineDeck(deck,index);
   });
   refineMixer();
+  refineDeckToolRails();
   refineRotaryControls();
   refineXoneScales();
   refinePanelLayout();
@@ -146,6 +148,7 @@ function refineDeck(deck,index){
   if(document.body.dataset.workspace==='traktor-flat')refineTraktorFlatDeck(deck,index);
 }
 function refineMixer(){
+  $('#mixer').dataset.channelLayout=document.body.dataset.workspace==='serato'?'inline':vertical()&&!document.body.classList.contains('four-decks')?'mirrored':'parallel';
   // A player rerender creates a new real crossfader. Retire its old moved footer.
   let footer=$('.preview-mixer-footer');
   const fresh=$('#mixer #crossfader');
@@ -186,7 +189,7 @@ function choose(workspace){
   window.openPlay.state.settings['Workspace Layout']=workspace;persist();
 }
 document.addEventListener('click',event=>{const button=event.target.closest?.('[data-workspace-choice]');if(button)choose(button.dataset.workspaceChoice);});
-const chrome=[...document.querySelectorAll('.hybrid-controls,.toolbar,.review-bar')];
+const chrome=[...document.querySelectorAll('.toolbar')];
 const chromeSize=new ResizeObserver(()=>document.body.style.setProperty('--workspace-chrome-height',chrome.reduce((height,node)=>height+node.getBoundingClientRect().height,0)+'px'));
 for(const region of chrome)chromeSize.observe(region);
 for(const [id,direction]of [['preview-zoom-out','out'],['preview-zoom-in','in']]){
@@ -260,6 +263,9 @@ function paint(){
   requestAnimationFrame(paint);
 }
 requestAnimationFrame(paint);
+
+const {installWorkspaceToolbar}=await import('./workspace-toolbar.js');
+installWorkspaceToolbar();
 
 // Standard UI only; the original DJ surfaces and audio state stay in place.
 const {installAstryxControls}=await import('./vendor/astryx/controls.js');

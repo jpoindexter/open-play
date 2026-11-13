@@ -1,9 +1,11 @@
 'use strict';
-const {app,BrowserWindow,Menu,dialog}=require('electron');
+const {app,BrowserWindow,Menu,Tray,nativeImage,dialog,shell}=require('electron');
 const path=require('node:path');
 const {createAssetServer}=require('./server.cjs');
+const {createMenuBar}=require('./menu-bar.cjs');
+const {createManualLinkHandler}=require('./manual-links.cjs');
 app.setName('Open Play Test');
-let host,window;
+let host,window,menuBar;
 const testTitle=`Open Play Test ${app.getVersion()} — MIDI controls test`;
 if(!app.requestSingleInstanceLock())app.quit();
 else{
@@ -32,15 +34,17 @@ else{
    ses.setPermissionCheckHandler((contents,permission,origin,details)=>{const allowed=contents===window?.webContents&&own(origin)&&details?.isMainFrame===true&&localDevicePermission(permission);recordPermission('check',permission,contents,origin,details,allowed);return allowed;});
    ses.setPermissionRequestHandler((contents,permission,callback,details)=>{const allowed=contents===window?.webContents&&own(contents.getURL())&&details?.isMainFrame===true&&own(details.requestingUrl)&&localDevicePermission(permission);recordPermission('request',permission,contents,details?.requestingUrl,details,allowed);callback(allowed);});
    window.on('page-title-updated',event=>event.preventDefault());
-   window.webContents.setWindowOpenHandler(()=>({action:'deny'}));
+   window.webContents.setWindowOpenHandler(createManualLinkHandler({contents:window.webContents,origin:host.origin,openExternal:url=>shell.openExternal(url),onError:()=>dialog.showErrorBox('Open Play manual could not open','Visit https://open-play-help.vercel.app in your browser. Local shortcut help remains available.')}));
    window.webContents.on('will-navigate',(event,url)=>{if(!own(url))event.preventDefault();});
    window.webContents.on('render-process-gone',(_,details)=>dialog.showErrorBox('Open Play stopped',`The renderer stopped (${details.reason}). Reopen the app; saved imports will be checked. Keep original files available.`));
    window.on('closed',()=>window=null);
    window.loadURL(host.origin+'/prototype/');
   };
   Menu.setApplicationMenu(Menu.buildFromTemplate([{label:app.name,submenu:[{label:'About this test build',click:()=>dialog.showMessageBox({type:'info',title:'Open Play Test',message:testTitle,detail:`Electron ${process.versions.electron}; Chromium ${process.versions.chrome}. Existing interface and browser audio engine; current browser controls source dd068e4, approved baseline f8b0abf; prior0.1.5 retained. Imported bytes are saved locally when storage succeeds; Files reports session-only failures. Prior browser Key Shift/Video MIDI and imported-audio evidence does not establish this main-app mapping/reload/audio path. Historical0.1.3 Hercules headphone/master isolation and0.1.1 knob navigation were user-confirmed; full mapping, hot-plug, latency and quality remain incomplete. Optional stems use the existing local model service. No public release or notarization.\n\nProject: ${assets}`})},{type:'separator'},{role:'quit'}]},{label:'Edit',submenu:[{role:'undo'},{role:'redo'},{type:'separator'},{role:'cut'},{role:'copy'},{role:'paste'},{role:'selectAll'}]},{label:'View',submenu:[{role:'reload'},{role:'resetZoom'},{role:'zoomIn'},{role:'zoomOut'},{role:'togglefullscreen'},{type:'separator'},{role:'toggleDevTools'}]},{label:'Window',submenu:[{role:'minimize'},{role:'front'}]}]));
-  createWindow();app.on('activate',()=>{if(!BrowserWindow.getAllWindows().length)createWindow();});
+  createWindow();
+  if(process.platform==='darwin')menuBar=createMenuBar({Tray,Menu,nativeImage,getWindow:()=>window,origin:host.origin,iconPath:path.join(__dirname,'assets','menuTemplate.png'),quit:()=>app.quit()});
+  app.on('activate',()=>{if(!BrowserWindow.getAllWindows().length)createWindow();});
  }).catch(error=>{dialog.showErrorBox('Open Play could not start',error.message);app.quit();});
  app.on('window-all-closed',()=>app.quit());
- app.on('will-quit',()=>host?.server.close());
+ app.on('will-quit',()=>{menuBar?.destroy();host?.server.close();});
 }

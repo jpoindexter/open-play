@@ -1,7 +1,7 @@
 // HTML review only. Render source-audio thumbnails without touching deck state.
 import {paintSourceOverview,sourceWaveformState} from './source-waveform.js';
 
-const width=320,height=44,cacheName='openplay-library-waveforms-rgb-v1';
+const width=320,height=44,cacheName='openplay-library-waveforms-rgb-v2';
 const preference='openplay-preview-waveform-column';
 
 export function installLibraryWaveforms({state,engine}){
@@ -12,13 +12,19 @@ export function installLibraryWaveforms({state,engine}){
   const active=()=>enabled&&['rekordbox','serato-hybrid','traktor-flat'].includes(document.body.dataset.workspace)&&!document.hidden;
   const keyFor=track=>track.contentHash||`${track.id}:${track.seed}:${track.bpm}:${track.freq}`;
   const requestFor=key=>new Request(new URL('/__openplay-waveform-cache/'+encodeURIComponent(key),location.origin));
-  const cache=globalThis.caches?.open(cacheName).catch(()=>null)||Promise.resolve(null);
+  const cache=globalThis.caches?.open(cacheName).then(async value=>{await caches.delete('openplay-library-waveforms-rgb-v1');return value;}).catch(()=>null)||Promise.resolve(null);
   const status=(cell,phase,text)=>{
     cell.dataset.previewState=phase;cell.setAttribute('aria-busy',String(phase==='loading'));
     cell.replaceChildren();const label=document.createElement('span');label.textContent=text;cell.append(label);
   };
   function paintCell(cell,track,record){
-    if(cell.dataset.previewState===(record?.phase||'waiting')&&cell.dataset.previewKey===keyFor(track))return;
+    if(cell.dataset.previewState===(record?.phase||'waiting')&&cell.dataset.previewKey===keyFor(track)){
+      const image=cell.querySelector('img'),alt=`Full-track waveform: ${track.title}`;
+      if(image&&image.alt!==alt)image.alt=alt;
+      const retry=cell.querySelector('button'),label=`Retry waveform preview for ${track.title}`;
+      if(retry&&retry.getAttribute('aria-label')!==label)retry.setAttribute('aria-label',label);
+      return;
+    }
     cell.dataset.previewKey=keyFor(track);
     if(record?.phase==='ready'){
       const image=document.createElement('img');image.src=record.src;
@@ -39,7 +45,8 @@ export function installLibraryWaveforms({state,engine}){
     return r.width>0&&r.bottom>p.top&&r.top<p.bottom;
   }
   function refresh(){
-    scheduled=false;document.body.dataset.libraryWaveforms=String(enabled);
+    scheduled=false;
+    if(document.body.dataset.libraryWaveforms!==String(enabled))document.body.dataset.libraryWaveforms=String(enabled);
     const table=root.querySelector('table');if(!table)return;
     const head=table.querySelector('thead tr');
     if(!head.querySelector('.library-wave-preview')){
@@ -83,7 +90,7 @@ export function installLibraryWaveforms({state,engine}){
     if(busy||!active())return;busy=true;
     try{
       while(active()){
-        const row=rows().find(row=>{const t=state.tracks.find(t=>t.id===row.dataset.track);return t&&onScreen(row)&&!records.has(keyFor(t));});
+        const row=rows().find(row=>{const t=state.tracks.find(t=>t.id===row.dataset.track);return t&&!records.has(keyFor(t))&&onScreen(row);});
         if(!row)break;
         const track=state.tracks.find(t=>t.id===row.dataset.track),key=keyFor(track);
         records.set(key,{phase:'loading'});refresh();

@@ -8,7 +8,7 @@ const panels=await readFile(new URL('../prototype/panels.js',import.meta.url),'u
 const engine=await readFile(new URL('../prototype/engine.js',import.meta.url),'utf8');
 function extract(source,start,end){const a=source.indexOf(start),b=source.indexOf(end,a);assert(a>=0&&b>a);return source.slice(a,b);}
 const requestSource=extract(app,'const deckLoadRequests =','async function load(index,');
-const loadSource=extract(app,'async function load(index,','\nasync function play(d)');
+const loadSource=extract(app,'async function load(index,','\nasync function play(');
 const ejectSource=extract(app,'async function deckAction(','\n  if (!d.track)')+'\n}';
 const pairSource=extract(panels,'  async function importKaraoke(','\n  function video()');
 const offSource=extract(engine,'  async setStemSlip(d, mode) {','\n  async stemSlipBuffers(');
@@ -17,12 +17,12 @@ function environment() {
  const pair={...original,id:'pair'},newer={...original,id:'newer'};
  const deck={index:0,track:original,stemSlip:'vocal',playing:false,position:0,rate:1,videoLoadGeneration:0};
  const state={decks:[deck],settings:{},flip:{deck:-1}},notifications=[],calls={graphics:0,persist:0,buffers:[]};
- const runtime={stemSlipRateTokens:new Map(),voices:new Map(),stemSlipTracks:new Map(),cross:0,
+ const runtime={rateOwners:new WeakMap(),stemSlipRateTokens:new Map(),voices:new Map(),stemSlipTracks:new Map(),cross:0,
   position:d=>d.position,pause:d=>{d.playing=false;},setCross(){},configureFX(){},buffer:async t=>{calls.buffers.push(t.id);}};
  // Real off branch sets mode synchronously but still returns an async Promise.
  runtime.setStemSlip=new Function('return ({'+offSource+'}).setStemSlip;')();
  const noop=()=>{},cancel={cancelDeck:noop},scope={state,trackById:id=>[original,pair,newer].find(t=>t.id===id),
-  notify:text=>notifications.push(text),engine:runtime,pitchPlay:cancel,stemSlipControls:cancel,
+  notify:text=>notifications.push(text),engine:runtime,tempoSliders:{cancel:noop},pitchPlay:cancel,stemSlipControls:cancel,
   flipAutomation:{stop:noop},renderDecks:noop,drawWaves:noop,renderTracks:noop,enqueueAnalysis:noop,ensurePreparedStems:noop};
  const {load,deckAction}=new Function(...Object.keys(scope),requestSource+loadSource+ejectSource+';return {load,deckAction};')(...Object.values(scope));
  const importKaraoke=new Function('s','a','karaokeImportTokens','load','videoMixer','renderTracks','persist',pairSource+';return importKaraoke;')(

@@ -1,0 +1,247 @@
+{
+  "date": "2026-10-25",
+  "sourceCommit": "ea70bc0ba59ea7c5607f52ca0c440274f25d2c99",
+  "baselineCommit": "f9d2715f6069ff7b5aac86004be55dd4ded63ecb",
+  "scope": "Actual source methods with controlled graph,clock,buffer,cache,DOM and adapter endpoints. No new live/native/music/hardware acceptance.",
+  "sourceSHA256": {
+    "prototype/app.js": "043864e077c433978084f42260fe718fa87691a8ff851f7e21f96d0ad8e08e8b",
+    "prototype/engine.js": "afea206989809d24a22bae3246541f767521bb5afb2bbf0377f03ec09527ed8e",
+    "prototype/sync.js": "0c20a550e0ff8f0148dff44b8eb4ac6bb043c0ea8eaf832d7cc76659dd3e8958",
+    "prototype/simple-sync-preparation.test.mjs": "0031e810581ca2542bb1cef7562ed07f493cf2aa566a34eea43f34b67d203c9a",
+    "prototype/pitch-failure-safety.test.mjs": "cfd0f0bda45faa4f0d97eb0d6d05a9670cf089f1b4e14d9a6eba541c2c118b76",
+    "prototype/quantize-control-retention.test.mjs": "4968cb2e60bc7bae6a38105292dcae6de8ff349423a386f62793021f644a20ed"
+  },
+  "baseline": {
+    "tests": 27,
+    "passed": 7,
+    "failed": 20,
+    "sha256": "0f3858a9edb7d9f7402594b91fab5117b909c852ddbccac8cafbbd2b9af4ff84"
+  },
+  "focused": {
+    "tests": 27,
+    "passed": 27,
+    "failed": 0,
+    "sha256": "d7bb90c3443e8ac9f8db655d0bf3a55ab1993454845fb790b663f7112f72a60b"
+  },
+  "fullNode": {
+    "tests": 221,
+    "passed": 221,
+    "failed": 0,
+    "sha256": "149dc048172d98cff0455eba403f2b9d31f7fc57f39c8b15a44d3da2b2a2060a"
+  },
+  "areas": {
+    "simpleSync": {
+      "cases": 12,
+      "baselineFailed": 10,
+      "baselinePassed": 2,
+      "afterPassed": 12,
+      "parentBefore": {
+        "result": [
+          {
+            "status": "fulfilled"
+          }
+        ],
+        "afterSeek": {
+          "position": 9,
+          "token": 2,
+          "rate": 1
+        },
+        "afterSync": {
+          "position": 9,
+          "token": 3,
+          "rate": 1.05
+        },
+        "voiceRetained": false,
+        "starts": [
+          {
+            "when": 1.01,
+            "offset": 9,
+            "rate": 1
+          },
+          {
+            "when": 1.03,
+            "offset": 9.1815,
+            "rate": 1.05
+          }
+        ]
+      },
+      "parentAfter": {
+        "result": [
+          {
+            "status": "rejected",
+            "error": "AbortError"
+          }
+        ],
+        "afterSeek": {
+          "position": 9,
+          "token": 2,
+          "rate": 1
+        },
+        "afterSync": {
+          "position": 9,
+          "token": 2,
+          "rate": 1
+        },
+        "voiceRetained": true,
+        "starts": [
+          {
+            "when": 1.01,
+            "offset": 9,
+            "rate": 1
+          }
+        ]
+      },
+      "remaining": "Pending live ACK and Simple OFF/mode cancellation are unaccepted."
+    },
+    "reversePitch": {
+      "cases": 7,
+      "baselineFailed": 4,
+      "baselinePassed": 3,
+      "afterPassed": 7,
+      "scope": "Real renderer bounds with cached transforms and controlled graph/reversal endpoints. Gesture exclusion is compatibility coverage, not a failing baseline."
+    },
+    "quantize": {
+      "cases": 8,
+      "baselineFailed": 6,
+      "baselinePassed": 2,
+      "afterPassed": 8,
+      "ordinaryRebuildsAfter": 0,
+      "scope": "Actual controller/render/global handler plus controlled DOM; not a measured native frame gain. Missing-header fallback does not recreate the header."
+    }
+  },
+  "existingChecks": {
+    "live-keylock": {
+      "exitCode": 0,
+      "passed": 9,
+      "failed": 0,
+      "cases": 9,
+      "sha256": "226e3b8f9f75417df24e85e5c817de945873af39174e0922620d91148bf819d1",
+      "scope": "Actual current AudioEngine start/control/routing/retirement methods with controlled adapter, native graph and clock collaborators. No actual browser PCM, physical hardware, native app or integrated audio acceptance. Source may be concurrently edited by parent; hashes delimit read-only review."
+    },
+    "gui-tempo": {
+      "exitCode": 0,
+      "passed": true,
+      "failed": 0,
+      "cases": 8,
+      "sha256": "450eb2710910624a5963af76044ef3799dd42d2368d2245f6159bf62a8e52298",
+      "scope": "Controlled GUI-coordinate model with asynchronous engine collaborator; not browser input/audio, native, hardware or vendor equivalence."
+    },
+    "handoff": {
+      "exitCode": 0,
+      "passed": true,
+      "failed": 0,
+      "cases": 4,
+      "sha256": "e3543c3d752d28484ae8dfb508726d5343a90159b10da9dea4c1426ed35bb1ae",
+      "scope": "Two audio-time barrier ownership/failure policy; no actual audio/native/hardware proof"
+    },
+    "simple-loop": {
+      "exitCode": 0,
+      "passed": true,
+      "failed": 0,
+      "cases": 4,
+      "sha256": "0d094eb688a82b7086cdc064013494af639ea3efb98a65450f16144a6dbabe47",
+      "scope": "Loop-aware Simple Sync geometry/paused-tempo policy; no acoustic or hardware proof"
+    },
+    "fx-tempo": {
+      "exitCode": 0,
+      "passed": 8,
+      "failed": 0,
+      "cases": 8,
+      "sha256": "05292f8816b9818adb380c656a6c4d4bde19b19400230259475ccdc0026eb99c",
+      "scope": "Actual AudioEngine configureFX/setRate and semantic query with controlled existing effect slot updates; not browser DSP, measured repeat intervals, live UI, musical/reference or native acceptance."
+    }
+  },
+  "independentReview": {
+    "simpleAndOriginalAlignmentMasterPassed": 17,
+    "pitchAndRatePassed": 20,
+    "quantizePassed": 8,
+    "concreteRemainingIntroducedRegressionFound": false
+  },
+  "corrections": {
+    "incompleteGraphAndProcessingLiveFixtureErrorsExcluded": true,
+    "finalTestsRerunAgainstImmutableBaseline": true,
+    "voicesOptionalCompatibilityPreserved": true,
+    "inflightMetadataRegression": {
+      "tests": 12,
+      "passed": 11,
+      "failed": 1,
+      "sha256": "d7a71268986f6675f7081494a7121e8556af89e4e9e8f3b3970f68caca3accc4"
+    },
+    "gestureCompatibilityAddedAfterChange": true
+  },
+  "preparedIntegration": {
+    "scope": "PRIVATE CURRENT_INTEGRATION readiness only; existing eight-track Run/turn10 workload. No Electron, HTTP listener, UI, native capture, playback or music started. It does not exercise the new cancellation/reverse-pitch/Quantize cases.",
+    "currentCommit": "ea70bc0ba59ea7c5607f52ca0c440274f25d2c99",
+    "variants": {
+      "baseline": 20,
+      "candidate": 20,
+      "current": 23
+    },
+    "currentFiles": {
+      "native-orientation-window.cjs": {
+        "sha256": "a98b4f4584509f2ae8af766b587ef528ca5281aed50b4e99dc79082db50c065a",
+        "bytes": 30216
+      },
+      "orientation-server.py": {
+        "sha256": "16da6cbb85e8b610bedfcead34d4bb0982388e8c421abed01158a37fc10f4879",
+        "bytes": 3504
+      },
+      "orientation-current-sources.json": {
+        "sha256": "5c0b453cb0b2958314aa05c0fa6c4e2659e9e93e478b72f6c93103dc15bedcc3",
+        "bytes": 2492
+      }
+    },
+    "originalCopiesVerified": true,
+    "legacyManifestsUnchanged": true,
+    "captureObserverSecurityAndQualityGateSectionsByteUnchanged": true,
+    "serverHandlerHostOriginAndTrackRoutingSectionByteUnchanged": true,
+    "pureChecks": {
+      "triggerCases": 9,
+      "intervalCases": 7,
+      "injectedScriptsCompiled": 2,
+      "all3ManifestsGitHashVerified": true,
+      "eightOriginalTrackHashesVerified": true
+    },
+    "launchOnlyAfterUnlock": true,
+    "doesNotEstablish": [
+      "Matched99/ba4 orientation causality",
+      "Current native integration",
+      "New FX parameter or failed-rate-request coverage",
+      "New Simple Sync cancellation, reverse-pitch or Quantize regression acceptance",
+      "Audible Sync pops or hardware output"
+    ],
+    "preservedPrior5eReadinessSet": [
+      {
+        "file": "native-orientation-window.cjs",
+        "preserved": "native-orientation-window.current-5e53ef6-before-ea70bc0.cjs",
+        "sha256": "a248153fe59a3642a7c21841b9078ec508e02b083b33a7af2a52191a8a58fb9d",
+        "bytes": 30101
+      },
+      {
+        "file": "orientation-server.py",
+        "preserved": "orientation-server.current-5e53ef6-before-ea70bc0.py",
+        "sha256": "3d12ad87aeb2e6d1c014492272d798c6367eec9accf137fb6628315e8ba85618",
+        "bytes": 3494
+      },
+      {
+        "file": "orientation-current-sources.json",
+        "preserved": "orientation-current-sources.current-5e53ef6-before-ea70bc0.json",
+        "sha256": "84cfdc5f8f831c89224dc5c0aaab83ca69e96f704ccb357e46354c3f752959b6",
+        "bytes": 2351
+      },
+      {
+        "file": "orientation-current-readiness.json",
+        "preserved": "orientation-current-readiness.current-5e53ef6-before-ea70bc0.json",
+        "sha256": "121a408d36676236f79f08f784bc10cb2aaccc979d5e16ebf33669e78c237cbe",
+        "bytes": 1371
+      }
+    ],
+    "addedCurrentModule": "sync.js"
+  },
+  "boundaries": {
+    "newUIPlaybackListenerNativeBuild": false,
+    "normal52ProfileTouched": false,
+    "legacyComparisonSeparate": true,
+    "audiblePopsNativeStallsHardwareStillOpen": true
+  }
+}

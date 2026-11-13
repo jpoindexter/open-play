@@ -1,0 +1,80 @@
+{
+  "date": "2026-10-29",
+  "baselineCommit": "d79c1962f4d21180e168f6986fcc529acdac119f",
+  "status": "Two source boundary repairs; private122/native delivery pending",
+  "ownerInstruction": "Goal active, audio muted; no main playback or broad test reruns",
+  "hiddenSlicer": {
+    "rootCause": "Hiding held C/D invalidates token before Slicer can restore prior loop fields; old release only forgets owner",
+    "change": "Use slicer.cancelDeck(d) before engine.pause(d), matching ordinary Stop cancellation order",
+    "command": "node --test --test-name-pattern='hidden held Slicer' prototype/slicer-presentation.test.mjs",
+    "red": "1fail: hidden deck retains temporary loop",
+    "green": "1pass: original loop fields restored, deck stopped, late release inert, A/B unaffected",
+    "scope": "Actual Slicer/extracted count handler, controlled token/clock transport",
+    "evidenceSHA256": {
+      "red.txt": "77ebb8fed4a207044ffcb9ddf77d4754b7986ceee00d626308522455495bd8fc",
+      "green.txt": "22da16eb0ad319eb69b0d44c6da248421aac8792d4cb49ec83b2c4a15eb634c5"
+    }
+  },
+  "simpleMaster": {
+    "baseline": "d79c196",
+    "defect": "Explicit new MASTER selection failed to revoke an owned older Simple Sync alignment",
+    "focusedCommand": "node --test --test-name-pattern='explicit new MASTER cancels' prototype/simple-sync-lifecycle.test.mjs",
+    "red": {
+      "tests": 1,
+      "pass": 0,
+      "fail": 1,
+      "assertion": "Old owned adapter controller was not aborted by actual MASTER C handler"
+    },
+    "green": {
+      "tests": 1,
+      "pass": 1,
+      "fail": 0
+    },
+    "actualModules": [
+      "AudioEngine",
+      "synchronizeSimple",
+      "createSyncMaster",
+      "extracted actual app deckAction"
+    ],
+    "assertions": [
+      "Actual new MASTER C140 selected manually",
+      "Old owned ACK controller aborted",
+      "Late obsolete ACK rejects AbortError and its prepared adapter is disposed",
+      "Original playing B voice/rate1 and A/B unsynced/null roles retained; no stale success notice",
+      "Fresh actual Sync targets C140 and successfully commits real engine deferred setRate/group/liveACK owner with B140/120, Cprimary/Bsecondary and correct one success notice",
+      "Final voices/transforms empty; all controlled adapters disposed"
+    ],
+    "compatibility": "Fresh C is paused, so the success segment additionally executes legitimate tempo-only setRate\u2192setSyncedRates\u2192start token/rateOwner mutation against the prior121 completion guard. Controlled adapters/graph only.",
+    "regressionFileLines": 135,
+    "evidenceSHA256": {
+      "red.txt": "7e31029661cd7be0985e2713779edf3aa01a878e3fb72a86795544ec3358afa5",
+      "green.txt": "abe877f56ab7a1ec7bdf8284bf34e28fb4559a2f4107bcbad6939fb320bf6d64",
+      "source-before.sha256": "63970dc1783c65503cb845fc6d562c780f3bd498fe8d9355fe74f4889ff31a8c",
+      "failing-result.json": "32b959d515b3fb7f3838a4447c0a9ba339d068ae35e62f42a369e71285337ef0"
+    },
+    "limits": [
+      "One focused case, not a broad suite",
+      "No native/live WASM/PCM/music/physical/controller/focus acceptance",
+      "No source claim that this caused a reported pop or four-deck stall"
+    ]
+  },
+  "waveformReview": {
+    "action": "Read-only review of retained traces and current hot path; no product change",
+    "verdict": "No new defensible cause for remaining stalls; recurring small writes/allocations not linked causally to stalls. Existing raster bounds and equality guards retained."
+  },
+  "sourceSHA256": {
+    "prototype/app.js": "80674a925854b4439642b751ff49c21b42f904b5dbc46bdbcce148c053e7333d",
+    "prototype/slicer-presentation.test.mjs": "7228c7727157f95b6483930e057875a3ddad8608c5e4b828ea2b348acfccfe4c",
+    "prototype/simple-sync-lifecycle.test.mjs": "93f96f31ec5aef90a74aeccb540495c1da034fea4179b214a85ba27dc4838c3c"
+  },
+  "testModuleLines": {
+    "prototype/slicer-presentation.test.mjs": 67,
+    "prototype/simple-sync-lifecycle.test.mjs": 135
+  },
+  "limits": [
+    "Two focused RED/GREEN regressions only; no broad suite/new diagnostic helper",
+    "Native held/delayed interaction, PCM/live-worklet/audio-quality/hardware acceptance pending",
+    "Not established causes of generic Sync pops or waveform stalls",
+    "No original audio/session/profile/recordings touched; unrelated design draft preserved"
+  ]
+}

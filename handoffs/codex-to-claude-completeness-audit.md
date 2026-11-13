@@ -1,3 +1,95 @@
+## Current core native follow-through —30 October2026 /0.1.128
+
+Private128/source0e61228 adds one isolated70-line cold BeatJump/newer saved-loop check; product transport unchanged from127/038ce4d. Actual native four-deck run uses real pitch Worker output358530frames/48kHz, finite/nonzero, with its first completed result held before engine continuation. Normal mode/saved-pad recall supersedes it; releasing old result leaves seek11 only, newer loop11–12/voice/token6/anchor intact.172A/C/D+mixer controls and7/7ready preview sources retained,8images after. Native stopped/muted/hooksrestored and5sourcehashesstable. Bmode change intentionally rebuilds B; no Bnode-identity claim. No broad suite, accepted listening rerun or masterPCM/music/controller/natural-race-frequency proof.
+
+CORE-FIX-71 bounded software defect marked complete after native criterion/readback. DEK-005 and CORE-001 remain OPEN. Owned check window closed; main still paused30.097/34.086,16tracks/12previews/silentmaster. Archive inspection5/5, current/named launchers point128. Closed127profile262files/120232934B recovery hashes/sizes/mtimes equal; verifiedinactive127bundle/ownedZIP retired, only128bundle remains. Original audio, recordings, recovery and unrelateddraft retained. Genericpop/stall/startup60 and owner/Hercules/headphone gates remain OPEN. Goal active; audio muted. [Executed native check and limits](../docs/prototype/BEAT_JUMP_128_NATIVE_2026-10-30.json).
+
+## Current core follow-through —30 October2026 /0.1.127
+
+Private127/source038ce4d delivers a reproduced looped Beat Jump ownership repair. Cold loop preparation could settle after a newer saved-loop recall and issue an obsolete seek, canceling the newer recall. The shared98-line loop module now rechecks its own transport token before that follow-up. One focused actual-engine/app-handler RED→GREEN retains seek11/loop11–12/new voice/token; fresh Beat Jump still succeeds at13/loop13–14. Controlled Worker/graph evidence does not execute renderer DSP. No broad suite or ordinary accepted listening rerun.
+
+Package inspection5/5 and exact native paused startup observed:30.097/34.086s,16tracks/12materialized library previews,2Play/tempo/6EQ and silent master. Graphite controls/layouts/rails and source previews retained. Closed126profile262files/120232813B recovery copy has equal hashes/sizes/mtimes. Current/playback/named127launchers point to127. Verified inactive126bundle and owned Electron ZIP retired (~0.94GB logical bytes); only127bundle remains. Original music, recordings, recovery and unrelated draft retained. CORE-FIX-71 tracks distinct defect and remaining native cold-overlap/listening criterion; parent DEK-005 stays OPEN. Genericpop/stall/startup60 and owner/Hercules/headphone gates remain OPEN. Goal active, audio muted. [Source scope](../docs/prototype/CORE_BEAT_JUMP_2026-10-30.json) · [Native delivery](../docs/prototype/CORE_BEAT_JUMP_127_NATIVE_2026-10-30.json).
+
+## Current core delivery —30 October2026 /0.1.124
+
+Private desktop **0.1.124** is current/default, source1306423. Public grid publication revokes related pending Simple alignment before metadata changes; delayed Loop Roll release checks its own transport token before follow-up Seek so a newer saved-loop recall wins. Two focused source RED→GREEN checks pass. Package5/5/private seal and paused native recovery observed:30.097/34.086s,16tracks/12visible previews/core controls. Relevant changed native races, PCM and listening remain pending. Goal active, audio muted. Genericpop/stall/startup60 and hardware gates remain OPEN.
+
+Closed123profile261files/120232212B copied with equal hashes/sizes/mtimes. Three124launchers syntax checked; exact bundle separately executed. Inactive123and own packaging ZIP retired (736304755logical bytes); only124bundle. Original media/recordings/recovery copies/unrelated draft retained. Existing123isolatedGUIchecker prepared with asserted physical mute and stopped0, but Flip panel/start callback was NOT REACHED after bounded activation attempts; owned window closed/main retained. No Flip native acceptance or app-defect attribution. No broad suite/new diagnostic helper/main playback. Re-entry: continue concrete muted core defects; listening/controller later.
+
+Evidence: `docs/prototype/CORE_GRID_ROLL_RELEASE_2026-10-30.json` and `CORE_GRID_ROLL_RELEASE_124_NATIVE_2026-10-30.json`. Existing30/70repairs,09link,65failed-to-reachattempt and liveentry reconciled; no new cards or broad closure. Keep original prompt/history and prior accepted evidence scoped.
+
+## Current core delivery —30 October2026 /0.1.123
+
+Private desktop **0.1.123** is current/default, source5b25277. Current Loop Roll Stop restores prior fields under track/token/bounds ownership; related public tempo changes revoke pending Simple alignment; Flip Start updates existing controls. Three new focused source regressions and one affected loop-feedback check passed. Package5/5/private seal and paused native recovery observed:30.097/34.086s,16tracks/12visible previews/core controls. Relevant changed native held/delayed, PCM and listening scenarios remain pending. Goal active, audio muted. Genericpop/stall/startup60 and hardware gates remain OPEN.
+
+Closed122profile261files/120232072B copied with equal hashes/sizes/mtimes. Three123launchers syntax checked; exact bundle separately executed. Inactive122and own packaging ZIP retired (736254581logical bytes); only123bundle. Original media/recordings/recovery copies/unrelated draft retained. No broad suite/new diagnostic helper/main playback. Count-reduction Roll behavior is source-wired only; newer raw identical-bounds/same-token loop intent remains a documented guard limit. Re-entry: continue concrete muted core defects; listening/controller later.
+
+Evidence: `docs/prototype/CORE_ROLL_FLIP_TEMPO_2026-10-29.json` and `CORE_ROLL_FLIP_TEMPO_123_NATIVE_2026-10-30.json`. Existing30/65/70cards extended; no new cards or broad closure. Preserve prior scoped accepted evidence and originalprompt.
+
+## Current core delivery —29 October2026 /0.1.122
+
+Private desktop **0.1.122** is current/default, source9bdb81d. Two reproduced cancellation defects repaired: hiding held Slicer C/D restores prior loop fields before pause; choosing a new MASTER cancels old pending Simple alignment. Two focused RED→GREEN checks pass, including a fresh deferred match to the new master. Package5/5/private seal and paused native recovery observed:30.097/34.086s,16tracks/12visible previews/core controls. Relevant changed native held/delayed and listening scenarios remain pending. Goal active, audio muted. Genericpop/stall/startup60 and hardware gates remain OPEN.
+
+Closed121profile262files/120248463B copied with equal hashes/sizes/mtimes. Three122launchers syntax checked; exact bundle separately executed. Inactive121and own packaging ZIP retired (736213038logical bytes); only122bundle. Original media/recordings/recovery copies/unrelated draft retained. Read-only waveform hot-path review found no new causal stall evidence; no speculative rendering/audio changes or broad suite. Re-entry: continue concrete muted core defects; listening/controller later.
+
+Evidence: `docs/prototype/CORE_HIDDEN_MASTER_2026-10-29.json` and `CORE_HIDDEN_MASTER_122_NATIVE_2026-10-29.json`. Existing69/70cards extended with companions; no new cards. Keep original119FAIL/corrected120PASS and prior accepted mixing evidence scoped.
+
+## Current core delivery —29 October2026 /0.1.121
+
+Private desktop **0.1.121** is current/default, sourcea1fabe0. Three reproduced software defects repaired: hidden C/D Pitch holds no longer consume the next Play; held-Slicer Pause reuses existing feedback controls; obsolete Simple tempo-only completion cannot falsely engage Sync after newer Play/tempo input. Three focused RED→GREEN checks pass. Archive inspection5/5/private seal and actual paused recovery observed:30.097/34.086s,16tracks/12visible previews/core controls. Changed-path native held/delayed scenarios and listening remain pending. Goal stays active, audio muted. Genericpop/stall/startup60 and hardware gates remain OPEN.
+
+Closed120profile261files/120231830B copied with equal hashes/sizes/mtimes. Three121launchers syntax checked; exact bundle separately executed. Inactive120and own packaging ZIP retired (~736MB logical); only121bundle. Original media/recordings/recovery copies/unrelated draft retained. No broad suites/new diagnostic helper/main playback. Re-entry: continue reproduced software defects muted; listening/controller later.
+
+Evidence: `docs/prototype/CORE_HOLD_SIMPLE_2026-10-29.json` and `CORE_HOLD_SIMPLE_121_NATIVE_2026-10-29.json`. Original119FAIL and corrected120PASS retained; do not rerun120scoped check. Trello69/70new defects and66companion kept open for pending native scope.
+
+## Current core delivery —29 October2026 /0.1.120
+
+Current/default120/source550ff95 has unchanged118product playback code and includes the101-line diagnostic correction. Archive inspection5/5/seal and actual paused recovery observed. One corrected native generated4deck Horizontal/Compact GridSave→Close→Pause→newPlay→oldresume completion PASSES: same real live-WASM voice/adapter/token6/rate1.26/TEMPO/outgoing transport,225/225controls,7/7unrelated previews and edited targetdecoded/ready under120→100BPMkey. Exact handled cancellation; all stopped/muted, adapters/timers/PCM0/method/settings/meta/buffers/history/prepare/storage restored, source hashes stable. Captured normalization mismatch fields were deck0/1syncState/syncRole; final remaining mismatches0. Original119overallFAIL remains unchanged. [Result and limits](../docs/prototype/GRID_CANCEL_120_NATIVE_2026-10-29.json).
+
+Main paused30.097/34.086,16tracks/12visiblepreviews/core controls retained; no mainPlay/Sync/RECstart. Closed119profile261files/120231690B APFS-copy/hash+mtime equal. Three120starters syntax checked; exact app executed separately. Inactive119and own cache retired (~939MB logical); only120bundle. Originalmedia/recordings/recoveryprofiles/unrelateddraft preserved. Stop repeating this scoped successful check. Prior53/109mixing acceptance remains scoped; owner listening/focus/Hercules and genericpop/stall/startup60 OPEN. No full-core/public-beta claim.
+
+--- Historical handoff and original prompt preserved below ---
+
+## Current core delivery —29 October2026 /0.1.119
+
+Current/default119/sourcebea1be5 retains118product playback implementation. Added93-line isolated diagnostic and one existing-tool button; archive inspection5/5/seal, actual paused recovery30.097/34.086,16tracks/12previews/core controls. One native generated4deck Compact GridSave→Close→Pause→newPlay→oldresume completion retained new live WASM voice/adapter/token6/rate1.26/TEMPO, outgoing identity and225/225controls, with exact handled cancellation. **Overall diagnostic FAIL:**7/8preview sources matched, settingsAndMetadataRestoredfalse. All stopped/muted; adapters disposed/timers/PCM0/method/buffers/history/prepare/storage restored/source stable. Do not regrade overall failure from these passing subsets. [Full result and limits](../docs/prototype/GRID_CANCEL_119_NATIVE_2026-10-29.json).
+
+A101-line diagnostic-only source correction now allows/verifies edited generated-track preview rekey, adds per-track/per-field mismatch detail, and reapplies exact descriptors after structural cleanup. Syntax checked only; NOT included in119 and runtime still pending. No new product change/broad suite. Current119main session unchanged; closed118profile261files/120231550B APFS-copy/hash+mtime equal. Three119starters syntax checked; exact app executed separately. Inactive118and own cache retired (~939MB logical); only119bundle. Original media/recordings/recovery profiles/unrelated draft preserved. Prior accepted mixing evidence retains scope; owner listening/focus/Hercules and genericpop/stall/startup60 OPEN.
+
+--- Historical handoff and original prompt preserved below ---
+
+## Current core delivery —29 October2026 /0.1.118
+
+Current/default118/source594d223 repairs an obsolete grid-realignment failure stopping newer same-track Play, and scopes ordinary Eject redraw to the emptied deck. Two focused source RED/GREEN cases only; no broad suite/new diagnostic/DSP patch. Archive inspection5/5 and private ad-hoc seal verified. Actual native startup restores Constant Change/DJ W!LD paused30.097/34.086,16tracks/12visible previews,2Play/tempo/6EQ; master silent. One volatile native stopped four-deck Eject empties B while A remains; no Prepare/Play/Sync/RECstart. Native held/playing DOM/focus and delayed grid-race acceptance remain OPEN. [Delivery and limits](../docs/prototype/CORE_EJECT_GRID_118_NATIVE_2026-10-29.json).
+
+Closed117profile262files/120239682B APFS-copy/hash+mtime equal. Three118starters syntax checked; exact app executed separately. Verified inactive117and own packaging cache retired (~939MB logical); only118bundle. Original music, recordings, recovery profiles and unrelated draft retained. Prior53/109mixing,115KeySyncUI/116SlicerUI/117PitchUI retain scope. Owner listening/focus/Hercules deferred; genericpop/stall/startup60 unresolved.
+
+--- Historical handoff and original prompt preserved below ---
+
+## Current core delivery —29 October2026 /0.1.117
+
+Current/default117, source868284a, includes Pitch Play in-place control feedback and deck-local Pitch range/transport-mode redraws. Three focused source cases were already recorded; not rerun for delivery. Archive inspection5/5 and private ad-hoc seal verified. Actual settled native startup restores Constant Change/DJ W!LD paused30.097/34.086,16tracks/12materialized previews,2Play/tempo/6EQ and silent master meter. No mainPlay/Sync/RECstart or profile restore. [Delivery and limits](../docs/prototype/PITCH_CONTROL_117_NATIVE_2026-10-29.json).
+
+Closed116profile261files/120231270B APFS-copy/hash+mtime equal. Current/playback/named117starters syntax checked; exact app executed separately. Verified inactive116and own packaging cache removed (~939MB logical bytes); only117bundle. Music, recordings, recovery profiles and unrelated draft retained. Native held/playing control-retention, owner listening/focus and Hercules remainOPEN. Prior53/109 workflows,115pausedKeySyncUI and116pausedSlicerUI retain their scopes; genericpop/stall/startup60 unresolved.
+
+--- Historical handoff and original prompt preserved below ---
+
+## Current core delivery —29 October2026 /0.1.116
+
+Current/default116, sourceea54bad, includes Slicer in-place feedback and shared Key Sync completion ownership. Ten focused source cases and controlled-WASM RED/GREEN were already recorded; not rerun for delivery. Archive/source/controlled-host inspection5/5 and private ad-hoc seal verified. Actual settled native startup restores Constant Change/DJ W!LD paused30.097/34.086,16tracks/12materialized previews,2Play/tempo/6EQ and silent master meter. No mainPlay/Sync/RECstart or profile restore. [Delivery and limits](../docs/prototype/CORE_SLICER_KEY_116_NATIVE_2026-10-29.json).
+
+Closed115profile259files/120230651B APFS-copy/hash+mtime equal. Current/playback/named116starters syntax checked; exact app executed separately. Verified inactive115and own packaging cache removed; only116bundle. Music, recordings, recovery profiles and unrelated draft retained. Relevant native Slicer/KeySync cancellation/held checks, owner listening/focus and Hercules remainOPEN. Prior accepted ordinary workflows retain their scopes; genericpop/stall/startup60 unresolved.
+
+--- Historical handoff and original prompt preserved below ---
+
+## Current core delivery —29 October2026 /0.1.115
+
+Current/default115, source10a758a, includes Key Sync in-place feedback and Flip Stop/Load/loop-wrap repairs. Eight focused source checks were already recorded; not rerun for delivery. Immutable archive/source/controlled-host inspection5/5. Actual settled native startup restores Constant Change/DJ W!LD paused30.097/34.086,16tracks/12materialized previews,2Play/tempo/6EQ and silent master meter. No main Play/Sync/RECstart or profile restore. [Delivery and limits](../docs/prototype/CORE_CONTROL_115_NATIVE_2026-10-29.json).
+
+Closed114profile259files/120230511B copied/hash+mtime equal. Current/playback/named115starters syntax checked; exact app executed separately. Verified inactive114and own packaging cache removed; only115bundle retained. Music, recordings, recovery profiles and unrelated draft preserved. Key Sync/Flip native changed-path acceptance, owner listening/focus and Hercules stay OPEN. Owner explicitly chose muted work only. Prior manual/jog/EQ/Cue/stop and109restart acceptance retained; genericpop/stall/startup60 not closed.
+
+--- Historical handoff and original prompt preserved below ---
+
 ## Current status — core audit and priorities, 21 October 2026
 
 Current desktop test remains **0.1.37 / source ce5c124**. Jason accepted Jewel Kid/Prism as “Aligned and clean; easier to follow.” Preserve the chosen rekordbox layout, all controls/layout variants and library waveform previews. Existing accepted playback, fader, filter, tempo and jog evidence is retained; no new runtime/listening claim is made by this audit.

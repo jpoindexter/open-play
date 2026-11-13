@@ -1,0 +1,21 @@
+# Long-song pitch-loop preparation — 28 October 2026
+
+The deferred Fable finding is now reproduced through the real interface: a 1.951219512-second loop at source zero on a 448.0058125-second, 48 kHz stereo song fails Play with Key Lock enabled and key shift −12. The renderer budgets all 21,504,279 frames, exceeding its 512 MiB PCM bound. The independent playing deck retains its voice and rate. This is a confirmed loop-path failure, not an established Sync-pop cause.
+
+The existing KeylockRenderer now accepts a source-time window, validates its frame bounds, includes those bounds in the existing bounded cache key, and copies/budgets only that range for the existing worker/DSP. Ordinary transformed loops supply the loop bounds plus any pre-loop source path and two seconds of DSP context on each available side. Original decoded audio remains caller-owned and unchanged. Large required ranges can still exceed the existing budget; ordinary full-track reverse rendering remains separate work. No memory-limit increase or new renderer was added.
+
+The engine maps forward/reverse BufferSource offsets and loop bounds relative to that render window while keeping deck clocks in original source seconds. Loop resize/off uses the existing prepared restart with old-voice ownership and rollback. A synchronized target outside the prepared window now rejects before moving the cursor or replacing existing audio instead of silently clamping to the wrong sample. Existing warped-loop and continuous live-keylock routes remain separate; no beatgrid, Sync clock, fade, layout, control or format was changed.
+
+## Executed evidence
+
+The same isolated real-song Play now succeeds through the actual worker in about 358 ms. Its rendered result is 189,659 frames (3.951229 seconds including context), instead of a full-song render. The estimated input/resampled/output PCM budget falls from 688,136,928 to 6,069,088 bytes; WASM heap and the caller-owned original are additional. The other playing voice and rate remain unchanged. Four Play controls and three currently materialized library previews are present in both captures; nine library tracks exist in the cold diagnostic. This is not a complete control-identity, all-preview-readiness or frame-time measurement.
+
+One 35-line actual-engine/renderer test has a failing whole-song-memory baseline and passes for bounded worker input, source offsets, pre-loop audio, reverse mapping, loop resize/off and out-of-window ownership. Its worker/graph endpoints are controlled and do not establish PCM quality. One initial reverse oracle omitted the existing one-sample endpoint clamp and was corrected; raw output is preserved. The out-of-window rejection has its own failing baseline. The 13 directly affected rate-safety cases and seven dependent pitch-safety cases also pass: 21 targeted checks total, no full suite, soak or clean-song matrix. Cached fixture data now represents a complete source channel and keys the actual windowed cache entries.
+
+The real browser pass precedes the final out-of-window guard. Ordinary Play does not enter it; the new guard's ownership path is covered by its executed composed regression. Listening, exact loop-seam quality, native playback, physical MIDI/headphone routing and Sync-pop resolution remain unverified. CORE-LIVE-01 retains deferred owner acceptance.
+
+Owned Stop/close/clear returned “Stopped; frame closed; owned origin cleared.” The diagnostic tab and staged source/media were removed; input hash and mtime remain unchanged. Normal desktop session and original music were outside the fixture. Private raw evidence: local-evidence/keylock-loop-start-2026-10-28. [Compact receipt](keylock-loop-window-2026-10-28.json).
+
+## Four-deck transition follow-through
+
+A later single muted browser pass on four different real songs executes Loop half/double, Loop Off to live keylock and Sync afterward, retaining the other voices/rates, tracked controls/previews and focus. Complete six-second first-master-channel PCM is finite/nonzero; owner listening and native acceptance remain open. No product edit, new app build or suite replay. [Executed report and limits](FOUR_DECK_LOOP_TRANSITIONS_2026-10-28.md).

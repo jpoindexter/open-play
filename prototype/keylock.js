@@ -51,19 +51,22 @@ export class KeylockRenderer {
   }
   async render(
     buffer,
-    { tempo = 1, semitones = 0, signal, onProgress = () => {} } = {},
+    { tempo = 1, semitones = 0, signal, window = null, onProgress = () => {} } = {},
   ) {
     if (signal?.aborted) throw aborted();
+    const first=window?Math.round(window.start*buffer.sampleRate):0,last=window?Math.round(window.end*buffer.sampleRate):buffer.length;
+    if(!Number.isSafeInteger(first)||!Number.isSafeInteger(last)||first<0||last>buffer.length||last<=first)
+      throw new RangeError('Pitch render window must lie inside the source.');
     const channels = Array.from({ length: buffer.numberOfChannels }, (_, c) =>
-      buffer.getChannelData(c),
+      window?buffer.getChannelData(c).subarray(first,last):buffer.getChannelData(c),
     );
     validateTransform(channels, buffer.sampleRate, tempo, semitones);
-    if (tempo === 1 && semitones === 0) {
+    if (tempo === 1 && semitones === 0 && !window) {
       onProgress(1);
       return buffer;
     }
     if (!this.ids.has(buffer)) this.ids.set(buffer, this.nextId++);
-    const key = `${this.ids.get(buffer)}:${tempo}:${semitones}`;
+    const key = `${this.ids.get(buffer)}:${tempo}:${semitones}${window?`:${first}:${last}`:''}`;
     const cached = this.cache.get(key);
     if (cached) {
       this.cache.delete(key);
@@ -73,9 +76,9 @@ export class KeylockRenderer {
     }
     // Bound worker input, optional resampled source and output PCM before
     // cloning. The WASM heap and caller-owned original are additional memory.
-    const preparedFrames=semitones===0?0:Math.ceil(buffer.length/(2**(semitones/12)));
-    const outputFrames=Math.max(1,Math.round(buffer.length/tempo));
-    if ((buffer.length+preparedFrames+outputFrames)*buffer.numberOfChannels*4 > 512 * 1024 * 1024)
+    const frames=last-first,preparedFrames=semitones===0?0:Math.ceil(frames/(2**(semitones/12)));
+    const outputFrames=Math.max(1,Math.round(frames/tempo));
+    if ((frames+preparedFrames+outputFrames)*buffer.numberOfChannels*4 > 512 * 1024 * 1024)
       throw new Error(
         "This track exceeds the browser pitch-render memory limit. Use a shorter file.",
       );

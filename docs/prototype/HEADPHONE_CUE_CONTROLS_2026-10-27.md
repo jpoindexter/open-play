@@ -1,0 +1,17 @@
+# Headphone Cue retains active controls — 27 October2026
+
+One actual isolated four-deck Compact headphone Cue on/off sequence reproduces an avoidable deck/mixer rebuild in baseline6a090ca. Selecting A headphone Cue correctly changes PFL state, but retains only11/236original observed nodes on and12/237off; unrelated B level loses focus and its original node. This differs from temporary deck Cue and hot-cue metadata repairs.
+
+The shared deckAction handler updates the current PFL button active/aria-pressed and existing transport/focused-deck presentation, then returns. Four added product lines; no new module/abstraction/dependency. Actual GUI, focused keyboard and controller action mapping use this handler. Engine.setPFL, notifications, track guard, sound routing/clock/trim and data persistence remain unchanged. A missing PFL button retains prior structural recovery. No continuous-frame selector overhead added.
+
+Actual same isolated GUI after repair retains236/236nodes on and237/237off, the same Cue button and unrelated B fader focus/value.4Play and2then3lazy library preview images remain. State/engine selection and active/aria-pressed agree true→false. Preview pumping can add an image between the two independently captured node sets; counts describe each observed set, not every possible app node. Physical output muted and all decks stopped at cleanup; no normal profile/audio/session modifications.
+
+One focused actual-handler regression failed before and passed after, covering current GUI button versus controller/no element, PFL routes/state/aria and missing-control fallback. Controlled collaborators do not prove native events or audio routing. The actual GUI reproduction is separate evidence; generated tracks are sufficient for this rendering defect and establish no real-track musical acceptance. No broad suite/clean soak/matrix or additional listening. The existing diagnostic harness is202lines; the new regression21lines. Legacy app size remains MOD-001 debt, not whole-repo modularization compliance.
+
+[Compact results](headphone-cue-controls-2026-10-27.json). Raw captures stay ignored under local-evidence/headphone-cue-refresh-2026-10-27/. Native current Compact/held/playing, controller/headphone/master listening and next actual pop/stall remain open on the linked defect/owner cards. No frame-time reduction, audible-pop cause/fix, physical routing or full-core/parity claim.
+
+## Exact private native delivery
+
+Private69/sourcebaed140 actual ASAR/controlled-host inspection5/5;611prototype files/101declared modules. Protected68recording preflight clear, normal quit/process exit and closed254-file/120545906Bprofile backup with identical before/after/copy hashes. Settled69startup retains4real tracks2/3/4/5s/16library tracks/exact BX3 metadata/4Play/tempo/filter/level/12EQ/decoded deck waveforms and5final viewport AX preview images; master silent/Autoplay off.
+
+In the actual native current Compact main view, mouse A headphone Cue on shows selected1and focused Cue. Focused Space returns selected0; stopped positions and controls/previews remain. AX IDs are not DOM/pointer identity; off-focus retention was not established. No Play/Sync/REC, physical headphone sound, controller or playing-held use. [Delivery](desktop-0.1.69-playback-delivery.json). [CORE-FIX-24](https://trello.com/c/3dkC5glV) remains open; [CORE-LIVE-01](https://trello.com/c/yJ8r9kCD) groups later owner checks. Defaults69and named starter syntax checked; starter not executed. Temporary browser/server closed.

@@ -1,0 +1,26 @@
+{
+  "date": "2026-11-03",
+  "card": {
+    "id": "ari:cloud:trello::card/workspace/6a8f03e71844a6c1103692dc/6aea2d48eac63bc7cec4398d",
+    "name": "LIB-FIX-07 — Apply restored master gains before saving",
+    "url": "https://trello.com/c/8SaPz5b3/246-lib-fix-07-apply-restored-master-gains-before-saving",
+    "list": "Core DJ — Now",
+    "complete": false,
+    "description": "## Reproduced core gain/persistence defect — 3 November 2026\nNormal Library tools → Restore backup saved Master Output Level/Master Volume without applying current audio-engine/header gains. Browser RED: successful restore of −6dB/50%, Settings50%, header still0.0dB; reload applied −6/50. Actual handler + actual app setters + AudioEngine method regression retained master−10 instead of requested−6.\n\n## Bounded repair and acceptance\n- [x] Two existing app setters after validated settings merge, save:false; existing single durable save. No DSP/default/new abstraction.\n- [x] Focused actual-source regression RED→GREEN;10 adjacent restore/recovery checks pass. Explicit legacy check retains−10/.75 when gains omitted; malformed backups remain rejected before mutation.\n- [x] Actual browser normal file picker: reload baseline−6/50 → neutral0/100 restore applies header/settings immediately, stopped/silent.117controls and5ready preview sources retained. Existing restore redraw is intentional; no node-identity claim.\n- [ ] Deliver and observe same restore path in next desktop candidate. Installed138 remains untouched; no native repair/delivery claim.\n\nNot established cause of Jason's Serato comparison or intermittent pops. No music playback, PCM/listening/reference/hardware acceptance. Main session/original audio/saved levels/unrelated draft untouched. Existing controls, layouts and library previews retained. No broad test suite or new build.\nRelated LIB-011; CORE-FIX-75 remains open for fair level calibration/listening. Separate from missing-file metadata/import recovery and prior malformed-backup validation; existing restore/LIB-FIX search found no same named gain-application defect.\nEvidence: https://github.com/jpoindexter/open-play/blob/codex/core-four-deck-trace/docs/prototype/LIBRARY_RESTORE_MASTER_2026-11-03.json\nPrimary Codex gpt-6.1-sol/high; parent Claude alternatives remain recommendations subject to availability. No agent invocation implied."
+  },
+  "parents": [
+    {
+      "id": "ari:cloud:trello::card/workspace/6a8f03e71844a6c1103692dc/6ae9b341ac79591bccfafc8c",
+      "name": "CORE-FIX-75 — Investigate low playback level and gain staging",
+      "commentId": "ari:cloud:trello::action/6aea2d4cad557687874ee0b9",
+      "text": "Distinct reproduced gain-state defect now tracked in LIB-FIX-07 https://trello.com/c/8SaPz5b3/246-lib-fix-07-apply-restored-master-gains-before-saving: restore saved master level/volume but left current engine/header unchanged until reload. Source/browser repair now applies both through existing setters. This is NOT established as the reported Serato loudness cause; your saved levels stay untouched and CORE-FIX-75 remains open for calibrated comparison/listening."
+    },
+    {
+      "id": "ari:cloud:trello::card/workspace/6a8f03e71844a6c1103692dc/6ad2026ce97a013cd37491e8",
+      "name": "LIB-011 — Metadata backup and migrations",
+      "commentId": "ari:cloud:trello::action/6aea2d4a0483bc280f055bb5",
+      "text": "New distinct LIB-FIX-07 https://trello.com/c/8SaPz5b3/246-lib-fix-07-apply-restored-master-gains-before-saving repairs reproduced backup master-gain application: saved settings changed while current engine/header retained old gains. Two existing setters, one save; actual source RED→GREEN and normal browser picker checked,117controls/5previews retained. Native138 unchanged; next desktop delivery gate remains open."
+    }
+  ],
+  "scope": "Source/browser gain-restore acceptance only; next desktop delivery remains open."
+}

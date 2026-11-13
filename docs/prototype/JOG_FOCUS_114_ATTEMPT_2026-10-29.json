@@ -1,0 +1,212 @@
+{
+  "date": "2026-10-29",
+  "version": "0.1.114",
+  "sourceCommit": "2f5b9e12a06c063ed68919c2a4c29a5ae1fc18d9",
+  "criterion": "Native held jog returns to nominal speed after actual focus/window loss",
+  "disposition": "UNGRADED: required focus transition was not executed",
+  "productChanges": false,
+  "newBuild": false,
+  "suiteRerun": false,
+  "nativeSetup": "Existing GUI Tempo after Sync checker; generated isolated A330Hz/120BPM and B550Hz/100BPM synced to120BPM; internal physical output muted before playback; capture worklet zeroes its outputs.",
+  "executed": [
+    "Native H hold during capture: A approximately330Hz, B686.400Hz (nominal660Hz times1.04).",
+    "Next native Window-menu action with held H rejected cannotClickOffscreenElement; no focus loss observed.",
+    "Next capture B660Hz is compatible with ordinary prior H release and does not establish focus-loss cleanup.",
+    "Both180s tones reached natural end; subsequent Stop/export captured exact zero samples. This does not prove an active Stop race.",
+    "Final Devices UI reported MUTED; owned checker closed; main saved session paused30.097/34.086 with16tracks,12materialized previews and core controls retained."
+  ],
+  "captureIdentity": {
+    "bytes": 430115,
+    "sha256": "bd1380a6d4c5222ac475f33894f2f3d7ecade64e9774a1ebd23c4ff75d229237",
+    "sourceStable": true,
+    "startedAt": "2026-10-29T17:44:51.394Z",
+    "finishedAt": "2026-10-29T17:48:15.765Z"
+  },
+  "independentPCM": {
+    "method": "Whole-window Float32 LE decode, SHA256, finite/peak/RMS/exact-zero and positive-zero-crossing interpolation;13230frames per channel per case; no physical output or listening inference.",
+    "sampleRate": 44100,
+    "cases": [
+      {
+        "case": 1,
+        "nominalRates": [
+          1,
+          1.2
+        ],
+        "playing": [
+          true,
+          true
+        ],
+        "channels": [
+          {
+            "frames": 13230,
+            "sha256": "4240d7a048b1a5e62a8c8390101fe6018ab936710abf609dee698e7fbdf8c1eb",
+            "finite": true,
+            "peak": 0.08049294352531433,
+            "rms": 0.056917234672178775,
+            "exactZeros": 0,
+            "independentHz": 329.99999824213097
+          },
+          {
+            "frames": 13230,
+            "sha256": "b162120cca3b1fb857997545d26736a0128d88a91d9aa0f648e1206fca84baa4",
+            "finite": true,
+            "peak": 0.07746526598930359,
+            "rms": 0.0547454448146308,
+            "exactZeros": 0,
+            "independentHz": 686.4000260333667
+          }
+        ]
+      },
+      {
+        "case": 2,
+        "nominalRates": [
+          1,
+          1.2
+        ],
+        "playing": [
+          true,
+          true
+        ],
+        "channels": [
+          {
+            "frames": 13230,
+            "sha256": "38cca723639f2180324f6786f565c1a1e343adba4eba1b84069b142cf65a3831",
+            "finite": true,
+            "peak": 0.08049294352531433,
+            "rms": 0.056917234672179524,
+            "exactZeros": 0,
+            "independentHz": 330.00000108921864
+          },
+          {
+            "frames": 13230,
+            "sha256": "6eab957cc052bc56750f16696ffb44604341d3e95a4f0beeb4c106a8f60fe517",
+            "finite": true,
+            "peak": 0.0774601399898529,
+            "rms": 0.05474980672594712,
+            "exactZeros": 0,
+            "independentHz": 660.0000245860053
+          }
+        ]
+      },
+      {
+        "case": 3,
+        "nominalRates": [
+          1,
+          1.2
+        ],
+        "playing": [
+          false,
+          false
+        ],
+        "channels": [
+          {
+            "frames": 13230,
+            "sha256": "9d55c9c2f49808c72a9d28e4f661bae87b1ed419741fa38e5ffeff9648f33d7d",
+            "finite": true,
+            "peak": 0.0,
+            "rms": 0.0,
+            "exactZeros": 13230,
+            "independentHz": null
+          },
+          {
+            "frames": 13230,
+            "sha256": "9d55c9c2f49808c72a9d28e4f661bae87b1ed419741fa38e5ffeff9648f33d7d",
+            "finite": true,
+            "peak": 0.0,
+            "rms": 0.0,
+            "exactZeros": 13230,
+            "independentHz": null
+          }
+        ]
+      }
+    ]
+  },
+  "privateEvidenceDirectory": "local-evidence/core-native-114-jog-focus-2026-10-29",
+  "originalReportCaveat": "Legacy original inner harness says not native; retained unedited. Outer receipt identifies actual packaged native114 host, without promoting PCM to listening or physical evidence.",
+  "limits": [
+    "Focus/window-loss criterion remains unchecked.",
+    "No new product defect established; no speculative patch.",
+    "No music, subjective jog feel, controller/headphone routing, Sync-pop or long-session acceptance."
+  ],
+  "next": "Owner-assisted once: in the isolated physically muted checker, hold H, switch to another visible native window before releasing, then verify nominal return. The supported automated menu and overlapping native-input routes did not prove this overlap. Do not rerun ordinary accepted jog/listening or build another checker.",
+  "secondAttempt": {
+    "route": "Held native H via2500ms pressKey plus separate existing System Settings title click; no settings changes requested or observed.",
+    "disposition": "UNGRADED: focus-click returned only after H call returned; no observation proves focus changed while H remained held. Native input route did not establish the required overlap.",
+    "independentCapture": {
+      "originalBytes": 287345,
+      "originalSHA256": "ccac2db9204ab3ca6966ed1d2e2a90accfcab45279bc9fb49ff5c85cbc03e614",
+      "sourceStable": true,
+      "sampleRate": 44100,
+      "cases": [
+        {
+          "rates": [
+            1,
+            1.2
+          ],
+          "playing": [
+            true,
+            true
+          ],
+          "channels": [
+            {
+              "frames": 13230,
+              "sha256": "5b9bf0a71467a2da6d902f21bc851618fe034dac85e9e663b0914477b7cb3069",
+              "peak": 0.08049294352531433,
+              "rms": 0.05691723467218675,
+              "exactZeros": 0,
+              "independentHz": 329.99999824213097
+            },
+            {
+              "frames": 13230,
+              "sha256": "b546c11b9e171fa44fd0181e434d772242bda2653952f4f41b28fcdb98867539",
+              "peak": 0.07746458053588867,
+              "rms": 0.05474066914361217,
+              "exactZeros": 0,
+              "independentHz": 686.3999927820338
+            }
+          ]
+        },
+        {
+          "rates": [
+            1,
+            1.2
+          ],
+          "playing": [
+            false,
+            false
+          ],
+          "channels": [
+            {
+              "frames": 13230,
+              "sha256": "9d55c9c2f49808c72a9d28e4f661bae87b1ed419741fa38e5ffeff9648f33d7d",
+              "peak": 0.0,
+              "rms": 0.0,
+              "exactZeros": 13230,
+              "independentHz": null
+            },
+            {
+              "frames": 13230,
+              "sha256": "9d55c9c2f49808c72a9d28e4f661bae87b1ed419741fa38e5ffeff9648f33d7d",
+              "peak": 0.0,
+              "rms": 0.0,
+              "exactZeros": 13230,
+              "independentHz": null
+            }
+          ]
+        }
+      ],
+      "nativeActionTiming": {
+        "captureRequestedAt": "2026-10-29T17:59:28.883Z",
+        "hCallAt": "2026-10-29T17:59:29.011Z",
+        "focusCallAt": "2026-10-29T17:59:29.414Z",
+        "hReturnedAt": "2026-10-29T17:59:31.536Z",
+        "focusReturnedAt": "2026-10-29T17:59:31.578Z",
+        "targetObserved": [
+          "There has been no change in the accessibility tree for Window: \"Software Update\"."
+        ]
+      }
+    },
+    "cleanup": "Explicit Stop/export while generated tones still running; stopped report bothplayingfalse, both13230-frame channels exactzero. Devices UI MUTED; owned checker closed; main30.097/34.086,16tracks and controls/previews retained.",
+    "limits": "No OS focus-loss pass; no subjective sound or physical output proof. No product code changes/build/test suite."
+  }
+}

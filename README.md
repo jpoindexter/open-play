@@ -1,45 +1,94 @@
 # Open Play
 
-[Core audit and remaining work — 21 October](docs/prototype/CORE_DJ_AUDIT_2026-10-21.md) · [Trello reconciliation](docs/delivery/CORE_DJ_RECONCILIATION_2026-10-21.json).
+Independent DJ software for mixing local music. Two or four decks, readable frequency-colored waveforms, a central mixer and a library with waveform previews.
 
-Current work is finishing the **core two-track DJ experience**, with the chosen rekordbox layout, all controls and library waveform previews preserved. Jason authorized a new local desktop test build on20October. [Current waveform/native evidence and open acceptance](docs/prototype/WAVEFORM_READABILITY_035.md), [core plan](docs/delivery/CORE_DJ_FIRST.md), [HTML preview](http://127.0.0.1:8848/prototype/layout-preview.html).
+[Try locally](#run-locally) · [User manual](https://open-play-help.vercel.app/) · [Contribute](CONTRIBUTING.md) · [Report a bug](https://github.com/jpoindexter/open-play/issues/new/choose) · [MIT license](LICENSE)
 
-Independent open-source desktop DJ project, with a browser review candidate and ongoing reference investigation. The goal is familiar Serato DJ Pro design and behavior without artificial feature, account or device gates in the independent implementation.
+![Open Play with two compact decks, a central mixer and library waveform previews](help/assets/screenshots/workspace-two-decks.jpg)
 
-Historical local desktop approval for revision `f8b0abf` and previous test builds is retained in [approvals](docs/approvals.md). Native0.1.27/0.1.37 are historical; current local test 0.1.44 (source a6600e0) passed existing-profile startup with 16 tracks. [Extended four-deck real-track evidence and open pop/lag](docs/prototype/CORE_FOUR_DECK_SOAK_2026-10-23.md). [Cue/EQ/Autoplay evidence and remaining acceptance](docs/prototype/CORE_CUE_EQ_TRANSPORT_2026-10-23.md). [Bounded decoded cache and executed limits](docs/prototype/CORE_DECODED_CACHE_2026-10-23.md). [State-safety fixes and verification](docs/prototype/CORE_STATE_SAFETY_2026-10-22.md); [Trello reconciliation](docs/delivery/CORE_FOUR_DECK_SOAK_RECONCILIATION_2026-10-23.json). [Earlier desktop instructions](desktop/README.md) describe historical candidates; they do not override the current scope. Full core, vendor parity and physical routing acceptance remain open.
+*Workspace reference with generated demo tracks from the illustrated manual. The guide identifies its version baseline; screenshots are not proof of current audio or hardware acceptance.*
 
-- [Run the HTML prototype](prototype/README.md)
-- [Per-file Video FX save/recall evidence](docs/prototype/VIDEO_FILE_FX_REVIEW.md)
-- [Semantic Video links and treatment evidence](docs/prototype/VIDEO_LINK_TREATMENT_REVIEW.md)
-- [Current Video, karaoke and Media Crate evidence](docs/prototype/VIDEO_FUNCTIONAL_REVIEW.md)
-- [Executed review and known gaps](docs/prototype/REVIEW_REPORT.md)
-- [Claude independent audit handoff](handoffs/codex-to-claude-completeness-audit.md)
-- [Full build plan](FULL_BUILD_PLAN.md)
-- [Original execution brief](PROJECT_PROMPT.md)
-- [Evidence ledger](docs/research/EVIDENCE_LEDGER.md)
-- [Binary findings](docs/research/BINARY_FINDINGS.md)
-- [Pre-prototype parity gate](docs/research/PARITY_GATE.md)
-- [Feature additions from research](docs/research/PARITY_ADDITIONS.md)
-- [110-feature model plan](docs/delivery/FEATURE_MODEL_PLAN.md)
-- [Machine-readable feature registry](docs/delivery/feature-registry.json)
-- [Manual-to-feature crosswalk](docs/research/MANUAL_FEATURE_CROSSWALK.md)
-- [Reviewed interaction requirements](docs/research/INTERACTION_REQUIREMENTS.md)
-- [Installed UI observations](docs/research/UI_OBSERVATIONS.md)
-- [Official manual source index](docs/research/manual-index.json)
-- [Connected Hercules investigation](docs/research/HARDWARE_HERCULES.md)
-- [Foundation and product-model recommendation](docs/decisions/001-foundation-and-models.md)
-- [Development-model routing](docs/models/DEVELOPMENT_ROUTING.md)
-- [Approval record](docs/approvals.md)
-- [Private Trello board](https://trello.com/b/OqMGEjpe/open-play-serato-parity)
+## Status
 
-Reference: installed Serato DJ Pro 4.0.10.213, with Desktop installers 4.0.9 and 4.0.10. Hardware reference: Hercules DJControl Inpulse 300 MK2. The latest recorded session used computer audio with that controller disconnected; no live device claim is made here. Ghidra is the selected deep-analysis tool; Hopper is a demo.
+**Early development; contributors welcome.** The goal is a useful, reliable public Mac local-audio beta. A public desktop installer has not been released. The latest recorded private candidate is **0.1.151**; musical Sync, audible pops, matched output volume and final installation/signing acceptance still have open gates. See [known issues](docs/beta/KNOWN_ISSUES.md) and the [beta plan](docs/delivery/PUBLIC_BETA_PLAN.md).
 
-Findings distinguish observed behavior, file evidence, official documentation, inference, proposals and unknowns. Device enumeration and source inspection are not complete hardware compatibility. The original 74 proposed feature groups have expanded to 110; that count is not an assertion that the reference has exactly 110 features or that parity is verified.
+The source is available to study, fork, modify and contribute under MIT. It is not a claim of complete Serato, rekordbox or Traktor parity. Experimental and simulated features are labelled. Original music and personal library data are not required to contribute.
 
-Raw binaries, extracted slices, disassembly, private library data, screenshots and vendor article bodies stay outside Git under ignored `local-evidence/`. The repository contains original plans/findings, public-source metadata, diagnostic tooling, original browser prototype code and screenshots of that prototype.
+## What is here
 
-- [Full-scope contract](docs/research/FULL_SCOPE_CONTRACT.md)
-- [Feature coverage accountability](docs/research/FEATURE_COVERAGE.md)
+- Two- and four-deck workflows, Compact/Full decks and horizontal/vertical waveform views.
+- Local audio import, transport, tempo, jog nudge, beatgrids and outgoing-master Sync workflows.
+- Channel gain, EQ, optional filter, level faders, headphone monitor controls and crossfader.
+- Temporary Cue, hot cues, loops and other performance controls.
+- Crates, search, metadata, local persistence and full-track library previews.
+- An illustrated, searchable [manual](https://open-play-help.vercel.app/), plus an Electron test host.
 
+Browser decoding varies. Independent headphone output and controller routing require suitable hardware; a passing software check does not certify them. Advanced DSP, stems, video and provider fixtures have separate setup and acceptance limits.
 
-- [FX Tap BPM and stem-responsive waveform evidence](docs/prototype/FX_TEMPO_WAVEFORM_REVIEW.md): actual timing/audio/source-display behavior; full reference parity remains open.
+## Run locally
+
+The browser workspace is the simplest way to explore or contribute. No npm install is needed to use the committed UI bundle.
+
+Prerequisites: Git, Python 3.9+ and a recent browser. This server command has been checked on macOS; Windows server support is not established.
+
+```sh
+git clone https://github.com/jpoindexter/open-play.git
+cd open-play
+python3 scripts/serve_prototype.py --port 8848
+```
+
+Open **http://127.0.0.1:8848/prototype/workspace-preview.html**. Stop the server with **Ctrl+C**. If that port is busy, choose another port and use the same one in the URL.
+
+Start at low output volume. Use the original generated demo tracks or import audio you have permission to use. Keep your originals: metadata backups do not contain audio or recordings, and Files distinguishes durable storage from session-only imports. The [first-mix guide](docs/beta/QUICK_START.md) explains the workflow.
+
+The loopback server does not install optional stem models or upload your library. Optional local processing needs its separately documented runtime.
+
+### Development commands
+
+Use Node.js 24 for the existing JavaScript checks. Run only the check relevant to your change, for example:
+
+```sh
+node --test prototype/repeat-end.test.mjs
+```
+
+For edits to the Astryx UI source, rebuild its committed bundle:
+
+```sh
+cd prototype/ui
+npm ci --ignore-scripts
+npm run build
+```
+
+For manual-site work, follow [help/README.md](help/README.md). The desktop packaging scripts currently depend on maintainer-only generated fixtures; they are not a fresh-clone installer command. Use the browser workspace unless you are specifically working on the [Electron host](desktop/README.md).
+
+## Contribute
+
+**Fork → create a branch → make one focused change → open a pull request.** See [CONTRIBUTING.md](CONTRIBUTING.md) for setup, code boundaries, focused checks and review expectations.
+
+Useful contributions include reproducible Sync/audio bug reports, clearer waveform feedback, import/recovery improvements, control accessibility, documentation and carefully scoped fixes. For a large feature, open an issue first so we can agree on scope.
+
+- [Bugs and feature requests](https://github.com/jpoindexter/open-play/issues/new/choose)
+- [Pull requests](https://github.com/jpoindexter/open-play/pulls)
+- [Private security reports](SECURITY.md)
+
+Do not attach songs, full mixes, library backups, credentials or private research dumps. Generated audio and small redacted reproductions are preferred.
+
+## Code map
+
+| Directory | Purpose |
+| --- | --- |
+| `prototype/` | Browser DJ engine, workspace, controls and focused checks |
+| `prototype/ui/` | Astryx UI source; custom DJ controls remain separate |
+| `desktop/` | Electron host and private packaging tools |
+| `help/` | Static manual source and screenshots |
+| `scripts/` | Loopback server and development/research tools |
+| `docs/` | Design decisions, evidence, limitations and delivery plans |
+| `experiments/` | Isolated audio investigations; not default production backends |
+
+## License and attribution
+
+Original Open Play code is [MIT licensed](LICENSE). Third-party code retains its own licenses and notices; see [NOTICE](NOTICE). Optional model weights and experimental integrations require their own license checks. The app is independent and is not affiliated with Serato, AlphaTheta/rekordbox, Native Instruments or Allen & Heath.
+
+## Maintainer notes and history
+
+The [current handoff](handoffs/current.md) and [build plan](FULL_BUILD_PLAN.md) retain detailed evidence and remaining gates. [Earlier README checkpoints](https://github.com/jpoindexter/open-play/blob/4ab279c2954ab6a4d00bdd0c2c820205053b541c/README.md) remain in Git history. The [original project brief](PROJECT_PROMPT.md) is preserved.

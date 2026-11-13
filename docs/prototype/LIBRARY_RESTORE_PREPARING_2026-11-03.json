@@ -1,0 +1,31 @@
+{
+  "date": "2026-11-03",
+  "baseline": "e1f19fd86037a389ee2b493884ac9d16077b64cb",
+  "defect": "Backup restore admitted a deck with temporary Cue processing=true but playing=false/playQueued unset, replacing metadata/crates and persisting while preparation was still owned.",
+  "reproduction": "Actual createCueHolds.press \u2192 AudioEngine.start; hold resume() before continuation, then execute the actual restore file-input handler. Controlled clock/graph/file, not browser/native/human input.",
+  "red": "Track title/crates replaced during held Cue and save reached; expected unchanged session. Original failed assertion retained privately.",
+  "repair": "Existing restore guard includes d.processing and tells user to wait for preparation. No DSP, hold cancellation, layout or gain/default change.",
+  "verification": {
+    "regressions": "8 current library-restore checks pass, including prior gain restore and malformed/legacy backups. Added cleanup assertion reruns only the new pending-Cue case.",
+    "pendingOwner": "State remains byte-identical and persist calls empty; processing flag and start token retained by rejected restore.",
+    "cleanup": "Cancel Cue/pause before releasing held resume; then processing=false, playing=false, voices=0 asserted.",
+    "scope": "Actual source/module behavior with controlled collaborators, no physical audio or real-time timing. No browser/native/PCM/acoustic or generic-pop claim."
+  },
+  "sourceSHA256": {
+    "prototype/panels.js": "48d1d31173dc3cac8c2279d54fadb445cdb074cbfa3aaf4a0a396e3f5be560fe",
+    "prototype/library-restore.test.mjs": "30f1b34a775cf316df02ecb99689035747ff185465e08ffb2d03fa76fa1cbb9e",
+    "prototype/holds.js": "0efaeeee4280d7c0eb6a88da9664ae12ba520b969115a69f1033fcb572f06789",
+    "prototype/engine.js": "036f084a42177cb58eeaf926b3fd3d5ea6f0ef7b2fe9aefcb1974711ee89261b"
+  },
+  "preserved": [
+    "Existing validation, stopped legacy/gain restore and durable-save behavior",
+    "Custom controls/layouts/source and library waveform renderers untouched",
+    "Original audio and installed native138 saved session untouched"
+  ],
+  "remaining": [
+    "Include both restore repairs in next desktop batch",
+    "Execute native restore/admission path when reliable input or a reused isolated diagnostic is available",
+    "Owner listening, reference volume, Hercules/headphone acceptance remain separate"
+  ],
+  "privateEvidence": "local-evidence/restore-preparing-2026-11-03/"
+}

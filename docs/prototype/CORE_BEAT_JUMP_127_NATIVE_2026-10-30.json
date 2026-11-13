@@ -1,0 +1,69 @@
+{
+  "date": "2026-10-30",
+  "version": "0.1.127",
+  "sourceCommit": "038ce4da3fe6974fa5e9199ec852fff97fd36bce",
+  "asarSHA256": "93130329fc9f8dd0aa0fe0718aaa290465c341e3ea397f1962334c64ef607fb7",
+  "scope": "Executed exact native package startup and paused recovery only; no main Play/Sync/Cue/REC or held-race attempt.",
+  "sourceRepair": "CORE-FIX-71 \u2014 pending looped Beat Jump yields to newer saved-loop recall",
+  "native": {
+    "savedPositions": [
+      30.097,
+      34.086
+    ],
+    "libraryTracks": 16,
+    "materializedViewportPreviews": 12,
+    "playControls": 2,
+    "tempoControls": 2,
+    "eqControls": 6,
+    "silentMaster": true,
+    "pausedRecoveryBanner": true,
+    "visual": "Native screenshot inspected; graphite mixer, deck tools and waveforms remain visible."
+  },
+  "packageInspection": {
+    "passed": 5,
+    "failed": 0,
+    "scope": "Actual immutable ASAR and controlled host callbacks, not audio/runtime proof"
+  },
+  "profileRecovery": {
+    "source": "/Users/jasonpoindexter/Library/Application Support/Open Play Playback Test",
+    "target": "/Users/jasonpoindexter/Documents/GitHub/Open Play/local-evidence/profile-recovery/pre-beat-jump-0.1.126-2026-10-30",
+    "files": 262,
+    "bytes": 120232813,
+    "hashesSizesMTimesEqual": true
+  },
+  "evidenceSHA256": {
+    "main-before.txt": "c9262cd9cd74e392e158059a71a175949aabb14a530bc704374cb943651dfc8c",
+    "main-127.txt": "94a558cea67b4abf9bebe529b6d4dd9b6e96a7e6b5b4fffd6823479b12f6d1eb",
+    "native-127.png": "abc5c3bcd7476c2d1d441dfccf02f5524f30d8d9c96930966a3cd1dda0e3f9b3"
+  },
+  "limits": [
+    "Source RED\u2192GREEN uses controlled Worker/graph and actual engine/app handlers; renderer DSP not run",
+    "Native cold BeatJump/saved-loop overlap, changed-path listening and physical controller acceptance pending",
+    "Prior ordinary manual/jog/EQ/Cue/stop acceptance retained; not rerun",
+    "Generic Sync pops/waveform stalls/startup60 remain open",
+    "No original audio/session/recording modification by test, no new broad suite or diagnostic"
+  ],
+  "cleanup": {
+    "retiredVersion": "0.1.126",
+    "asarSHA256": "4943d49c3cb1dc8789d85c84c6616dcdf96b4c0d702da3b0760e2e055691abae",
+    "inactiveProcessVerified": true,
+    "retiredBundleBytes": 809077826,
+    "cache": [
+      {
+        "path": "/Users/jasonpoindexter/Library/Caches/electron/5ea8d8a9b31b6adae9bf3c2dbe1ac40908da7b96143379b3ba53f43037430952/electron-v44.9.0-darwin-arm64.zip",
+        "bytes": 130738603,
+        "sha256": "12d873a5ae98a6598e730402e9278c5d132e97ea1a4405a7713bec2a3e83921f"
+      }
+    ],
+    "remainingVersions": [
+      "0.1.127"
+    ],
+    "logicalBytesRemoved": 939816429
+  },
+  "trello": {
+    "card": "https://trello.com/c/rQHArSGa",
+    "parent": "https://trello.com/c/Wyeht7E2",
+    "descriptionsReadBackExactly": true,
+    "bothRemainOpen": true
+  }
+}

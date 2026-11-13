@@ -1,0 +1,69 @@
+# Current private desktop —0.1.114
+
+114/source2f5b9e1 preserves113product audio/control/layout source. One first native controlledoldlive-key failure after actualLoad/Play/newkeyUp retains replacementvoice/key+1/adaptersemitone1/token4playing,213controls and8/8preview sources. Bothadaptersdisposed/timerscleared/PCM0, allstopped/muted/sourcehashesstable. [Executed result and limits](LIVE_KEY_114_NATIVE_2026-10-29.json). No suite/clean-case rerun or newproductpatch; originalnaturalworklet/rate/otherbackend/music/physical claims remainOPEN.
+
+Main114paused30.097/34.086,16tracks/12materializedpreviews/corecontrols. Closed113profile259files/120230371B copied/hash+mtime equal. Exactbundleexecuted; current/playback/named114launchers syntaxchecked separately. Only114bundle; inactive113/cache removed. All originalmedia/captures/recoveryprofiles/unrelateddrafts retained. Manualmix/jog/A-BEQ/Cue/cleanStop and109restarttransition are alreadyaccepted at their scopes. One ownerchanged-path listening question is pending; no answer inferred. Herculeslater. Generic pops/stalls/startup60 remainOPEN; no full-core/public-beta claim.
+
+--- Historical checkpoints below; old current/default references are superseded ---
+
+## Prior108 delivery —29 October2026
+
+**Current/default private test:0.1.108**, source1370e3f/ASAR42edf78f…17559dd. It contains three bounded core repairs: fresh raw-jog future anchors, scoped partial-Load overview painting and tempo-only Smart Sync firstOFF ownership. Source checks5+8+13and package/source/controlled-host5/5passed; strict deep private ad-hoc seal verified. No broad suite or clean-case soak repeated.
+
+**CORE-FIX-61closed narrowly:** ONE native isolated four-deck generated raw-B handoff, with synthetic H through the installed handler and a diagnostic readiness participant. Captured source.start offset/when and actual AudioParam independently match pre/post positions exactly. Hrelease restores1.32;217observed controls/previews retained, internal physical mute/stopped cleanup/source-factory restoration/source hashes verified. No PCM/music/OSfocus/controller proof. **CORE-FIX-62closed narrowly:** actual native CLoad retains4Play/8materialized previews; composed source evidence establishes initiating paint/geometry4→1with full/shared-track fallbacks. No measured native frame/GC improvement.
+
+[Native result and limits](../prototype/CORE_BATCH_108_NATIVE_2026-10-29.json) · [Source RED/GREEN](../prototype/CORE_BATCH_108_SOURCE_2026-10-29.json). CORE-FIX-15's new paused-master tempo-only OFF repair is included but native/real-ACK/listening acceptance remains OPEN. Generic Sync pops/stalls, unexpected106startup(CORE-FIX-60), current musical/renderer-failure and headphone/Hercules gates remain OPEN. Prior scoped owner manual/jog/EQ/Cue/stop acceptance retains its limits; no full-core/public-beta/parity claim.
+
+The normal108session remains stopped114.836/112.561,16tracks/12materialized previews and original controls/layouts. Before launch,259-file120,353,899-byte closed107profile copied using APFS copy-on-write; byte/hash/mtime equality verified. Preflight Sound AX reportedMute1, laterMute0/volume1without an agent restore toggle; sustained OS mute is unproved. The separate graph's internal AudioMonitor mute was asserted. Owned checker and Sound window closed; no main transport or original-media changes.
+
+Only108app bundle remains. After exact108startup/check, hash-verified inactive107and its launcher plus packaging download cache were retired. Current/playback/named108launchers syntax checked; exact bundle observed, launchers not separately executed. The earlier108/source1bc4f9e build had been discarded during storage cleanup; this is the rebuilt1370e3f candidate. Original media, recordings and all profile recovery copies remain protected. Build-only SDK remains removed; current runtime/committed WASM intact. Latest disk reading~48GiBfree includes changes outside this scoped cleanup and is not attributed to this pass.
+
+Next: address a reproduced core defect or one remaining native failure path; preserve next actual pop/stall/unexpected-Play context. Do not rerun accepted clean cases or substitute source/graph results for owner listening. The unrelated monochrome-tools draft remains untouched. Push every owned slice.
+
+## Historical0.1.94 audit — scoped evidence retained, not current identity
+
+28 October2026. **Goal incomplete; native94is now current/default.** Exact sourceaa07a04/archive5/5 and actual settled native startup observed: Constant Change/DJ W!LD paused50.716/62.715s,16library tracks,2Play/tempo,6EQ and12materialized previews, master−10.04344/silent UI meter. No main Play/Sync/REC Start or profile restore. [Native delivery](DESKTOP_CORE_094_2026-10-28.md).
+
+Before launch, the256-file120945306-byte closed92profile and recovery copy were revalidated hash/mtime-identical with no playback-test process. The copy is a recovery option, not permission to overwrite later owner changes. Only94bundle remains; verified inactive92and its named starter were retired. The Mac locked again after the settled capture; final native read was blocked. No further native input. Paused startup does not prove relevant native failure/playing/listening or physical acceptance.
+
+## Outcome, now, next and done
+
+Outcome: reliable real-track core mixing in the current desktop, retaining every existing control/layout/library waveform preview and original audio/session.
+
+Now: preserve current/default94, the closed-profile recovery copy and all original recordings/music. No broad suite/soak, repeated clean listening, speculative DSP change, new theme rollout or rebuild is needed for this handoff.
+
+Next: native availability was observed again after the earlier lock. The isolated controlled-failure setup was blocked by DevTools paste protection before execution; it was not bypassed. That check was stopped/closed and the main paused session preserved. Native queue acceptance needs a supported isolated fault-control route; no ordinary successful tempo rerun substitutes for it. Owner listening and device work remain deferred. Do not re-import songs, overwrite owner positions or rebuild just to accumulate another clean result.
+
+Done requires relevant current native playing/error ownership, one scoped listening result and suitable physical routing/controller acceptance, with pop/stall disposition recorded honestly. Existing prior53manual/jog/EQ/Cue/stop acceptance remains accepted at its stated scope. Packaging or another clean case cannot close an intermittent defect.
+
+Latest muted 0.1.94 subset: [one native grouped-tempo/Stop observation](NATIVE_CORE_094_MUTED_2026-10-28.md). The intended rejection was not reached; native failure criteria remain open. Shifted +24 loop frequency criterion misses are retained under DEK-007. Main controls/previews/positions verified unchanged; owner listening remains deferred.
+
+## Requirement-by-requirement audit
+
+| Explicit requirement | Evidence inspected | Current gap / decision |
+|---|---|---|
+| Manual beatmatch, tempo and jog | [Native53listening receipt](desktop-0.1.53-listening.json): Sync off, B tempo/nudge and short crossfade accepted by Jason | Reuse; short grid-assisted operator/user session, not whole-track zero drift or physical jog proof. |
+| A/B EQ | Same receipt: LOW/MID/HIGH cuts and neutral resets on both channels accepted | Reuse ordinary checks; current changed transitions and physical controls remain separate. |
+| Temporary Cue, release, Cue+Play latch and clean stop | Same receipt: user accepted audition/release/latch/final silence | Reuse ordinary checks. Relevant asynchronous ownership/held-control cases remain with their defect cards. |
+| Reproduced queued Sync/tempo failure | [Shared queue](SYNC_TEMPO_MASTER_QUEUE_2026-10-28.md) and [outer same-fader queue](TEMPO_SLIDER_MASTER_QUEUE_2026-10-28.md): actual paused/muted Compact failure before/after; three focused regressions; newer valid input and idle coordinates preserved | Both fixes in current94; native paused startup executed. Relevant native failure/playing/listening remains unexecuted. |
+| Sync alignment/pop reliability | [Open investigation](SYNC_POP_INVESTIGATION.md); prior accepted clean multi-track sessions retain scope | Intermittent owner report unresolved. Preserve the next actual event; no proven pop causation from queue fixes. |
+| Four-deck stalls | [Native incident](CORE_NATIVE_STALL_CAPTURE_2026-10-24.md) and subsequent presentation/control repairs | Historical worst242.5ms/unattributed frames remain; no current long-session/native stall-free claim. Use practical mixing with a modest load/analysis, not another broad soak. |
+| Controls, all layouts and library previews | Native94paused startup/16tracks/12materialized previews/2Play/tempo/6EQ; actual94-source Compact423controls/4Play/1materialized preview;644runtime assets match immutable source | Current94native playing/held/all-layout breadth unverified. One materialized thumbnail is not all-library readiness. Renderer/layout files unchanged between92source and94; separate preview files do not theme the main app. |
+| Original audio, saved session and recordings | No original audio used in queue fixtures; closed-profile256-file hash/copy match revalidated before native94launch | Copy preserves disk state only; no claim of recovering an in-memory recording or proving crash recovery. Do not overwrite later owner edits. |
+| Focused reusable modules | Queue41lines, GUI slider61; new logic remains in existing responsibility owners | Legacy app2095and engine2269lines remain MOD-001debt. No whole-repo300-line claim or broad refactor prerequisite. |
+| Trello and pushed source |194cards/17complete after94readback; no duplicate44or unsupported closure; d15370a pushed | Native94delivery and current audit preserve criteria/history/models; no unsupported closure. |
+| Independent headphones/master and Hercules | User explicitly deferred; earlier computer audio does not prove socket separation | Physical acceptance remains MIX-004/AUD-003/HW-003/HW-011; no unattended substitute. |
+
+## One later session, not a matrix
+
+1. **Software/current candidate:** relevant changed paths only—paused-incoming and playing-incoming Sync, outgoing master unchanged, ordinary tempo/nudge/crossfade while watching NOW/grid, and one modest load/analysis during four-deck use. Fold affected held-control/Cue/key/loop/Reverse checks into normal use where relevant. Native controlled-failure ownership is an automation task, not a request for Jason to inject failures. Retain pass/fail/uncertain, exact version and limitations.
+2. **If a pop/stall occurs:** save that original recording and revision, tracks, positions, rates, transport states, clicked deck/action and event time. Stop repeating clean cases. Different absolute bar numbers alone do not establish failed Sync; audio and UI outcomes are separate.
+3. **When suitable hardware is connected:** verify actual headphone/master destinations, private cue at channel-fader zero, MIX/LEVEL/master and no speaker leak; one practical browse/load/Cue/tempo/jog/EQ/fader transition. Finish with all decks/samples stopped and needed recording/session saved. Reuse prior ordinary53acceptance.
+
+The original detailed hardware/held-control criteria remain on [CORE-LIVE-01](https://trello.com/c/yJ8r9kCD); this ordered handoff does not erase them. [Structured audit](core-dj-reentry-2026-10-28.json), [current staged identity](DESKTOP_CORE_094_2026-10-28.md), [known issues](../beta/KNOWN_ISSUES.md). Prior86/87checkpoint remains in [immutable Git history](https://github.com/jpoindexter/open-play/blob/d15370ae15ece7841a120a0045187ad6b28e1a2a/docs/prototype/CORE_DJ_REENTRY_2026-10-28.md).
+
+## Scoped board evidence reconciliation
+
+CORE-FIX-05 and CORE-FIX-06 now distinguish checked controlled-source/HTML and prior native 0.1.53 evidence from unchecked current-native race/inventory criteria. Their original descriptions, criteria and model guidance remain intact below the scoped checklist. Both remain open. Readback: 194 cards, 17 complete; no new, moved or closed cards. The adjacent structured audit retains its original timestamped snapshot and adds this later reconciliation separately.
+
+No new reproduced software failure was established in this board pass. Remaining native fault-control access, listening and physical gates cannot be satisfied by more ordinary clean tests. No full-core, public-beta, zero-pop, hardware or vendor-parity completion claim.

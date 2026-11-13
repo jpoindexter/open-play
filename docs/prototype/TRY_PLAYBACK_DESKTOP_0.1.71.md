@@ -1,0 +1,9 @@
+# Private desktop0.1.71 — paused
+
+Sourcee92e3d6; ASARf99e9b55ab86d546bfb4779ac6e9b51defc2eafd6e5038d07f4af64f7a1ec263. Actual archive/controlled-host5/5;613prototype files/101selected declared modules. No public release.
+
+CORE-FIX-25 rejects invalid enabled loop spans before engine start/setLoop and UI pre-Slip handling. Seven product lines reuse one existing-engine method; no new runtime module/clock/playback-DSP/routing/layout change. Two focused regressions2failbefore→2passafter. Corrected actual four-deck End→Loop baseline creates48→48active span; repair leaves loopoff/0→0and explicit error,236/236observed nodes/controls/previews retained. Actual muted valid Play starts; invalid active loop request preserves exact voice/token/rate and advancing clock; all stopped at cleanup. First Quantize-on setup excluded. [Report](LOOP_BOUNDS_2026-10-27.md). No broad suite/soak.
+
+Protected70recording preflight clear, normal quit/process exit, closed254-file/120546148Bprofile backup hashes identical before/after/copy. Actual71settled startup retains same4real tracks/16library tracks/exact BX3 metadata/4Play/tempo/filter/level/12EQ/decoded detail/overviews/5viewport AX previews. Native A Quantize-off→End337.0377s→Loop shows exact bounds error with silent master; Home/Right/Right returns2s and Quantize restoreson. B/C/D remain3/4/5s. No main Play/Sync/REC. Native message/position evidence is not direct loop-bound/DOM/pointer/acoustic inspection. Defaults71and named starter syntax checked only.
+
+[CORE-FIX-25](https://trello.com/c/eOgKtAwN) has narrow invalid-loop safety criteria. Broader DEK-004/Sync-pop/four-deck/reference/held/controller/listening acceptance remain open. [CORE-LIVE-01](https://trello.com/c/yJ8r9kCD) retains the one practical owner session; do not rerun the covered paused error. Prior53ordinary listening and64–70fixes retain their scope.

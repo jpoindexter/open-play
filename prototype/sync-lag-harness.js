@@ -1,11 +1,14 @@
+import {createBeatgrid} from './beatgrid.js';
 import {sessionKey} from './session-storage.js';
 import {sourceWaveformState,paintSourceDetail} from './source-waveform.js';
 import {paintDetailWaveforms} from './detail-waveform.js';
 const $=s=>document.querySelector(s),sleep=ms=>new Promise(r=>setTimeout(r,ms)),assert=(ok,text)=>{if(!ok)throw Error(text);};
 const report={frames:[],errors:[]};
+const warpMode=new URL(location.href).searchParams.has('warp');
 const pitchMode=new URL(location.href).searchParams.has('pitch');
 const keylockMode=new URL(location.href).searchParams.has('keylock');report.testMode=keylockMode?'late keylock acknowledgment':'four-deck waveform and ordinary deadline';
 report.scope=keylockMode?'Actual GUI keylocked Sync under an injected post-acknowledgment stall extending80ms past the scheduled boundary. Owned physically muted tones; no human/physical/pop identity claim.':'Actual workspace rAF callbacks and ordinary GUI Sync under80ms post-alignment stall. Owned physically muted tones; no human/physical/pop identity claim.';
+if(warpMode){report.testMode='late warped-loop acknowledgment';report.scope='Actual GUI warped-loop Sync with a controlled late main-thread acknowledgment. Physically muted owned tones; not an explanation of historical ordinary-track pops.';}
 if(pitchMode){report.testMode='playing keylock transition';report.scope='Actual GUI keylock enable on a playing ordinary deck, real adapter, owned physically muted tones. No acoustic/full-core acceptance.';}
 let app,section=null,callbackTimes={},rectangles=0,detailPaints=0,readoutMutations=0;
 const raf=window.requestAnimationFrame.bind(window),fill=CanvasRenderingContext2D.prototype.fillRect,clear=CanvasRenderingContext2D.prototype.clearRect;
@@ -38,13 +41,13 @@ async function boot(){
  $('#probe-run').disabled=false;$('#probe-run').textContent='Run Sync deadline and frame checks';
 }
 $('#probe-run').onclick=async()=>{
- $('#probe-run').disabled=true;const {engine,state}=app;let witness,create,timeline,factory;
+ $('#probe-run').disabled=true;const {engine,state}=app;let witness,create,timeline,factory,NativeWorklet;
  try{
   await engine.resume();engine.audioMonitor.mutePhysical(true);assert(engine.audioMonitor.snapshot().physicalMuted,'Physical mute');
   await Promise.all(state.decks.slice(0,2).map(d=>sourceWaveformState(engine.buffers.get(d.track.id)).ready));await sleep(500);
   report.detailCacheLoaded=paintDetailWaveforms.toString().includes('lastFrames');
   report.rasterLoaded=paintSourceDetail.toString().includes('paintRaster');
-  if(!keylockMode&&!pitchMode){
+  if(!keylockMode&&!pitchMode&&!warpMode){
   await measure('2-deck compact horizontal stopped');
   for(const d of state.decks.slice(0,2))click(`[data-action="play"][data-deck="${d.index}"]`);
   await until(()=>state.decks.slice(0,2).every(d=>d.playing&&!d.processing),'both playing');await measure('2-deck compact horizontal playing');
@@ -70,6 +73,7 @@ $('#probe-run').onclick=async()=>{
    d.track={...d.track,id:'sync-deadline-'+index,bpm:index?115.5:121,grid:0,duration:12,gridWarpMarkers:[],gridMarkers:[],cues:Array(8).fill(null)};
    Object.assign(d,{position:1,rate:1,keylock:false,keyShift:0,sync:false,syncRole:null,syncState:'off',loop:false,reverse:false});engine.buffers.set(d.track.id,b);
   }
+  if(warpMode){right.track.gridWarpMarkers=[{time:2,bpm:118}];right.loop=true;right.loopIn=0;right.loopOut=createBeatgrid(right.track).timeAt(8);}
   if(keylockMode){click('[data-action="keylock"][data-deck="1"]');await until(()=>right.keylock,'key lock enabled');}
   engine.setCross(1);click('[data-action="play"][data-deck="0"]');await until(()=>left.playing&&!left.processing,'leader');click('[data-action="play"][data-deck="1"]');await until(()=>right.playing&&!right.processing,'follower');await sleep(300);
   await engine.ctx.audioWorklet.addModule(new URL('./fx-tempo-capture-worklet.js',import.meta.url));
@@ -88,6 +92,10 @@ $('#probe-run').onclick=async()=>{
   create=engine.ctx.createBufferSource.bind(engine.ctx);engine.ctx.createBufferSource=()=>{const source=create(),start=source.start.bind(source);source.start=(when,offset)=>{report.starts.push({when,actual:engine.ctx.currentTime,offset});return start(when,offset);};return source;};
   timeline=engine.onGridTimeline;engine.onGridTimeline=(d,options)=>{const value=timeline?.(d,options);if(d===right&&!injected&&options.when>engine.ctx.currentTime+.02){injected=true;const before=engine.ctx.currentTime,end=performance.now()+80;while(performance.now()<end){}report.stall={before,after:engine.ctx.currentTime,when:options.when};}return value;};
   if(keylockMode){engine.onGridTimeline=timeline;factory=engine.createForwardKeylock.bind(engine);engine.createForwardKeylock=async options=>{const adapter=await factory(options),start=adapter.start.bind(adapter);adapter.start=async options=>{const ack=await start(options);if(!injected){injected=true;const before=engine.ctx.currentTime,end=performance.now()+Math.max(150,(ack.when-before)*1000+80);while(performance.now()<end){}report.stall={before,after:engine.ctx.currentTime,when:ack.when};}return ack;};return adapter;};report.keylockGuardLoaded=engine.startForwardKeylock.toString().includes('ack.when-.005');}
+  if(warpMode){
+   engine.onGridTimeline=timeline;NativeWorklet=window.AudioWorkletNode;
+   window.AudioWorkletNode=class extends NativeWorklet{constructor(ctx,name,options){super(ctx,name,options);if(name==='open-play-warp-loop-v1'){const post=this.port.postMessage.bind(this.port);this.port.postMessage=(message,...args)=>{post(message,...args);if(message.type==='start'&&!injected){injected=true;const before=ctx.currentTime,end=performance.now()+Math.max(100,(message.options.when-before)*1000+80);while(performance.now()<end){}report.stall={before,after:ctx.currentTime,when:message.options.when};}};}}};report.warpGuardLoaded=engine.startWarpLoop.toString().includes('ack.when-.005');
+  }
   report.pressAt=engine.ctx.currentTime;click('[data-action="sync"][data-deck="1"]');await until(()=>injected&&!right.processing,'Sync completion');engine.ctx.createBufferSource=create;
   report.deadline={injected,voiceRetained:engine.voices.get(1)===voice,leaderRetained:engine.voices.get(0)===leader,rateRetained:right.rate===rate,playing:right.playing,processing:right.processing,sync:right.sync,notice:$('#notice')?.textContent||''};
   const pcm=await captured,a=pcm.data;let maxCurvature=0,zeroFrames=0,peak=0;
@@ -96,15 +104,16 @@ $('#probe-run').onclick=async()=>{
   const bytes=new Uint8Array(a.buffer);let binary='';for(let i=0;i<bytes.length;i+=16384)binary+=String.fromCharCode(...bytes.subarray(i,i+16384));$('#probe-pcm').textContent=btoa(binary);
   report.deadlinePassed=report.deadline.voiceRetained&&report.deadline.leaderRetained&&report.deadline.rateRetained&&right.playing&&!right.sync&&peak>.001&&maxCurvature<.001&&zeroFrames===0;
   assert(report.deadlinePassed,'Late Sync must preserve both audible voices and prior tempo without a discontinuity');
+  if(NativeWorklet){window.AudioWorkletNode=NativeWorklet;NativeWorklet=null;}
   engine.onGridTimeline=timeline;click('[data-action="sync"][data-deck="1"]');await until(()=>right.sync&&!right.processing,'on-time retry');
-  const when=right.anchorTime,primaryBeat=when=>((engine.voiceClock(left,engine.voices.get(0))(when)*121/60)%4+4)%4,ownBeat=((right.anchorPosition*115.5/60)%4+4)%4;
+  const when=right.anchorTime,primaryBeat=when=>((engine.voiceClock(left,engine.voices.get(0))(when)*121/60)%4+4)%4,ownBeat=((createBeatgrid(right.track).beatAt(right.anchorPosition))%4+4)%4;
   report.retry={leaderRetained:engine.voices.get(0)===leader,rate:right.rate,phaseErrorBeats:Math.min(Math.abs(ownBeat-primaryBeat(when)),4-Math.abs(ownBeat-primaryBeat(when)))};assert(report.retry.leaderRetained&&Math.abs(right.rate-121/115.5)<1e-9&&report.retry.phaseErrorBeats<.001,'On-time Sync retry failed');
   click('[data-action="play"][data-deck="1"]');await until(()=>!right.playing,'pause follower');click('[data-action="sync"][data-deck="1"]');await until(()=>right.syncState==='armed','paused arming');click('[data-action="play"][data-deck="1"]');await until(()=>right.playing&&!right.processing,'armed launch');
   report.armedLaunch={playing:right.playing,leaderRetained:engine.voices.get(0)===leader,syncState:right.syncState};assert(report.armedLaunch.leaderRetained&&right.syncState==='beat','Armed launch failed');
   }
  }catch(error){report.errors.push(error.stack);}
  finally{
-  if(create)engine.ctx.createBufferSource=create;if(timeline)engine.onGridTimeline=timeline;if(factory)engine.createForwardKeylock=factory;engine.silence();witness?.disconnect();if(witness)try{engine.masterOutput.output.disconnect(witness);}catch{}
+  if(NativeWorklet)window.AudioWorkletNode=NativeWorklet;if(create)engine.ctx.createBufferSource=create;if(timeline)engine.onGridTimeline=timeline;if(factory)engine.createForwardKeylock=factory;engine.silence();witness?.disconnect();if(witness)try{engine.masterOutput.output.disconnect(witness);}catch{}
   report.controls={play:document.querySelectorAll('[data-action="play"]').length,eq:document.querySelectorAll('[data-mix$=":low"]').length,libraryPreviews:document.querySelectorAll('.library-wave-preview img').length};
   report.sourceHashes=Object.fromEntries(await Promise.all(['app.js','engine.js','layout-preview.js','detail-waveform.js','source-waveform.js','sync-lag-harness.js'].map(async file=>[file,[...new Uint8Array(await crypto.subtle.digest('SHA-256',await(await fetch(file,{cache:'no-store'})).arrayBuffer()))].map(n=>n.toString(16).padStart(2,'0')).join('')])));
   report.persistentSessionUnchanged=report.persistentSessionUnchanged();

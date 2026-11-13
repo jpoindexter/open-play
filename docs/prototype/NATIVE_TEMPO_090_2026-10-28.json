@@ -1,0 +1,95 @@
+{
+  "version": "0.1.90",
+  "sourceCommit": "4e01e3aeef3167af859dd257c29b143adafe48a1",
+  "asarSHA256": "710a133b709fdc19db7f7efc301b8df172880435d49906f0ccc212efbb9fc7e8",
+  "originalReportSHA256": "d19bc6e548fff5cdca3dbe31b14dd7d6294ed2956d9e97882ccc399b6b450217",
+  "originalBytes": 312517,
+  "nativeExecutionObserved": "Actual 0.1.90 built-in Checks \u2192 GUI Tempo after Sync window, normal Prepare/tempo Up/Capture/Stop/export controls via native accessibility. Separate volatile check session; No main Play/Sync/Recording Start; the normal-window position discrepancy is recorded separately below.",
+  "scope": "Generated forward non-keylocked tones, two decks, one relative tempo step and clean stop. Inherited generic browser-only scope in raw harness report is retained; actual native host/window observation is recorded separately here. No injected failure, four-deck, keylock/warp, real-song, acoustic or hardware acceptance.",
+  "inspection": "Independent full-window hash/finite checks and global20\u201320000Hz Hann16x FFT peak. Fixed .3Hz/.005RMS/1e-6silence criteria, no expected-frequency mask or fitted waveform. Snapshot windows only, not whole-run continuity.",
+  "sourceStable": true,
+  "declaredSourcesMatch": true,
+  "sampleRate": 48000,
+  "rates": [
+    1.0008333333333332,
+    1.201
+  ],
+  "measurements": [
+    {
+      "case": "playing tempo adjustment",
+      "channel": 0,
+      "frames": 14400,
+      "sha256": "1d69d4bff1f6ffa2cc5119a5f02f7d69d15cb772509d9be3ac35bb60d42075f4",
+      "allFinite": true,
+      "peak": 0.08049092441797256,
+      "rms": 0.0569021568729012,
+      "frequencyHz": 330.27501280696885,
+      "expectedHz": 330.275,
+      "frequencyErrorHz": 1.2806968868517288e-05,
+      "passed": true
+    },
+    {
+      "case": "playing tempo adjustment",
+      "channel": 1,
+      "frames": 14400,
+      "sha256": "5f488905a6096de45f78c95c098df52c078fe00f4942b39869335f8600dda775",
+      "allFinite": true,
+      "peak": 0.07745985686779022,
+      "rms": 0.05477003255214499,
+      "frequencyHz": 660.5499874387029,
+      "expectedHz": 660.5500000000001,
+      "frequencyErrorHz": -1.2561297126012505e-05,
+      "passed": true
+    },
+    {
+      "case": "clean stop",
+      "channel": 0,
+      "frames": 14400,
+      "sha256": "c72274a22cba2dcef62e0f62834446ee39b0cd95ad0faa27a89b3b49f48aa390",
+      "allFinite": true,
+      "peak": 0.0,
+      "rms": 0.0,
+      "frequencyHz": null,
+      "expectedHz": 0,
+      "frequencyErrorHz": null,
+      "passed": true
+    },
+    {
+      "case": "clean stop",
+      "channel": 1,
+      "frames": 14400,
+      "sha256": "c72274a22cba2dcef62e0f62834446ee39b0cd95ad0faa27a89b3b49f48aa390",
+      "allFinite": true,
+      "peak": 0.0,
+      "rms": 0.0,
+      "frequencyHz": null,
+      "expectedHz": 0,
+      "frequencyErrorHz": null,
+      "passed": true
+    }
+  ],
+  "downloadsUnchanged": true,
+  "passed": true,
+  "normalMainSessionComparison": {
+    "beforeAFormatted": "00:13.0 of 05:37.0",
+    "priorDeliveryAPreciseSeconds": 13.073,
+    "afterAPreciseSeconds": 13.229,
+    "afterBPreciseSeconds": 12.426,
+    "aUnattributedPositionDifference": true,
+    "exactPositionPreservationProven": false,
+    "cause": "Unestablished; no product defect reproduction or cross-session causation claimed.",
+    "mainPlaySyncOrRecordingStartIssued": false,
+    "exposedAXSeekRestoreAttempt": {
+      "requestedSeconds": 13.073,
+      "valueChanged": false
+    },
+    "finalPositionsStableAcrossTwoObservations": true,
+    "masterDB": -10.04344,
+    "mainMeterSilent": true,
+    "bLowDB": -24,
+    "libraryTracks": 16,
+    "previewImagesMaterializedBefore": 12,
+    "previewImagesMaterializedAfter": 16,
+    "diagnosticWindowClosed": true
+  }
+}

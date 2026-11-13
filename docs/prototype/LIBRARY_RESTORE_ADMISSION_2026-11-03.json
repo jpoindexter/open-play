@@ -1,0 +1,44 @@
+{
+  "date": "2026-11-03",
+  "baseline": "e98a39fde885f73ef6ca7aea5d42fb9c0e870540",
+  "card": "LIB-FIX-08",
+  "defect": "Rejected backups were still read, parsed and validated before the playback admission check.",
+  "criterion": "Known-busy Cue reads/parses/validates zero times; playback beginning during an admitted read prevents parsing/validation, all state mutation and persistence.",
+  "red": {
+    "knownPreparingCue": {
+      "reads": 1,
+      "parses": 1,
+      "validations": 1
+    },
+    "playbackDuringRead": {
+      "reads": 1,
+      "parses": 1,
+      "validations": 1
+    },
+    "failedCases": 2
+  },
+  "repair": "One local idle predicate runs before File.text and again after the current-owner check, before JSON.parse. Existing validation, generation/dialog ownership, restored gains and one-save path retained.",
+  "green": {
+    "knownPreparingCue": {
+      "reads": 0,
+      "parses": 0,
+      "validations": 0
+    },
+    "playbackDuringRead": {
+      "reads": 1,
+      "parses": 0,
+      "validations": 0
+    },
+    "restoreRecoveryChecks": 16,
+    "failed": 0
+  },
+  "limits": "Actual source handler, app gain setters and engine methods with controlled file/DOM/clock/storage collaborators. No measured latency, natural load/stall/pop cause, native interleaving, listening or hardware proof.",
+  "sourceSHA256": {
+    "prototype/panels.js": "9785129e40dfa3e01169cd013fe284d15bde7b01bf50bb7096044e32997eac8a",
+    "prototype/library-restore.test.mjs": "8a3fd4f9fd060bdb11fab66ec2b020b4302746980c8889ff41000f8fc9fd9a4d",
+    "prototype/library-recovery.test.mjs": "3ed6433c6eda28f8055d94d47f02183c8a4794ae8eb0f6be921a332202be289d"
+  },
+  "preservation": "No layout, waveform, DSP, gain defaults, original audio or native139 session changes. One local helper, no dependency or new global abstraction.",
+  "privateEvidence": "local-evidence/restore-admission-2026-11-03",
+  "delivery": "Queued with LIB-FIX-09 for desktop140."
+}

@@ -1,0 +1,215 @@
+{
+  "date": "2026-10-29",
+  "card": "CORE-FIX-64",
+  "url": "https://trello.com/c/uxjrqqFH",
+  "baselineCommit": "8c0522ff5980c15871d02318d84d1b14cb6d2703",
+  "currentSource": {
+    "prototype/manual-loops.js": "abc09bd34bd359a836870c22d6418a6bf53442ddf54e40232ec68df38b3d2439",
+    "prototype/manual-loop-ownership.test.mjs": "4e7672384a7c4937df7b0eefeea07f36a888c390983562b4942343efc88c6cf6",
+    "prototype/app.js": "b3d74e1e8474fab8703a4d9e7fc45def5a1bf5d99d858c90d92a3480eaed341c",
+    "prototype/engine.js": "036f084a42177cb58eeaf926b3fd3d5ea6f0ef7b2fe9aefcb1974711ee89261b"
+  },
+  "repair": "Shared manual loop queue rechecks track/deck/epoch and its post-call transport token after every async loop/seek. Queue admission may inherit successful predecessor token; benign no-op may carry only an unchanged entry token. Stop/new transport token cannot be adopted by older queued input.",
+  "focusedChecks": {
+    "newFilePassed": 3,
+    "existingLoopFeedbackPassed": 1,
+    "cases": [
+      "Actual app Load during rendered-loop preparation leaves replacement position/length/token unchanged",
+      "Active and queued recalls yield to engine.pause Stop; fresh post-Stop recall remains accepted",
+      "Successful queued recalls across real engine token changes and intervening benign move no-op retain final recall"
+    ],
+    "scope": "Controlled actual manual module/engine/app Load with generated AudioBuffer and controlled Worker/graph; no native or acoustic proof. Prior intermediate GREEN source hashes differ from final benign-no-op adjustment; final three regression cases execute currentSource exactly. No broad suite."
+  },
+  "reports": {
+    "result-red.json": {
+      "sha256": "716b87623e6428d128a1e3385b0e7215ef917773fef72ec7e0bda244ae1e7efd",
+      "source": "8c0522f/default112",
+      "scope": "Actual ManualLoops + AudioEngine + app Load; existing keylock-loop-window controlled Worker/AudioBuffer/graph endpoints. Generated buffer only, no DSP/native/UI/listening proof.",
+      "sourceBefore": {
+        "prototype/app.js": "b3d74e1e8474fab8703a4d9e7fc45def5a1bf5d99d858c90d92a3480eaed341c",
+        "prototype/engine.js": "036f084a42177cb58eeaf926b3fd3d5ea6f0ef7b2fe9aefcb1974711ee89261b",
+        "prototype/manual-loops.js": "3f5b7b5aedad4fdde623447ed657fc0a7664cf405ed542b986f6ab20120bbe92"
+      },
+      "before": {
+        "track": "old-generated",
+        "position": 6.59,
+        "loopLength": 4,
+        "token": 1
+      },
+      "afterLoad": {
+        "loaded": true,
+        "track": "new-generated",
+        "position": 0,
+        "loopLength": 1.5,
+        "token": 3
+      },
+      "afterStop": null,
+      "afterRecall": {
+        "track": "new-generated",
+        "position": 1,
+        "loopLength": 1.5,
+        "loop": false,
+        "playing": false,
+        "token": 4,
+        "oldWorkerTerminated": true,
+        "starts": 1,
+        "notices": []
+      },
+      "results": null,
+      "cleanup": {
+        "voices": 0,
+        "transforms": 0,
+        "retiringVoices": 0,
+        "allStopped": true,
+        "workersTerminated": true
+      },
+      "sourceStable": true
+    },
+    "result-green.json": {
+      "sha256": "017557edd1dc773ff722f6dcb1694a564f81129723c83a3d7a5469a9cc27b2f7",
+      "source": "8c0522f+manual-loop-ownership-repair/default112",
+      "scope": "Actual ManualLoops + AudioEngine + app Load; existing keylock-loop-window controlled Worker/AudioBuffer/graph endpoints. Generated buffer only, no DSP/native/UI/listening proof.",
+      "sourceBefore": {
+        "prototype/app.js": "b3d74e1e8474fab8703a4d9e7fc45def5a1bf5d99d858c90d92a3480eaed341c",
+        "prototype/engine.js": "036f084a42177cb58eeaf926b3fd3d5ea6f0ef7b2fe9aefcb1974711ee89261b",
+        "prototype/manual-loops.js": "08b05bad33c1e618ba602215b0f00f02675289feb3068602020817007fb6723a"
+      },
+      "before": {
+        "track": "old-generated",
+        "position": 6.59,
+        "loopLength": 4,
+        "token": 1
+      },
+      "afterLoad": {
+        "loaded": true,
+        "track": "new-generated",
+        "position": 0,
+        "loopLength": 4,
+        "token": 3
+      },
+      "afterStop": null,
+      "afterRecall": {
+        "track": "new-generated",
+        "position": 0,
+        "loopLength": 4,
+        "loop": false,
+        "playing": false,
+        "token": 3,
+        "oldWorkerTerminated": true,
+        "starts": 1,
+        "notices": []
+      },
+      "results": null,
+      "cleanup": {
+        "voices": 0,
+        "transforms": 0,
+        "retiringVoices": 0,
+        "allStopped": true,
+        "workersTerminated": true
+      },
+      "sourceStable": true
+    },
+    "result-queued-stop-red.json": {
+      "sha256": "dd519626419fa6491b4a32b66ff8f4f96c60f61a6570620e9447ab488551388d",
+      "source": "8c0522f+post-await-guard/default112",
+      "scope": "Actual ManualLoops + AudioEngine.pause Stop; app Load extracted but unused; existing keylock-loop-window controlled Worker/AudioBuffer/graph endpoints. Generated buffer only, no DSP/native/UI/listening proof.",
+      "sourceBefore": {
+        "prototype/app.js": "b3d74e1e8474fab8703a4d9e7fc45def5a1bf5d99d858c90d92a3480eaed341c",
+        "prototype/engine.js": "036f084a42177cb58eeaf926b3fd3d5ea6f0ef7b2fe9aefcb1974711ee89261b",
+        "prototype/manual-loops.js": "e80c55f50dea3dc38f442e3a1881335167614d0f1049d78b7444a7dd5ec67816"
+      },
+      "before": {
+        "track": "old-generated",
+        "position": 6.59,
+        "loopLength": 4,
+        "token": 1
+      },
+      "afterLoad": null,
+      "afterStop": {
+        "track": "old-generated",
+        "position": 1.5899999999999999,
+        "loopLength": 4,
+        "token": 3
+      },
+      "afterRecall": {
+        "track": "old-generated",
+        "position": 1,
+        "loopLength": 2,
+        "loop": true,
+        "playing": false,
+        "token": 4,
+        "oldWorkerTerminated": true,
+        "starts": 1,
+        "notices": []
+      },
+      "results": [
+        false,
+        true
+      ],
+      "cleanup": {
+        "voices": 0,
+        "transforms": 0,
+        "retiringVoices": 0,
+        "allStopped": true,
+        "workersTerminated": true
+      },
+      "sourceStable": true
+    },
+    "result-queued-stop-green.json": {
+      "sha256": "459b8b5ea596238852b5aeaa5f3045bef6bcb78201f788a7d15fe8ba1a05eff1",
+      "source": "8c0522f+post-await-and-queue-admission-guard/default112",
+      "scope": "Actual ManualLoops + AudioEngine.pause Stop; app Load extracted but unused; existing keylock-loop-window controlled Worker/AudioBuffer/graph endpoints. Generated buffer only, no DSP/native/UI/listening proof.",
+      "sourceBefore": {
+        "prototype/app.js": "b3d74e1e8474fab8703a4d9e7fc45def5a1bf5d99d858c90d92a3480eaed341c",
+        "prototype/engine.js": "036f084a42177cb58eeaf926b3fd3d5ea6f0ef7b2fe9aefcb1974711ee89261b",
+        "prototype/manual-loops.js": "0dbdc31a5690c63ca39e47adfdfe7617fc67c29fd6b6cf10c7fee6c1d972f26b"
+      },
+      "before": {
+        "track": "old-generated",
+        "position": 6.59,
+        "loopLength": 4,
+        "token": 1
+      },
+      "afterLoad": null,
+      "afterStop": {
+        "track": "old-generated",
+        "position": 1.5899999999999999,
+        "loopLength": 4,
+        "token": 3
+      },
+      "afterRecall": {
+        "track": "old-generated",
+        "position": 1.5899999999999999,
+        "loopLength": 4,
+        "loop": true,
+        "playing": false,
+        "token": 3,
+        "oldWorkerTerminated": true,
+        "starts": 1,
+        "notices": []
+      },
+      "results": [
+        false,
+        false
+      ],
+      "cleanup": {
+        "voices": 0,
+        "transforms": 0,
+        "retiringVoices": 0,
+        "allStopped": true,
+        "workersTerminated": true
+      },
+      "sourceStable": true
+    }
+  },
+  "native": {
+    "version": "0.1.113",
+    "status": "one controlled raw saved-pad/normal-Load path executed",
+    "receipt": "MANUAL_LOOP_113_NATIVE_2026-10-29.json",
+    "scope": "Actual packaged generated-only workspace, native AudioContext/raw AudioBuffer voice, installed saved-loop pad and normal library selection/Load handlers. One next-resume gate before real delegation; not the original rendered-worker gate, natural renderer failure, PCM, music, listening, physical output, OS focus or controller proof."
+  },
+  "remaining": [
+    "No native original-rendered-worker/queuedStop/PCM/listening/physical/allmode certification",
+    "Generic Sync pops/stalls/startup60 remain unproven, not attributed to this defect"
+  ]
+}

@@ -1,3 +1,123 @@
+# Current private desktop 0.1.151
+
+Current/default and playback launchers target **0.1.151 / source f0ebf35**. Native Help→Open Play manual/search + Enter is observed in the external browser. Local shortcut/Cue help and diagnostics remain. Exact package inspection passed 5/5.
+
+The main 25 rows, positions 6.927/206.068 seconds, master −10.08 dB, core controls and 12 visible previews recover. Current 151 and rollback 150 remain; closed-profile recovery is preserved. Output intentionally stays **0% / Mute enabled**; unmute only for an explicitly authorized listening session. Musical Sync, pops, matched volume and minimum public-release gates remain open; Hercules later. [Delivery and limits](HELP_MANUAL_151_2026-11-11.json).
+
+--- Historical guides below; old current/default statements are superseded ---
+
+# Historical private desktop —0.1.124
+
+Private desktop **0.1.124** is current/default, source1306423. Public grid publication revokes related pending Simple alignment before metadata changes; delayed Loop Roll release checks its own transport token before follow-up Seek so a newer saved-loop recall wins. Two focused source RED→GREEN checks pass. Package5/5/private seal and paused native recovery observed:30.097/34.086s,16tracks/12visible previews/core controls. Relevant changed native races, PCM and listening remain pending. Goal active, audio muted. Genericpop/stall/startup60 and hardware gates remain OPEN. [Delivery and limits](CORE_GRID_ROLL_RELEASE_124_NATIVE_2026-10-30.json).
+
+Closed123profile261files/120232212B copied with equal hashes/sizes/mtimes. Three124launchers syntax checked; exact bundle separately executed. Inactive123and own packaging ZIP retired (736304755logical bytes); only124bundle. Original media/recordings/recovery copies/unrelated draft retained. Existing123isolatedGUIchecker prepared with asserted physical mute and stopped0, but Flip panel/start callback was NOT REACHED after bounded activation attempts; owned window closed/main retained. No Flip native acceptance or app-defect attribution. No broad suite/new diagnostic helper/main playback. Re-entry: continue concrete muted core defects; listening/controller later.
+
+# Prior private desktop —0.1.115
+
+**Source follow-through (not yet in115):** Slicer callbacks now preserve control nodes, and Key Sync completion uses shared request/track/token/settings ownership. [Focused evidence and next delivery](CORE_SLICER_KEY_OWNERSHIP_2026-10-29.json). Current115session remains unchanged; no listening claim.
+
+Current/default115, source10a758a, includes Key Sync in-place feedback and Flip Stop/Load/loop-wrap repairs. Eight focused source checks were already recorded; not rerun for delivery. Immutable archive/source/controlled-host inspection5/5. Actual settled native startup restores Constant Change/DJ W!LD paused30.097/34.086,16tracks/12materialized previews,2Play/tempo/6EQ and silent master meter. No main Play/Sync/RECstart or profile restore. [Delivery and limits](CORE_CONTROL_115_NATIVE_2026-10-29.json).
+
+Paused native Key Sync ON/OFF now observed in the existing isolated muted GUI window: accessible pressed state, compatible-key feedback and Key Lock update correctly; generated positions stay still. This does not prove held four-deck DOM identity or audio quality. Same linked delivery receipt includes the scope.
+
+Closed114profile259files/120230511B copied/hash+mtime equal. Current/playback/named115starters syntax checked; exact app executed separately. Verified inactive114and own packaging cache removed; only115bundle retained. Music, recordings, recovery profiles and unrelated draft preserved. Key Sync/Flip native changed-path acceptance, owner listening/focus and Hercules stay OPEN. Owner explicitly chose muted work only. Prior manual/jog/EQ/Cue/stop and109restart acceptance retained; genericpop/stall/startup60 not closed.
+
+--- Historical checkpoints below; old current/default references are superseded ---
+
+# Prior private desktop —0.1.114
+
+**Source follow-through (not installed in114):** Key Sync in-place feedback and Flip Stop/Load/loop-wrap ownership repairs have focused RED/GREEN evidence. [Scope and next delivery](CORE_CONTROL_SAFETY_2026-10-29.json). Current114session remains paused; no new build or listening claim.
+
+114/source2f5b9e1 preserves113product audio/control/layout source. One first native controlledoldlive-key failure after actualLoad/Play/newkeyUp retains replacementvoice/key+1/adaptersemitone1/token4playing,213controls and8/8preview sources. Bothadaptersdisposed/timerscleared/PCM0, allstopped/muted/sourcehashesstable. [Executed result and limits](LIVE_KEY_114_NATIVE_2026-10-29.json). No suite/clean-case rerun or newproductpatch; originalnaturalworklet/rate/otherbackend/music/physical claims remainOPEN.
+
+Main114paused30.097/34.086,16tracks/12materializedpreviews/corecontrols. Closed113profile259files/120230371B copied/hash+mtime equal. Exactbundleexecuted; current/playback/named114launchers syntaxchecked separately. Only114bundle; inactive113/cache removed. All originalmedia/captures/recoveryprofiles/unrelateddrafts retained. Manualmix/jog/A-BEQ/Cue/cleanStop and109restarttransition are alreadyaccepted at their scopes. One ownerchanged-path listening question is pending; no answer inferred. Herculeslater. Generic pops/stalls/startup60 remainOPEN; no full-core/public-beta claim.
+
+Native jog/focus attempts: the Window-menu action was offscreen; a separate existing Settings-window click returned only after the H hold ended. Neither establishes focus loss during a held jog. This single check now awaits an owner-assisted window switch and remains **unchecked**. No product defect or patch inferred. Checker stopped/exported/closed, final physical route reported muted, main session unchanged. [Attempts and exact PCM limits](JOG_FOCUS_114_ATTEMPT_2026-10-29.json). No new build or suite rerun.
+
+--- Historical checkpoints below; old current/default references are superseded ---
+
+# Prior109 paused-seek listening acceptance
+
+109/source377dc16 is open, stopped30.097/34.086, master−∞, neutralEQ/center crossfader. Owner accepted the repaired paused-seek→sequentialPlay transition: “Yes—aligned without re-pressing Sync.” SYNC ARMED / TEMPO SYNC / BEAT SYNC now distinguish launch arming, speed matching and phase state. [Native replay and limits](SYNC_PAUSED_SEEK_109_NATIVE_2026-10-29.json).
+
+Default/playback/named109launchers syntax checked; exact app observed separately. Only109app remains. Closed108profile copied and hash/mtime matched; captures, original music and recovery profiles retained.16saved tracks and waveform previews/core controls remain. Broad pop/stall/grid/startup/hardware gates remain OPEN. No broad suite or clean-case repetition.
+
+--- Historical guides below; old launch targets and blockers are not current ---
+
+# Private desktop0.1.58 — startup observed, restart review pending
+
+The exact versioned58bundle/source2ba58bb is open. Native startup shows the shared quiet header,16saved tracks and16library waveform previews; two demo decks remain stopped at0. No Play/Sync/REC was invoked. [Native evidence and input limits](CORE_NATIVE_058_STARTUP_2026-10-25.md), [delivery receipt](desktop-0.1.58-playback-delivery.json).
+
+Four-real-track/count/position native quit/reopen remains pending. AX button activation opens the selector, but slider writes/keys do not change intended state and pointer input reports noWindowsAvailable. After the owner clicks inside58, continue that single recovery path. Do not infer success from an AX setValue call or the earlier browser reload. Current launcher remains57;58versioned launcher was not executed. Avoid opening57over running58; older saves can omit the new deck-session field.
+
+58includes paused loaded-track/count/position recovery. Browser4real-track reload retained2/3/4/5s positions and controls/previews,0Play. Tempo/Sync/loops/temporaryCue start reset. Preserve the prelaunch closed profile backup. No crash/physical routing/Sync-pop or public-release claim. Later typography/mixer/catalog source changes are not in58.
+
+---
+
+# Historical desktop0.1.57 — previous observed candidate
+
+Current launcher targets0.1.57/source9c964e6. Actual startup observed with4realtracks,16library previews,32hotcues,0playing. Normal profile/library retained; prior deck positions were not restored. [Executed native receipt](desktop-0.1.57-native-startup.json). New shared header/Settings changes are source/browser-only and need a new package before native review. [Public beta target and gates](../delivery/PUBLIC_BETA_PLAN.md).
+
+---
+
+# Historical desktop0.1.56 guide
+
+**New private0.1.57package ready, not launched:** [delivery receipt](desktop-0.1.57-playback-delivery.json). Use `Start Open Play Playback Test 0.1.57.command` after preserving your current work and closing the other playback-test version. Package inspection5/5; actual57native startup remains pending. The Current launcher and open four-track session remain0.1.56. The preview repair is narrow; broader lag/Sync-pop work remains open.
+
+**Current source candidates — core reliability:** Desktop0.1.56/source3667d6f saves Prepare/manual History edits in a focused39-line session-panels module. Actual native insertion and Prepare add survived quit/process exit/reopen; original96history entries retained plus inserted97,16tracks/previews/controls present,0playing. [Evidence and limits](./desktop-0.1.56-session-panels.json). New session archive/read/export passes isolated handler/storage checks; native archive interaction remains open. Prior53listening/focus,54fader resets and55play-count evidence retain scope. Hardware deferred; software continues. Rare Sync pops/stalls and broad feature criteria remain open; no clean-case repeats or broad matrices.
+
+Open `Start Open Play Current Test.command` or `Start Open Play Playback Test 0.1.56.command`. Current exact56 native window is four-deck Horizontal/Compact: A DJ W!LD Love Every Day, B Jewel Kid In The Dance, C Radio Slave All Rize, D Moonglow, stopped around01:44.6; allSyncOFF/pitch0/filterneutral/levels80%/crosscentre/Master−10dB.16saved tracks/library previews remain; Constant Change is still prepared and four intentional Play actions executed; their History writes are expected from the handler, but extra live History readback was blocked by lock. No recording active. On restart demo decks load rather than restoring these live song positions.
+
+Native56 H→V→H with four muted real transports observed controls/state/usability, including Dfilter.01→.02 after transition; cleanup restored. This is not timing, DOM identity, held-pointer, PCM/listening or pop-free proof. The visible Horizontal selector versus stale AXVertical disagreement is on UI-004, cause unverified. Prior53listening/focus,54fader,55count and56session/isolated archives retain their scope. Use56 for archives; older builds omit their field on save. No broad clean-case/matrix rerun.
+
+Sourcef061853 now skips redundant geometry for cached library previews. Two owned four-real-track native Compact V→H captures retain270original control nodes and12preview images; callback layout6.021ms→0, but full transition70.901→80.907ms. This is a narrow cached-preview repair, not a complete lag/pop fix. [Executed report](CACHED_LIBRARY_PREVIEW_GEOMETRY_2026-10-25.md). Earlier failed captures remain historical. Normal56/session was preserved stopped; this source repair is not yet installed. A private57package is ready with package inspection5/5; no clean listening/matrix repeat or hardware gate is implied.
+
+---
+
+## Historical0.1.47 guide
+
+# Try desktop0.1.47 — load/library-row candidate
+
+**Packaged, native startup not yet checked: the Mac locked.** Source30f5661; package5/5. Last observed native app remains0.1.46,16tracks/14previews and0playing decks. No new normal-profile playback. [Delivery receipt](desktop-0.1.47-playback-delivery.json), [browser evidence and limits](CORE_FOUR_DECK_LOAD_ROWS_2026-10-23.md).
+
+After unlocking: preserve any REC/work, quit0.1.46, then run `Start Open Play Current Test.command` or `Start Open Play Playback Test 0.1.47.command`. Both launchers target the verified47bundle and pass syntax checks; neither was executed. Check47title, saved library/previews, stopped timers and no recovery/save warning. Older bundles/profile/port18775 remain.
+
+Load preserves unaffected decks/mixer/shared waveform; routine row refresh retains previews. Explicit structural/schema changes still rebuild. Broader stalls/pops remain open. Next automated trace: cold-analysis/Auto-Gain completion.
+
+Listening re-entry when available: Sync OFF/pitch reset, manual incoming tempo and T/Y left or G/H right nudge, one manual transition; audition/reset LOW/MID/HIGH; paused Cue hold/release then Cue+Play latch; pause both and confirm silence. Preserve event/REC context if a pop returns. Physical headphone/master/controller acceptance needs suitable hardware.
+
+---
+
+## Historical0.1.46 guide
+
+# Try desktop0.1.46 — transport/preview performance candidate
+
+Open `Start Open Play Current Test.command` or `Start Open Play Playback Test 0.1.46.command`. Existing profile/port18775 and older bundles remain. Immutable source57bc6c4. [Executed report and limits](CORE_FOUR_DECK_REFRESH_2026-10-23.md).
+
+Observed native startup/current launcher:16saved tracks,14AX previews, two stopped demo decks, Horizontal/Compact, Master−10dB, no recovery/save warning. Native preview checkbox off/on restores previews. Select saved real-song rows and deck Load or Shift+Left/Right. Diagnostic8-track sessions use separate state and thumbnail stores; no normal-profile music was played.
+
+Ordinary Play/Pause/queued start/latch preserves control/canvas nodes and focus. Actual load and temporary-state restoration still render; remaining stalls/pops are OPEN. No audio clock/analyzer changes. Existing late-start guard may request a retry while retaining prior audio; let loading settle.
+
+When ready: Sync OFF/pitch reset, incoming manual tempo and T/Y left or G/H right nudge, one manual transition; audition/reset LOW/MID/HIGH; paused Cue hold/release then Cue+Play latch; pause both and confirm silence. Preserve REC/event context if a pop returns. Physical headphone/master/controller acceptance needs suitable hardware. Do not rerun already accepted checks.
+
+---
+
+## Historical0.1.45 guide
+
+# Try desktop0.1.45 — core waveform/Sync trace candidate
+
+Open `Start Open Play Current Test.command` or `Start Open Play Playback Test 0.1.45.command`. Existing profile/port18775 and older bundles remain. Immutable source d82617c. [Executed evidence and remaining limits](CORE_FOUR_DECK_TRACE_2026-10-23.md).
+
+Observed current-launcher startup:16saved tracks,14AX waveform-preview images, two demo decks stopped0, rekordbox Horizontal/Compact, Master−10dB, no recovery/save warning. Select saved real tracks and use each deck Load or Shift+Left/Right. Diagnostic eight-track imports/native trace use isolated profiles; no normal-profile music was played.
+
+Waveform geometry now avoids repeated forced layout. Late warped-loop starts retain old audio/rate and show the existing retry notice; settle load and retry. Owned loop/primary metadata follows the retained voice. Callback p95 improves substantially, but rare stalls and broader pops remain OPEN.
+
+When ready: Sync OFF/pitch reset, manual incoming tempo plus T/Y left or G/H right nudge, one manual transition; audition/reset LOW/MID/HIGH, paused Cue hold/release and Cue+Play latch, then pause both and confirm silence. Preserve REC/event context if a pop returns. Physical headphone/master isolation and controller acceptance need suitable hardware. Do not repeat already accepted cases or treat displayed grid alignment as musical acceptance.
+
+---
+
+## Historical0.1.44 guide
+
 # Try desktop 0.1.44 — core Sync/session candidate
 
 Open `Start Open Play Current Test.command` or `Start Open Play Playback Test 0.1.44.command`. Close another playback-test version first; existing profile/port18775 and older bundles remain. Immutable source a6600e0. [Executed evidence and limits](CORE_FOUR_DECK_SOAK_2026-10-23.md).

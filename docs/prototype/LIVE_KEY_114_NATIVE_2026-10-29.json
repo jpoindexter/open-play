@@ -1,0 +1,204 @@
+{
+  "date": "2026-10-29",
+  "card": "CORE-FIX-39",
+  "url": "https://trello.com/c/g9W4yTft",
+  "version": "0.1.114",
+  "sourceCommit": "2f5b9e12a06c063ed68919c2a4c29a5ae1fc18d9",
+  "asarSHA256": "136f811db9b84de7764d7114d09e8d1a64ee38bb3a221188deefc4f91cff36cf",
+  "productLogicChangedFrom113": false,
+  "unchangedProductFiles": [
+    "prototype/app.js",
+    "prototype/engine.js",
+    "prototype/deck-key-shift.js",
+    "prototype/smart-sync.js",
+    "prototype/manual-loops.js"
+  ],
+  "executedNativeCheck": {
+    "startedAt": "2026-10-29T17:34:39.811Z",
+    "completed": true,
+    "scope": "Actual packaged generated-only workspace, native AudioContext/live WASM adapters, installed keyUp and normal library selection/Load/Play. Only the old adapter.update is replaced with a controlled pending rejection, with no delegation. Replacement keyUp uses its real live update. Not a native worklet/natural renderer failure, PCM, music, listening, physical output, OS focus or controller proof.",
+    "sourceBefore": {
+      "app.js": "b3d74e1e8474fab8703a4d9e7fc45def5a1bf5d99d858c90d92a3480eaed341c",
+      "engine.js": "036f084a42177cb58eeaf926b3fd3d5ea6f0ef7b2fe9aefcb1974711ee89261b",
+      "deck-key-shift.js": "87e3ad950779b63d76b037c055e94cff59cc8db44ec6a660be41d7979c3dbe16",
+      "live-key-failure-check.js": "6561a90773104b74d8e9f56cb053012a6830f85b01218b0da6fcd96500b99768"
+    },
+    "oldUpdateArguments": [
+      {
+        "keylock": true,
+        "semitones": 1
+      }
+    ],
+    "held": {
+      "track": "demo-1",
+      "keyShift": 1,
+      "adapterSemitones": 0,
+      "sameVoice": true,
+      "calls": 1
+    },
+    "previewBefore": [
+      {
+        "track": "demo-0",
+        "src": "blob:http://127.0.0.1:18775/b562a97c-3c07-4a4a-bc14-496204cf558d"
+      },
+      {
+        "track": "demo-6",
+        "src": "blob:http://127.0.0.1:18775/6b8e7d39-bb07-450f-9726-8ed33d9bbcfe"
+      },
+      {
+        "track": "demo-1",
+        "src": "blob:http://127.0.0.1:18775/42aa8ccf-bf5b-4f88-a682-b3391c0b7f8c"
+      },
+      {
+        "track": "demo-7",
+        "src": "blob:http://127.0.0.1:18775/529555f7-8531-418d-808e-cf1b3f61021b"
+      },
+      {
+        "track": "demo-2",
+        "src": "blob:http://127.0.0.1:18775/3c9073e7-fc4c-43cc-9a9e-33fd552e7d3f"
+      },
+      {
+        "track": "demo-5",
+        "src": "blob:http://127.0.0.1:18775/151c8f17-e502-419a-b5d3-aad889db89a4"
+      },
+      {
+        "track": "demo-4",
+        "src": "blob:http://127.0.0.1:18775/30a32a80-dada-4fca-98c8-ab779d09d598"
+      },
+      {
+        "track": "demo-3",
+        "src": "blob:http://127.0.0.1:18775/7d1f7f75-202d-4d3d-bfbe-01bb4020ce97"
+      }
+    ],
+    "replacement": {
+      "track": "demo-0",
+      "keylock": true,
+      "keyShift": 1,
+      "pitchSettings": {
+        "keylock": true,
+        "keyShift": 1
+      },
+      "adapterState": {
+        "when": 12.11310657596372,
+        "position": 0.2247392290249426,
+        "playing": true,
+        "rate": 1,
+        "keylock": true,
+        "semitones": 1,
+        "effectiveSemitones": 1
+      },
+      "token": 4,
+      "controls": 213,
+      "oldAdapterDisposed": true
+    },
+    "after": {
+      "track": "demo-0",
+      "sameVoice": true,
+      "sameAdapter": true,
+      "keylock": true,
+      "keyShift": 1,
+      "pitchSettings": {
+        "keylock": true,
+        "keyShift": 1
+      },
+      "adapterState": {
+        "when": 12.11310657596372,
+        "position": 0.24215419501133795,
+        "playing": true,
+        "rate": 1,
+        "keylock": true,
+        "semitones": 1,
+        "effectiveSemitones": 1
+      },
+      "token": 4,
+      "playing": true,
+      "queued": false,
+      "expectedHandledNotice": "Diagnostic old live update failure",
+      "calls": 1,
+      "rejections": 1
+    },
+    "previews": {
+      "before": 8,
+      "after": 8,
+      "matched": 8
+    },
+    "adapterCleanup": [
+      {
+        "disposed": true,
+        "timerCleared": true,
+        "retainedPCMBytes": 0
+      },
+      {
+        "disposed": true,
+        "timerCleared": true,
+        "retainedPCMBytes": 0
+      }
+    ],
+    "cleanup": {
+      "allStopped": true,
+      "physicalMuted": true,
+      "oldUpdateRestored": true,
+      "adaptersDisposed": true
+    },
+    "sourceAfter": {
+      "app.js": "b3d74e1e8474fab8703a4d9e7fc45def5a1bf5d99d858c90d92a3480eaed341c",
+      "engine.js": "036f084a42177cb58eeaf926b3fd3d5ea6f0ef7b2fe9aefcb1974711ee89261b",
+      "deck-key-shift.js": "87e3ad950779b63d76b037c055e94cff59cc8db44ec6a660be41d7979c3dbe16",
+      "live-key-failure-check.js": "6561a90773104b74d8e9f56cb053012a6830f85b01218b0da6fcd96500b99768"
+    },
+    "sourceStable": true,
+    "finishedAt": "2026-10-29T17:34:40.727Z"
+  },
+  "originalResultSHA256": "5099aeaa0dd2810c3c2ceb41cb274d5302e98f66bb360567ab5266869c29c680",
+  "packageInspection": {
+    "passed": 5,
+    "failed": 0,
+    "scope": "Archive source identity, fixtures and controlled host callbacks; separate from native execution"
+  },
+  "normalSession": {
+    "observedBeforeAndAfter": true,
+    "mainPlaySyncRecordStartInvoked": false,
+    "positions": [
+      30.097,
+      34.086
+    ],
+    "tracks": 16,
+    "materializedLibraryPreviews": 12,
+    "playControls": 2,
+    "tempoControls": 2,
+    "eqControls": 6,
+    "meter": "minus infinity",
+    "checkerClosed": true
+  },
+  "profileCopy": {
+    "at": "2026-10-29T17:33:19.533344+00:00",
+    "method": "closed-profile APFS copy-on-write cp -cRp",
+    "files": 259,
+    "logicalBytes": 120230371,
+    "byteHashMtimeEqual": true,
+    "manifestSHA256": "4fb32195354afb006cc6c9cb804b73e9187f3f7ae17d36e4f22036579b8821ea"
+  },
+  "cleanup": {
+    "at": "2026-10-29T17:35:41.132843+00:00",
+    "retiredVersion": "0.1.113",
+    "sha256Verified": true,
+    "inactiveVerified": true,
+    "logicalBytes": 808356613,
+    "ownPackagingCacheBytes": 130738603,
+    "retainedCurrent": "0.1.114",
+    "protected": "Original music, recordings, all profile recovery copies and unrelated drafts retained"
+  },
+  "launchers": {
+    "currentPlaybackNamed": "0.1.114",
+    "syntaxChecked": true,
+    "exactBundleExecuted": true,
+    "launcherCommandsSeparatelyExecuted": false
+  },
+  "scope": "One first current-native playing pitch-replacement controlled rejection. Old update is a held no-delegate Promise; actual Load/Play/newkeyUp goes through installed handlers and genuine native AudioContext/live WASM replacement adapter. Controlled error is handled before final retainedowner assertions. No test suite or prior clean case rerun.",
+  "remaining": [
+    "No natural worklet/error causation, original PCM recording, measured pitch quality, music listening or physical proof.",
+    "Rate-branch rejection and same-track overlapping-key failure retain separate controlled-source evidence; not executed in this native case.",
+    "Core listening question remains pending; no owner response inferred. Hercules remains deferred.",
+    "Intermittent pop/stall/startup60, broader core/vendor and hardware criteria remain open; no full goal/public-beta completion claim."
+  ]
+}

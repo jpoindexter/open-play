@@ -43,7 +43,7 @@ export function createSlicer({engine,render=()=>{},notify=()=>{}}){
   const pending=engine.setLoop(h.d,loop.on,loop.start,loop.end,{positionAt,priorClock:engine.voiceClock(h.d,engine.voices.get(h.d.index)),playing});
   h.token=engine.startTokens.get(h.d.index);await pending;return owns(h);
  }
- function fail(h,error){if(owns(h)){restoreFields(h);engine.pause(h.d);forget(h);render();}if(error.name!=='AbortError')notify(error.message);return false;}
+ function fail(h,error){if(owns(h)){restoreFields(h);engine.pause(h.d);forget(h);render(h.d);}if(error.name!=='AbortError')notify(error.message);return false;}
  const expired=(h,position)=>h.playing&&!h.prior.on&&(h.d.reverse?position<=0:position>=h.track.duration);
  async function finishBackground(h){
   // A prepared future output may cross the endpoint before the current clock
@@ -54,7 +54,7 @@ export function createSlicer({engine,render=()=>{},notify=()=>{}}){
   // Forget the hold before the existing callback can repeat or replace track.
   try{await engine.onEnd?.(d);return true;}
   catch(error){if(error.name!=='AbortError')notify(error.message);return false;}
-  finally{render();}
+  finally{render(d);}
  }
  async function press(key,d,index){
   if(!d.track||held.has(key))return false;
@@ -68,7 +68,7 @@ export function createSlicer({engine,render=()=>{},notify=()=>{}}){
    h={d,track:d.track,prior:previous?.prior||prior(d),clock:previous?.clock||engine.voiceClock(d,engine.voices.get(d.index)),playing:previous?.playing??d.playing,token:engine.startTokens.get(d.index)};
    active.set(d.index,h);held.set(key,h);d.slice=index;
    const current=await transition(h,{on:true,start,end},()=>d.reverse?end:start,true);
-   if(current)render();return current;
+   if(current)render(d);return current;
   }catch(error){if(h)return fail(h,error);notify(error.message);return false;}
  }
  async function release(key){
@@ -87,7 +87,7 @@ export function createSlicer({engine,render=()=>{},notify=()=>{}}){
    // backing endpoint. Successful handoff/Stop/Load invalidates this watcher.
    if(h.playing&&!h.prior.on)ending ||= finishBackground(h);
    const current=await pending;
-   if(current){forget(h);render();return true;}return ending?await ending:false;
+   if(current){forget(h);render(h.d);return true;}return ending?await ending:false;
   }catch(error){
    if(error.name==='SlicerEndedError')return ending||finishBackground(h);
    if(error.name==='AbortError'&&ending)return ending;
@@ -99,8 +99,8 @@ export function createSlicer({engine,render=()=>{},notify=()=>{}}){
   cancelDeck(d);
   try{
    const b=bounds(d);if(on)fixed.set(d.index,{track:d.track,domain:b.domain,startBeat:b.startBeat});else fixed.delete(d.index);
-   d.slicerLoop=on;await engine.setLoop(d,on,b.start,b.end);render();return true;
-  }catch(error){d.slicerLoop=false;fixed.delete(d.index);notify(error.message);render();return false;}
+   d.slicerLoop=on;await engine.setLoop(d,on,b.start,b.end);render(d);return true;
+  }catch(error){d.slicerLoop=false;fixed.delete(d.index);notify(error.message);render(d);return false;}
  }
  return{press,release,releaseAll:()=>Promise.all([...held.keys()].map(release)),releaseDeck:d=>Promise.all([...held].filter(([,h])=>h.d===d).map(([key])=>release(key))),cancelDeck,changeRates,domainLoop,bounds};
 }

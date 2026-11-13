@@ -1,0 +1,9 @@
+# Deck Tap Tempo control refresh
+
+The existing deck Tap estimator already invokes the grid ownership hooks. Its application callback nevertheless rebuilt all decks and the mixer after every accepted Tap pair. A focused execution of the actual app constructor/callback on source7d64ba2 reproduced renderDecks after120→125BPM. The failing assertion and preserved pre-fix sources are private under local-evidence/tap-presentation-2026-10-26.
+
+The repair passes the affected track to the existing render callback, reusing the29-line track-details presenter, row-preserving library refresh and drawWaves(track). No estimator, audible-rate compensation, grid/Sync algorithm, original audio, mappings or layout change. The refresh also runs when realignment rejects, so saved metadata remains presented and the original rejection propagates without announcing success.
+
+Executed after repair: the same callback check passes without renderDecks; one failure-path check passes; the existing scripts/test_midi_shift_controls.mjs check passes its rate compensation, octave folding, lock/rearm and MIDI routing/duplicate-suppression assertions. These are controlled module/callback checks with collaborators. They do not prove actual rendered pointer capture, retained native controls/previews, musical quality, reduced frame time, hardware or absence of pops. No broad Node suite or soak.
+
+[CORE-FIX-18](https://trello.com/c/iXFY5haE) remains open for actual exact-desktop Tap/held-gesture acceptance. The normal0.1.59 session is unchanged. Private0.1.60 packaging is prepared from an immutable commit with this repair and the separate real-track-verified [Track Details Sync repair](TRACK_DETAILS_PENDING_SYNC_2026-10-26.md); see its package/inspection/delivery receipts for actual build disposition. Default/current launchers stay on59 until native acceptance. Hardware/listening and intermittent pop/stall gates remain open.

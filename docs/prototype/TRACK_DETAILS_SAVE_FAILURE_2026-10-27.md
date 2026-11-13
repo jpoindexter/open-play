@@ -1,0 +1,13 @@
+# Track Details save failure and retry — 27 October 2026
+
+Actual existing safety harness, run only for Track Details on a dedicated origin: injected session-storage quota failure, edited title/BPM and requested the original form submit. Baseline closed the dialog with no inline failure status. The narrow false-persistence regression also failed with Missing expected rejection. The global session banner existed, but the form discarded its save context; no original session/audio was involved.
+
+The existing30-line track-details module now retains persist’s false result, completes existing BPM/grid realignment, then throws a clear session-only/save-failure warning for the existing form error handler. The form stays open and Save is re-enabled. If realignment also fails, its error no longer incorrectly says Details saved. Live edits remain in session, matching existing library-restore failure policy; no new storage system, rollback/transport race or API change.
+
+Actual same form workflow after repair: modal stays open, visible inline warning explains the unsaved edit, old stored session is unchanged, in-memory edits retained. Restoring storage and pressing the same Save control succeeds; actual reload retains edited title/BPM with decks stopped/no queued start. Six affected-file module checks pass, including changed-grid ordering, exact BPM, combined persistence/realignment failure, duplicate owners and replacement-dialog handling. No full suite or soak.
+
+One post-edit same-origin attempt did not establish a refreshed module load and is retained ungraded. A fresh-origin attempt exposed an overly broad harness status selector: it picked an Astryx button status instead of the direct form status. Actual DOM snapshot showed the warning. Narrowed that selector and reran only this failed segment; final actual form/retry/reload report is complete. Neither intermediate result is hidden or counted as a product pass.
+
+Callers: panels.js Track Details submit remains the single product consumer; existing finally refreshes current metadata/rows/affected overviews and displays the rejection inline. No panels/app/layout, audio algorithms, original files, normal profile or library-preview changes. Existing safety harness gained one dedicated button so the old broad6-group run need not execute. Handwritten files remain below300lines: runtime30, focused tests59, diagnostic80.
+
+Receipt: track-details-save-failure-2026-10-27.json. Private originals/results/screenshots: local-evidence/details-save-failure-2026-10-27/. CORE-FIX-20 tracks this defect under LIB-011/CORE-FIX-17. Native delivery, acoustic/held-gesture/hardware and full-core/release acceptance remain separate.

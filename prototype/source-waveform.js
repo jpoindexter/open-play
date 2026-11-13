@@ -80,7 +80,7 @@ export function sourceSpectrumRGB(bands){
   const levels=[bands[0],bands[1]*2,bands[2]*3],maximum=Math.max(...levels);
   return maximum>1e-12?levels.map(value=>Math.round(255*(value/maximum)**1.3)):[0,0,0];
 }
-function paint(ctx,profile,{x=0,y=0,width,height,from,to,vertical=false}){
+function paint(ctx,profile,{x=0,y=0,width,height,from,to,vertical=false,overview=false}){
   const resolution=Math.min(3,Math.max(1,Math.abs(ctx.getTransform?.().a||1)));
   const along=vertical?height:width,count=Math.max(2,Math.ceil(along*resolution)),strip=along/count;
   const center=vertical?x+width/2:y+height/2,extent=(vertical?width:height)*.46;
@@ -96,7 +96,8 @@ function paint(ctx,profile,{x=0,y=0,width,height,from,to,vertical=false}){
       if(vertical)ctx.fillRect(center-hi,y+i*strip,Math.max(.5/resolution,hi-lo),strip+.15/resolution);
       else ctx.fillRect(x+i*strip,center-hi,strip+.15/resolution,Math.max(.5/resolution,hi-lo));
     };
-    draw(sample.minimum,sample.maximum,.38);
+    // Whole-song peak buckets flatten mastered tracks; energy preserves section contrast.
+    if(!overview)draw(sample.minimum,sample.maximum,.38);
     const body=sample.rms*1.5;
     draw(Math.max(sample.minimum,-body),Math.min(sample.maximum,body),1);
   }
@@ -137,7 +138,7 @@ function paintRaster(ctx,profile,{x,y,width,height,position,span,vertical}){
 
 export function paintSourceOverview(ctx,buffer,{width,height}){
   const state=sourceWaveformState(buffer);if(!state.profile)return state.error?null:state.ready;
-  paint(ctx,state.profile,{width,height,from:0,to:state.profile.duration});return null;
+  paint(ctx,state.profile,{width,height,from:0,to:state.profile.duration,overview:true});return null;
 }
 export function paintSourceDetail(ctx,buffer,{x=0,y=0,width,height,position,span=4,vertical=true}){
   const state=sourceWaveformState(buffer);if(!state.profile)return state.error?null:state.ready;

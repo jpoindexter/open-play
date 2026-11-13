@@ -1,0 +1,76 @@
+{
+  "date": "2026-10-28",
+  "scope": "Actual AudioEngine/monitor paired OfflineAudioContext capture and independent complete PCM/envelope inspection. Generated sine; no hardware output. Not human/native musical acceptance or generic Sync-pop resolution.",
+  "signal": {
+    "sampleRate": 48000,
+    "frames": 36864,
+    "frequencyHz": 1000,
+    "amplitude": 0.2,
+    "eventsSeconds": [
+      0.256,
+      0.512
+    ]
+  },
+  "captures": [
+    {
+      "capture": "before",
+      "frames": 36864,
+      "allFinite": true,
+      "boundarySteps": [
+        0.20000000298023224,
+        -0.19828897714614868
+      ],
+      "completeFadeGuardMaxSteps": [
+        0.20000000298023224,
+        0.19828897714614868
+      ],
+      "analyticEnvelopeMaxError": null,
+      "captureSHA256": "cd3252114cc2e42659e5eb273ae0a1cb36db1790135f860fecaf85702cda6c6c"
+    },
+    {
+      "capture": "after",
+      "frames": 36864,
+      "allFinite": true,
+      "boundarySteps": [
+        0,
+        0.0017110258340835571
+      ],
+      "completeFadeGuardMaxSteps": [
+        0.026105238124750744,
+        0.02610523812478622
+      ],
+      "analyticEnvelopeMaxError": 1.5688487564613496e-08,
+      "captureSHA256": "705120841597ff5ae9843e0e9e8fad12cabdf3dd0c7809264a8ee78f6f920df6"
+    }
+  ],
+  "focusedRegression": {
+    "file": "prototype/headphone-cue-transition.test.mjs",
+    "before": "1 failure: immediate gain assignment",
+    "after": "1/1 pass after correction of a four-channel test collaborator",
+    "covers": [
+      "first Cue selection",
+      "rapid reversal",
+      "channel trim via crossfader refresh",
+      "unchanged-target deadline",
+      "emergency physical mute"
+    ]
+  },
+  "firstAfterAttempt": "Unchanged signal retained in after-first-reload-unchanged.json; not graded as repaired. Explicit current-module import identity then yielded the retained after.json.",
+  "routingFixture": "Existing monitor harness steady-state metrics now start after intentional10ms fade; all4096 frames still checked finite.",
+  "moduleLines": 77,
+  "genericSyncPopResolved": false,
+  "listening": "pending",
+  "hardware": "pending",
+  "affectedRoutingFixture": {
+    "first": "8/18: cached old metric body graded the intentional fade; retained/excluded",
+    "current": "18/18 with explicit current fixture module URL",
+    "scope": "Existing affected monitor routing fixture only; steady levels after10ms, all4096 frames finite",
+    "sourceIdentityLimit": "Private wrapper left relative hash fetches at404; those hash fields are excluded. Runtime imported the explicit /prototype/audio-monitor-harness.js?cue-transition=metrics-v1 module and executed its settling-window metrics."
+  },
+  "cleanup": "Offline contexts disposed; owned browser tab closed and18855 server stopped; normal desktop session untouched.",
+  "sourceSHA256": {
+    "prototype/audio-monitor.js": "b1cc71271d475ab9d36450b0a7c33d58b72194d50ee2370177f8bf3b865f9f85",
+    "prototype/audio-monitor-harness.js": "e2bfdc3524410e34d6ccdf3281abea4d0582cd9d2fe05bc29f289d464b9b15b2",
+    "prototype/headphone-cue-transition.test.mjs": "34a48f9ae42ab27a9bd2d63e5c55cb60cd4e9d9e08b093e55fe28250589ae81d"
+  }
+}

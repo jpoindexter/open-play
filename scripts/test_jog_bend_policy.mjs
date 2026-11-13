@@ -19,7 +19,7 @@ const fault=createJogBend({engine:{voices,setJogBend:async(d,f)=>{if(f!==1&&fail
 await fault.tick(deck,10,'left');failBend=true;await assert.rejects(fault.tick(deck,10,'left'),/Preparation/);
 assert.equal(recovery.at(-1),1,'a rejected update must restore its still-owned voice before retiring the bend');
 const backend=Object.create(AudioEngine.prototype),source={playbackRate:{value:1.08}},rawVoice={sources:[source],timelineScale:1};
-Object.assign(backend,{ctx:{currentTime:2},voices:new Map([[0,rawVoice]]),deckScratchRequests:new Map(),stemSlipPending:new Map()});
+Object.assign(backend,{ctx:{currentTime:2},voices:new Map([[0,rawVoice]]),rateOwners:new WeakMap(),deckScratchRequests:new Map(),stemSlipPending:new Map()});
 const preparing={index:0,playing:true,processing:true,track:{duration:20},rate:1,position:0,anchorPosition:0,anchorTime:0};
 await assert.rejects(backend.setJogBend(preparing,1.08),/preparation/);await backend.setJogBend(preparing,1);
 assert.equal(source.playbackRate.value,1);assert.equal(preparing.rate,1);assert.equal(preparing.anchorPosition,2.16);
