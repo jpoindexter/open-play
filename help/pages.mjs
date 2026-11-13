@@ -27,7 +27,7 @@ export const groups = [
     ['advanced', 'Advanced features', 'Effects, Sampler, Stems, Flip, video and simulated services.'],
     ['troubleshooting', 'Troubleshooting', 'No sound, timing offsets, pops, stalls and missing media.'],
     ['known-issues', 'Beta status and limitations', 'What remains unverified and how to report a problem.'],
-    ['contributing', 'Source and contributions', 'Get the MIT source, fork Open Play and submit a focused improvement.'],
+    ['contributing', 'Source and contributions', 'Fork the MIT source, contribute improvements and open pull requests.'],
     ['glossary', 'DJ glossary', 'BPM, downbeat, phase, cue, pitch, gain and clipping.']
   ]]
 ];

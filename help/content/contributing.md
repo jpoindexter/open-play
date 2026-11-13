@@ -1,6 +1,6 @@
 ## Get Open Play’s source
 
-Open Play is an independent DJ project for local music. Its [GitHub repository](https://github.com/jpoindexter/open-play) is public, and original project code is available under the [MIT License](https://github.com/jpoindexter/open-play/blob/main/LICENSE). Third-party code keeps its own notices; optional runtimes and model weights can have different terms.
+Open Play is an independent DJ project for local music. You can contribute code, documentation, accessibility improvements and clear bug reports. Its [GitHub repository](https://github.com/jpoindexter/open-play) is public, and original project code is available under the [MIT License](https://github.com/jpoindexter/open-play/blob/main/LICENSE). Third-party code keeps its own notices; optional runtimes and model weights can have different terms.
 
 Use the [README quickstart](https://github.com/jpoindexter/open-play#run-locally) to run the browser workspace. The committed UI bundle is included, so basic exploration does not require an npm build. The server command has been checked on macOS. Desktop packaging and optional processing runtimes are separate setup paths.
 
