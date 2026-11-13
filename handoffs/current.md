@@ -1,8 +1,10 @@
-## Core recording ownership repair —13 November2026
+## Current private core candidate0.1.153 —13 November2026
 
-Rapid Recording Start/Stop is repaired in source with a37-line owner module; the existing engine only delegates and shrinks. Actual-engine2focused cases fail baseline/pass repaired. The same generated-only browser/native-MediaRecorder button workflow changes2recorders→1, finalizes a0.36s stereo capture, then completes a subsequent capture. All109observed deck/mixer controls and5materialized library previews retain their nodes; all decks stopped/physical graph muted, constructors restored and own tab/server cleanup recorded. No broad suite, DSP/Sync/layout/control removal or original-audio/profile edit.
+Private153/source `cb49ea90` is current/default and open stopped. Recording Start/Stop ownership is included; actual packaged isolated buttons use one native recorder after rapid Start, finish a0.36s stereo WebM/Opus capture, then finish a subsequent capture. All109observed controls and8materialized previews retain their nodes. Exact archive/host inspection6/6. New Fader Start zero cancellation reuses the existing Play owner helper; one targeted regression RED→GREEN prevents a delayed silent restart/count/history change. No broad suite, layout/control removal or DSP rewrite.
 
-Installed/public0.1.152and private151are unchanged: this is source/browser acceptance for the next coherent desktop candidate, not new native/listening/Hercules/codec/file-save/crash acceptance. Musical Sync/pop/visual/matched-volume gate remains; Hercules later. [Exact repair and limits](../docs/prototype/MIX_RECORDING_OWNERSHIP_2026-11-13.json). REC-FIX-01 tracks this narrow defect; REC-001/002 retain broader criteria.
+Normal Quit/reopen cleared the isolated check and restored the25-track main session at6.927/206.068s, master−10.08dB,2Play/2tempo/6EQ/2level and12visible previews. A closed-profile recovery preserves279files/221735400logical bytes with matching hashes/sizes/mtimes and separate inodes. Final system output0%/Mute1; its settings changed between observations for an unknown reason, so continuous system mute is not claimed. The native recording check separately asserts physical graph mute.
+
+REC-FIX-01 and CORE-FADER-01 meet only their narrow software/delivery criteria; parents remain open for saved-file/content/error recovery, native MIDI follow-through, owner musical Sync/pop/visual/matched-volume listening and Hercules later. Public signed/notarized152unchanged. Current153and one151rollback retained; temporary build stage absent, no new Downloads or media/profile/recording deletion. [Exact private delivery and limits](../docs/prototype/DESKTOP_153_CORE_2026-11-13.json).
 
 ## Public Mac preview0.1.152 —13November2026
 

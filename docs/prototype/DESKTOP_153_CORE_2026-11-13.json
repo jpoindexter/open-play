@@ -1,0 +1,115 @@
+{
+  "date": "2026-11-13",
+  "version": "0.1.153",
+  "channel": "Private Playback Test; public signed/notarized152 remains unchanged",
+  "sourceCommit": "cb49ea90a4aeb82e11a198ff3a9a2fd3ef2c938c",
+  "asarSHA256": "b673575412a0ce984e827ebdfe51632fce094d95c8633c8cc8a106e3cde1ebca",
+  "changes": [
+    "37-line mix-recording owner module coalesces rapid Start and repeated Stop; source/browser regression evidence reused",
+    "Existing Fader Start cancellation callback reuses cancelPendingPlay to revoke ordinary queued Play at zero; Cue cancellation retained"
+  ],
+  "packageInspection": {
+    "completed": true,
+    "passed": 6,
+    "failed": 0,
+    "receipt": "desktop-0.1.153-playback-core-inspection.json"
+  },
+  "recordingNative": {
+    "completed": true,
+    "scope": "Actual generated-only workspace and native MediaRecorder. No listening, hardware, file-save or interrupted-recording recovery claim.",
+    "nativeRecordersAfterRapidStart": 1,
+    "firstCapture": {
+      "bytes": 261,
+      "type": "audio/webm;codecs=opus",
+      "duration": 0.36,
+      "channels": 2
+    },
+    "nativeRecordersTotal": 2,
+    "controls": {
+      "observed": 109,
+      "retained": 109
+    },
+    "previews": {
+      "observed": 8,
+      "retained": 8
+    },
+    "allStopped": true,
+    "physicalMuted": true,
+    "nativeRecorderRestored": true
+  },
+  "recordingEvidence": "local-evidence/desktop-153/native-recording.txt",
+  "faderRegression": {
+    "baseline": {
+      "pass": 0,
+      "fail": 1
+    },
+    "repaired": {
+      "pass": 1,
+      "fail": 0
+    },
+    "scope": "Actual modules with controlled graph, clock and FX readiness; no native MIDI failure-path or physical acceptance",
+    "includedInExactArchive": true,
+    "receipt": "FADER_ZERO_153_2026-11-13.json"
+  },
+  "closedProfileBackup": {
+    "files": 279,
+    "logicalBytes": 221735400,
+    "hashSizeMtimeEqual": true,
+    "separateInodes": true,
+    "oldProcessAbsent": true
+  },
+  "mainRecovery": {
+    "executed": "Normal151Quit; absent old process; closed-profile backup;153main start; isolated check; normal153Quit/reopen clears isolated session; final main AX/screenshot",
+    "tracks": 25,
+    "positionsSeconds": [
+      6.927,
+      206.068
+    ],
+    "masterDB": -10.08,
+    "playControls": 2,
+    "tempoControls": 2,
+    "eqControls": 6,
+    "channelLevelFaders": 2,
+    "materializedLibraryPreviews": 12,
+    "mainPlaySyncCueRecordStartActions": 0,
+    "wholeMetadataExportCompared": false
+  },
+  "mute": {
+    "nativeRecordingGraphMuted": true,
+    "finalSystemOutputPercent": 0,
+    "finalSystemMute": true,
+    "continuousSystemMuteClaim": false,
+    "note": "System volume/mute changed between observations, cause unknown. No main playback command; recording check additionally asserts physical graph mute."
+  },
+  "launchers": [
+    "Start Open Play Current Test.command",
+    "Start Open Play Playback Test.command",
+    "Start Open Play Playback Test 0.1.153.command"
+  ],
+  "cleanup": {
+    "isolatedWindowCleared": true,
+    "desktopReservationReleased": true,
+    "temporaryBuildStageAbsent": true,
+    "privateBundlesRetained": [
+      "0.1.153 current",
+      "0.1.151 single rollback"
+    ],
+    "public152Retained": true,
+    "newDownloads": 0,
+    "musicRecordingsProfilesRecoveriesDeleted": false
+  },
+  "modularity": "Recording owner37lines, native checker59, existing fader regression94; one callback substitution in app under explicit MOD-001 legacy exception. No dependency, broad refactor or layout change.",
+  "remaining": [
+    "Owner musical Sync/pop/visual/matched-volume listening",
+    "Actual saved master file/content and interrupted recording recovery",
+    "Native synthetic MIDI delayed-Play failure path and physical controller calibration",
+    "Hercules headphone routing later"
+  ],
+  "notRun": [
+    "Broad suite/corpus/soak",
+    "Listening",
+    "Physical Hercules",
+    "Public153installer, signing, notarization or release"
+  ],
+  "trelloReadbackReceipt": "DESKTOP_153_TRELLO_2026-11-13.json"
+}

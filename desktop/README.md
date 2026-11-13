@@ -2,7 +2,7 @@
 
 [Download public preview0.1.152](https://github.com/jpoindexter/open-play/releases/tag/v0.1.152-preview.1) for Apple Silicon. This is a Developer ID signed, notarized evaluation prerelease with known listening/device/reliability limits; use the [installation manual](https://open-play-help.vercel.app/installation/).
 
-Open Play Preview has a separate profile/partition/port18776. It retains the existing browser engine, controls and waveform previews. Private Playback Test151remains separate on18775. No native audio rewrite or automatic updater is introduced.
+Open Play Preview has a separate profile/partition/port18776. It retains the existing browser engine, controls and waveform previews. Private Playback Test153remains separate on18775; Current/Playback launchers open153. The packaged recording ownership repair and paused main recovery are recorded in [the private153receipt](../docs/prototype/DESKTOP_153_CORE_2026-11-13.json). Listening and controller acceptance remain separate. No native audio rewrite or automatic updater is introduced.
 
 Maintainers: [current release procedure](RELEASE.md) documents immutable packaging, exact certificate selection, Keychain notarization, the signed DMG and clean-up boundaries. The current packager needs its generated fixture references; this is not a fresh-clone one-command build.
 
