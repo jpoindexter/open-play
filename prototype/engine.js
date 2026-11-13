@@ -1,4 +1,5 @@
 import { createEffect } from "./effects.js";
+import {createMixRecording} from './mix-recording.js';
 import { prepareExtendedEffects } from "./extended-effects.js";
 import { KeylockRenderer } from "./keylock.js";
 import { DeckScratchCache } from "./deck-scratch-cache.js";
@@ -1188,36 +1189,8 @@ export class AudioEngine {
       ready: this.ctx?.state === "running" && this.effectsPrepared === true,
     });
   }
-  async recordStart() {
-    await this.resume();
-    if (!window.MediaRecorder)
-      throw new Error("This browser does not support mix recording.");
-    this.chunks = [];
-    const type = ["audio/webm;codecs=opus", "audio/webm", "audio/mp4"].find(
-      (t) => MediaRecorder.isTypeSupported(t),
-    );
-    this.recorder = new MediaRecorder(
-      this.destination.stream,
-      type ? { mimeType: type } : {},
-    );
-    this.recorder.ondataavailable = (e) => {
-      if (e.data.size) this.chunks.push(e.data);
-    };
-    this.recorder.start(250);
-    this.recording = true;
-    this.recordStarted = this.ctx.currentTime;
-  }
-  recordStop() {
-    return new Promise((resolve) => {
-      if (!this.recorder || !this.recording) return resolve(null);
-      this.recorder.onstop = () => {
-        const blob = new Blob(this.chunks, { type: this.recorder.mimeType });
-        this.recording = false;
-        resolve(blob);
-      };
-      this.recorder.stop();
-    });
-  }
+  recordStart(){return (this.mixRecording??=createMixRecording(this)).start();}
+  recordStop(){return this.mixRecording?.stop()??Promise.resolve(null);}
   reverseBuffer(id, original) {
     if (this.reversed.has(original)) return this.reversed.get(original);
     const out = this.ctx.createBuffer(

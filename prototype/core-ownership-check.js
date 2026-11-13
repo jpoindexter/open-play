@@ -1,4 +1,5 @@
 import {runOutputLevelCheck} from './output-level-check.js';
+import {runMixRecordingCheck} from './mix-recording-check.js';
 import {runPlayingControlsCheck} from './playing-controls-check.js';
 import {runHiddenDeckCheck} from './hidden-deck-check.js';
 import {runLibraryRestoreCueCheck} from './library-restore-cue-check.js';
@@ -211,6 +212,9 @@ async function boot(){
   catch(error){$('#ownership-status').textContent='Cue/backup setup failed: '+error.message;}
  };$('#restore-cue-run').disabled=false;
  $('#output-level-run').onclick=runOutputLevel;$('#output-level-run').disabled=false;
+ const recordingButton=document.createElement('button');recordingButton.textContent='Run muted recording Start/Stop check';recordingButton.id='mix-recording-run';
+ recordingButton.onclick=async()=>{disableRuns();const report=await runMixRecordingCheck(window.openPlay);$('#ownership-result').value=JSON.stringify(report);$('#ownership-status').textContent=report.completed?'Recording Start/Stop check passed; all audio stopped':'Recording check failed: '+report.error?.message;};
+ $('#ownership-status').before(recordingButton);
  $('#active-analysis-run').onclick=runActiveAnalysis;$('#active-analysis-run').disabled=false;
  $('#simple-grid-run').onclick=()=>runSimpleGrid();$('#simple-grid-run').disabled=false;
  $('#simple-master-run').onclick=()=>runSimpleGrid('choose-master');$('#simple-master-run').disabled=false;

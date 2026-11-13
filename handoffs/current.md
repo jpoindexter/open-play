@@ -1,3 +1,9 @@
+## Core recording ownership repair —13 November2026
+
+Rapid Recording Start/Stop is repaired in source with a37-line owner module; the existing engine only delegates and shrinks. Actual-engine2focused cases fail baseline/pass repaired. The same generated-only browser/native-MediaRecorder button workflow changes2recorders→1, finalizes a0.36s stereo capture, then completes a subsequent capture. All109observed deck/mixer controls and5materialized library previews retain their nodes; all decks stopped/physical graph muted, constructors restored and own tab/server cleanup recorded. No broad suite, DSP/Sync/layout/control removal or original-audio/profile edit.
+
+Installed/public0.1.152and private151are unchanged: this is source/browser acceptance for the next coherent desktop candidate, not new native/listening/Hercules/codec/file-save/crash acceptance. Musical Sync/pop/visual/matched-volume gate remains; Hercules later. [Exact repair and limits](../docs/prototype/MIX_RECORDING_OWNERSHIP_2026-11-13.json). REC-FIX-01 tracks this narrow defect; REC-001/002 retain broader criteria.
+
 ## Public Mac preview0.1.152 —13November2026
 
 [Versioned Apple Silicon prerelease](https://github.com/jpoindexter/open-play/releases/tag/v0.1.152-preview.1) · [Exact distribution receipt](../docs/delivery/MAC_PREVIEW_152_2026-11-13.json).

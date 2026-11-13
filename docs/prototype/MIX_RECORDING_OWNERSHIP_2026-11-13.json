@@ -1,0 +1,106 @@
+{
+  "date": "2026-11-13",
+  "baselineCommit": "b43b7798c3937d4101427162b138fe8180c5484f",
+  "defect": "Rapid master-capture Start created duplicate native recorders; repeated Stop replaced its completion callback and rejected, leaving the first completion pending.",
+  "repair": "One per-engine recording owner coalesces Start/Stop, blocks Start during finalization and pins each recorder\u2019s chunks/type. Existing API/codecs/destination/UI preserved.",
+  "scope": "Actual engine regression plus generated-only browser workspace/native MediaRecorder; not a native desktop app, listening, hardware or interrupted-file recovery claim.",
+  "node": {
+    "baseline": {
+      "pass": 0,
+      "fail": 2
+    },
+    "repaired": {
+      "pass": 2,
+      "fail": 0
+    },
+    "command": "node --test prototype/mix-recording.test.mjs"
+  },
+  "browserBefore": {
+    "completed": false,
+    "scope": "Actual generated-only workspace and native MediaRecorder. No listening, hardware, file-save or interrupted-recording recovery claim.",
+    "nativeRecordersAfterRapidStart": 2,
+    "error": {
+      "name": "Error",
+      "message": "Rapid Start created 2 native recorders"
+    },
+    "allStopped": true,
+    "physicalMuted": true,
+    "nativeRecorderRestored": true
+  },
+  "browserAfter": {
+    "completed": true,
+    "scope": "Actual generated-only workspace and native MediaRecorder. No listening, hardware, file-save or interrupted-recording recovery claim.",
+    "nativeRecordersAfterRapidStart": 1,
+    "firstCapture": {
+      "bytes": 261,
+      "type": "audio/webm;codecs=opus",
+      "duration": 0.36,
+      "channels": 2
+    },
+    "nativeRecordersTotal": 2,
+    "controls": {
+      "observed": 109,
+      "retained": 109
+    },
+    "previews": {
+      "observed": 5,
+      "retained": 5
+    },
+    "allStopped": true,
+    "physicalMuted": true,
+    "nativeRecorderRestored": true
+  },
+  "changedFiles": [
+    {
+      "file": "prototype/engine.js",
+      "sha256": "306f7528660aa270123a03932b72337267ac7d4a2e11cf812e77b5b28ccd327f"
+    },
+    {
+      "file": "prototype/mix-recording.js",
+      "sha256": "171ac2866923f0f7f1af9060909e418536f160a284319daf4b55cdd96388e79a"
+    },
+    {
+      "file": "prototype/mix-recording.test.mjs",
+      "sha256": "d80c513f6d4b3fd0bee5788b8ab9366f7c985baca285e183ffa3e54fdd2e9c53"
+    },
+    {
+      "file": "prototype/mix-recording-check.js",
+      "sha256": "ea2d6bc1cf5df8aa9e1293caf2f95eebd3ddb84f7cd227a0218343a67128e5c4"
+    },
+    {
+      "file": "prototype/core-ownership-check.js",
+      "sha256": "6dba4a89e9a9d43c8debe00d48539a635191ed46c911714f8c387540269e5229"
+    },
+    {
+      "file": "desktop/package-playback.mjs",
+      "sha256": "7f77e0b82fca976fdd5c98b17cc6fa16304a5da5f5a12e150c702b9fe5a64a34"
+    }
+  ],
+  "moduleLines": 37,
+  "modularity": "New handwritten files under300lines; legacy engine imports/delegates and shrinks27lines under existing MOD-001 exception. No whole-repo size compliance claimed.",
+  "preservation": [
+    "All existing controls/layouts/library previews retained",
+    "No new dependency, DSP, Sync, gain, format or audio routing change",
+    "No original songs or native profiles edited by this workflow",
+    "Installed/public0.1.152and private151remain unchanged"
+  ],
+  "cleanup": [
+    "Only own check tab closed; original manual tab remains",
+    "Native MediaRecorder constructor restored; all decks stopped; physical graph muted",
+    "Own18856and49245servers signaled for shutdown; no recording/media file downloaded",
+    "Initial reused18856origin failed generated-only admission; no Play/record/import/storage-clear action; check moved to fresh49245origin",
+    "Both owned server listeners absent after shutdown"
+  ],
+  "remaining": [
+    "Next desktop candidate must include this source for native application follow-through",
+    "Owner musical Sync/pop/visual/matched-volume session remains open",
+    "Hercules/headphone/controller checks later",
+    "File save, all-codec/disk-full/error/interrupted recording and crash recovery remain broader REC-001/REC-002 work"
+  ],
+  "review": {
+    "scope": "Read-only37-line recording owner plus engine delegation and focused regressions",
+    "result": "No concrete introduced ownership/error/compatibility defect found",
+    "additionalChecksRun": false
+  },
+  "baselineStopEvidence": "Actual engine duplicate Stop raises InvalidStateError; original handler replaces onstop before the second native stop call. Dropped completion is the traced consequence; the baseline browser run specifically reproduced duplicate Start."
+}
