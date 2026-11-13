@@ -36,6 +36,10 @@ The first publication uses the existing `jasons-projects-998d5f27` team. GitHub 
 
 The local project link remains under ignored `.vercel/project.json`. Updating content rebuilds only `.vercel/output`, preserving that link. Review the deployed home, a deep article, search, mobile navigation and a real 404. Keep the previous deployment for rollback; use `vercel rollback` only for an actual bad publication.
 
+## Latest publication —13 November 2026
+
+The production alias now includes 21 articles, the public MIT source/contribution guide and updated release/reporting information. The interface and screenshot reference remains explicitly0.1.89; latest recorded private desktop status is0.1.151. No desktop build or listening session was performed for this help-only update. [Deployment and public checks](../docs/delivery/HELP_SITE_2026-11-13.json).
+
 ## Content maintenance
 
 1. Change the relevant Markdown and source coverage when controls change.
