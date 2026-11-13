@@ -1,6 +1,6 @@
 // Prepare a signed DMG; finalize only after Apple's recorded submission is Accepted.
 import assert from 'node:assert/strict';
-import {readFile,writeFile,mkdir,mkdtemp,cp,copyFile,symlink,rm,stat,access} from 'node:fs/promises';
+import {readFile,writeFile,mkdir,mkdtemp,copyFile,symlink,rm,stat,access} from 'node:fs/promises';
 import {execFileSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
 import {tmpdir} from 'node:os';
@@ -47,7 +47,9 @@ if(mode==='prepare'){
  run('codesign',['--verify','--deep','--strict','--verbose=2',app]);
  const stage=await mkdtemp(path.join(tmpdir(),'open-play-installer-'));
  try{
-  await cp(app,path.join(stage,path.basename(app)),{recursive:true});
+  // ditto preserves relative framework symlinks; fs.cp rewrites their targets.
+  run('ditto',[app,path.join(stage,path.basename(app))]);
+  run('codesign',['--verify','--deep','--strict',path.join(stage,path.basename(app))]);
   await symlink('/Applications',path.join(stage,'Applications'));
   await copyFile(path.join(root,'desktop/PREVIEW_INSTALL.txt'),path.join(stage,'READ ME FIRST.txt'));
   run('hdiutil',['create','-volname',`Open Play Preview ${version}`,'-srcfolder',stage,'-format','UDZO',dmg]);
@@ -55,7 +57,8 @@ if(mode==='prepare'){
  run('codesign',['--force','--sign',credential,'--timestamp',dmg]);
  run('hdiutil',['verify',dmg]);
  await writeFile(proof,JSON.stringify({version,sourceCommit:receipt.sourceCommit,asarSHA256:receipt.asarSHA256,
-  dmg:path.basename(dmg),certificateSHA1:credential,status:'signed-not-notarized',preparedAt:new Date().toISOString()},null,2)+'\n',{flag:'wx'});
+  dmg:path.basename(dmg),preNotarizationSHA256:sha(await readFile(dmg)),certificateSHA1:credential,
+  status:'signed-not-notarized',preparedAt:new Date().toISOString()},null,2)+'\n',{flag:'wx'});
  console.log(JSON.stringify({dmg,status:'signed-not-notarized',next:'Submit this exact DMG with notarytool, save submission.json beside it, then finalize.'}));
 }else{
  const submission=JSON.parse(await readFile(path.join(output,'submission.json')));
@@ -65,16 +68,18 @@ if(mode==='prepare'){
  const log=path.join(output,'notarization-log.json');
  run('xcrun',['notarytool','log',submission.id,'--keychain-profile',credential,log]);
  const result=JSON.parse(await readFile(log));
+ const prior=JSON.parse(await readFile(proof));
  assert.equal(result.status,'Accepted');
  assert(!result.issues?.length,'Review every notarization warning before distribution');
+ assert.equal(prior.sourceCommit,receipt.sourceCommit);
+ assert.equal(sha(await readFile(dmg)),prior.preNotarizationSHA256,'Installer changed after signing');
+ assert.equal(result.sha256,prior.preNotarizationSHA256,'Apple accepted a different installer');
  run('xcrun',['stapler','staple',dmg]);
  run('xcrun',['stapler','validate',dmg]);
  run('codesign',['--verify','--strict',dmg]);
  run('spctl',['--assess','--type','open','--context','context:primary-signature','--verbose=2',dmg]);
  const digest=sha(await readFile(dmg));
  await writeFile(path.join(output,'SHA256SUMS'),`${digest}  ${path.basename(dmg)}\n`,{flag:'wx'});
- const prior=JSON.parse(await readFile(proof));
- assert.equal(prior.sourceCommit,receipt.sourceCommit);
  await writeFile(proof,JSON.stringify({...prior,status:'notarized',submissionId:submission.id,
   sha256:digest,bytes:(await stat(dmg)).size,finalizedAt:new Date().toISOString()},null,2)+'\n');
  console.log(JSON.stringify({dmg,sha256:digest,status:'notarized'}));

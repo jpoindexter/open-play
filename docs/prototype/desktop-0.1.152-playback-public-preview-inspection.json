@@ -1,0 +1,78 @@
+{
+  "version": "0.1.152",
+  "archiveSHA256": "fe6132549f4165dd8d6bf0af35328c07490c18787d9a7b3cf83da22cd9262122",
+  "sourceCommit": "d187830137827643789de76c2188d7c0de5f7415",
+  "checks": [
+    {
+      "name": "Declared package identity matches the selected isolated channel",
+      "passed": true,
+      "evidence": {
+        "publicPreview": true,
+        "name": "Open Play Preview",
+        "bundle": "org.openplay.dj.preview",
+        "profile": "Open Play Preview",
+        "partition": "persist:open-play-preview",
+        "port": 18776,
+        "packageName": "open-play-preview"
+      }
+    },
+    {
+      "name": "Archive and all declared prototype module bytes match immutable source",
+      "passed": true,
+      "evidence": {
+        "runtimePrototypeFiles": 698,
+        "omittedDevelopmentFiles": [
+          "prototype/ui/package-lock.json"
+        ],
+        "declaredModules": 139,
+        "rootNotices": [
+          "LICENSE",
+          "NOTICE"
+        ]
+      }
+    },
+    {
+      "name": "Staged host/helper bytes and sanitized package identity match receipt",
+      "passed": true,
+      "evidence": {
+        "stagedFiles": 16,
+        "version": "0.1.152"
+      }
+    },
+    {
+      "name": "Only four generated diagnostic WAVs match independently referenced hashes",
+      "passed": true,
+      "evidence": {
+        "generatedWAVs": 4,
+        "noNativeReferenceLibrary": true
+      }
+    },
+    {
+      "name": "Archive excludes raw evidence, user profiles, Git and credentials",
+      "passed": true,
+      "evidence": {
+        "files": 3949
+      }
+    },
+    {
+      "name": "Packaged main profile/permissions and isolated check session remain distinct",
+      "passed": true,
+      "evidence": {
+        "mainPartition": "persist:open-play-preview",
+        "diagnosticPartitionPersistent": false,
+        "uniqueDiagnosticSessions": true,
+        "devicePermissionsDenied": true,
+        "sandboxRetained": true,
+        "relativeCheckVerified": true,
+        "guiTempoCheckVerified": true,
+        "simpleControllerCheckVerified": true,
+        "menuBarVerified": true
+      }
+    }
+  ],
+  "scope": "Actual ASAR bytes and controlled packaged host/check-window callbacks, not native UI/audio/device acceptance.",
+  "fullParityVerified": false,
+  "passed": 6,
+  "failed": 0,
+  "completed": true
+}

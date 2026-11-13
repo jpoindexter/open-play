@@ -1,6 +1,14 @@
-# Open Play desktop test
+# Open Play Mac preview
 
-**Current private package:0.1.58/source2ba58bb.** Actual native startup shows the shared header,16saved tracks and16waveform previews; two demo decks remain stopped. Native four-real-track quit/reopen recovery is pending because pointer/keyboard input is unreliable. Use the versioned58bundle while it is open; do not launch another playback-test version over it. The Current launcher still targets57. [Current delivery and limits](../docs/prototype/TRY_CURRENT_DESKTOP.md). Newer repository UI work is not in this immutable package; no public beta published.
+[Download public preview0.1.152](https://github.com/jpoindexter/open-play/releases/tag/v0.1.152-preview.1) for Apple Silicon. This is a Developer ID signed, notarized evaluation prerelease with known listening/device/reliability limits; use the [installation manual](https://open-play-help.vercel.app/installation/).
+
+Open Play Preview has a separate profile/partition/port18776. It retains the existing browser engine, controls and waveform previews. Private Playback Test151remains separate on18775. No native audio rewrite or automatic updater is introduced.
+
+Maintainers: [current release procedure](RELEASE.md) documents immutable packaging, exact certificate selection, Keychain notarization, the signed DMG and clean-up boundaries. The current packager needs its generated fixture references; this is not a fresh-clone one-command build.
+
+# Historical desktop test host
+
+**Historical private checkpoint:0.1.58/source2ba58bb.** Actual native startup shows the shared header,16saved tracks and16waveform previews; two demo decks remain stopped. Native four-real-track quit/reopen recovery is pending because pointer/keyboard input is unreliable. Use the versioned58bundle while it is open; do not launch another playback-test version over it. The Current launcher still targets57. [Current delivery and limits](../docs/prototype/TRY_CURRENT_DESKTOP.md). Newer repository UI work is not in this immutable package; no public beta published.
 
 ## Historical host and0.1.37reference
 

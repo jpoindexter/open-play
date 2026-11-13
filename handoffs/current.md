@@ -1,3 +1,15 @@
+## Public Mac preview0.1.152 —13November2026
+
+[Versioned Apple Silicon prerelease](https://github.com/jpoindexter/open-play/releases/tag/v0.1.152-preview.1) · [Exact distribution receipt](../docs/delivery/MAC_PREVIEW_152_2026-11-13.json).
+
+Developer ID signed app/DMG; Apple notarization Accepted without issues, DMG stapled/validated, installed app and image accepted as Notarized Developer ID. Native fresh-profile first launch, two owned WAV imports,2saved/0session-only and stopped normal restart executed. Controls/layouts/library previews remain; no DJ runtime change. The first unpublished staging-copy rejection was corrected with ditto and all14relative framework symlinks verified.
+
+The public app uses a separate Open Play Preview profile/port18776. Private151and its25-track session remain untouched; inactive150was retired after review. No personal music, recordings or recoveries removed. Speakers finish0percent/muted. Manual and GitHub release contain install/update/removal instructions, MIT/third-party notices and known limits; repo has20relevant topics and contribution links.
+
+**Next core gate:** one focused owner Sync/pop/visual/matched-volume listening session when authorized. Hercules/headphone isolation remains deferred. This evaluation prerelease does not close musical reliability, broad clean-machine/OS/crash/update, automatic-updater or full-parity cards. Never treat distribution trust as audio acceptance; do not repeat broad clean test matrices.
+
+## Historical source/private-candidate checkpoints
+
 ## MIT source and contributor setup —13November2026
 
 Source is public at https://github.com/jpoindexter/open-play. Owner chose MIT; current source merged into main through PR1, with a newcomer README, contributor/security guidance, issue/PR templates and verified anonymous reads. Forks/issues and private vulnerability reporting are enabled. [Source delivery and limits](../docs/delivery/OPEN_SOURCE_2026-11-13.json). This publishes source, not a desktop beta: the151binary/audio session and owner listening gates are unchanged. Root notices are included by the next playback packaging path; future binary inclusion/trust and complete dependency/weight notices still need acceptance.

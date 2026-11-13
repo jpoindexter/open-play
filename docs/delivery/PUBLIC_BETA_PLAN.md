@@ -1,3 +1,20 @@
+# Public preview delivered; working-beta gates remain
+
+**13November2026:** [Open Play Preview0.1.152](https://github.com/jpoindexter/open-play/releases/tag/v0.1.152-preview.1) is the first public Apple Silicon Mac evaluation prerelease. Owner explicitly requested installer publication. Developer ID signatures, accepted notarization, stapled DMG, exact artifact trust and native fresh-profile import/restart are recorded in [the distribution receipt](MAC_PREVIEW_152_2026-11-13.json). Original source is public MIT; contributions and the illustrated manual are available.
+
+All controls, layouts and library waveform previews remain. The preview uses its own profile; private151and recovery remain separate. No engine/DSP/UI feature rewrite was needed for distribution. No personal music or model weights are bundled; installed Electron/Chromium and source notices are retained. GitHub topics/About, a versioned prerelease tag and linked help make the project discoverable.
+
+## Next core work
+
+1. Owner listening: one current Sync/pop/visual and matched-reference-volume segment. Reuse prior accepted manual/jog/EQ/Cue/stop checks; preserve one concrete failure instead of rerunning clean matrices.
+2. Fix any reproduced core reliability/data-safety issue with one narrow regression and real changed-path check. Keep controls/previews and modular boundaries.
+3. Gather early preview feedback. Broader clean-machine, OS, crash/update/recovery acceptance remains explicit, not inferred from this Mac's new profile.
+4. Hercules/headphone/controller acceptance is later at the owner's request. Automatic updater, full vendor parity, AI features and200-card completion are not preview prerequisites.
+
+The prerelease is not a stable/live-performance product or full-core acceptance. Do not mark broad cards complete from a successful Apple scan or installer launch. No new timing promise is derived from publication alone.
+
+## Historical plan and forecast (superseded where current receipt differs)
+
 > Source/community milestone delivered 13 November 2026: public MIT repository, README and contribution workflow. The working public desktop beta remains the goal; core listening and final binary gates are still open. [Source delivery](OPEN_SOURCE_2026-11-13.json).
 
 # Public beta delivery target — 4 November2026

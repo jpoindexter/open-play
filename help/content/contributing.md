@@ -4,7 +4,7 @@ Open Play is an independent DJ project for local music. You can contribute code,
 
 Use the [README quickstart](https://github.com/jpoindexter/open-play#run-locally) to run the browser workspace. The committed UI bundle is included, so basic exploration does not require an npm build. The server command has been checked on macOS. Desktop packaging and optional processing runtimes are separate setup paths.
 
-Source availability is not a public desktop installer. Current audio, device and release limitations remain in [Beta status and limitations](/known-issues/).
+The separate [Mac preview installer](/installation/) is an early evaluation prerelease. Current audio, device and release limitations remain in [Beta status and limitations](/known-issues/).
 
 ## Fork and make a focused improvement
 

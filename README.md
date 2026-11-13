@@ -2,7 +2,7 @@
 
 Independent DJ software for mixing local music. Two or four decks, readable frequency-colored waveforms, a central mixer and a library with waveform previews.
 
-[Try locally](#run-locally) · [User manual](https://open-play-help.vercel.app/) · [Contribute](CONTRIBUTING.md) · [Report a bug](https://github.com/jpoindexter/open-play/issues/new/choose) · [MIT license](LICENSE)
+[Mac preview](https://github.com/jpoindexter/open-play/releases/tag/v0.1.152-preview.1) · [Try locally](#run-locally) · [User manual](https://open-play-help.vercel.app/) · [Contribute](CONTRIBUTING.md) · [Report a bug](https://github.com/jpoindexter/open-play/issues/new/choose) · [MIT license](LICENSE)
 
 ![Open Play with two compact decks, a central mixer and library waveform previews](help/assets/screenshots/workspace-two-decks.jpg)
 
@@ -10,9 +10,17 @@ Independent DJ software for mixing local music. Two or four decks, readable freq
 
 ## Status
 
-**Early development; contributors welcome.** The goal is a useful, reliable public Mac local-audio beta. A public desktop installer has not been released. The latest recorded private candidate is **0.1.151**; musical Sync, audible pops, matched output volume and final installation/signing acceptance still have open gates. See [known issues](docs/beta/KNOWN_ISSUES.md) and the [beta plan](docs/delivery/PUBLIC_BETA_PLAN.md).
+**Early preview; contributors welcome.** [Download Open Play Preview 0.1.152 for Apple Silicon Macs](https://github.com/jpoindexter/open-play/releases/tag/v0.1.152-preview.1). This Developer ID signed, notarized DMG is an evaluation prerelease. Musical Sync, intermittent pops/stalls, matched output volume, controller/headphone routing and broader clean-machine compatibility still have open acceptance gates. Keep an independent music/metadata backup and avoid relying on this preview for live performances. See [known issues](docs/beta/KNOWN_ISSUES.md) and the [beta plan](docs/delivery/PUBLIC_BETA_PLAN.md).
 
 The source is available to study, fork, modify and contribute under MIT. It is not a claim of complete Serato, rekordbox or Traktor parity. Experimental and simulated features are labelled. Original music and personal library data are not required to contribute.
+
+## Install the Mac preview
+
+1. Download the `.dmg` from the [versioned prerelease](https://github.com/jpoindexter/open-play/releases/tag/v0.1.152-preview.1). It targets **Apple Silicon (arm64)**; Intel is not included.
+2. Open the disk image and drag **Open Play Preview** to **Applications**. Eject the image, then open the installed app.
+3. Start at low output volume and follow the [first-mix guide](https://open-play-help.vercel.app/first-mix/). Keep your original songs.
+
+The preview uses a separate local profile; it does not migrate the private Playback Test library. Import your local files into this preview. Installation and safe replacement/removal instructions are in the [manual](https://open-play-help.vercel.app/installation/). The release includes SHA256SUMS; signing is distribution trust, not proof of audio quality or hardware certification.
 
 ## What is here
 
@@ -21,7 +29,7 @@ The source is available to study, fork, modify and contribute under MIT. It is n
 - Channel gain, EQ, optional filter, level faders, headphone monitor controls and crossfader.
 - Temporary Cue, hot cues, loops and other performance controls.
 - Crates, search, metadata, local persistence and full-track library previews.
-- An illustrated, searchable [manual](https://open-play-help.vercel.app/), plus an Electron test host.
+- An illustrated, searchable [manual](https://open-play-help.vercel.app/), plus an Electron desktop preview.
 
 Browser decoding varies. Independent headphone output and controller routing require suitable hardware; a passing software check does not certify them. Advanced DSP, stems, video and provider fixtures have separate setup and acceptance limits.
 
@@ -79,7 +87,7 @@ Do not attach songs, full mixes, library backups, credentials or private researc
 | --- | --- |
 | `prototype/` | Browser DJ engine, workspace, controls and focused checks |
 | `prototype/ui/` | Astryx UI source; custom DJ controls remain separate |
-| `desktop/` | Electron host and private packaging tools |
+| `desktop/` | Electron host, preview packaging and signed DMG release procedure |
 | `help/` | Static manual source and screenshots |
 | `scripts/` | Loopback server and development/research tools |
 | `docs/` | Design decisions, evidence, limitations and delivery plans |

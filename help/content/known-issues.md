@@ -2,7 +2,9 @@
 
 The [source repository](https://github.com/jpoindexter/open-play) is public under **MIT**, with a README, contribution guide, issue/PR templates and private security reporting. See [Source and contributions](/contributing/).
 
-The latest recorded private desktop candidate is **0.1.151**. The interface/screenshots in this guide retain their explicit **0.1.89** reference; this update does not claim every current control has been walked through again. No approved public desktop beta installer is linked here. Final listening/visual/volume, signing/notarization and clean-install/recovery acceptance remain unfinished.
+[Open Play Preview 0.1.152](https://github.com/jpoindexter/open-play/releases/tag/v0.1.152-preview.1) is available as an early Apple Silicon Mac prerelease. The app and DMG are Developer ID signed; the DMG is notarized and stapled. This is not a stable production-performance release. Final listening/visual/volume, controller/headphone routing and broader clean-machine/recovery acceptance remain unfinished.
+
+The private Playback Test151library stays separate. The interface/screenshots in this guide retain their explicit **0.1.89** reference; this release does not claim every current control has been walked through again. Follow [installation and safe replacement](/installation/).
 
 Earlier computer-audio sessions accepted specific manual mixing, EQ, Cue and Sync paths. They do not establish every current mode, song, device or long session. Package startup is separate from audible acceptance.
 

@@ -1,6 +1,6 @@
 # Beta status and known issues
 
-This is a private Mac candidate, not an approved public release. Check the window title and supplied build receipt for the exact version. Installation, signing/notarization and clean-machine acceptance are unfinished.
+Open Play Preview0.1.152 is an early public Apple Silicon Mac evaluation prerelease, not a stable performance release. The app and DMG are Developer ID signed; the DMG is notarized/stapled. Listening, output-volume, controller/headphone routing and broad clean-machine/crash/update acceptance remain open. Check the [versioned release](https://github.com/jpoindexter/open-play/releases/tag/v0.1.152-preview.1) and [installation guide](https://open-play-help.vercel.app/installation/). Its profile is separate from private Playback Test151.
 
 Earlier computer-audio acceptance does not cover every current mode, song, device or long session. Layouts, custom DJ controls and library previews remain available.
 
