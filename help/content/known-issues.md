@@ -1,6 +1,8 @@
 ## Current release status
 
-This manual’s baseline is the **0.1.89 private Mac candidate**. No approved public beta installer is linked here. Signing/notarization, public distribution and clean-machine install/update acceptance remain unfinished.
+The [source repository](https://github.com/jpoindexter/open-play) is public under **MIT**, with a README, contribution guide, issue/PR templates and private security reporting. See [Source and contributions](/contributing/).
+
+The latest recorded private desktop candidate is **0.1.151**. The interface/screenshots in this guide retain their explicit **0.1.89** reference; this update does not claim every current control has been walked through again. No approved public desktop beta installer is linked here. Final listening/visual/volume, signing/notarization and clean-install/recovery acceptance remain unfinished.
 
 Earlier computer-audio sessions accepted specific manual mixing, EQ, Cue and Sync paths. They do not establish every current mode, song, device or long session. Package startup is separate from audible acceptance.
 
@@ -34,7 +36,7 @@ Provider, Link, external-control and some file-operation surfaces remain explici
 
 ## Report a problem
 
-Use the [Open Play beta bug report](https://github.com/jpoindexter/open-play/issues/new?template=beta-bug-report.yml). If the template is unavailable before the release branch is merged, use [a blank issue](https://github.com/jpoindexter/open-play/issues/new) with the checklist below. A GitHub account may be required; this help site has no separate support inbox or upload service.
+Use the [Open Play beta bug report](https://github.com/jpoindexter/open-play/issues/new?template=beta-bug-report.yml). The public repository also offers [a blank issue](https://github.com/jpoindexter/open-play/issues/new) with the checklist below. Filing reports requires a GitHub account; this help site has no separate support inbox or upload service.
 
 1. App version, macOS/Mac model, audio output and controller setup.
 2. Exact steps, expected result and actual result; say once/repeatedly.
@@ -42,3 +44,6 @@ Use the [Open Play beta bug report](https://github.com/jpoindexter/open-play/iss
 4. Whether the defect was heard, visible, in a downloaded master capture or uncertain; explain recovery.
 
 Review screenshots/logs for private paths and names. Do not attach songs, full mixes, private backups, account credentials or other people’s data by default. Describe a recording first; agree an appropriate diagnostic excerpt if needed.
+
+
+For security vulnerabilities, use [private vulnerability reporting](https://github.com/jpoindexter/open-play/security/advisories/new) instead of a public issue. See the project’s [security guidance](https://github.com/jpoindexter/open-play/blob/main/SECURITY.md).

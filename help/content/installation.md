@@ -1,6 +1,8 @@
 ## Get the correct build
 
-Open Play currently has private Mac test builds. There is no approved public beta installer or download on this site. Use a build supplied by the project owner and check its version in the window title.
+Open Play’s [MIT source is public](https://github.com/jpoindexter/open-play), and the [README quickstart](https://github.com/jpoindexter/open-play#run-locally) explains how to run the browser workspace. See [Source and contributions](/contributing/) if you want to fork or improve it.
+
+Desktop test builds remain separate. The latest recorded private candidate is **0.1.151**; there is no approved public desktop beta installer or download on this site. Use a build supplied by the project owner and check its version in the window title.
 
 The current private package targets **Apple Silicon (arm64)**. An Intel build and a fully tested macOS compatibility range are not established. Do not infer support for an OS merely because it can open the application.
 

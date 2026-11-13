@@ -1,5 +1,5 @@
 export const version = '0.1.89';
-export const updated = '28 October 2026';
+export const updated = '13 November 2026';
 export const groups = [
   ['Start here', [
     ['index', 'Open Play manual', 'Learn the workspace, mix two tracks and find a control.'],
@@ -27,6 +27,7 @@ export const groups = [
     ['advanced', 'Advanced features', 'Effects, Sampler, Stems, Flip, video and simulated services.'],
     ['troubleshooting', 'Troubleshooting', 'No sound, timing offsets, pops, stalls and missing media.'],
     ['known-issues', 'Beta status and limitations', 'What remains unverified and how to report a problem.'],
+    ['contributing', 'Source and contributions', 'Get the MIT source, fork Open Play and submit a focused improvement.'],
     ['glossary', 'DJ glossary', 'BPM, downbeat, phase, cue, pitch, gain and clipping.']
   ]]
 ];
