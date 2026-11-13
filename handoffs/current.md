@@ -1,3 +1,7 @@
+## MIT source and contributor setup —13November2026
+
+Source is public at https://github.com/jpoindexter/open-play. Owner chose MIT; current source merged into main through PR1, with a newcomer README, contributor/security guidance, issue/PR templates and verified anonymous reads. Forks/issues and private vulnerability reporting are enabled. [Source delivery and limits](../docs/delivery/OPEN_SOURCE_2026-11-13.json). This publishes source, not a desktop beta: the151binary/audio session and owner listening gates are unchanged. Root notices are included by the next playback packaging path; future binary inclusion/trust and complete dependency/weight notices still need acceptance.
+
 ## Working public release — current candidate 0.1.151
 
 Get a working Mac local-audio beta into public as quickly as possible. Core DJ acceptance is the first milestone, not the project endpoint. Four active cards cover core mixing, transport, session safety and minimum public-release coordination. Full parity, AI, design rewrites and Hercules remain deferred.
